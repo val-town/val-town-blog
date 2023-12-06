@@ -1,0 +1,22 @@
+{
+  "name": "val-town-blog",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro check && astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/check": "^0.3.1",
+    "@astrojs/mdx": "^2.0.0",
+    "@astrojs/rss": "^4.0.0",
+    "@astrojs/sitemap": "^3.0.3",
+    "@fontsource/ibm-plex-sans": "^5.0.17",
+    "@fontsource/ibm-plex-serif": "^5.0.8",
+    "astro": "^4.0.2",
+    "typescript": "^5.3.2"
+  }
+}
