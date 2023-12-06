@@ -127,7 +127,7 @@ The pinned vals column is resizable by dragging its border. Note that this is de
 
 We recently added TypeScript editor support, but it was buggy and slow, so we kept it as an opt-in beta feature. However, we polished it up, and moved it to a web worker, freeing up the main thread to keep our UI nice and snappy. We moved it out of beta, so now everyone will get lovely type support throughout Val Town.
 
-![Kapture_2023-08-15_at_18.42.09.gif](./val-town-newsletter-12/kapture_2023-08-15_at_184209.gif)
+<video src="./capture.mp4"></video>
 
 ### Val Templates
 
