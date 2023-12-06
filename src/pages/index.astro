@@ -7,7 +7,9 @@ import { getCollection } from 'astro:content';
 import FormattedDate from '../components/FormattedDate.astro';
 
 const posts = (await getCollection('blog')).sort(
-	(a, b) => a.data.pubDate.valueOf() - b.data.pubDate.valueOf()
+	(a, b) => {
+    return b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+  }
 );
 ---
 
@@ -50,19 +52,23 @@ const posts = (await getCollection('blog')).sort(
 				border-radius: 12px;
 			}
 			ul li a {
+        padding: 20px 0;
 				display: block;
 			}
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
-				line-height: 1;
+				line-height: 1.4;
 			}
+      .description {
+				color: rgb(var(--gray));
+        margin: 0;
+      }
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
 			}
-			ul li a:hover h4,
-			ul li a:hover .date {
+			ul li a:hover h4 {
 				color: rgb(var(--accent));
 			}
 			ul a:hover img {
@@ -74,7 +80,6 @@ const posts = (await getCollection('blog')).sort(
 				}
 				ul li {
 					width: 100%;
-					text-align: center;
 				}
 				ul li:first-child {
 					margin-bottom: 0;
@@ -94,8 +99,8 @@ const posts = (await getCollection('blog')).sort(
 						posts.map((post) => (
 							<li>
 								<a href={`/blog/${post.slug}/`}>
-									<img width={720} height={360} src={post.data.heroImage} alt="" />
 									<h4 class="title">{post.data.title}</h4>
+									<p class="description">{post.data.description}</p>
 									<p class="date">
 										<FormattedDate date={post.data.pubDate} />
 									</p>
