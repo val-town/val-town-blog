@@ -203,6 +203,6 @@ Steve
 ### Subscribe
 
 The easiest way to subscribe to Val Town is to _sign up for an account on
-[val.town](http://val.town)_, and then opting in to receive our newsletter as
-your set your username. You can also sign up
+[val.town](https://www.val.town)_, and then opting in to receive our newsletter
+as your set your username. You can also sign up
 [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

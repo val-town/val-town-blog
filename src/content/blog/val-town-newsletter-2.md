@@ -47,7 +47,7 @@ delightful ways! Here’s some of my favorites:
   (forked from
   [https://www.val.town/@tionis.variablePower](https://www.val.town/@tionis.variablePower))
 
-- A Slack slash command to eval a [val.town](http://val.town) expression
+- A Slack slash command to eval a [val.town](https://www.val.town) expression
   [https://www.val.town/nate.slackapp](https://www.val.town/nate.slackapp)
 
 - A reminder to pray
@@ -148,6 +148,6 @@ Steve
 ### Subscribe
 
 The easiest way to subscribe to Val Town is to _sign up for an account on
-[val.town](http://val.town)_, and then opting in to receive our newsletter as
-your set your username. You can also sign up
+[val.town](https://www.val.town)_, and then opting in to receive our newsletter
+as your set your username. You can also sign up
 [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

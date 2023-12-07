@@ -76,13 +76,13 @@ Vals used to require exactly one export, and the name of that export was the nam
 - Andre made [the best video with vals](https://www.youtube.com/watch?v=1yWs-FZnqag) ever made (to help him work out)
 - xkonti made [an incredible ntfy val](https://www.val.town/v/xkonti/ntfy) to send yourself push notifications on your phone
 - Justin Bennett made vals to get your [sleep](https://www.val.town/v/just_be/getSleepScore) and [readiness](https://www.val.town/v/just_be/getReadinessScore) from your oaura ring
-- [tal](http://val.town/tal) made [an iCal feed that updates with Department of Education (lunch) menu items](https://www.val.town/v/tal.doeMenuCalendar)
-- [fil](http://val.town/fil) made a val to check when his favourite [museum activities are updated](https://www.val.town/v/fil.musee_angers_activites_feed)
-- [maxm](http://val.town/maxm) made this awesome [retro-style visit counter](https://www.val.town/v/maxm.retroVisitCounter)
+- [tal](https://www.val.town/tal) made [an iCal feed that updates with Department of Education (lunch) menu items](https://www.val.town/v/tal.doeMenuCalendar)
+- [fil](https://www.val.town/fil) made a val to check when his favourite [museum activities are updated](https://www.val.town/v/fil.musee_angers_activites_feed)
+- [maxm](https://www.val.town/maxm) made this awesome [retro-style visit counter](https://www.val.town/v/maxm.retroVisitCounter)
   ![https://maxm-retrovisitcounter.web.val.run/counter.png](https://maxm-retrovisitcounter.web.val.run/counter.png)
 - Guy Dupont [generated STL file](https://twitter.com/gvy_dvpont/status/1726710176655581448)[s](https://www.petemillspaugh.com/cultivating-emails) with a val
 - [Steve](https://val.town/stevekrouse) made [a handy val](https://www.val.town/v/stevekrouse.umbrellaReminder) to make sure he never forgets an umbrella and [another to help help him know how warm to dress](https://x.com/stevekrouse/status/1722659193792942246?s=20)
-- [tmcw](http://val.town/tmcw) showed us how we could [use Elysia](https://www.val.town/v/tmcw.elysiaExample), the speedy new Bun web server library, in Val Town
-- [wilt](http://val.town/wilt) showed off the new Windows feature allowing you to [add PWAs to your dock](https://www.val.town/v/wilt.miniWidget)
-- [jamiedubs](http://val.town/jamiedubs) created a val to [fetch an image from any smart contract](https://www.val.town/v/jamiedubs.nftImage)
+- [tmcw](https://www.val.town/tmcw) showed us how we could [use Elysia](https://www.val.town/v/tmcw.elysiaExample), the speedy new Bun web server library, in Val Town
+- [wilt](https://www.val.town/wilt) showed off the new Windows feature allowing you to [add PWAs to your dock](https://www.val.town/v/wilt.miniWidget)
+- [jamiedubs](https://www.val.town/jamiedubs) created a val to [fetch an image from any smart contract](https://www.val.town/v/jamiedubs.nftImage)
 - [Generate a powerpoint](https://www.val.town/v/stevekrouse/powerPointExample) from a val

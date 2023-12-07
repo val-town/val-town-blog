@@ -68,7 +68,7 @@ Rodrigo is focused on making Val Town easier to learn and onboard to. Tom is bui
 
 ### Cool Vals
 
-I’m going light on the cool vals this month. I don’t want to crash your browser with all the embeds! Head on over to [val.town/explore](http://val.town/explore) to see what folks are up to!
+I’m going light on the cool vals this month. I don’t want to crash your browser with all the embeds! Head on over to [val.town/explore](https://www.val.town/explore) to see what folks are up to!
 
 [https://twitter.com/stevekrouse/status/1644362429323681792?s=20](https://twitter.com/stevekrouse/status/1644362429323681792?s=20)
 
