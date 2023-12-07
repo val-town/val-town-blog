@@ -40,8 +40,7 @@ to gush about how lovely my colleagues are:
   use. Now I just turn to my left 😱. It felt like he professionalized our
   entire codebase in his first two weeks on the job.
 - _Steve Krouse (me) -_ Who let this guy in? I can’t say anything nice about
-  myself, so you’ll have to read
-  [my website](..//tasks/the-poll-job-stevekrouse--me) or
+  myself, so you’ll have to read [my website](https://stevekrouse.com/) or
   [my research journal](http://futureofcoding.org/log) and come up with your own
   nice things to say about me.
 - _Dan, Ross (advisors) -_ I’d be remiss if I didn’t include Dan and Ross in the

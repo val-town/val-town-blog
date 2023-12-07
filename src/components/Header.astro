@@ -6,9 +6,8 @@ import { SITE_TITLE } from '../consts';
 <header>
 	<nav>
 		<h2><a href="/">{SITE_TITLE}</a></h2>
-		<div class="internal-links">
-			<HeaderLink href="/">Home</HeaderLink>
-		</div>
+    <div style='flex:auto'></div>
+		<a class='application-link' href="https://www.val.town/">Val Town</a>
 		<div class="social-links">
 			<a href="https://twitter.com/valdottown" target="_blank">
 				<span class="sr-only">Follow Val Town on Twitter</span>
@@ -52,6 +51,17 @@ import { SITE_TITLE } from '../consts';
 		align-items: center;
 		justify-content: space-between;
 	}
+	nav a.application-link {
+    background: #eee;
+    border: 1px solid #eee;
+    line-height: 1;
+    margin-right: 10px;
+    padding: 5px 0.5em;
+    border-radius: 5px;
+  }
+	nav a.application-link:hover {
+    border: 1px solid #ccc;
+  }
 	nav a {
 		padding: 1em 0.5em;
 		color: var(--black);
