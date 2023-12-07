@@ -12,9 +12,9 @@ By way of reminder, Val Town gets you fastest from idea to deployed cloud script
 
 In the last three months (since the [0th Newsletter](../val-town-newsletter-0)), we’ve gained focus around the product’s early use-cases, found a couple fantastic early adopters, shipped major features, grew the founding team, and are working on an exciting roadmap for 2023.
 
-## Programmatic notifications
+### Programmatic notifications
 
-Our first challenge was finding use-cases for Val Town, while keeping it a generic programming tool. After dozens of early-adopter conversations, stumbled onto \*\***programmatic notifications**:
+Our first challenge was finding use-cases for Val Town, while keeping it a generic programming tool. After dozens of early-adopter conversations, stumbled onto *programmatic notifications*:
 
 1. Poll some source of information via `fetch` (Hacker News, RSS feeds, Twitter, etc)
 2. If there are results, email them to yourself via `console.email`
@@ -22,7 +22,7 @@ Our first challenge was finding use-cases for Val Town, while keeping it a gener
 
 Most people can think of at least one kind of custom notification they’d like, and it takes just a couple of minutes to fork one of these to suit your purposes.
 
-## Hacker News
+### Hacker News
 
 The Hacker News [Agolia Search API](https://hn.algolia.com/api) is free and unauthenticated, so it’s really easy to make queries. We made a tutorial around it, but it was mostly ignored until [Kartik](http://akkartik.name/) taught himself JavaScript to get it to work for him! We then built a whole website around it ([hnfollow.com](..//tasks/hnfollow-com-happy-path)) and [launched it to Hacker News](https://news.ycombinator.com/item?id=33533830). We made the front page, got a couple dozens users, and then were [removed from the front page](https://news.ycombinator.com/item?id=33535795), because Val Town “is much more interesting than an HN email alert.” The launch of Scheduled Vals has made this even easier (probably deprecating hnfollow.com). Now you can setup HN Alerts by forking a single val:
 
@@ -34,7 +34,7 @@ The Hacker News [Agolia Search API](https://hn.algolia.com/api) is free and unau
   </iframe>
 </div>
 
-## RSS
+### RSS
 
 RSS has been making a comeback, particularly since the mess at Twitter. [James](https://jsomers.net/) mentioned that he has a RSS to email Zapier Zap, and it got me thinking that this is something Val Town would really excel at. This is where the idea for Scheduled Vals came from, as a generalization of HN Follow, but packaged up in a single val. Of course, we can’t compete against full RSS readers, but if you simply want an email notification for a new post in an RSS feed, I think we’re compelling. I put all mine in an object and then looped over them.
 
@@ -46,7 +46,7 @@ RSS has been making a comeback, particularly since the mess at Twitter. [James](
   </iframe>
 </div>
 
-## New Citations
+### New Citations
 
 Ernest programmed a function to get notifications when there are new citations to a particular scientific paper.
 
@@ -58,7 +58,7 @@ Ernest programmed a function to get notifications when there are new citations t
   </iframe>
 </div>
 
-## Air Quality
+### Air Quality
 
 [Lev](https://twitter.com/levpopov) programmed a bot that helps folks in San Francisco know when they should close their window due to poor air quality during fire season.
 
@@ -70,11 +70,11 @@ Ernest programmed a function to get notifications when there are new citations t
   </iframe>
 </div>
 
-## **Webhooks**
+### *Webhooks*
 
 Of course not all notifications need to be run on a schedule. Some notifications come in the form of webhooks, like from Stripe, your app, database, or really anywhere. Val Town is quite good at turning an HTTP request into an email to yourself. For example, I get emailed when anyone signs up to Val Town or certain errors occur.
 
-## All the notifications
+### All the notifications
 
 There are so many other exciting similar use-cases. Once you start thinking of them, it’s hard to stop:
 
@@ -86,19 +86,19 @@ There are so many other exciting similar use-cases. Once you start thinking of t
 
 What are you waiting for? Go setup your own programmatic notifications! If you want company while you code, free to [schedule time to pair program with me](https://calendly.com/steviekrouse) to set these up. It’s super useful for me to watch folks use the tool.
 
-## Product improvements
+### Product improvements
 
 A big focus for this year is doing a better job of blogging and celebrating each product improvement as they happen. Given that we didn’t do this over the last three months, here are the highlights!
 
-## Scheduled Vals
+### Scheduled Vals
 
 Our initial interface for creating intervals was simply Javascript’s `setInterval`, but made persistent. The downside was that you had to keep track of your interval IDs and be careful about starting, editing and deleting intervals. Now we have a one-click interface for creating & editing intervals that are automatically attached to vals.
 
-## TypeScript
+### TypeScript
 
 We’ve rolled out TypeScript by default to all vals. It won’t prevent you from running code with type errors, but will give you (hopefully) useful type errors, even without adding any annotations.
 
-## Evaluation History
+### Evaluation History
 
 We now save every single evaluation of every val, be it a function or piece of state, no matter how it’s triggered. It’s been a great aid to debugging, and we have big dreams for where we can take observability in the future (replayability/omniscience). You can see evaluation history on the pages of vals that you own:
 
@@ -108,15 +108,15 @@ You can click into an evaluation to see its inputs, outputs, logs, emails, and e
 
 ![Screenshot 2023-01-03 at 5.51.46 PM.png](./val-town-newsletter-1/screenshot_2023-01-03_at_55146_pm.png)
 
-## Folders
+### Folders
 
 We had a janky version of “notebooks” before, but we really needed a proper way to organize your vals. Nobody felt this more than I did with my 1000+ vals. You can now move vals into folders, recursively!
 
-## Secrets
+### Secrets
 
 By popular demand, there is now a special, safe place for you to put your secrets, API keys, and auth tokens. You can find this page by clicking your username (in the top-right corner) or by going to [https://www.val.town/@me.secrets](https://www.val.town/@me.secrets).
 
-## Smaller upgrades
+### Smaller upgrades
 
 - Automatically retry `fetch` requests when they fail before even connecting, all from randomly assigned residential proxies, virtually eliminating a very common class of error.
 - Val are either functions or a single statement. However now if you write a series of statements, we will detect it, wrap it in a function, and call that function for you.
@@ -128,7 +128,7 @@ By popular demand, there is now a special, safe place for you to put your secret
 - Added & then removed in-app chat.
 - Added dozens of tests.
 
-## Company
+### Company
 
 The founding team is coming together!
 
@@ -143,7 +143,7 @@ We have raised a small amount from a single investor who instigated this project
 
 This essay on [End-Programmer Programming](../end-programmer-programming) is probably the closest thing we currently have to a company mission statement.
 
-## 2023
+### 2023
 
 The focus for 2023 is product and growth: making our scripting tool very fun and useful, and getting lots of folks using it.
 
@@ -151,7 +151,7 @@ I think the product as is, modulo a bit of polish, could be useful to 10-100x mo
 
 I don’t like to plan too firmly, because I’m a big believer in being surprised by what users do with the tool and what they want from it, but my personal instinct is that the next big feature effort we’ll add (maybe in Q2) is building in first-class OAuth flows into your favorite tools, so you don’t have to waste time with authenticating to do Zapier-like automations in Val Town.
 
-## Happy programming 👨‍💻👩‍💻
+### Happy programming 👨‍💻👩‍💻
 
 Be sure to jump into our [Discord](https://discord.gg/dHv45uN5RY) to share tips, bugs, feature requests, and show off your work!
 
@@ -161,6 +161,6 @@ Steve
 
 steve@val.town
 
-## Subscribe
+### Subscribe
 
-The easiest way to subscribe to Val Town is to **sign up for an account on [val.town](http://val.town)**, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).
+The easiest way to subscribe to Val Town is to *sign up for an account on [val.town](http://val.town)*, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

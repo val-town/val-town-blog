@@ -8,7 +8,7 @@ author: Steven Krouse
 
 Our Show HN had an great reception, we loved what you all did with the tool, we closed two security vulnerabilities, made lots of little improvements to the site, and officially added a fourth to the team! We’re focused on bugs, stability, and security for the next couple weeks.
 
-## Welcome HN 👋
+### Welcome HN 👋
 
 We did a [Show HN](https://news.ycombinator.com/item?id=34343122) the Wednesday before last. If you’re a new friend from HN, welcome!
 
@@ -24,7 +24,7 @@ Val Town quite good at these [“Programmatic Notification”](../val-town-newsl
 
 Please jump into the Discord with any questions or DM me (steve@val.town). We’re eager to help and hear your feedback.
 
-## Cool Vals 🤩
+### Cool Vals 🤩
 
 The ultimate joy of a toolmaker is having the tool used in unexpected and delightful ways! Here’s some of my favorites:
 
@@ -69,7 +69,7 @@ The ultimate joy of a toolmaker is having the tool used in unexpected and deligh
 - Using a URL shortener
   [https://www.val.town/demo.shortenUrl](https://www.val.town/demo.shortenUrl)
 
-## Show HN Recap
+### Show HN Recap
 
 We were hoping to be on the front page of Hacker News all day, and we were! While we never cracked the top 3, we were hovering around #5 all day, got 331 upvotes and 71 comments. Possibly the most exciting fact about our launch was how positive everyone on HN was! I’d like to give a special shout-out to Dan G from HN, who gave us great tips on how to launch.
 
@@ -77,7 +77,7 @@ In approximate numbers, we had 20k new visitors this month, with the majority co
 
 We have about 100 users who have run code more than 30 times and another 100 who have run code more than 10 times. This means we have about 1000 people who churned off the product fairly quickly after signing up. This means we struck a nerve with folks enough to give us their email, but we have a lot more to do to help them be successful with the tool.
 
-## Changelog
+### Changelog
 
 - New homepage, explaining Val Town & “vals”
 
@@ -95,11 +95,11 @@ We have about 100 users who have run code more than 30 times and another 100 who
 
 - \~50 tiny fixes, including major refactors to pay down tech debt
 
-## Security
+### Security
 
 We encountered one medium-severity and [one critical-severity](../security-disclosure-1) security vulnerability. We immediately fixed the vulnerabilities and paid out bug bounties to the reporters. We are talking to Hacker One about setting up a more formal bug bounty program. We have also made it our #1 priority to switch to a more secure sandboxed runtime (possibly Deno) for running user code. We hope to make the switch in the next week or two.
 
-## Roadmap
+### Roadmap
 
 We feel that the roadmap is fairly straightforward for us over the next couple of months. The product has some rough edges we need to smooth out: sandboxing, janky semantics around mutable state, public vs private vals, val versioning, better documentation, etc. Although we know a lot about these problems, please keep reporting them as you see them so we know which are the highest priority. We have a new #bugs forum channel in [our Discord](https://discord.gg/dHv45uN5RY) that we’d love to hear from you in!
 
@@ -111,6 +111,6 @@ Happy coding!
 
 Steve
 
-## Subscribe
+### Subscribe
 
-The easiest way to subscribe to Val Town is to **sign up for an account on [val.town](http://val.town)**, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).
+The easiest way to subscribe to Val Town is to *sign up for an account on [val.town](http://val.town)*, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

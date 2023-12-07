@@ -14,7 +14,7 @@ We don't want to automatically subscribe you to our newsletter without your cons
 
 :::note
 
-💌 [Click here to **sign up for our newsletter**](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b) (this form needs you to turn off adblocker)
+💌 [Click here to *sign up for our newsletter*](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b) (this form needs you to turn off adblocker)
 
 :::
 

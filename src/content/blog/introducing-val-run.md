@@ -18,13 +18,13 @@ This will require no change if:
 
 If not, it is a simple URL scheme switch - our Upgrade Guide below will walk you through it. We attempted to contact our API users ahead of this change, but we apologize if you were caught unawares and this causes breaking changes for you. We take breaking changes seriously, and only choose this path reluctantly to protect against the new exploit that was reported. The vulnerability was not exploited to the best of our knowledge.
 
-## Overview
+### Overview
 
 Val Town is a website for users to write and run JavaScript. User code can also be run via the API. The v0 API was launched in late 2022. The v1 API was launched on May 4th, 2023, along with [Restricted Library Mode](https://blog.val.town/blog/restricted-library-mode) semantics. The v1 API has three modes, Express, Run, and Eval, which give various levels of convenience and customizability, depending on your needs.
 
 Today’s new `val.run` API change only applies to our Express API. The exploit (explained below) relies running a client-side script on an HTML page, which is only possible in our Express API. The other two APIs (Eval and Run) only return JSON, thus are not affected, and are not being changed.
 
-## Upgrade Guide
+### Upgrade Guide
 
 The changes to the Express API:
 
@@ -42,7 +42,7 @@ The share menus on vals now automatically point to the new Express API.
 
 ![valDotRunURLexample.png](./introducing-val-run/valdotrunurlexample.png)
 
-## Exploit
+### Exploit
 
 The exploit was caused by how cookies are shared from parent domains to subdomains. It was responsibly reported by [easrng](https://easrng.net).
 
@@ -56,7 +56,7 @@ The exploit was caused by how cookies are shared from parent domains to subdomai
 
 This exploit was not taken advantage of to the best of our knowledge.
 
-## Contact
+### Contact
 
 We at Val Town will be on call for the next couple days, so please reach out if you have any questions or concerns. [Discord](https://discord.com/invite/dHv45uN5RY) is great if it’s a public question and the community might be able to help. You can contact me personally at `steve@val.town` for anything at all.
 

@@ -8,19 +8,19 @@ author: Steven Krouse
 
 We’re almost done rebuilding our runtime on Deno! We also snuck in a dozen little projects and upgrades. We are overwhelmed by all the cool vals y’all are dazzling us with! We reached 100 users who have at least one scheduled val running 🤩
 
-## Changelog
+### Changelog
 
-## New demo video
+### New demo video
 
 The [last demo video](https://www.loom.com/share/878294970d8e48919c819f35d0cd0da4) was from September 2022, so it was high time for an update. It’s amazing to see how far the product has come since then! After a fairly [awesome reception](https://twitter.com/stevekrouse/status/1629232279624077312?s=20) to our new demo video on Twitter, we decided to add it to the docs and our landing page.
 
 [https://www.loom.com/share/c075dc075909400a85591ac3f83d1ca5](https://www.loom.com/share/c075dc075909400a85591ac3f83d1ca5)
 
-## Subdomains galore
+### Subdomains galore
 
 We launched [docs.val.town](http://docs.val.town), [blog.val.town](http://blog.val.town) and [about.val.town](http://about.val.town)!
 
-## HTML emails
+### HTML emails
 
 Now you can send yourself HTML emails like it’s 1999.
 
@@ -28,15 +28,15 @@ Now you can send yourself HTML emails like it’s 1999.
 console.email({ html: "<h1>hello!</h1>" });
 ```
 
-## Reorder your vals
+### Reorder your vals
 
 Now you can drag your vals around in whatever order your heart desires.
 
-## Autocomplete for secrets
+### Autocomplete for secrets
 
 ![Screenshot 2023-03-02 at 11.54.43 AM.png](./val-town-newsletter-4/screenshot_2023-03-02_at_115443_am.png)
 
-## & much more
+### & much more
 
 - val evaluation is back to being 300ms or so. (Down from up to 2 seconds!)
 - profile pictures from github / gravatar
@@ -47,7 +47,7 @@ Now you can drag your vals around in whatever order your heart desires.
 - speedups to the frontend when you're working with larger vals
 - we don’t go down every night anymore. we almost never go down now!
 
-## Now
+### Now
 
 It’s all hands on deck to get our new Deno runtime merged in ASAP. Maybe next week? Don’t hold us to it.
 
@@ -55,7 +55,7 @@ Rodrigo is working on lots of small design upgrades, including a much needed imp
 
 I am apparently now a product manager, writing docs and tweeting, shuttling feedback from users back to the team, creating lots of github issues, and occasionally I get some time to grind out some little features and find bugs in our new Deno runtime.
 
-## Cool vals
+### Cool vals
 
 Now we have a `#cool-vals` channel in [our Discord](https://discord.gg/dHv45uN5RY). Go show off & give each other props! I am trying something new on this newsletter. Welcome to the wall of cool vals! (Best viewed on desktop.)
 
@@ -275,6 +275,6 @@ That’s all for this newsletter. See you around town!
 
 Steve
 
-## Subscribe
+### Subscribe
 
-The easiest way to subscribe to Val Town is to **sign up for an account on [val.town](http://val.town)**, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).
+The easiest way to subscribe to Val Town is to *sign up for an account on [val.town](http://val.town)*, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

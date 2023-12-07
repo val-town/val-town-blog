@@ -10,11 +10,11 @@ Val Town launched a SQLite integration with Turso leveraging their [new multiten
 
 We contacted Turso and after their investigation, learned that this was the case since Oct 17th. It had gone unnoticed by us and our users – luckily the integration is new and hadn’t been yet heavily used. We only noticed the issue when we started working on a lightweight SQLite data explorer that rendered a list of all the tables in a schema, and noticed table names that we didn’t create.
 
-## Impact
+### Impact
 
 Customers all shared a single SQLite database during the Oct 17th - Nov 20th period. All data was shared, visible and mutable, to any customer. Upon reviewing the queries that were written during this time, we found very few queries run against other user’s tables. Most collisions were on a test `kv` table that was used in our examples, and was mostly to test out the integration.
 
-## Cause
+### Cause
 
 Val Town’s SQLite integration was built on top of Turso database groups when the feature was in early beta. On Oct 17th, their system changed the way they recognized a group vs individual database to rely on a flag that never got set in our group database, because of how early it was created. From then on all queries were routed to the same database file, sharing schemas and data.
 
@@ -28,7 +28,7 @@ Upon learning of the issue, the Turso team fixed the issue immediately. They als
 
 We at Val Town also take data security extremely seriously. Turso is a new but trusted vendor. We wouldn’t have adopted new features from them in an early state if we didn’t have a high degree of trust. We were confident that any potential issues would be quickly and thoroughly addressed. They have not broken that trust, and we look forward to continuing a fruitful partnership with them.
 
-## Timeline
+### Timeline
 
 - Sep 11th - We launched our first Turso integration, on an early private beta of [multitenancy](https://turso.tech/multitenancy)
 - Sep 25th - Turso’s [multitenancy](https://turso.tech/multitenancy) is officially launched

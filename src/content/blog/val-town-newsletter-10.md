@@ -14,7 +14,7 @@ Val Town turns one today! In the last two weeks we shipped Val READMEs, the new
   </lite-youtube>
 </div>
 
-## A year of Val Town
+### A year of Val Town
 
 Val Town turns one year old today 🥳
 
@@ -30,47 +30,47 @@ Our ambition is to be the default place code runs, from hobby projects to produc
 
 Here’s to the next year of Val Town!
 
-## Changelog
+### Changelog
 
-## Val READMEs
+### Val READMEs
 
 Add markdown READMEs to your vals.
 
 ![Untitled](./val-town-newsletter-10/untitled.png)
 
-## val.run
+### val.run
 
 In response to a security vulnerability, we moved up the launch of our the new val.run Express API. It is entirely subdomain-based to provide an isolated security model and allow for fully-customizable API paths, as required by some webhook specs, such as ChatGPT plugins. Read more in [the announcement post](https://blog.val.town/blog/introducing-valrun).
 
-## Val action menu
+### Val action menu
 
 Val’s new action menu combines four buttons (Share, Logs, Move, Schedule) into one.
 
 ![Screenshot 2023-07-05 at 15.51.57.png](./val-town-newsletter-10/screenshot_2023-07-05_at_155157.png)
 
-## Guides
+### Guides
 
 The guides section on [docs.val.town](https://docs.val.town/) has been expanded to include more examples of things you do can with vals like [creating web hooks](https://docs.val.town/creating-a-webhook), [web scraping](https://docs.val.town/web-scraping), [saving form data](https://docs.val.town/save-html-form-data), [generating PDFs](https://docs.val.town/generate-pdfs), and more including more service-specific guides like setting up chat bots, and fetching and storing data.
 
 ![Screenshot 2023-07-05 at 15.56.20.png](./val-town-newsletter-10/screenshot_2023-07-05_at_155620.png)
 
-## \***\*Expanding the Vals API - RFC\*\***
+### *Expanding the Vals API - RFC*
 
 We have [a RFC](https://blog.val.town/blog/expanding-the-vals-api-rfc) open to enable more programmatic use of Val Town, and to support the pioneers who are building tools that currently use our undocumented, unstable, internal API. It’s only open until Sunday, July 9th, so please get your comments in asap!
 
 ![Screenshot 2023-07-05 at 11.29.06@2x.png](./val-town-newsletter-10/screenshot_2023-07-05_at_1129062x.png)
 
-## Truncated output
+### Truncated output
 
 We recently instituted hard 100kb limits on val outputs. Now instead of throwing an error and returning nothing, we truncate the outputs at 100kb and try to “[repair](https://www.npmjs.com/package/jsonrepair)” the remaining output to be valid JSON. This is meant to be a strict improvement over showing you nothing, but it’s still not an ideal user experience. We have plans to increase these limits in a more scalable way in the medium-term.
 
 ![Screenshot 2023-07-05 at 16.11.16.png](./val-town-newsletter-10/screenshot_2023-07-05_at_161116.png)
 
-## Public Key Auth
+### Public Key Auth
 
 I prototyped [a authentication protocol for Val Town users](https://blog.val.town/public-key-auth-val-town-users-can-be-your-users) so Val Town users can authenticate themselves when calling each others’ vals. This work paves the way for per-user rate limiting and billing within Val Town.
 
-## Inspiration emails
+### Inspiration emails
 
 One of the biggest requests when folks sign up to Val Town is for us to “inspire” them with potential uses of the product. We are experimenting with having you setup your own inspiration emails about what you can use Val Town for — during the onboarding tutorial! We have you schedule a val that will send you an email of an inspiring val or usecase every day. [You can set yours up here](https://www.val.town/docs/tutorial/4). Because it’s just a normal val, you can modify it, improve it, whatever you want.
 
@@ -78,9 +78,9 @@ One of the biggest requests when folks sign up to Val Town is for us to “inspi
 
 ![Screenshot 2023-07-05 at 12.22.26@2x.png](./val-town-newsletter-10/screenshot_2023-07-05_at_1222262x.png)
 
-## API & NPM Examples
+### API & NPM Examples
 
-We want Val Town to be **_the_** place you go for examples of how to use an NPM package or use an API. Now you (and Google searchers) can explore Val Town from the perspective of APIs and NPM packages.
+We want Val Town to be *_the_* place you go for examples of how to use an NPM package or use an API. Now you (and Google searchers) can explore Val Town from the perspective of APIs and NPM packages.
 
 [https://twitter.com/Zephraph/status/1672411315292323840?s=20](https://twitter.com/Zephraph/status/1672411315292323840?s=20)
 
@@ -108,7 +108,7 @@ Or by NPM package:
 
 ![Screenshot 2023-07-05 at 11.47.58@2x.png](./val-town-newsletter-10/screenshot_2023-07-05_at_1147582x.png)
 
-## More `fetch` proxies
+### More `fetch` proxies
 
 We proxy all `fetch` requests so you aren’t affected by the fetching of other Val Town users. Every request comes from a different IP address. However we used to only have one proxy which didn’t allow .gov URLs and many other limitations. Now we have multiple proxies so we can support many more (hopefully all) URLs now.
 
@@ -120,13 +120,13 @@ Before
 
 ![Screenshot 2023-07-05 at 12.30.00@2x.png](./val-town-newsletter-10/screenshot_2023-07-05_at_1230002x.png)
 
-## Secrets upgrades
+### Secrets upgrades
 
 Some quality of life upgrades to the [Secrets page](https://www.val.town/settings/secrets) to let you update existing secrets in-place and check when a secret was last updated.
 
 ![Screenshot 2023-07-05 at 16.35.15.png](./val-town-newsletter-10/screenshot_2023-07-05_at_163515.png)
 
-## Link to val version
+### Link to val version
 
 You can link to a specific val version now, via `?v=version`, ie [val.town/v/pdebie.publishYoutubeToLemmy?v=25](https://www.val.town/v/pdebie.publishYoutubeToLemmy?v=25).
 
@@ -140,17 +140,17 @@ Tip: If you share a val URL in a social network, you get a pretty share URL imag
   </iframe>
 </div>
 
-## Trending algorithm updated
+### Trending algorithm updated
 
 Now it’s likes / age^1.5, where having a README counts as 5 likes, and you need at least one like to show up at all (but you can like your own val).
 
-## Discord welcome bot
+### Discord welcome bot
 
 Get welcomed to Val Town, by Val Town, and [learn how to build this bot yourself](https://docs.val.town/create-a-discord-welcome-bot).
 
 ![Untitled](./val-town-newsletter-10/untitled-2.png)
 
-## Cuter val names
+### Cuter val names
 
 What looked like `untitled_E8W8FGY` now is now the friendlier `untitled_magentaMarmoset`.
 
@@ -162,13 +162,13 @@ Before
 
 ![Untitled](./val-town-newsletter-10/untitled-4.png)
 
-## Footer
+### Footer
 
 Mostly for Google to see all our pages, but you may find it useful too.
 
 ![Screenshot 2023-07-05 at 11.34.43@2x.png](./val-town-newsletter-10/screenshot_2023-07-05_at_1134432x.png)
 
-## Misc
+### Misc
 
 - `setTimeout` is back, but [not persistent/durable](https://docs.val.town/gotchas#e89ca9ef411f4cfaa3265f216449b79e)
 - Val names are now represented as case insensitive (citext)
@@ -178,7 +178,7 @@ Mostly for Google to see all our pages, but you may find it useful too.
 - val.town/docs redirects to docs.val.town
 - Unreachable code warning
 
-## Roadmap
+### Roadmap
 
 As always we’re quite responsive to feedback and suggestions, so let us know what you want. We’re planning:
 
@@ -196,7 +196,7 @@ As always we’re quite responsive to feedback and suggestions, so let us know w
 - Integrated LLMs (have AI write your vals for you)
 - More web-standard and JS compatibility
 
-## Cool tweets
+### Cool tweets
 
 [https://twitter.com/stungeye/status/1671241335100297216?s=20](https://twitter.com/stungeye/status/1671241335100297216?s=20)
 
@@ -222,7 +222,7 @@ As always we’re quite responsive to feedback and suggestions, so let us know w
 
 [https://twitter.com/stevekrouse/status/1672000502446292993?s=20](https://twitter.com/stevekrouse/status/1672000502446292993?s=20)
 
-## Cool Vals
+### Cool Vals
 
 <div class="not-content">
   <iframe src="https://www.val.town/embed/easrng.rssViewer" width="100%" frameborder="no" style="height: 400px;">

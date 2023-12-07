@@ -8,7 +8,7 @@ author: Steven Krouse
 
 This month we shipped autosave, comments, email a val, an expanded API, and dozens more features, big and small. We’re hiring a full time engineer in NYC and a part-time docs writer. We were featured on a couple of podcasts and newsletters, and y’all tweeted some really cool vals.
 
-## We’re hiring!
+### We’re hiring!
 
 We’re looking for [a founding engineer to join us in New York](https://about.val.town/founding-engineer-at-val-town).
 
@@ -16,7 +16,7 @@ We’re also hiring someone to help with docs and community part-time and remote
 
 Come work with us! Email me at steve@val.town if you’re interested.
 
-## Podcasts
+### Podcasts
 
 I did a bit of a podcast tour over the last month, and it was a lot of fun!
 
@@ -24,25 +24,25 @@ I did a bit of a podcast tour over the last month, and it was a lot of fun!
 - [JavaScript Jam with Steve Krouse](https://www.javascriptjam.com/july-25-2023/)
 - [What makes programming fun?](https://www.youtube.com/watch?v=ZmRJ6PgVOdM&feature=youtu.be)
 
-## Changelog
+### Changelog
 
-### Autosave vals
+#### Autosave vals
 
 Vals now autosave in localstorage, so you can fearlessly leave the tab without losing your work.
 
 [https://youtu.be/y5WlxuZJwtk](https://youtu.be/y5WlxuZJwtk)
 
-### Comments on vals
+#### Comments on vals
 
 You can now write helpful and constructive comments on vals!
 
 ![Untitled](./val-town-newsletter-11/untitled.png)
 
-### Last runs preview
+#### Last runs preview
 
 ![Untitled](./val-town-newsletter-11/untitled-1.png)
 
-### Trigger vals via email
+#### Trigger vals via email
 
 Now you can send an email to a val to trigger it to run. Each val gets its own email address: `username.valname@valtown.email`. The val gets passed the email data as the first argument. Try it out by sending an email to [stevekrouse.testEmail2@valtown.email](mailto:stevekrouse.testEmail2@valtown.email) to trigger this val:
 
@@ -52,7 +52,7 @@ Now you can send an email to a val to trigger it to run. Each val gets its own e
   </iframe>
 </div>
 
-### Expanded API
+#### Expanded API
 
 We quietly released the first expansion of our API to let you list & search vals and users. Nico and Achille from our community were quick to release a [zod client](https://www.npmjs.com/package/valtown-zod-client), which works on Val Town.
 
@@ -62,7 +62,7 @@ We quietly released the first expansion of our API to let you list & search vals
   </iframe>
 </div>
 
-### What can I do with Val Town?
+#### What can I do with Val Town?
 
 ![https://www.val.town/examples/use-cases](./val-town-newsletter-11/untitled-2.png)
 
@@ -72,7 +72,7 @@ We quietly released the first expansion of our API to let you list & search vals
   </iframe>
 </div>
 
-## Testimonials
+### Testimonials
 
 ![https://www.val.town/#testimonials](./val-town-newsletter-11/screenshot_2023-07-31_at_120207.png)
 
@@ -82,17 +82,17 @@ We quietly released the first expansion of our API to let you list & search vals
   </iframe>
 </div>
 
-## Tailored Guides
+### Tailored Guides
 
 We customize your initial home screen with content related to the answers you gave during your onboarding.
 
 ![Screenshot 2023-07-31 at 12.04.07.png](./val-town-newsletter-11/screenshot_2023-07-31_at_120407.png)
 
-## Redesigned tips & feedback
+### Redesigned tips & feedback
 
 ![Screenshot 2023-07-31 at 12.01.00.png](./val-town-newsletter-11/screenshot_2023-07-31_at_120100.png)
 
-## Misc
+### Misc
 
 - View [all the vals you liked](https://www.val.town/settings/likes)
 - Disable-able code transformations (in [preferences](https://www.val.town/settings/preferences))
@@ -112,7 +112,7 @@ We customize your initial home screen with content related to the answers you ga
 - Polishes to the new val editor
 - View [trending scheduled vals](https://www.val.town/trending?scheduled=true)
 
-## Roadmap
+### Roadmap
 
 - Notifications (errors, likes, references, forks, etc)
 - Fork Vals (in a first-class, semantic way where we track this in the database)
@@ -124,7 +124,7 @@ We customize your initial home screen with content related to the answers you ga
 - Integrated LLMs (have AI write your vals for you)
 - More web-standard and JS compatibility
 
-## Cool ~~tweets~~ X’s
+### Cool ~~tweets~~ X’s
 
 [https://twitter.com/wesbos/status/1681341649786486785?s=20](https://twitter.com/wesbos/status/1681341649786486785?s=20)
 

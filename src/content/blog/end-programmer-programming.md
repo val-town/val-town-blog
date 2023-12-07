@@ -8,11 +8,11 @@ author: Steven Krouse
 
 The dream of “end-user programming” is still too far away. Let’s set our sights on “end-programmer programming” first.
 
-## The Dream
+### The Dream
 
 There is a dream, almost an ancient prophecy, about computers that is as old as computers themselves. Like a siren song, the dream has lured thousands of us to chase it. It shimmers like a mirage, tantalizingly just over the horizon, yet remains as elusive now as it ever has been. The road to the dream is littered with so many dead prototypes of brilliant minds that many have given up on the dream entirely. Yet in [some hearts](http://futureofcoding.org) the dream lives on.
 
-The dream is that the full power of computers be accessible to all, that our digital worlds will be as moldable as clay in our hands, shaped fluidly and continuously to serve each of our unique and particular needs. The dream is that the full expressivity of programming will be accessible to all people, not just the ~1% who spends years learning to code. The dream is the nothing short of [the real computer revolution](http://www.vpri.org/pdf/m2007007a_revolution.pdf). The dream is **end-user programming**.
+The dream is that the full power of computers be accessible to all, that our digital worlds will be as moldable as clay in our hands, shaped fluidly and continuously to serve each of our unique and particular needs. The dream is that the full expressivity of programming will be accessible to all people, not just the ~1% who spends years learning to code. The dream is the nothing short of [the real computer revolution](http://www.vpri.org/pdf/m2007007a_revolution.pdf). The dream is *end-user programming*.
 
 > \[End-user programming is] a vision for empowered computing pursued by bright-eyed computer science visionaries. Its rich history reaches back to the 1960s with programming environments like Smalltalk and Logo. Notable successes since then include Unix, the spreadsheet, Hypercard, and HTML. And today, newcomers like Zapier, Coda, and Siri Shortcuts are trying their own approaches to automation and dynamic modeling.
 
@@ -20,7 +20,7 @@ The dream is that the full power of computers be accessible to all, that our dig
 
 >
 
-## Boiling the ocean
+### Boiling the ocean
 
 The gulf between end-user software and end-user programming is filled with an ocean of thorny problems:
 
@@ -36,15 +36,15 @@ There are many amazing products and research prototypes that solve some of these
 
 Trying to tackle all of these problems at once is like trying to boil the ocean. Yet only focusing on a sliver of the problem doesn’t come anywhere close to the original dream. The wary dreamer must somehow chart a path from here, the world of today, that can bring us ever close to the whole dream.
 
-## End-programmer programming
+### End-programmer programming
 
-We can shift the audience. Instead of trying to achieve end-**\*\*\*\***user**\*\*\*\*** programming, let’s start with end-********\*\*\*\*********programmer********\*\*\*\********* programming. Today not even professional programmers can control their own software! How can we expect to get from here to end-user programming, without first achieving end-programmer programming?
+We can shift the audience. Instead of trying to achieve end-*user* programming, let’s start with end-*programmer* programming. Today not even professional programmers can control their own software! How can we expect to get from here to end-user programming, without first achieving end-programmer programming?
 
 At work, the programmer is a magician. She is just keystrokes away from anything she can dream up. But at home, using apps made by big companies, programmers are disenfranchised serfs, just like everyone else.
 
 The task of end-programmer programming is empowering programmers to actually control the software they use in their lives; not just the software they write for work.
 
-## Liberal software
+### Liberal software
 
 We already have free & open-source software. So what is stopping us programmers from achieving the dream of end-programmer programming?
 
@@ -66,7 +66,7 @@ The problems of liberal software are a tarball all on their own:
 
 We can limit the scope yet again: eschew whole, multiplayer apps in favor of small, personal, [folk](https://maggieappleton.com/folk-interfaces) software, little integrations, and mini-apps, like [Spotify Rediscover](https://rile.yt/rediscover), [Alert HN](https://alerthn.com/), [HN Replies](https://hnreplies.com/), and [Small World](https://smallworld.kiwi/).
 
-## An experiment: HN Follow
+### An experiment: HN Follow
 
 Because of excellent, free APIs and a sparse core interface, Hacker News has spawned a whole ecosystem of mini-apps from readers to push-notifiers. Inspired by our friend [Kartik](http://akkartik.name/)’s use-case, we decided to contribute our own mini-app to the fray, built in the end-programmer style.
 
@@ -80,7 +80,7 @@ Importantly, all this code is hosted and run for you. This is what makes it libe
 
 When you sign up for HN Follow, we create an account for you on [Val Town](https://val.town) (👋 disclaimer: this is my new startup, a collaborative cloud scripting environment) and install the scripts there.
 
-## Val Town
+### Val Town
 
 [Val Town](https://val.town) is a place to write and run code online. You can think of it as a “runnable Github Gists” or a “user-friendly AWS Lambda”. It makes it incredibly easy to email yourself, persist small pieces of data, expose functions and API endpoints, and create a recurring jobs.
 
@@ -92,6 +92,6 @@ But the dream of Val Town is nothing short of end-user programming, with a littl
 
 🙏 *Thanks Karik Agaram, Sam Arbesman, Geoffrey Litt, Dan Levine, Rodrigo Tello, and André Terron for your contributions to this piece, HN Follow, and Val Town!*
 
-## Subscribe
+### Subscribe
 
-The easiest way to subscribe to Val Town is to **sign up for an account on [val.town](http://val.town)**, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).
+The easiest way to subscribe to Val Town is to *sign up for an account on [val.town](http://val.town)*, and then opting in to receive our newsletter as your set your username. You can also sign up [via this link](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b).

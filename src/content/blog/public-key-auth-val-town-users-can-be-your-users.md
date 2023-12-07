@@ -27,9 +27,9 @@ First, we need a way for Val Town users to authenticate themselves to third-part
 
 It took an afternoon to get it working, and the main issue was struggling to understand the [Web Crypto API](https://developer.mozilla.org/en-US/docs/Web/API/Web_Crypto_API) and get them properly encoded into a format that can persist on Val Town. I learned a lot about encoding ArrayBuffers into base64 and back again. But the whole point of Val Town is that now that I’ve written these vals, you don’t have to worry about any of that - you just call [`@stevekrouse.generateKeys`](https://www.val.town/v/stevekrouse.generateKeys) and viola you get keys in beautiful JSON. Let me take you through how to set yourself up to both authenticate with this system and accept authenticated requests.
 
-## 1. Generate your keys
+### 1. Generate your keys
 
-Click **\*\***Run**\*\*** to generate keys and see them in JSON. If you’re logged into Val Town, this will save those keys to your account.
+Click *Run* to generate keys and see them in JSON. If you’re logged into Val Town, this will save those keys to your account.
 
 <div class="not-content">
   <iframe src="https://www.val.town/embed/new?code=import+%7B+set+%7D+from+%22https%3A%2F%2Fesm.town%2Fv%2Fstd%2Fset%22%3B%0Aimport+%7B+generateKeys+%7D+from+%22https%3A%2F%2Fesm.town%2Fv%2Fstevekrouse%2FgenerateKeys%22%3B%0A%0Alet+keys+%3D+await+generateKeys%28%29%0A%0Aexport+let+exportedKeySetter+%3D+Promise.all%28%5B%0A++set%28%22exportedKeys%22%2C+keys%29%2C%0A++set%28%22publicKey%22%2C+keys.publicKey%29%0A%5D%29" width="100%" frameborder="no" style="height: 400px;">
@@ -37,14 +37,14 @@ Click **\*\***Run**\*\*** to generate keys and see them in JSON. If you’re log
   </iframe>
 </div>
 
-## 2. Publish your public key
+### 2. Publish your public key
 
 Above we generated a public and private key pair. We want your private key to remain private always but we need to publish your public key.
 
 1. [Go to your public key](https://www.val.town/v/me/publicKey)
 2. Press the 🔒 icon toggle and publish that val
 
-## 3. Make an authenticated request
+### 3. Make an authenticated request
 
 To make an authenticated API request you need to pass:
 
@@ -61,7 +61,7 @@ To make an authenticated API request you need to pass:
   </iframe>
 </div>
 
-## 4. Verify the request
+### 4. Verify the request
 
 To make an API that verifies the request, you can use [`@stevekrouse.verifyAPIAuth`](https://www.val.town/v/stevekrouse.verifyAPIAuth):
 
@@ -71,7 +71,7 @@ To make an API that verifies the request, you can use [`@stevekrouse.verifyAPIAu
   </iframe>
 </div>
 
-## Further directions
+### Further directions
 
 This scheme uses the Val Town Run API, but it can easily be adapted to the Val Town Express API. These keys and this scheme works only for signing/authorizing. We could also build an end-to-end encrypted version of this scheme by encrypting the request with the public key of the recipient. One could also imagine naming these schemes and passing your scheme’s protocol name to its recipient so that it knows how to properly authenticate you.
 

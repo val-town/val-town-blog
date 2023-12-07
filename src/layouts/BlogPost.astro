@@ -35,6 +35,12 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
+      /** This might be too aggressive - would
+      * prefer it not be global.
+      */
+      .prose :global(video) {
+        width: 100%;
+      }
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;

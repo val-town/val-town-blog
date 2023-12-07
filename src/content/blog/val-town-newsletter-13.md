@@ -16,11 +16,11 @@ Vals are being used on everything from tracking prices and RSS feeds to categori
 
 If you would like to do us a big favor, please email [steve@val.town](mailto:steve@val.town) to schedule a user interview and onboarding session. The feedback we get from these sessions are what enable us to improve Val Town. We’re most excited to chat with folks at businesses who want to automate processes, make webhooks, little APIs, or crons. However, we’re happy to chat with anyone – please reach out!
 
-## Val Town v3
+### Val Town v3
 
 Val Town v3 finally shipped on October 23rd. It removed our custom `@` symbol syntax, but kept the ability to import code by typing the `@` symbol: we rewrite it as a web-standard JS import when you accept the completion. It’s more stable, easier to learn, supports JSX, environment variables, has no vendor lock-in, and fixed dozens of other bugs. It’s just way better — try it out!
 
-## Val Types
+### Val Types
 
 We created the concept of Val Types: HTTP Handler, Interval, Email Handler, or a Script. This lets us specialize the UI particularly for each type of val, which we’ve only just begun taking advantage of.
 
@@ -28,7 +28,7 @@ We created the concept of Val Types: HTTP Handler, Interval, Email Handler, or a
 
 ![Untitled](./val-town-newsletter-13/untitled.png)
 
-## SQLite & Blob Storage
+### SQLite & Blob Storage
 
 We all know functions are most useful when they can persist some state. Up until now, we had two bad answers:
 
@@ -47,13 +47,13 @@ A couple weeks ago we launched two integrations that let you persist real data w
 
 ![Screenshot 2023-11-28 at 10.24.52@2x.png](./val-town-newsletter-13/screenshot_2023-11-28_at_1024522x.png)
 
-## Exports & names
+### Exports & names
 
 Vals used to require exactly one export, and the name of that export was the name of the val. This was confusing to users, so we moved the name of vals outside the code, and allow vals to have as many or few exports as you’d like.
 
 ![Screenshot 2023-11-28 at 10.28.07@2x.png](./val-town-newsletter-13/screenshot_2023-11-28_at_1028072x.png)
 
-## Roadmap
+### Roadmap
 
 - Docs site in a public github repo
 - Near-at-hand templates for common patterns, like importing from npm, using secrets, JSX, emailing yourself, persistence, OpenAI…
@@ -65,7 +65,7 @@ Vals used to require exactly one export, and the name of that export was the nam
 - Benchmark v3 runtime performance and update limits
 - LLM to help you write vals
 
-## Links
+### Links
 
 - [Posthog shows how to use Val Town to capture RSS events in Posthog](https://posthog.com/tutorials/rss-item-capture)
 - Val Town is being [taught in a Northeastern class](https://x.com/Neesh774/status/1728788898837323871?s=20)!

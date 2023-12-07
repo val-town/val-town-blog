@@ -8,9 +8,9 @@ author: Steven Krouse
 
 We shipped our new Deno runtime! We launched imports, from npm, esm.sh, deno.land. Our next focus is on quick wins, particularly in social directions. Y’all continue to dazzle us with very cool vals 🤩
 
-## Changelog
+### Changelog
 
-## Deno
+### Deno
 
 ![Untitled](./val-town-newsletter-5/untitled.png)
 
@@ -22,7 +22,7 @@ The award for best Val Town user this month clearly goes to [Andrew Healey](http
 
 You can read the full [Upgrade to Deno guide here](https://docs.val.town/upgrade-to-deno-march-14-2023).
 
-## Imports
+### Imports
 
 As alluded to, Deno comes with this amazing import syntax that fits so well into the Val Town model. I shudder to think of a full `package.json` in a val. We may have to do it some day but hopefully not soon! After we launched Deno, it only took Tom about an afternoon to launch the first version of imports 🥳
 
@@ -40,7 +40,7 @@ As alluded to, Deno comes with this amazing import syntax that fits so well into
   </iframe>
 </div>
 
-## Refreshed Val Header
+### Refreshed Val Header
 
 We didn’t set out to entirely redesign val headers this month, but we kinda did, piece by piece:
 
@@ -72,27 +72,27 @@ In order to make room for all our buttons, we made them icons only, and their de
 
 ![Screenshot 2023-03-21 at 8.47.38 AM.png](./val-town-newsletter-5/screenshot_2023-03-21_at_84738_am.png)
 
-## Refreshed Tips Menu
+### Refreshed Tips Menu
 
 ![Screenshot 2023-03-20 at 2.07.32 PM.png](./val-town-newsletter-5/screenshot_2023-03-20_at_20732_pm.png)
 
 - Bug fixes around moving vals in your workspaces & deleting vals
 
-## Refresh to the Tracing UI
+### Refresh to the Tracing UI
 
 A lot of folks probably don’t even know that Val Town comes with tracing built in. We automatically track all evaluations of any val, including every time your function is run, and show you all those evaluations on the val’s page at the bottom. For security concerns, we only show you evaluations on vals that you own and that you were the initiator of the run. So if someone else calls your val, you won’t see the evaluation history for that run. Tom made a number of small UI tweaks to the evaluations UI, including these cute green checkmarks when no errors are thrown.
 
 ![Screenshot 2023-03-20 at 3.11.27 PM.png](./val-town-newsletter-5/screenshot_2023-03-20_at_31127_pm.png)
 
-## `api2.val.town` & `api3.val.town`
+### `api2.val.town` & `api3.val.town`
 
 You may have noticed that our API URL sometimes is displayed as `api.val.town`, `api2.val.town` or `api3.val.town`. Apologies for the confusion! They all go to the same place. We needed to make a couple different subdomains and we moved our infrastructure around last week. We will soon reconsolidate them back to simply just `api.val.town`, but continue to support `api2` and `api3` as symlinks to `api.val.town` in perpetuity.
 
-## Roadmap
+### Roadmap
 
 We are focused on quick wins, better onboarding, and social features over the next couple weeks. We’re thinking about improved auth, better search, dynamic featured vals, profile page customization & hero stats, comments, liking and mini pull requests on vals, pretty val share URLs, public folders, seeing & getting notifications about your vals’ usage, and much more.
 
-## Cool vals
+### Cool vals
 
 [https://twitter.com/stevekrouse/status/1637890851031359517](https://twitter.com/stevekrouse/status/1637890851031359517)
 
