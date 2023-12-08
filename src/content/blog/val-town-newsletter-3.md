@@ -11,7 +11,7 @@ made many small things better, and are working on making a few big things
 amazing. Deno, npm, omniscient debugging, and superjson hopefully soon!
 
 If you’re new to the Val Town journey, check out
-[our earlier blogs](..//val-town-blog) or just
+[our earlier blogs](/) or just
 [go to try out the product.](https://val.town)
 
 ### Founding team

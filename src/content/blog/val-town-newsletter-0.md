@@ -14,7 +14,7 @@ We don't want to automatically subscribe you to our newsletter without your cons
 
 :::note
 
-💌 [Click here to *sign up for our newsletter*](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b) (this form needs you to turn off adblocker)
+💌 [Click here to _sign up for our newsletter_](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b) (this form needs you to turn off adblocker)
 
 :::
 
@@ -40,7 +40,7 @@ If you've made it to the end and would like to be helpful, please play-test our 
 
 Other inspiration from Val Town:
 
-- André pulls data from Peloton (which spawned [this tutorial](..//archive/peloton-tutorial))
+- André pulls data from Peloton (which spawned this tutorial)
 - Jonathan pulls from [a Google spreadsheet](https://www.val.town/stevekrouse.sampleGoogleSheetCSV) to augment a iOS shortcuts workflow
 
 If you have ideas or want to jam on a project, please don't be shy! Just reply to this email.
