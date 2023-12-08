@@ -25,8 +25,8 @@ If you haven't been back in a while, we've added a bunch new features:
 - ✨ persistent `[setInterval`]\(../../Val%20Town%20Docs%2001c8eb9c534b4899802f3a9e31d540ab.md) ✨
 - ✨ `console.email` ✨
 - smarter & type-aware autocomplete
-- [notebooks beta](..//val-town-docs)
-- [a handful of tutorials](..//val-town-docs)
+- [notebooks beta](https://docs.val.town/)
+- [a handful of tutorials](https://docs.val.town/)
 
 [https://www.loom.com/share/878294970d8e48919c819f35d0cd0da4](https://www.loom.com/share/878294970d8e48919c819f35d0cd0da4)
 
