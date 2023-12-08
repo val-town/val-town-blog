@@ -4,9 +4,8 @@ generated: 1701894028827
 pubDate: August 25, 2023
 author: Steven Krouse
 description: How to customize OpenAI to your liking
+heroImage: ./an-introduction-to-openai-fine-tuning/screenshot_2023-08-24_at_1758482x.png
 ---
-
-![Screenshot 2023-08-24 at 17.58.48@2x.png](./an-introduction-to-openai-fine-tuning/screenshot_2023-08-24_at_1758482x.png)
 
 We’ve been tinkering with LLMs to write code on [Val Town](https://www.val.town/). Our platform runs vals - little snippets of TypeScript - with zero configuration, no deploying needed. These self-contained bits of functionality seem like the perfect target for something like GPT, with a little training. But we will need to teach GPT a little bit about the platform, which functions are available, how to structure its code.
 

@@ -12,17 +12,13 @@ As a quick reminder, [Val Town](https://val.town/) is the social JavaScript note
 
 We don't want to automatically subscribe you to our newsletter without your consent, so we're just sending you this one message so you can opt in.
 
-:::note
-
 💌 [Click here to _sign up for our newsletter_](https://cdn.forms-content.sg-form.com/6c6893f3-38e6-11ed-b573-a6c391c68d4b) (this form needs you to turn off adblocker)
-
-:::
 
 You can also sign up for our [brand new Discord here](https://discord.gg/dHv45uN5RY).
 
 If you haven't been back in a while, we've added a bunch new features:
 
-- ✨ persistent `[setInterval`]\(../../Val%20Town%20Docs%2001c8eb9c534b4899802f3a9e31d540ab.md) ✨
+- ✨ persistent `setInterval` ✨
 - ✨ `console.email` ✨
 - smarter & type-aware autocomplete
 - [notebooks beta](https://docs.val.town/)
@@ -32,11 +28,7 @@ If you haven't been back in a while, we've added a bunch new features:
 
 If you've made it to the end and would like to be helpful, please play-test our new interactive tutorial & let us know where you get stuck or other feedback:
 
-:::note
-
 🔔 [Get notified when legends post to HN](https://www.val.town/blog/get-notified-when-legends-post-to-hn)
-
-:::
 
 Other inspiration from Val Town:
 

@@ -6,8 +6,6 @@ pubDate: October 3, 2023
 author: Steven Krouse
 ---
 
-- Table of contents
-
 Shipping later this month, Val Town v3 is faster, simpler, and more reliable. It comes packed with long-requested features and bug fixes:
 
 - Web-standard JavaScript
@@ -154,7 +152,7 @@ export async function gpt3 (args) {
 }
 ```
 
-If another user imported and ran this val themselves, `process.env.openai` would refer to *their* OpenAI token. However, public or unlisted vals can also be run via our [Run API](https://docs.val.town/api/run), which uses the secrets of the _author_ of the function, not the invoker of the function. Thus anyone who published such a function would be giving away free use of their OpenAI token – without leaking the token itself.
+If another user imported and ran this val themselves, `process.env.openai` would refer to _their_ OpenAI token. However, public or unlisted vals can also be run via our [Run API](https://docs.val.town/api/run), which uses the secrets of the _author_ of the function, not the invoker of the function. Thus anyone who published such a function would be giving away free use of their OpenAI token – without leaking the token itself.
 
 There are ways around this footgun, but in the short-term our advice is to not publish functions that use your secrets. In the medium-term, we are considering deprecating the Run API. While it is cute, convenient, and makes for great demos, every time we blurred the distinction between functions and APIs, we’ve come to regret it. They are two different things, and blurring the distention makes for confusing semantics.
 
@@ -210,7 +208,7 @@ export const solidDom = renderToString(() => <div x={x}>Test {x}</div>);
 
 Now there’s a pretty important caveat here. When you see JSX, you probably think about client-side apps. Creating some components, with React hooks or Solid signals or whatever kind of client-side state and effects, and rendering them in the client - maybe pre-rendering them on the server with SSR first - but definitely at least “hydrating” them in the client.
 
-Our support for JSX is super convenient and great, and we think it goes super well with low-JavaScript tools like [htmx](https://htmx.org/), but what it *doesn’t* do is create client-side components. So event listeners, client-side state, React refs, anything that runs in the browser, won’t - for now.
+Our support for JSX is super convenient and great, and we think it goes super well with low-JavaScript tools like [htmx](https://htmx.org/), but what it _doesn’t_ do is create client-side components. So event listeners, client-side state, React refs, anything that runs in the browser, won’t - for now.
 
 We’re going to keep pushing on this feature and try to find ways to create bundles and support more web-app technologies, but for now we want to be clear about the limitations: Vals that use JSX won’t automatically run on the client-side like you might expect.
 

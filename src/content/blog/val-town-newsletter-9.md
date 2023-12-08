@@ -16,8 +16,6 @@ Our pricing page was on the front page of Hacker News last week! We are now
 making tens of dollars in revenue. Per month! We were also featured on a couple
 of JavaScript newsletters recently, so hello new friends 👋
 
-:::note
-
 🎓 If you’re new, we recommend our
 [tutorial](https://www.val.town/docs/tutorial), asking questions in the
 [Discord](https://discord.gg/dHv45uN5RY), and checking out some of the new
@@ -27,8 +25,6 @@ guides in our [docs](https://docs.val.town)
 [webhooks](https://docs.val.town/creating-a-webhook),
 [render HTML](https://docs.val.town/rendering-html),
 [persist data](https://docs.val.town/persistence-databases/persisting-100kb)).
-
-:::
 
 ### Changelog
 
@@ -66,7 +62,7 @@ turn it on at
 ### Tutorial redesign
 
 In the [onboarding tutorial](https://val.town/docs/tutorial), we moved the
-*Publish an API* step from the end to the beginning, because it was everyone’s
+_Publish an API_ step from the end to the beginning, because it was everyone’s
 favorite step. We also made the steps clearer, and added a table of contents.
 
 ![Screenshot 2023-06-16 at 16.47.01.png](./val-town-newsletter-9/screenshot_2023-06-16_at_164701.png)
@@ -137,7 +133,7 @@ When you’re a new user, we now have a nifty quick guide to present to you:
 
 Now we rely on Stripe webhooks to know when to upgrade your account — instead of
 manually setting it ourselves in the database. You get this sexy new
-*Pro* badge when you upgrade.
+_Pro_ badge when you upgrade.
 
 ![Screenshot 2023-06-16 at 12.46.19 2.png](./val-town-newsletter-9/screenshot_2023-06-16_at_124619_2.png)
 
