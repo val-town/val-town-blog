@@ -87,6 +87,17 @@ input {
 }
 table {
   width: 100%;
+  font-size: 80%;
+  border-collapse: collapse;
+}
+table th {
+  font-style: italic;
+}
+table td {
+  border-top: 1px solid rgb(var(--gray-light));
+}
+table td {
+  padding: 3px 0;
 }
 img {
   max-width: 100%;
