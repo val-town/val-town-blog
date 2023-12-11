@@ -24,6 +24,8 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <!-- Canonical URL -->
 <link rel="canonical" href={canonicalURL} />
 
+<link href={new URL('/rss.xml', Astro.url).toString()} rel="alternate" type="application/rss+xml" title="Val Town Blog">
+
 <!-- Primary Meta Tags -->
 <title>{title}</title>
 <meta name="title" content={title} />
