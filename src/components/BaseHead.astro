@@ -3,7 +3,9 @@
 // all pages through the use of the <BaseHead /> component.
 import '@fontsource/ibm-plex-sans';
 import '@fontsource/ibm-plex-mono';
+import { getImage } from "astro:assets";
 import '../styles/global.css';
+import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -13,7 +15,10 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { title, description, heroImage, image = '/blog-placeholder-1.jpg' } = Astro.props;
+
+const optimizedHero = await getImage({ src: heroImage });
+const socialImage = optimizedHero?.src ?? new URL(image, Astro.url)
 ---
 
 <!-- Global Metadata -->
@@ -36,11 +41,13 @@ const { title, description, image = '/blog-placeholder-1.jpg' } = Astro.props;
 <meta property="og:url" content={Astro.url} />
 <meta property="og:title" content={title} />
 <meta property="og:description" content={description} />
-<meta property="og:image" content={new URL(image, Astro.url)} />
+<meta property="og:image" content={socialImage} />
 
 <!-- Twitter -->
 <meta property="twitter:card" content="summary_large_image" />
 <meta property="twitter:url" content={Astro.url} />
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
-<meta property="twitter:image" content={new URL(image, Astro.url)} />
+<meta property="twitter:image" content={socialImage} />
+
+<ViewTransitions />
