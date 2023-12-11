@@ -15,6 +15,7 @@
     "@astrojs/rss": "^4.0.1",
     "@astrojs/sitemap": "^3.0.3",
     "@fontsource/ibm-plex-sans": "^5.0.18",
+    "@fontsource/ibm-plex-mono": "^5.0.8",
     "@fontsource/ibm-plex-serif": "^5.0.8",
     "astro": "^4.0.2",
     "astro-expressive-code": "^0.29.4",
