@@ -22,22 +22,25 @@ const posts = (await getCollection('blog')).sort(
 				width: 960px;
 			}
 			ul {
-				display: flex;
-				flex-wrap: wrap;
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
 				padding: 0;
 			}
-			ul li {
-				width: calc(50% - 1rem);
-			}
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
+    /*
 			ul li:first-child {
+        font-size: 140%;
+        background: #fff;
+        padding: 20px 40px;
+        border-radius: 10px;
+        border: 1px solid #ccc;
+        margin-bottom: 20px;
 			}
+    */
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;

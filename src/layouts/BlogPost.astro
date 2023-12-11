@@ -8,7 +8,7 @@ import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
+const { title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -20,6 +20,29 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 				max-width: 100%;
 				margin: 0;
 			}
+      .prose :global(.expressive-code .frame) {
+        box-shadow: none;
+      }
+      .prose :global(p) {
+        margin: 20px 0;
+      }
+      .prose :global(p code) {
+        font-size: 80%;
+        background: #F0F6FF;
+        border-radius: 4px;
+        color: #1e3a8a;
+        font-family: var(--ec-codeFontFml);
+      }
+      .prose :global(p:has(img)) {
+        margin: 0;
+      }
+      .prose :global(a) {
+        text-decoration: none;
+        color: #2563EB;
+      }
+      .prose :global(a:hover) {
+        text-decoration: underline;
+      }
 			.hero-image {
 				width: 100%;
 			}
@@ -58,13 +81,19 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 			.last-updated-on {
 				font-style: italic;
 			}
+
+	    @media (max-width: 720px) {
+        .title h1 {
+          font-size: 30px;
+        }
+      }
 		</style>
 	</head>
 
 	<body>
 		<Header />
 		<main>
-			<article>
+			<article itemscope itemtype="https://schema.org/Article">
 				<div class="hero-image">
 					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
 				</div>
@@ -72,6 +101,8 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 					<div class="title">
 						<div class="date">
 							<FormattedDate date={pubDate} />
+              {author ?
+                <>by <span itemprop="author">{author}</span></>  : null}
 							{
 								updatedDate && (
 									<div class="last-updated-on">
@@ -80,7 +111,7 @@ const { title, description, pubDate, updatedDate, heroImage } = Astro.props;
 								)
 							}
 						</div>
-						<h1>{title}</h1>
+						<h1 itemprop="name">{title}</h1>
 						<hr />
 					</div>
 					<slot />

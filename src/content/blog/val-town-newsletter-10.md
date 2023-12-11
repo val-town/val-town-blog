@@ -1,7 +1,6 @@
 ---
 title: Val Town Newsletter 10
-generated: 1701894028914
-description: A year of Val TOwn!
+description: A year of Val Town!
 pubDate: July 5, 2023
 author: Steven Krouse
 ---
@@ -54,7 +53,7 @@ The guides section on [docs.val.town](https://docs.val.town/) has been expanded 
 
 ![Screenshot 2023-07-05 at 15.56.20.png](./val-town-newsletter-10/screenshot_2023-07-05_at_155620.png)
 
-### *Expanding the Vals API - RFC*
+### _Expanding the Vals API - RFC_
 
 We have [a RFC](https://blog.val.town/blog/expanding-the-vals-api-rfc) open to enable more programmatic use of Val Town, and to support the pioneers who are building tools that currently use our undocumented, unstable, internal API. It’s only open until Sunday, July 9th, so please get your comments in asap!
 
@@ -80,7 +79,7 @@ One of the biggest requests when folks sign up to Val Town is for us to “inspi
 
 ### API & NPM Examples
 
-We want Val Town to be *_the_* place you go for examples of how to use an NPM package or use an API. Now you (and Google searchers) can explore Val Town from the perspective of APIs and NPM packages.
+We want Val Town to be _*the*_ place you go for examples of how to use an NPM package or use an API. Now you (and Google searchers) can explore Val Town from the perspective of APIs and NPM packages.
 
 [https://twitter.com/Zephraph/status/1672411315292323840?s=20](https://twitter.com/Zephraph/status/1672411315292323840?s=20)
 

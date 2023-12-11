@@ -9,4 +9,7 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://blog.val.town",
   integrations: [astroExpressiveCode(), mdx(), sitemap()],
+  server: {
+    port: 4322,
+  },
 });
