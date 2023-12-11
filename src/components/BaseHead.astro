@@ -3,13 +3,14 @@
 // all pages through the use of the <BaseHead /> component.
 import '@fontsource/ibm-plex-sans';
 import '@fontsource/ibm-plex-mono';
-import { getImage } from "astro:assets";
+import { getImage, type LocalImageProps } from "astro:assets";
 import '../styles/global.css';
 import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
 	description: string;
+	heroImage?: LocalImageProps['src'];
 	image?: string;
 }
 
