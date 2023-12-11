@@ -3,6 +3,7 @@ title: Improving the Val Editor
 description: Designing the core UI of editing
 pubDate: December 11, 2023
 author: Tom MacWright
+heroImage: ./editor-redesign/splash.png
 ---
 
 The Val Editor is the core of the Val Town UI – it's the UI
