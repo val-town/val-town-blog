@@ -1,7 +1,7 @@
 ---
 title: Improving the Val Editor
 description: Designing the core UI of editing
-pubDate: November 28, 2023
+pubDate: December 11, 2023
 author: Tom MacWright
 ---
 
