@@ -15,9 +15,9 @@ interface Props {
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, heroImage, image = '/blog-placeholder-1.jpg' } = Astro.props;
+const { title, description, heroImage, image = '/blog-placeholder.jpg' } = Astro.props;
 
-const optimizedHero = await getImage({ src: heroImage });
+const optimizedHero = heroImage && await getImage({ src: heroImage });
 const socialImage = optimizedHero?.src ?? new URL(image, Astro.url)
 ---
 
