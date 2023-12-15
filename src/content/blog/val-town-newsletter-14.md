@@ -82,6 +82,7 @@ Pull requests welcome! Huge shoutout to [Xkonti](https://www.val.town/u/xkonti) 
 ### Cool vals
 
 - [@pomdtr](https://www.val.town/u/pomdtr)'s upgraded the [Val Town CLI](https://github.com/pomdtr/vt) to manage vals, blobs, sqlite
+- [@saolsen](https://www.val.town/u/saolsen) pitted val against val in a [Connect 4 Bot Royale](https://www.val.town/v/saolsen/connect4_site)
 - [@rlesser](https://www.val.town/u/rlesser) visualized [your val's dependency graph](https://www.val.town/v/rlesser/dependency_graph) ([example](https://rlesser-dependency_graph.web.val.run/nbbaier/vtIdeaAggregator))
 - [@pomdtr](https://www.val.town/u/pomdtr) added [basic auth middleware](https://www.val.town/v/pomdtr/basicAuth) using your Val Town auth token
 - [@Glench](https://www.val.town/u/Glench) subscribes to [an RSS feed users trying to delete their Google Photos](https://www.val.town/v/Glench/googlePhotosMarketingRSS) (for marketing [his extension](https://chromewebstore.google.com/detail/bebhhjmapjadpdkkhbkpnpbjhkhndofl))
