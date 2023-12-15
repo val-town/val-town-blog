@@ -17,7 +17,7 @@ API, added another column on desktop so you can view multiple vals side-by-side,
 “public but unlisted” vals for private-ish use-cases, TypeScript intelligence
 generally available, notifications when folks comment or like your vals, the
 ability to properly fork vals, dark mode, and many more features and fixes, a
-bunch of tutorials, blogs, videos, podcasts, and did I mention
+bunch of tutorials, blogs, video, podcasts, and did I mention
 [we’re live on Product Hunt right now](https://www.producthunt.com/posts/val-town)?
 
 ### Val Town is on Product Hunt
@@ -166,7 +166,7 @@ happy with:
 The pinned vals column is resizable by dragging its border. Note that this is
 desktop-only, since there’s not quite enough room for two panes on a phone.
 
-<video controls><source src="/videos/https://cdn.discordapp.com/attachments/1020432421243592717/1143604665087447100/CleanShot_2023-08-22_at_13.54.22.mp4" /></video>
+<video controls><source src="/video/https://cdn.discordapp.com/attachments/1020432421243592717/1143604665087447100/CleanShot_2023-08-22_at_13.54.22.mp4" /></video>
 
 #### Types for everyone
 
@@ -176,7 +176,7 @@ web worker, freeing up the main thread to keep our UI nice and snappy. We moved
 it out of beta, so now everyone will get lovely type support throughout Val
 Town.
 
-<video controls><source src="./capture.mp4" /></video>
+<video controls><source src="/video/capture.mp4" /></video>
 
 #### Val Templates
 
@@ -197,7 +197,7 @@ as push notifications via email & webhook coming soon!
 
 #### Email _anyone_ from Val Town
 
-Val Town Pro users can now email *anyone* from Val Town. This
+Val Town Pro users can now email _anyone_ from Val Town. This
 opens up lots of possibilities for creating more dynamic services on Val Town.
 Check out [`@std.email`](https://www.val.town/v/std.email), and these
 [email](https://www.val.town/v/stevekrouse.emailGPT3)
@@ -216,11 +216,11 @@ understand by adding some with our new drag-and-drop image functionality.
 
 #### Fork vals
 
-At long last, you can *_properly_* fork a val, and have its provenance tracked
+At long last, you can _*properly*_ fork a val, and have its provenance tracked
 in the database. Before we just added a `// Forked from @someones.val` comment
 at the bottom of forked vals. We also migrated as many of those old-style forked
 vals over as possible. Now a forked val has a little icon in the bottom left of
-the val. You can also fork your own val — the option to do so is in the *…*
+the val. You can also fork your own val — the option to do so is in the _…_
 menu.
 
 ![Screenshot 2023-09-05 at 08.37.41@2x.png](./val-town-newsletter-12/screenshot_2023-09-05_at_0837412x.png)
@@ -232,7 +232,7 @@ menu.
 Val Town now has Dark mode! There’s also Auto mode to assume the system setting.
 We’re one of the cool kids now 😎
 
-<video controls><source src="/videos/cleanshot_2023-08-15_at_181825.mp4" /></video>
+<video controls><source src="/video/cleanshot_2023-08-15_at_181825.mp4" /></video>
 
 #### Val Town Universe
 
@@ -244,7 +244,7 @@ vals and their connections visually.
 Val Town wouldn’t be a social site without tagging, so now you can tag people in
 Val READMEs and comments.
 
-<video controls><source src="/videos/tagging.mp4" /></video>
+<video controls><source src="/video/tagging.mp4" /></video>
 
 #### Response body decoded
 
@@ -261,7 +261,7 @@ Copy and paste a val link to Notion to embed it. (Before you had to specifically
 copy the “Embed Link”, but now it auto-converts any val link.) Thanks, friends
 at Notion and Iframely!
 
-<video controls><source src="/videos/nfiybrcfqwifb98k.mp4" /></video>
+<video controls><source src="/video/nfiybrcfqwifb98k.mp4" /></video>
 
 #### Misc
 
