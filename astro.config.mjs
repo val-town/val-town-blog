@@ -9,6 +9,9 @@ import sitemap from "@astrojs/sitemap";
 export default defineConfig({
   site: "https://blog.val.town",
   integrations: [astroExpressiveCode(), mdx(), sitemap()],
+  editLink: {
+    baseUrl: "https://github.com/val-town/val-town-docs/edit/main/",
+  },
   server: {
     port: 4322,
   },

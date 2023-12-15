@@ -2,13 +2,14 @@
 import type { CollectionEntry } from 'astro:content';
 import { Image } from "astro:assets";
 import BaseHead from '../components/BaseHead.astro';
+import EditLink from '../components/EditLink.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 
 type Props = CollectionEntry<'blog'>['data'];
 
-const { title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
+const { id, title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
 ---
 
 <html lang="en">
@@ -115,6 +116,7 @@ const { title, description, author, pubDate, updatedDate, heroImage } = Astro.pr
 						<hr />
 					</div>
 					<slot />
+          <EditLink id={id} />
 				</div>
 			</article>
 		</main>
