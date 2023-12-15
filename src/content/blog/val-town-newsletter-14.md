@@ -13,15 +13,9 @@ The community has made hundreds of really cool vals recently (links below), incl
 
 ### Pull Requests
 
-You can now send Pull Requests to other people's vals!
+You can now send Pull Requests to vals! Below we demonstrate forking a val, adding a feature, submitting a PR, then switching accounts, and merging the PR.
 
-1. Fork their val
-2. Make your changes
-3. Send a Pull Request
-4. Wait for them to review & merge it
-5. You are now a Val Town legend 🎉
-
-TODO photos 👆
+<video controls><source src="/video/pr_demo.mp4" /></video>
 
 ### Editor Redesign
 
