@@ -47,7 +47,7 @@ You can now click on the references for each val. You can see that
 `@stevekrouse.fetchJSON` was referenced 619 times, and when you click on it you
 can see the 208 vals that use it that are public.
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_144032.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_144032.mp4" /></video>
 
 ### Tracing (evaluations) redesign
 
@@ -59,11 +59,11 @@ your API. These semantics are discussed in the
 [Restricted Library Mode](https://blog.val.town/blog/restricted-library-mode)
 blog post.)
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_144142-converted.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_144142-converted.mp4" /></video>
 
 ### NPM Search inline
 
-<video controls><source src="/videos/screenshot_2023-05-12_at_135727.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-12_at_135727.mp4" /></video>
 
 ### Likes
 
@@ -74,7 +74,7 @@ blog post.)
 Now we talk about some of our best features on the homepage: cron jobs,
 `console.email`, APIs and imports!
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_160852-converted.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_160852-converted.mp4" /></video>
 
 ### Onboarding Tutorial
 
@@ -97,7 +97,7 @@ multiple tokens, and the ability to delete tokens:
 Sometimes it’s useful to see every version of every val you’ve ever created,
 including deleted vals, so you can restore them.
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_144816.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_144816.mp4" /></video>
 
 ### First YouTube / TikTok / podcast / livestream
 
@@ -133,7 +133,7 @@ Slack, Google Sheets, Github, Telegram, Mastodon, Resy, Twitter, etc.
 When you click on a link that takes a couple seconds to load, you’ll see the
 classic progress bar loader at the top of the screen.
 
-<video controls><source src="/videos/my_movie.mp4" /></video>
+<video controls><source src="/video/my_movie.mp4" /></video>
 
 ### Userspace Cron
 
@@ -156,11 +156,11 @@ I know it’s annoying but we need to know where folks are hearing about us.
 
 Press cmd, then click.
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_150608.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_150608.mp4" /></video>
 
 ### Customizable profile pic
 
-<video controls><source src="/videos/screenshot_2023-05-15_at_150749.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-15_at_150749.mp4" /></video>
 
 ### Misc
 

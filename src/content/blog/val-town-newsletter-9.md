@@ -49,7 +49,7 @@ one of our most requested features since we launched in January.
 
 Explore the names & types of library functions without leaving Val Town!
 
-<video controls><source src="/videos/screenshot_2023-06-16_at_171613.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-06-16_at_171613.mp4" /></video>
 
 This is very beta software. We recommend only turning it on when you need it and
 then turning it off right after. There is still a lot of work we need to do to

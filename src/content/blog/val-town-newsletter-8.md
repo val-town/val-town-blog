@@ -82,7 +82,7 @@ operation. Over time we will make this refactor even more seamless, guiding you
 through replacing the name change across all references, and/or creating a
 "symlink".
 
-<video controls><source src="/videos/jmycrh46j7z2cli-.mp4" /></video>
+<video controls><source src="/video/jmycrh46j7z2cli-.mp4" /></video>
 
 ### hnFollow
 
@@ -121,10 +121,10 @@ at Supabase, and [on HN](https://news.ycombinator.com/item?id=36004925).
 ### Simpler privacy controls
 
 Val Privacy used to be tied to specific versions of vals. Now privacy is a
-property of *_all_* versions of a val, and you can easily toggle it back and
+property of _*all*_ versions of a val, and you can easily toggle it back and
 forth.
 
-<video controls><source src="/videos/screenshot_2023-05-31_at_171216.mp4" /></video>
+<video controls><source src="/video/screenshot_2023-05-31_at_171216.mp4" /></video>
 
 ### More consistent performance
 
