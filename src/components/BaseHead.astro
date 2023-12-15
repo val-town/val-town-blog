@@ -5,7 +5,6 @@ import '@fontsource/ibm-plex-sans';
 import '@fontsource/ibm-plex-mono';
 import { getImage, type LocalImageProps } from "astro:assets";
 import '../styles/global.css';
-import { ViewTransitions } from 'astro:transitions';
 
 interface Props {
 	title: string;
@@ -50,5 +49,3 @@ const socialImage = optimizedHero?.src ?? new URL(image, Astro.url)
 <meta property="twitter:title" content={title} />
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={socialImage} />
-
-<ViewTransitions />
