@@ -9,9 +9,9 @@ INTRO
 
 The community has made hundreds of really cool vals recently (links below), including through collaboration in the Discord recently. [Come join us!](https://discord.gg/dHv45uN5RY) 👋
 
-### TOPIC
+### HTTP Logs update
 
-TPIC DESCRIPTION
+The changes to how HTTP vals present logs.
 
 ### GitHub Discussions
 
