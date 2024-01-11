@@ -31,4 +31,10 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 - [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves Vscode](https://www.val.town/v/pomdtr/vscode)
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
-- [@pomdtr](https://www.val.town/u/pomdtr) updated his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs and query SQLite tables
+- [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs and query SQLite tables and a lot more
+- [@saolsen](https://www.val.town/u/saolsen) explored the idea of [writing vals in Rust](https://gist.github.com/saolsen/d273bb1baba5e912e4dc2b187511affa)
+- [@todepond](https://www.val.town/u/todepond) wrote about [making his supported dashboard using Val Town](https://todepond.com/wikiblogarden/tadi-web/fame/facts/)
+- [@pomdtr](https://www.val.town/u/pomdtr) created a val that [creates screenshots from another val](https://www.val.town/v/pomdtr/val2img)
+- [@saolsen](https://www.val.town/u/saolsen) created a [val version diff viewer](https://www.val.town/v/saolsen/changes)
+- [@saolsen](https://www.val.town/u/saolsen) implemented [val analytics with Plausible](https://www.val.town/v/saolsen/plausible)
+- [@pomdtr](https://www.val.town/u/pomdtr) created a [Chrome extension for Val Town](https://github.com/pomdtr/val-town-web-extension)
