@@ -9,9 +9,9 @@ INTRO
 
 The community has made hundreds of really cool vals recently (links below), including through collaboration in the Discord recently. [Come join us!](https://discord.gg/dHv45uN5RY) 👋
 
-### HTTP Logs update
+### Logs display update
 
-The changes to how HTTP vals present logs.
+The changes to vals present logs.
 
 ### GitHub Discussions
 
@@ -31,3 +31,4 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 - [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves Vscode](https://www.val.town/v/pomdtr/vscode)
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
+- [@pomdtr](https://www.val.town/u/pomdtr) updated his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs and query SQLite tables
