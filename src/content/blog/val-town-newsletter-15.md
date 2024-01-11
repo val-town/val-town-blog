@@ -19,8 +19,7 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 ### Misc Updates
 
-- Update 1
-- Update 2
+- Val version count limit (14,400)
 
 ### Roadmap
 
