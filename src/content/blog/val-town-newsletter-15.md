@@ -13,6 +13,10 @@ The community has made hundreds of really cool vals recently (links below), incl
 
 TPIC DESCRIPTION
 
+### GitHub Discussions
+
+The description of the discussions for feature-requests on GitHub [Discussions](https://github.com/val-town/val-town-product/discussions)
+
 ### Misc Updates
 
 - Update 1
