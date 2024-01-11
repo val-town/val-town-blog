@@ -20,6 +20,7 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 ### Misc Updates
 
 - Val version count limit (14,400)
+- HTTP responses can return 10Mb now
 
 ### Roadmap
 
@@ -28,4 +29,5 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 ### Cool vals
 
-- [@user](https://www.val.town/u/user) description with a link
+- [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves Vscode](https://www.val.town/v/pomdtr/vscode)
+- [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
