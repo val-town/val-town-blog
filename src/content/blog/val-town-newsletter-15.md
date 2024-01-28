@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 15
 description: Pull Requests, Val Editor Redesign, AI Suggestions, OSS Docs, New Astro Blog, Templates
-pubDate: December 15, 2023
+pubDate: February 01, 2024
 author: Steven Krouse
 ---
 
@@ -17,11 +17,15 @@ The overview of custom domains.
 
 The changes to vals present logs.
 
-### GitHub Discussions
+### GitHub discussions
 
 The description of the discussions for feature-requests on GitHub [Discussions](https://github.com/val-town/val-town-product/discussions)
 
-### Misc Updates
+### Val Town status page
+
+https://status.val.town/
+
+### Misc updates
 
 - Val version count limit (14,400)
 - HTTP responses can return 10Mb now
@@ -36,7 +40,7 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 - [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves Vscode](https://www.val.town/v/pomdtr/vscode)
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
-- [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs and query SQLite tables and a lot more
+- [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs, query SQLite tables, edit readmes and a lot more
 - [@saolsen](https://www.val.town/u/saolsen) explored the idea of [writing vals in Rust with WASM](https://gist.github.com/saolsen/d273bb1baba5e912e4dc2b187511affa)
 - [@todepond](https://www.val.town/u/todepond) wrote about [making his supported dashboard using Val Town](https://todepond.com/wikiblogarden/tadi-web/fame/facts/)
 - [@pomdtr](https://www.val.town/u/pomdtr) created a val that [creates screenshots from another val](https://www.val.town/v/pomdtr/val2img)
@@ -49,3 +53,8 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 - [@pomdtr](https://www.val.town/u/pomdtr) ported [blakeembrey/sql-template-tag](https://github.com/blakeembrey/sql-template-tag) to Val Town to simplify [building safe SQL queries](https://www.val.town/v/pomdtr/sql)
 - [@saolsen](https://www.val.town/u/saolsen) experimented with [writing tests with Jest ](https://www.val.town/v/saolsen/tiny_jest_example)
 - [@pomdtr](https://www.val.town/u/pomdtr) found a way to [serve static content by using val's readme]()https://www.val.town/v/pomdtr/notebook
+- [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
+- [@saolsen](https://www.val.town/u/saolsen) wrote a useful [val that can automatically prune multiple versions of other vals](https://www.val.town/v/saolsen/prune_val)
+- [@nbbaier](https://www.val.town/u/nbbaier) created a [val that can generate SQL](https://www.val.town/v/nbbaier/sqliteWriter) using [prisma-gpt](https://github.com/aliyeysides/prisma-gpt)
+- [@nbbaier](https://www.val.town/u/nbbaier) made a val that [generates readme for vals automatically](https://www.val.town/v/nbbaier/readmeGPT) using GPT
+- [@nbbaier](https://www.val.town/u/nbbaier) wrote a [Perplexity AI API wrapper val](https://www.val.town/v/nbbaier/perplextiyAPI)
