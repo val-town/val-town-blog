@@ -11,6 +11,8 @@ You all have made hundreds of really cool vals (links below). [Come join us in D
 
 ### Custom domains
 
+https://x.com/stevekrouse/status/1742563402931662885?s=20
+
 TODO photo and explaination and hat tip to saascustomdomains
 
 ### Logs – larger, faster, streamed, and scalable
@@ -19,11 +21,13 @@ TODO description and photo
 
 clickhouse
 
+- TODO link & close: https://github.com/val-town/val-town-product/discussions/30
+
 ### Early Return HTTP Responses
 
 - (TODO fix this title)
 - link to the discussion
-- and the discord announcement?
+- and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
 ### HTTP vals faster by 100ms ⚡️
 
@@ -35,9 +39,11 @@ on GitHub Discussions
 
 The description of the discussions for feature-requests on GitHub [Discussions](https://github.com/val-town/val-town-product/discussions)
 
+https://x.com/stevekrouse/status/1744721315024802285?s=20
+
 ### Val Town status page
 
-https://status.val.town/
+https://x.com/Andre_Terron/status/1750578181600649312?s=20
 
 - was this requested on discord or in a discussion?
 
@@ -47,9 +53,11 @@ https://github.com/val-town/val.town/pull/3645
 
 ### CodeMirror Continue for comments
 
-https://github.com/val-town/codemirror-continue
+https://x.com/tmcw/status/1745147192656957771?s=20
 
 ### Improved Feedback button
+
+https://x.com/stevekrouse/status/1749800319217700990?s=20
 
 ### Add code folding
 
@@ -63,7 +71,7 @@ https://github.com/val-town/codemirror-continue
 - Tabs on the bottom of vals for viewing logs and previewing HTTP vals
 - Fix flicker bug with our AI autocomplete
 - New comments on a val notify anyone who commented on that val
-- HTTP responses can return up to 10Mb now
+- HTTP responses can return up to 10Mb now (40x more than before)
 - Val readmes can be edited via API
 - Add URL ?search data to HTTP logs
 - Updated Deno to 1.40.2 (there's now [an API for getting this version data](https://www.val.town/v/std/deno_version)!)
@@ -80,7 +88,7 @@ https://github.com/val-town/codemirror-continue
 - [Halved our database size](https://x.com/tmcw/status/1742559580255658462?s=20) by removing stale data
 - iframe previews of other peoples' HTTP vals are closed by default
 - Disable grammarly correction in the editor
-- Improved Google indexing by adding pagination and noindex on vals without readmes (thanks [@tomcritchlow](https://www.val.town/u/tomcritchlow))
+- [Improved Google indexing by adding pagination and noindex on vals without readmes](https://x.com/tmcw/status/1753458573764337783?s=20) (thanks [@tomcritchlow](https://www.val.town/u/tomcritchlow))
 - Limit the number of versions a val can have to 14,400 (10 days in minutes)
 - Fix bugs with our homepage buttons
 
@@ -88,6 +96,26 @@ https://github.com/val-town/codemirror-continue
 
 - Roadmap item 1
 - Roadmap item 2
+
+## Kind words
+
+- https://x.com/meekaale/status/1740818276152996271?s=20
+- https://x.com/spences10/status/1741090256852586689?s=20
+- https://x.com/ibuildthecloud/status/1742565036944740660?s=20
+- https://x.com/arsalanbashir/status/1742830957374144658?s=20
+- https://x.com/GrantSlatton/status/1743441341030486256?s=20
+- https://x.com/alexzirbel/status/1744595109101101346?s=20
+- https://x.com/rossSpeak/status/1744864326727737363?s=20
+- https://x.com/CompuIves/status/1745400326654706144?s=20
+- https://x.com/rossSpeak/status/1747310275773296841?s=20
+- https://x.com/zeke/status/1748107363419332698?s=20
+- https://x.com/IrvinZhan/status/1748079715515339074?s=20
+- https://x.com/whelan_boyd/status/1722299311608807710?s=20
+- https://x.com/glcst/status/1742554321965691324?s=20
+- https://x.com/webtwozero/status/1750528451059368408?s=20
+- https://x.com/okpasquale/status/1750653517629473014?s=20
+- https://x.com/albfresco/status/1740955772144738738?s=20
+- https://x.com/nerdymomocat/status/1743041429331689901?s=20
 
 ### Cool vals
 
@@ -111,3 +139,23 @@ https://github.com/val-town/codemirror-continue
 - [@nbbaier](https://www.val.town/u/nbbaier) created a [val that can generate SQL](https://www.val.town/v/nbbaier/sqliteWriter) using [prisma-gpt](https://github.com/aliyeysides/prisma-gpt)
 - [@nbbaier](https://www.val.town/u/nbbaier) made a val that [generates readme for vals automatically](https://www.val.town/v/nbbaier/readmeGPT) using GPT
 - [@nbbaier](https://www.val.town/u/nbbaier) wrote a [Perplexity AI API wrapper val](https://www.val.town/v/nbbaier/perplextiyAPI)
+
+---
+
+To organize:
+
+- https://x.com/deepfates/status/1751015063912399126?s=20
+- https://x.com/tmcw/status/1744406760301920559?s=20
+- https://x.com/stevedylandev/status/1745667977393910096?s=200
+- https://x.com/stevekrouse/status/1747365282547478828?s=20
+- https://x.com/nbbaier/status/1748564488029147417?s=20
+- https://x.com/nbbaier/status/1748564489375502417?s=20
+- https://x.com/glcst/status/1749888541612544292?s=20
+- https://x.com/stevekrouse/status/1737173486047481887?s=20
+- https://x.com/stevekrouse/status/1738651539458171255?s=20
+- https://x.com/nbbaier/status/1744847782484070400?s=20
+- https://discord.com/channels/1020432421243592714/1020432421243592717/1201507447425208442
+- https://discord.com/channels/1020432421243592714/1020432421243592717/1201259951742521496
+- https://discord.com/channels/1020432421243592714/1020432421243592717/1199745917293703228
+- https://www.val.town/v/tomcritchlow/tom_og
+-
