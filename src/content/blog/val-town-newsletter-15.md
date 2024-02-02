@@ -1,23 +1,37 @@
 ---
 title: Val Town Newsletter 15
-description: Pull Requests, Val Editor Redesign, AI Suggestions, OSS Docs, New Astro Blog, Templates
-pubDate: February 01, 2024
+description: TODO
+pubDate: February 06, 2024
 author: Steven Krouse
 ---
 
-INTRO
+TODO description
 
-The community has made hundreds of really cool vals recently (links below), including through collaboration in the Discord recently. [Come join us!](https://discord.gg/dHv45uN5RY) 👋
+You all have made hundreds of really cool vals (links below). [Come join us in Discord!](https://discord.gg/dHv45uN5RY) 👋
 
 ### Custom domains
 
-The overview of custom domains.
+TODO photo and explaination and hat tip to saascustomdomains
 
-### Logs display update
+### Logs – larger, faster, streamed, and scalable
 
-The changes to vals present logs.
+TODO description and photo
 
-### GitHub discussions
+clickhouse
+
+### Early Return HTTP Responses
+
+- (TODO fix this title)
+- link to the discussion
+- and the discord announcement?
+
+### HTTP vals faster by 100ms ⚡️
+
+- Tom could make a chart about this
+
+### Suggest & vote on feature requests
+
+on GitHub Discussions
 
 The description of the discussions for feature-requests on GitHub [Discussions](https://github.com/val-town/val-town-product/discussions)
 
@@ -25,11 +39,50 @@ The description of the discussions for feature-requests on GitHub [Discussions](
 
 https://status.val.town/
 
+- was this requested on discord or in a discussion?
+
+### TypeScript-driven autocompletion
+
+https://github.com/val-town/val.town/pull/3645
+
+### CodeMirror Continue for comments
+
+https://github.com/val-town/codemirror-continue
+
+### Improved Feedback button
+
+### Add code folding
+
+- TODO ensure we closed this github discussion and link to it here
+
 ### Misc updates
 
-- Val version count limit (14,400)
-- HTTP responses can return 10Mb now
-- Readmes can be accessed via API now
+- Fixed the big, old, annoying flicker on page load
+- Redesigned our scheduled val & cron UI
+- "Run Now" button on scheduled and cron vals
+- Tabs on the bottom of vals for viewing logs and previewing HTTP vals
+- Fix flicker bug with our AI autocomplete
+- New comments on a val notify anyone who commented on that val
+- HTTP responses can return up to 10Mb now
+- Val readmes can be edited via API
+- Add URL ?search data to HTTP logs
+- Updated Deno to 1.40.2 (there's now [an API for getting this version data](https://www.val.town/v/std/deno_version)!)
+- Fix [val.town/brand](https://val.town/brand) assets
+- Defer loading dprint to speed up page loading times
+- Fix scheduled val bugs
+- Include val readmes in val pull requests
+- Add `VALTOWN_API_URL` environment variable to enable std library usage locally
+- Deprecate showing output in favor of console logs
+- Forked vals default to the name of the original val
+- Renamed "Secrets" to "Environment Variables"
+- Improved error message to when users try to preview a private HTTP val
+- Speed up querying for the latest evaluation of a val (4 seconds to 40ms)
+- [Halved our database size](https://x.com/tmcw/status/1742559580255658462?s=20) by removing stale data
+- iframe previews of other peoples' HTTP vals are closed by default
+- Disable grammarly correction in the editor
+- Improved Google indexing by adding pagination and noindex on vals without readmes (thanks [@tomcritchlow](https://www.val.town/u/tomcritchlow))
+- Limit the number of versions a val can have to 14,400 (10 days in minutes)
+- Fix bugs with our homepage buttons
 
 ### Roadmap
 
@@ -38,7 +91,7 @@ https://status.val.town/
 
 ### Cool vals
 
-- [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves Vscode](https://www.val.town/v/pomdtr/vscode)
+- [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves VSCode](https://www.val.town/v/pomdtr/vscode)
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
 - [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs, query SQLite tables, edit readmes and a lot more
 - [@saolsen](https://www.val.town/u/saolsen) explored the idea of [writing vals in Rust with WASM](https://gist.github.com/saolsen/d273bb1baba5e912e4dc2b187511affa)
