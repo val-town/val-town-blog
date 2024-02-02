@@ -94,8 +94,24 @@ https://x.com/stevekrouse/status/1749800319217700990?s=20
 
 ### Roadmap
 
-- Roadmap item 1
-- Roadmap item 2
+#### Feburary
+
+- AI autocomplete improvements
+- Improved val run scalability and pricing
+- Improved workflows for POST-request HTTP vals
+- Improved /trending ranking
+- Button to request someone to publish a val
+- Job posting & careers page
+- New intro video
+- Better onboarding for new users
+- Drop "untitled\_" from new val names
+
+### Soon-ish
+
+- Speed up val execution
+- Improved val organization in sidebar (TODO link to feature request)
+- Val Town Projects (for more complex projects, branching and pull requests as groups of vals)
+- TODO pull more from feature requests
 
 ## Kind words
 
