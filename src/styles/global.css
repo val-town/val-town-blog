@@ -5,7 +5,8 @@
  */
 
 :root {
-  --accent: #2337ff;
+  --accent: #3358d4;
+  --border: #ddd;
   --accent-dark: #000d8a;
   --black: 15, 18, 25;
   --gray: 96, 115, 159;
@@ -14,6 +15,7 @@
   --gray-gradient: rgba(var(--gray-light), 50%), #fff;
   --box-shadow: 0 2px 6px rgba(var(--gray), 25%),
     0 8px 24px rgba(var(--gray), 33%), 0 16px 32px rgba(var(--gray), 33%);
+  --mono-font: "IBM Plex Mono", monospace;
   --ec-codeFontFml: "IBM Plex Mono" !important;
 }
 
@@ -22,8 +24,7 @@ body {
   margin: 0;
   padding: 0;
   text-align: left;
-  background: linear-gradient(var(--gray-gradient)) no-repeat;
-  background-size: 100% 600px;
+  background: #fbfdfc;
   word-wrap: break-word;
   overflow-wrap: break-word;
   color: rgb(var(--gray-dark));
@@ -33,11 +34,13 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-main {
-  width: 720px;
-  max-width: calc(100% - 2em);
-  margin: auto;
-  padding: 3em 1em;
+#wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  border-radius: 5px;
+  background: #fff;
+  border: 1px solid var(--border);
+  box-shadow: 0px 1px 5px 0px rgba(0, 0, 0, 0.05);
 }
 
 h1,
@@ -51,19 +54,19 @@ h6 {
   line-height: 1.2;
 }
 h1 {
-  font-size: 3.052em;
+  font-size: 40px;
 }
 h2 {
-  font-size: 2.441em;
+  font-size: 35px;
 }
 h3 {
-  font-size: 1.953em;
+  font-size: 30px;
 }
 h4 {
-  font-size: 1.563em;
+  font-size: 25px;
 }
 h5 {
-  font-size: 1.25em;
+  font-size: 20px;
 }
 strong,
 b {
@@ -107,9 +110,10 @@ img {
   height: auto;
 }
 code {
-  padding: 2px 5px;
+  font-family: var(--mono-font);
+  padding: 1px 5px;
   background-color: rgb(var(--gray-light));
-  border-radius: 2px;
+  border-radius: 4px;
 }
 pre {
   padding: 1.5em;
@@ -134,6 +138,12 @@ hr {
   }
   main {
     padding: 1em;
+  }
+  #wrapper {
+    max-width: initial;
+    border: none;
+    box-shadow: none;
+    margin: 0;
   }
 }
 
