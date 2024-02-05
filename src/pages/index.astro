@@ -19,28 +19,26 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-				width: 960px;
+        padding: 20px 40px;
 			}
+      h4.title {
+        font-weight: 700;
+        font-size: 24px;
+      }
 			ul {
 				gap: 2rem;
 				list-style-type: none;
 				margin: 0;
-				padding: 0;
+				padding: 20px 0 40px 0;
 			}
+      ul li {
+        margin-bottom: 5px;
+      }
 			ul li * {
 				text-decoration: none;
 				transition: 0.2s ease;
 			}
-    /*
-			ul li:first-child {
-        font-size: 140%;
-        background: #fff;
-        padding: 20px 40px;
-        border-radius: 10px;
-        border: 1px solid #ccc;
-        margin-bottom: 20px;
-			}
-    */
+    
 			ul li img {
 				margin-bottom: 0.5rem;
 				border-radius: 12px;
@@ -54,14 +52,30 @@ const posts = (await getCollection('blog')).sort(
 				color: rgb(var(--black));
 				line-height: 1.4;
 			}
-      .description {
+      .title-layout {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .subtitle {
+        font-size: 80%;
 				color: rgb(var(--gray));
+      }
+      .description {
+				color: rgb(var(--black));
         margin: 0;
       }
 			.date {
 				margin: 0;
 				color: rgb(var(--gray));
 			}
+      ul li a {
+        border-radius: 5px;
+        padding: 20px;
+      }
+			ul li a:hover {
+        background-color: #eef;
+      }
 			ul li a:hover h4 {
 				color: rgb(var(--accent));
 			}
@@ -85,26 +99,32 @@ const posts = (await getCollection('blog')).sort(
 		</style>
 	</head>
 	<body>
-		<Header />
-		<main>
-			<section>
-				<ul>
-					{
-						posts.map((post) => (
-							<li>
-								<a href={`/blog/${post.slug}/`}>
-									<h4 class="title">{post.data.title}</h4>
-									<p class="description">{post.data.description}</p>
-									<p class="date">
-										<FormattedDate date={post.data.pubDate} />
-									</p>
-								</a>
-							</li>
-						))
-					}
-				</ul>
-			</section>
-		</main>
+    <div id='wrapper'>
+      <Header />
+      <main>
+        <section>
+          <ul>
+            {
+              posts.map((post) => (
+                <li>
+                  <a href={`/blog/${post.slug}/`}>
+                    <div class='title-layout'>
+                      <h4 class="title">{post.data.title}</h4>
+                    </div>
+                    <p class="description">{post.data.description}</p>
+                    <div class='subtitle'>
+                      <FormattedDate date={post.data.pubDate} />
+                      ·
+                      {post.data.author}
+                    </div>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </section>
+      </main>
+    </div>
 		<Footer />
 	</body>
 </html>

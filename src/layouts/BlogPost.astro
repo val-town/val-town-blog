@@ -6,6 +6,9 @@ import EditLink from '../components/EditLink.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
+import andre from "../content/authors/andre.jpg";
+import tom from "../content/authors/tom.jpg";
+import steve from "../content/authors/steve.jpg";
 
 type Props = CollectionEntry<'blog'>['data'] & { id: string };
 
@@ -16,11 +19,6 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
 	<head>
 		<BaseHead title={title} description={description} heroImage={heroImage} />
 		<style>
-			main {
-				width: calc(100% - 2em);
-				max-width: 100%;
-				margin: 0;
-			}
       .prose :global(.expressive-code .frame) {
         box-shadow: none;
       }
@@ -46,12 +44,12 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
       }
 			.hero-image {
 				width: 100%;
+        border-bottom: 1px solid var(--border);
 			}
 			.hero-image img {
 				display: block;
 				margin: 0 auto;
-				border-radius: 12px;
-				box-shadow: var(--box-shadow);
+        width: 100%;
 			}
 			.prose {
 				width: 720px;
@@ -69,14 +67,12 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
 			.title {
 				margin-bottom: 1em;
 				padding: 1em 0;
-				text-align: center;
 				line-height: 1;
 			}
 			.title h1 {
-				margin: 0 0 0.5em 0;
+				margin: 0 0 10px 0;
 			}
 			.date {
-				margin-bottom: 0.5em;
 				color: rgb(var(--gray));
 			}
 			.last-updated-on {
@@ -88,38 +84,55 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
           font-size: 30px;
         }
       }
+      .avatar {
+        border-radius: 100%;
+        vertical-align: middle;
+        border: 1px solid var(--border);
+        margin-right: 2px;
+        margin-top: -3px;
+      }
 		</style>
 	</head>
 
 	<body>
-		<Header />
-		<main>
-			<article itemscope itemtype="https://schema.org/Article">
-				<div class="hero-image">
-					{heroImage && <Image width={1020} height={510} src={heroImage} alt="" />}
-				</div>
-				<div class="prose">
-					<div class="title">
-						<div class="date">
-							<FormattedDate date={pubDate} />
-              {author ?
-                <>by <span itemprop="author">{author}</span></>  : null}
-							{
-								updatedDate && (
-									<div class="last-updated-on">
-										Last updated on <FormattedDate date={updatedDate} />
-									</div>
-								)
-							}
-						</div>
-						<h1 itemprop="name">{title}</h1>
-						<hr />
-					</div>
-					<slot />
-          <EditLink id={id} />
-				</div>
-			</article>
-		</main>
+    <div id='wrapper'>
+      <Header />
+      <main>
+        <article itemscope itemtype="https://schema.org/Article">
+          {heroImage && 
+          <div class="hero-image">
+            <Image width={1020} height={510} src={heroImage} alt="" />
+          </div>}
+          <div class="prose">
+            <div class="title">
+              <h1 itemprop="name">{title}</h1>
+              <div class="date">
+                <Image 
+                  densities={[1, 2, 3]}
+                  width="28" height="28" class='avatar' alt={author} src={
+                  author === 'Tom MacWright' ?
+                  tom : author === 'André Terron' ? andre :
+                  steve}
+                }>
+                </Image>
+                <span itemprop="author">{author}</span>
+                on
+                <FormattedDate date={pubDate} />
+                {
+                  updatedDate && (
+                    <div class="last-updated-on">
+                      Last updated on <FormattedDate date={updatedDate} />
+                    </div>
+                  )
+                }
+              </div>
+            </div>
+            <slot />
+            <EditLink id={id} />
+          </div>
+        </article>
+      </main>
+    </div>
 		<Footer />
 	</body>
 </html>
