@@ -136,9 +136,6 @@ hr {
   body {
     font-size: 18px;
   }
-  main {
-    padding: 1em;
-  }
   #wrapper {
     max-width: initial;
     border: none;
@@ -163,4 +160,16 @@ hr {
   clip-path: inset(50%);
   /* added line to stop words getting smushed together (as they go onto seperate lines and some screen readers do not understand line feeds as a space */
   white-space: nowrap;
+}
+
+figure {
+  margin: 0;
+}
+figure figcaption {
+  font-size: 14px;
+  text-align: center;
+}
+figure figcaption p {
+  margin: 0 !important;
+  padding: 0;
 }

@@ -7,6 +7,9 @@ heroImage: ./first-four-val-town-runtimes/timeline.png
 author: Tom MacWright
 ---
 
+import { Image } from "astro:assets";
+import memoryImage from "./first-four-val-town-runtimes/memory.png";
+
 One of the most important things that Val Town does is **run untrusted code**.
 Our whole premise requires us to take the TypeScript code that our community
 writes and run it on a server, safely, quickly, and flexibly.
@@ -122,7 +125,15 @@ At this point, we started to learn some lessons. In broad strokes:
 Of course, we hadn't learned these lessons all the way - but we were
 getting there.
 
-<iframe width="100%" height="330" src="https://www.youtube-nocookie.com/embed/M3BM9TB-8yA?si=aitL7GwzWEd99zfS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+<iframe
+  width="100%"
+  height="330"
+  src="https://www.youtube-nocookie.com/embed/M3BM9TB-8yA?si=aitL7GwzWEd99zfS"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  allowfullscreen
+></iframe>
 
 At this point, I had become really interested in [Deno](https://deno.com/). Ever since
 2018, when Ryan Dahl gave his excellent presentation on Node.js regrets,
@@ -151,14 +162,20 @@ farther away from environment variables or anything sensitive.
 
 All in all, this was an improvement, but we still had further to go.
 
-![Our server restarting by running out of memory](./first-four-val-town-runtimes/memory.png)
-
 - Security problems were far fewer and had much less impact. Deno's sandboxing
   was a huge unlock. However, it was still possible to escape the sandbox, by
   doing things like spawning a worker inside of the worker. We were also still
   trying to preserve [a complex security model](https://blog.val.town/blog/restricted-library-mode/)
   in which JavaScript functions had their own environment variables and
   security isolation.
+
+<figure>
+  <Image src={memoryImage} alt="Our server restarting" />
+  <figcaption>
+    Our server repeatedly restarting because of memory issues
+  </figcaption>
+</figure>
+
 - However, Workers triggered [memory problems](https://github.com/denoland/deno/issues/18414)
   that made the evaluation server slower and slower over time until it restarted.
   We were spawning and killing a _lot_ of workers, and understandably this
