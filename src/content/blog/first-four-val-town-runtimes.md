@@ -206,9 +206,24 @@ and worked pretty well.
 
 #### What's next
 
+|                     | v1         | v2           | v3                   | v4                          |
+| ------------------- | ---------- | ------------ | -------------------- | --------------------------- |
+| Platform            | Node.js    | Node.js      | Deno                 | Deno                        |
+| Module support      | None       | None         | Dynamic imports only | Static + dynamic ES Modules |
+| Isolation primitive | V8 Context | V8 Context   | V8 Context           | Process                     |
+| Val syntax          | Custom JS  | Custom TS+JS | Custom TS+JS         | Standard TS+JS              |
+| Importing vals      | `@` syntax | `@` syntax   | `@` syntax           | ESM-standard `import`       |
+
 As you can tell, we've been iterating fast. v4 is not the last version of
-Val Town: we still have more ground to cover on all of the dimensions that we
-care about. Vals should run instantly, securely, and everything should just
+the Val Town runtime: we still have more ground to cover on all of the dimensions that we
+care about. It's heartening to see others contribute to this discussion - Figma's
+adoption of QuickJS, after
+[using Realms was not secure enough](https://www.figma.com/blog/an-update-on-plugin-security/),
+Amazon open-sourcing [Firecracker](https://aws.amazon.com/blogs/aws/firecracker-lightweight-virtualization-for-serverless-computing/)
+one of the components of Lambda, and Deno
+sharing [details of how their Deploy product works](https://deno.com/blog/anatomy-isolate-cloud).
+
+We want to learn from everyone. Vals should run instantly, securely, and everything should just
 work.
 
 Oh, and if you read this and you have the answer and the experience and are the
