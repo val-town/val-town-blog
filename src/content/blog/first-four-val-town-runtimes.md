@@ -1,0 +1,214 @@
+---
+title: The first four versions of the Val Town Runtime
+generated: 1701894028894
+description: From vm to vm2 to workers to processes, the long journey to how we run vals today
+pubDate: February 5, 2024
+author: Tom MacWright
+---
+
+One of the most important things that Val Town does is **run untrusted code**.
+Our whole premise requires us to take the TypeScript code that our community
+writes and run it on a server, safely, quickly, and flexibly.
+
+#### Safety
+
+The default way to run arbitrary code is "dangerously". Modules in Node.js have unfettered
+access to your system's environment variables, filesystem, network, and much
+more. This access is [routinely abused in supply-chain attacks](https://socket.dev/blog/inside-node-modules).
+The easiest way to run an arbitrary string of code is with the `eval()` method,
+which doesn't provide any kind of sandbox protections, so it can easily become
+an attack vector.
+
+Security generally means isolation and containment:
+
+- Vals need to be isolated from the system they're running on: they shouldn't
+  be able to read from the filesystem or learn about environment variables.
+- Vals should be isolated from each other: you shouldn't be able to affect
+  anyone else's val's behavior.
+
+#### Speed
+
+On the other hand, if you were to make every Val run in a full-fledged Docker
+container, it'd be tremendously slow. You're booting up a whole Linux machine
+with all the bells and whistles just to evaluate a few lines of code. It'd be
+[pretty secure](https://docs.docker.com/engine/security/#conclusions), but
+pretty slow.
+You could create a pool of Docker containers, but the memory and devops overhead
+would be significant.
+
+#### Flexibility
+
+Val Town lets you bring a lot of experience from other systems. If you've used
+Node.js, great - your NPM modules should mostly work. Thanks to our current system,
+a lot of DOM methods work too - you can parse query strings with [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) and use new APIs
+like web-standard streams. A way to square the safety + speed requirements
+would be to use [QuickJS](https://bellard.org/quickjs/), a standalone JavaScript
+engine that's fast to start up and easily sandboxed with WebAssembly. But
+we'd be miles away from NPM or Node compatibility, and would run JavaScript
+about 35x slower.
+
+---
+
+So, those are the properties we're aiming for. What have we tried so far? Buckle up.
+
+#### Runtime 1: Node.js + vm
+
+The very first version of Val Town used Node.js’s [vm module](https://nodejs.org/api/vm.html).
+Schematically, running a val looked like this:
+
+```ts
+const [returnValue, logs, error] = vm.runInContext(`
+  let resolveValue;
+  let returnValue;
+  let error;
+  const logs = [];
+  console.log = (log) => { logs.push(log); return undefined };
+  try {
+    ${replacedCode}
+    returnValue = ${name}
+  } catch (e) {
+    error = e;
+  }
+  [returnValue, logs, error];
+`);
+```
+
+Now, the documentation for the vm module warns that "The node:vm module
+is not a security mechanism. Do not use it to run untrusted code."
+So it should be no surprise that this approach didn't last very long.
+
+The Node.js vm module is incredibly convenient to use, but it was dangerous and
+didn't check our boxes:
+
+- Infinite loops in user code will take down your server
+- It's easy to escape the sandbox and access sensitive environment variables
+- You can't install NPM modules within the sandbox
+- Scripts that run in the Node.js VM sandbox run in _script_ mode, not _module_
+  mode, so you can't use `import` or `export`.
+
+#### Runtime 2: Node.js + vm2
+
+Due to the security problems with vm, we quickly switched
+to [vm2](https://github.com/patriksimek/vm2), a now-deprecated NPM module
+that, unlike vm, aimed to be a security sandbox. VM2 still used
+vm "under the hood", but it formalized all of the security workarounds
+that people used to secure it. It used Proxies to try and prevent people
+from escaping the sandbox. A familiar exploit in vm is something like
+this, taken from the vm2 readme:
+
+```ts
+vm.runInNewContext('this.constructor.constructor("return process")().exit()');
+```
+
+vm2 prevented this attack by tweaking all of the objects exposed to the
+VM context.
+
+The vm2 maintainer valiantly fought to make this strategy robust, but in
+the end it was impossible to add security to an unsecure construct,
+and the [sandbox escapes kept coming](https://github.com/patriksimek/vm2/security).
+Eventually vm2 was deprecated by its maintainer and [isolated-vm](https://github.com/laverdet/isolated-vm)
+is the recommended replacement for Node.js users.
+
+### Runtime 3: Deno + Workers
+
+At this point, we started to learn some lessons. In broad strokes:
+
+1. The Node.js vm module isn't a good base to build on.
+2. It'd sure be nice to run vals as modules, not scripts.
+3. Attempts to sandbox JavaScript _using JavaScript_, like vm2,
+   are probably not going to work out.
+
+Of course, we hadn't learned these lessons all the way - but we were
+getting there.
+
+<iframe width="100%" height="330" src="https://www.youtube-nocookie.com/embed/M3BM9TB-8yA?si=aitL7GwzWEd99zfS" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+At this point, I had become really interested in [Deno](https://deno.com/). Ever since
+2018, when Ryan Dahl gave his excellent presentation on Node.js regrets,
+the Deno project had prioritized the exact kind of sandboxing and security
+we were interested in. A lot had changed since 2018 - they had even
+ported the whole project from Go to Rust -
+but [the permissions system](https://docs.deno.com/runtime/manual/basics/permissions#permissions-list) was a consistent focus, and
+all signs pointed to it being very high-quality.
+
+With Deno you can import modules and approve or disallow, one by one, their
+requests to access the filesystem or environment. It's like going from code
+running as root by default, to a capabilities-based system: iOS asking you
+whether you want some app to see your location.
+
+Better yet, Deno had a [Workers API](https://docs.deno.com/runtime/manual/runtime/workers)
+that mimics the Web Workers API in browsers: you can spin up separate threads,
+with their own permissions, within an existing Deno process. It's super fast –
+much faster than spinning up a new process. I idolize how [Cloudflare Workers works](https://developers.cloudflare.com/workers/reference/how-workers-works/) - spinning
+up a V8 isolate per execution instead of a whole process. This looked
+like the way to do it.
+
+So we implemented a separate Deno server that only handled Val evaluation: giving
+us three servers total (Remix for the frontend, Express backend, Deno server).
+This elegantly provided isolation between Deno and Node.js, so Vals were much
+farther away from environment variables or anything sensitive.
+
+All in all, this was an improvement, but we still had further to go.
+
+![Our server restarting by running out of memory](./first-four-val-town-runtimes/memory.png)
+
+- Security problems were far fewer and had much less impact. Deno's sandboxing
+  was a huge unlock. However, it was still possible to escape the sandbox, by
+  doing things like spawning a worker inside of the worker. We were also still
+  trying to preserve [a complex security model](https://blog.val.town/blog/restricted-library-mode/)
+  in which JavaScript functions had their own environment variables and
+  security isolation.
+- However, Workers triggered [memory problems](https://github.com/denoland/deno/issues/18414)
+  that made the evaluation server slower and slower over time until it restarted.
+  We were spawning and killing a _lot_ of workers, and understandably this
+  wasn't a typical usecase.
+- Server isolation had a performance cost: for a val that powers a website, for each
+  request we'd receive the request in the Express server, serialize it, send
+  it to Deno, which would deserialize and operate on it, send the response to Express,
+  which would then send it to the user.
+
+Despite these issues, the switch to Deno was a big upgrade, and we were significantly
+less affected by anything that untrusted code could do.
+
+#### Runtime 4: Node.js + Deno processes
+
+The current iteration of our runtime learns from the lessons so far:
+
+- You can't really use JavaScript to build a JavaScript sandbox.
+- Deno is a powerful tool for simple containment of functionality.
+- Memory leaks are scary.
+
+Right now, Vals run as temporary Deno subprocesses of a Node.js server.
+The subprocess's code is tiny: it uses [node-deno-vm](https://github.com/casual-simulation/node-deno-vm),
+a terrific module from Kallyn Gowdy, which works by exposing a WebSocket
+connection between Deno and Node.js and wrapping it in
+a [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)-style API.
+The "guest" code that wraps vals is also now [public](https://esm.town/guest.ts),
+though it's still an implementation detail and could change at any time.
+
+While this gives far better isolation between user code and system code
+than our previous vm and Worker-based strategies, it takes a little more
+time to start up, so we use a pool of pre-initialized processes to
+avoid that time penalty.
+
+This strategy also gives the ability to have more fine-grained communication
+with Deno, because it's based on WebSockets instead of a simple REST
+HTTP request cycle. We can send multiple messages to control vals while
+they're running, and receive multiple messages from them as they run.
+This is key to how we just cut 100ms from typical val runtimes - more on
+that later.
+
+Along with Runtime v4 was [Val Town v3, which included a slew of improvements](https://blog.val.town/blog/introducing-val-town-v3/),
+like static import support, JSX, and web-standard JavaScript.
+It was a vastly expanded set of JavaScript that "just worked,"
+and worked pretty well.
+
+#### What's next
+
+As you can tell, we've been iterating fast. v4 is not the last version of
+Val Town: we still have more ground to cover on all of the dimensions that we
+care about. Vals should run instantly, securely, and everything should just
+work.
+
+Oh, and if you read this and you have the answer and the experience and are the
+one to unlock the next-gen runtime: we're hiring: [steve@val.town](mailto:steve@val.town).
