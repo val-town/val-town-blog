@@ -11,9 +11,13 @@ You all have made hundreds of really cool vals (links below). [Come join us in D
 
 ### Custom domains
 
-https://x.com/stevekrouse/status/1742563402931662885?s=20
+We released a heavily requested feature - custom domains. Custom domains allow you to use your own domain names to access the HTTP vals you created. This feature enables a more branded and professional experience for users visiting your vals. This is a feature for [Pro subscribers](https://www.val.town/pricing) only.
 
-TODO photo and explaination and hat tip to saascustomdomains
+![A custom domain configured to direct HTTP requests to "amazingVal"](./val-town-newsletter-15/custom-domains.png)
+
+You can add your domain or subdomain in the [custom domain settings](https://www.val.town/settings/domains). For more info take a look at our [documentation page](https://docs.val.town/reference/custom-domains/).
+
+Big thanks to [SaaS Custom Domains](https://saascustomdomains.com/) for making the implementation much easier.
 
 ### Logs – larger, faster, streamed, and scalable
 
