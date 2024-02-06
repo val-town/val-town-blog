@@ -198,7 +198,7 @@ The current iteration of our runtime learns from the lessons so far:
 
 Right now, Vals run as temporary Deno subprocesses of a Node.js server.
 The subprocess's code is tiny: it uses [node-deno-vm](https://github.com/casual-simulation/node-deno-vm),
-a terrific module from Kallyn Gowdy, which works by exposing a WebSocket
+a terrific module from [Kallyn Gowdy](https://github.com/KallynGowdy), which works by exposing a WebSocket
 connection between Deno and Node.js and wrapping it in
 a [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)-style API.
 The "guest" code that wraps vals is also now [public](https://esm.town/guest.ts),
