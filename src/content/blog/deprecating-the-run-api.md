@@ -18,7 +18,9 @@ Our Run API allowed any function in Val Town to be called as an API endpoint. If
 
 The snag is that the Run API _ran vals as the author_. If you called my function, it would run with my environment variables. This is nifty, but it can also be dangerous and unexpected. That’s something we want to avoid. Most of the time, you publish code on Val Town to share functions for others to use as a library, using _their_ Val Town resources and _their_ environment variables.
 
-Starting today, the Run API will be disabled by default. We have enabled the Run API on the vals that have been relying on it, and emailed the owners of those vals.
+**Starting today, the Run API will be disabled by default.**
+
+We have enabled the Run API on the vals that have been relying on it, and emailed the owners of those vals.
 
 Going forward, we recommend [HTTP vals](https://docs.val.town/types/http/) to make APIs. It uses the new and wonderful web-standard “fetch handler” API. We’re so passionate about this API that we’re [trying to get it named!](https://blog.val.town/blog/the-api-we-forgot-to-name/)
 
@@ -60,7 +62,7 @@ We had in our Jan/Feb roadmap to deprecate the `/run` API, but the urgency only 
 
 # The new “RPC” val type
 
-Our first priority is always protecting user data, and we also don’t want to disrupt our users with breaking changes or downtime.
+Our first priority is always protecting user data. We also don’t want to disrupt our users with breaking changes or downtime.
 
 In the end, this duality of permissions was too confusing. The Run API resulted in a way to run vals that might not be aligned with the original intent of the author. We decided to immediately deprecate the `/run` endpoint going forward. We allow-listed the vals that depend on it to keep them working.
 
@@ -70,24 +72,31 @@ In theory, the “RPC” type would allow us to keep the Run API running indefin
 
 # APIs on Val Town
 
-The proper way to build APIs in val town is via an HTTP val. Here’s how to do it, it’s super simple:
+The proper way to build APIs in val town is via an HTTP val. Here’s how to do it:
 
 ```tsx
-export default async function myApi(req: Request): Promise<Response> {
-  return Response.json({ ok: true });
+function addNumbers(a: number, b: number) {
+  return a + b;
+}
+
+// api wrapper
+export default async function add_numbers(req: Request): Promise<Response> {
+  const [a, b]: [number, number] = await req.json()
+  const result = addNumbers(a, b)
+  return Response.json(result);
 }
 ```
 
 If you did like how the `/run` API worked, we built a helper for you:
 
 ```tsx
-import { rpc } from "https://esm.town/v/std/rpc?v=3";
+import { rpc } from "https://esm.town/v/std/rpc?v=1";
 
-export const myApi = rpc(async (a: number, b: number) => {
+export const add_numbers = rpc(async (a: number, b: number) => {
   return a + b;
 });
 ```
 
-And you’d be able to access it from `username-myApi.val.run?args=[1,2]`, or by issuing a POST request to `username-myApi.val.run` with the body `[1,2]`. That should minimize the work needed to migrate from the Run API into an HTTP val.
+Check out the `std/rpc`'s readme for instructions on how to use it. That should minimize the work needed to migrate from the Run API into an HTTP val.
 
 We are committed to making it as easy as possible to make APIs, so expect more improvements, and if you have any ideas, we’re very active in our [Discord](https://discord.gg/dHv45uN5RY), and we’d love to have a community chat about this! You can also submit specific ideas on our [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
