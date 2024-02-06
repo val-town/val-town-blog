@@ -30,35 +30,30 @@ We are excited to continue iterating on improving how APIs are built and used wi
 
 As always, if you have any questions or comments, please reach out on [discord](https://discord.gg/dHv45uN5RY), [email](mailto:steve@val.town), or [twitter](https://twitter.com/ValDotTown).
 
-# Library vs API
+# When everything is an API
 
-When you write code for others, there are 2 prevalent permission models you can take:
+If you want to build an API in Val Town today, you use an HTTP val. They provide a web-standard interface to receive requests and send responses. The Run API was a precursor to HTTP vals. It exposes a function to the internet. However, any publicly accessible function could be invoked by the Run API.
 
-1. Library: You share your code on GitHub or npm. Others copy or install your code on their codebase. They run your code with access to their files and environment variables. The code runs in the caller’s environment. In Val Town, you run code with these semantics when you import someone else’s val.
-2. API: You run the code on your infrastructure. If someone wants to run your code, they send a request to your server. Your code accesses your environment. In Val Town, you run code with these semantics when you send a request to an HTTP val, or using the Run API.
+For example, consider this val you might write:
 
-If you want the full details about these permission models, and how we’ve been iterating on them, take a look at our [Restricted Library Mode blog post](https://blog.val.town/blog/restricted-library-mode/) and our [v3 announcement post](https://blog.val.town/blog/introducing-val-town-v3/). In summary, early val town ran every val in API mode, but that’s not what developers expected when running JavaScript. When we migrated to be more web standard with our v3 runtime, vals could be imported as libraries, and we created the Run API as a way to build APIs on val town.
+```tsx
+import { default: OpenAI } from "npm:openai";
 
-But the problem is that any publicly accessible val could be executed from the Run API as an API, even when the author didn’t have that intention. This is a huge footgun, and we were well aware of it, here’s a [section from our blog post introducing the v3 runtime](https://blog.val.town/blog/introducing-val-town-v3/#6-goodbye-restricted-library-mode):
+export async function gpt3 (args) {
+  const openai = new OpenAI({
+    apiKey: Deno.env.get("openai")
+  });
+  return openai.chat.completions.create(args)
+}
+```
 
-> There is a footgun you should watch out for. In a bid for simplicity Val Town sometimes blurs the distinction between a function and an API. For example, consider this val you might write:
->
-> ```tsx
-> import { default: OpenAI } from "npm:openai";
->
-> export async function gpt3 (args) {
->   const openai = new OpenAI({
->     apiKey: process.env.openai
->   });
->   return openai.chat.completions.create(args)
-> }
-> ```
->
-> If another user imported and ran this val themselves, `process.env.openai` would refer to *their* OpenAI token. However, public or unlisted vals can also be run via our [Run API](https://docs.val.town/api/run), which uses the secrets of the *author* of the function, not the invoker of the function. Thus anyone who published such a function would be giving away free use of their OpenAI token – without leaking the token itself.
->
-> There are ways around this footgun, but in the short-term our advice is to not publish functions that use your secrets. In the medium-term, we are considering deprecating the Run API. While it is cute, convenient, and makes for great demos, every time we blurred the distinction between functions and APIs, we’ve come to regret it. They are two different things, and blurring the distention makes for confusing semantics.
+If the author intended on using this as the backend for a client app, they'd use the Run API to invoke it using their secrets – without leaking the token.
 
-We had in our Jan/Feb roadmap to deprecate the `/run` API, but the urgency only came after [Eas](https://easrng.net/) found a number of vals that could be exploited using the `/run` API, including from our own team. We apologize to everyone for leaving this known footgun active and hidden for so long.
+And if the author wrote such a function to be used as a library, other users can import and run this val themselves. `Deno.env.get("openai")` would refer to the *invoker*'s OpenAI token.
+
+However, any public or unlisted val could be invoked by the Run API. So instead of using the *invoker*'s OpenAI token, the Run API would use the *author*'s token – without leaking the token itself.
+
+[Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
 
 # The new “RPC” val type
 
