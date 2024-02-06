@@ -32,7 +32,7 @@ As always, if you have any questions or comments, please reach out on [discord](
 
 When you write code for others, there are 2 prevalent permission models you can take:
 
-1. Library: You share your code on GitHub or npm, and other copy or install your code on their codebase, and run with access to their files and environment variables. The code runs in the caller’s environment. In val town, you run in Library mode when you import someone else’s val.
+1. Library: You share your code on GitHub or npm. Others copy or install your code on their codebase. They run your code with access to their files and environment variables. The code runs in the caller’s environment. In Val Town, you run code with these semantics when you import someone else’s val.
 2. API: You run the code on your infrastructure, and if someone want to run your code, they usually send a request to your server, that way your code can access your private information, like keys to other services, or configurations, and you return the response. In val town, you run in API mode when you send a request to an HTTP val, or using the Run API.
 
 If you want the full details about these permission models, and how we’ve been iterating on them, take a look at our [Restricted Library Mode blog post](https://blog.val.town/blog/restricted-library-mode/) and our [v3 announcement post](https://blog.val.town/blog/introducing-val-town-v3/). In summary, early val town ran every val in API mode, but that’s not what developers expected when running JavaScript. When we migrated to be more web standard with our v3 runtime, vals could be imported as libraries, and we created the Run API as a way to build APIs on val town.
