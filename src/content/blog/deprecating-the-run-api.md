@@ -14,7 +14,7 @@ Today we are deprecating our [Run API](https://docs.val.town/api/run/).
 
 [Val Town](https://val.town) is a social website to code in the cloud. We simplify how APIs are built and used.
 
-We previously supported something called the Run API, which allowed any val to be called as a REST endpoint. If you wrote a function that took some parameters, the Run API would let you call it from the internet instantly, specifying arguments as JSON in a POST request.
+Our Run API allowed any function in Val Town to be called as an API endpoint. If you wrote a function that took some parameters, the Run API would let you call it from the internet instantly, specifying arguments as JSON in a POST request.
 
 The snag is that the Run API _ran vals as the author_. If you called my function, it would run with my environment variables. This is nifty, but it can also be dangerous and unexpected. That’s something we want to avoid. Most of the time, you publish code on Val Town to share functions for others to use as a library, using _their_ Val Town resources and _their_ environment variables.
 
