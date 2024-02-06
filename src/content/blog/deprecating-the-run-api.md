@@ -20,7 +20,7 @@ The snag is that the Run API _ran vals as the author_. If you called my function
 
 Starting today, the Run API will be disabled by default. We have enabled the Run API on the vals that have been relying on it, and emailed the owners of those vals.
 
-Going forward, we recommend [HTTP vals](https://docs.val.town/types/http/) to make APIs. It uses the new and wonderful web-standard “fetch handler” API. We’re [so passionate about this API that we’re trying to get it named!](https://blog.val.town/blog/the-api-we-forgot-to-name/)
+Going forward, we recommend [HTTP vals](https://docs.val.town/types/http/) to make APIs. It uses the new and wonderful web-standard “fetch handler” API. We’re so passionate about this API that we’re [trying to get it named!](https://blog.val.town/blog/the-api-we-forgot-to-name/)
 
 For nostalgia’s sake, we have created an adapter that mimics our Run API, in user-space, on top of HTTP vals. Anyone who loves the Run API can keep using it, and now even customize it.
 
