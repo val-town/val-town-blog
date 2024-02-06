@@ -37,15 +37,40 @@ Val execution started
 Finished
 ```
 
-### Early Return HTTP Responses
+### Immediate HTTP responses
 
-- (TODO fix this title)
-- link to the discussion
+Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately and wait for the promises to resolve afterwards. This introduces 2 benefits:
+
+### ⚡️ HTTP vals respond 100ms faster on average
+
+Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's exieprience significantly.
+
+TODO:
+- link to the discussion (can't find the discussion)
 - and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
+- Add a fancy graph comparing before-and-after. Maybe in a style of Chrome dev tools network tab timimg? (Tom?)
 
-### HTTP vals faster by 100ms ⚡️
+### ⏲️ Running tasks after returning the HTTP response
 
-- Tom could make a chart about this
+Because we're returning HTTP responses immediately, non-resolved promises continue their execution after the response has been returned.
+
+This allows you to speed your vals even more by performing some non-critical tasks (like logging) after sending the response:
+
+- TODO: Include code example https://www.val.town/v/neverstew/earlyWebReturn
+
+You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`:
+
+- TODO: Include code example:
+```ts
+// HTTP val handling PUT request
+// 1. Generate new UUID
+// 2. Return new UUID early
+// 3. Save data to DB after the response
+```
+
+TODOs:
+- link to the discussion (can't find the discussion)
+- and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
 ### Suggest & vote on feature requests
 
