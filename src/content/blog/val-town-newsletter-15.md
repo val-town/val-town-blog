@@ -21,11 +21,21 @@ Big thanks to [SaaS Custom Domains](https://saascustomdomains.com/) for making t
 
 ### Logs – larger, faster, streamed, and scalable
 
-TODO description and photo
+We upgraded the logs viewing experience. Now vals' logs are live-streamed, can be much larger and are stored in a much more scalable way, ensuring we have room for more logging-related features. As your val is being executed you are able to see the log messages appear in real-time. This was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
 
-clickhouse
+Previously, logs had a size limit of ??? and we were able to increase it to ???. This makes is possible to debug larger data sets or longer processing chains without worrying about the logs cutting of mid-execution.
 
-- TODO link & close: https://github.com/val-town/val-town-product/discussions/30
+Initialy we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
+
+- TODO: Replace `???` with actual limit sizes.
+- TODO: Close: https://github.com/val-town/val-town-product/discussions/30
+- TODO: Video of logs in real time with an example of a progress bar:
+```
+Val execution started
+0% [==========] 100%
+    ^^^^^^^^^^
+Finished
+```
 
 ### Early Return HTTP Responses
 
