@@ -53,13 +53,13 @@ And if the author wrote such a function to be used as a library, other users can
 
 However, any public or unlisted val could be invoked by the Run API. So instead of using the *invoker*'s OpenAI token, the Run API would use the *author*'s token – without leaking the token itself.
 
-[Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
+The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
 
 # The new “RPC” val type
 
-Our first priority is always protecting user data. We also don’t want to disrupt our users with breaking changes or downtime.
+Our first priority is always protecting user data. But we couldn't simply disable the API without causing downtime to our users.
 
-In the end, this duality of permissions was too confusing. The Run API resulted in a way to run vals that might not be aligned with the original intent of the author. We decided to immediately deprecate the `/run` endpoint going forward. We allow-listed the vals that depend on it to keep them working.
+The Run API resulted in a way to run vals that might not be aligned with the original intent of the author. We decided to immediately deprecate the `/run` endpoint. Vals that relied on that API were allow-listed to continue working.
 
 If you used the Run API in the last few days, we sent you an email with more information. If your val is allow-listed, it will show up as the new "RPC" type. It’s not possible to create new “RPC” vals. If you accidentally change the type out of "RPC", you won’t be able to change it back. Reach out to us if you need to allow-list one of your vals.
 
