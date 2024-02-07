@@ -24,7 +24,7 @@ We have enabled the Run API on the vals that have been relying on it, and emaile
 
 Going forward, we recommend [HTTP vals](https://docs.val.town/types/http/) to make APIs. It uses the new and wonderful web-standard “fetch handler” API. We’re so passionate about this API that we’re [trying to get it named!](https://blog.val.town/blog/the-api-we-forgot-to-name/)
 
-For nostalgia’s sake, we have created an adapter that mimics our Run API, in user-space, on top of HTTP vals. Anyone who loves the Run API can keep using it, and now even customize it.
+For nostalgia’s sake, we have created an [adapter](https://www.val.town/v/std/rpc) that mimics our Run API, in user-space, on top of HTTP vals. Anyone who loves the Run API can keep using it, and now even customize it.
 
 We are excited to continue iterating on improving how APIs are built and used with you all.
 
@@ -49,9 +49,9 @@ export async function gpt3 (args) {
 
 If the author intended on using this as the backend for a client app, they'd use the Run API to invoke it using their secrets – without leaking the token.
 
-And if the author wrote such a function to be used as a library, other users can import and run this val themselves. `Deno.env.get("openai")` would refer to the *invoker*'s OpenAI token.
+And if the author wrote such a function to be used as a library, other users can import and run this val themselves. `Deno.env.get("openai")` would refer to the _invoker_'s OpenAI token.
 
-However, any public or unlisted val could be invoked by the Run API. So instead of using the *invoker*'s OpenAI token, the Run API would use the *author*'s token – without leaking the token itself.
+However, any public or unlisted val could be invoked by the Run API. So instead of using the _invoker_'s OpenAI token, the Run API would use the _author_'s token – without leaking the token itself.
 
 The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
 
@@ -76,13 +76,13 @@ function addNumbers(a: number, b: number) {
 
 // api wrapper
 export default async function add_numbers(req: Request): Promise<Response> {
-  const [a, b]: [number, number] = await req.json()
-  const result = addNumbers(a, b)
+  const [a, b]: [number, number] = await req.json();
+  const result = addNumbers(a, b);
   return Response.json(result);
 }
 ```
 
-If you did like how the `/run` API worked, we built a helper for you:
+If you did like how the `/run` API worked, we built a [helper](https://www.val.town/v/std/rpc) for you:
 
 ```tsx
 import { rpc } from "https://esm.town/v/std/rpc?v=1";
@@ -92,6 +92,6 @@ export const add_numbers = rpc(async (a: number, b: number) => {
 });
 ```
 
-Check out the `std/rpc`'s readme for instructions on how to use it. That should minimize the work needed to migrate from the Run API into an HTTP val.
+Check out the [`std/rpc`'s readme](https://www.val.town/v/std/rpc) for instructions on how to use it. That should minimize the work needed to migrate from the Run API into an HTTP val.
 
 We are committed to making it as easy as possible to make APIs, so expect more improvements, and if you have any ideas, we’re very active in our [Discord](https://discord.gg/dHv45uN5RY), and we’d love to have a community chat about this! You can also submit specific ideas on our [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
