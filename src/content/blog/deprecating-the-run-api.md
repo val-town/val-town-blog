@@ -117,4 +117,4 @@ If you used the Run API recently, we sent you an email with more information. If
 
 If we somehow missed you in this transition, or you have any other questions, reach out: we’re very active in our [Discord](https://discord.gg/dHv45uN5RY), and we’d love to have a community chat about this! You can also submit specific ideas on our [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
 
-This is another big step in our journey to make programming easier. Check it out for yourself by signing up at (val.town)[https://val.town]. Start building your APIs today! And if you want to get your hands dirty on making APIs easier, we're [hiring](https://val-town.notion.site/Founding-Engineer-at-Val-Town-e6fa51bdb2974778a4669ccdcf50b146)!
+This is another big step in our journey to make programming easier. Dive in and start building your APIs today by signing up at (val.town)[https://val.town]! And If simplifying API development excites you, we're [hiring](https://val-town.notion.site/Founding-Engineer-at-Val-Town-e6fa51bdb2974778a4669ccdcf50b146)!
