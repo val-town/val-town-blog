@@ -76,9 +76,13 @@ https://x.com/stevekrouse/status/1744721315024802285?s=20
 
 ### Val Town status page
 
-https://x.com/Andre_Terron/status/1750578181600649312?s=20
+Nobody likes when a website is down, but it's even worse not being able to figure out if it's down for everyone. We now have a public status page to answer that question!
 
-- was this requested on discord or in a discussion?
+https://status.val.town/
+
+![Screenshot of the new Val Town status page](./val-town-newsletter-15/status-page.png)
+
+https://x.com/Andre_Terron/status/1750578181600649312?s=20
 
 ### TypeScript-driven autocompletion
 
