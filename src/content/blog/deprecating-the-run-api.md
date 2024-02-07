@@ -14,17 +14,17 @@ Today we are deprecating our [Run API](https://docs.val.town/api/run/).
 
 [Val Town](https://val.town) is a social website to code in the cloud. We simplify how APIs are built and used.
 
-Our Run API allowed any function in Val Town to be called as an API endpoint. If you wrote a function that took some parameters, the Run API would let you call it from the internet instantly, specifying arguments as JSON in a POST request.
+Our Run API allowed any published function in Val Town to be called as an API endpoint. If you wrote a function that took some parameters, and made it public, the Run API would let you call it from the internet instantly, specifying arguments as JSON in a POST request.
 
 The snag is that the Run API _ran vals as the author_. If you called my function, it would run with my environment variables. This is nifty, but it can also be dangerous and unexpected. That’s something we want to avoid. Most of the time, you publish code on Val Town to share functions for others to use as a library, using _their_ Val Town resources and _their_ environment variables.
 
-**Starting today, the Run API will be disabled by default.**
+**The Run API is now disabled by default.**
 
-We have enabled the Run API on the vals that have been relying on it, and emailed the owners of those vals.
+For backwards compatibility and to prevent downtime, we have enabled the Run API specifically on the vals that have been relying on it. We have emailed the owners of those vals that their vals are still accessible via the Run API and how to turn that off. If you did not receive an email, all of your vals are now inaccessible to the Run API.
 
-Going forward, we recommend [HTTP vals](https://docs.val.town/types/http/) to make APIs. It uses the new and wonderful web-standard “fetch handler” API. We’re so passionate about this API that we’re [trying to get it named!](https://blog.val.town/blog/the-api-we-forgot-to-name/)
+To make an API on Val Town going forward, we recommend [HTTP vals](https://docs.val.town/types/http/). They use the new and wonderful web-standard [“fetch handler” API](https://blog.val.town/blog/the-api-we-forgot-to-name/).
 
-For nostalgia’s sake, we have created an [adapter](https://www.val.town/v/std/rpc) that mimics our Run API, in user-space, on top of HTTP vals. Anyone who loves the Run API can keep using it, and now even customize it.
+For anyone fond of the old Run API, we created [an adapter that mimics the Run API](https://www.val.town/v/std/rpc), in user-space, on top of the fetch handler API. Anyone who loves the Run API can keep using it, and even customize it.
 
 We are excited to continue iterating on improving how APIs are built and used with you all.
 
