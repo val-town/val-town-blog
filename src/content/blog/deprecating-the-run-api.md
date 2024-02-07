@@ -24,7 +24,7 @@ For backwards compatibility and to prevent downtime, we have enabled the Run API
 
 To make an API on Val Town going forward, we recommend [HTTP vals](https://docs.val.town/types/http/). They use the new and wonderful web-standard [“fetch handler” API](https://blog.val.town/blog/the-api-we-forgot-to-name/).
 
-For anyone fond of the old Run API, we created [an adapter that mimics the Run API](https://www.val.town/v/std/rpc), in user-space, on top of the fetch handler API. Anyone who loves the Run API can keep using it, and even customize it.
+For anyone fond of the old Run API, we created [an adapter that mimics the Run API](https://www.val.town/v/std/rpc), in userspace, on top of the fetch handler API. Anyone who loves the Run API can keep using it, and even customize it.
 
 We are excited to continue iterating on improving how APIs are built and used with you all.
 
@@ -32,7 +32,7 @@ As always, if you have any questions or comments, please reach out on [discord](
 
 # When every function is an API
 
-If you want to build an API in Val Town today, you use an HTTP val. They provide a web-standard interface to receive requests and send responses. The Run API was a precursor to HTTP vals. It exposes a function to the internet. However, any publicly accessible function could be invoked by the Run API.
+If you want to build an API in Val Town today, you should use an HTTP val. They provide a web-standard interface to receive requests and send responses. The Run API was a precursor to HTTP vals. It exposes a function to the internet. However, any publicly accessible function could be invoked by the Run API.
 
 Val Town's mission is to simplify programming. We think there's too much boilerplate to deploy an HTTP endpoint. _What if every function could instantly be an API?_, we wondered.
 
@@ -43,8 +43,8 @@ import { default: OpenAI } from "npm:openai";
 
 export const gpt4 = async (content: string, max_tokens: number = 50) => {
   const openai = new OpenAI({
-      apiKey: Deno.env.get("openai")
-    });
+    apiKey: Deno.env.get("openai")
+  });
   let chatCompletion = await openai.chat.completions.create({
     messages: [{
       role: "user",
@@ -57,7 +57,7 @@ export const gpt4 = async (content: string, max_tokens: number = 50) => {
 };
 ```
 
-The Run API turned this function immediately into a private API! You could run it via a URL like so:
+The Run API turned this function immediately into a private API! You could run it via a URL like this:
 
 ```ts
 const completion = await fetch(
@@ -74,9 +74,9 @@ const completion = await fetch(
 );
 ```
 
-This is pretty magical for folks who have never done backend programming before. Just by making a function, you've made an API.
+This is pretty magical for folks who have never done backend programming before. Just by writing a function, you've made an API.
 
-Functions and APIs in Val Town are private by default. Above you'll notice that an `authorization` bearer token is required to access that function's API. That restriction is only true as long as the function is private. Public and unlisted functions ran on the Val Town Run API without authorization. And that was the problem.
+Functions and APIs in Val Town are private by default. Above you'll notice that an `Authorization` header is required to access that function's API. But that restriction is only true as long as the function is private: public and unlisted functions ran on the Val Town Run API without authorization. And that was the problem.
 If the author intended on using this as the backend for a client app, they'd use the Run API to invoke it using their secrets – without leaking the token.
 
 And if the author wrote such a function to be used as a library, other users can import and run this val themselves. `Deno.env.get("openai")` would refer to the _invoker_'s OpenAI token.
