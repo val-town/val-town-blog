@@ -110,9 +110,9 @@ Our first priority is always protecting user data. But we couldn't turn off the 
 
 We came up with a deprecation plan that balances these requirements. We wanted to allow vals that are currently being used via the Run API by their author's design to continue running, while preventing any new Vals from being accessible via the Run API.
 
-- As of today, only vals that were actively using the Run API in the last few days are allowed to continue using it.
+- As of today, only vals that were actively using the Run API in the last week are allowed to continue using it.
 - We've emailed everyone whose vals are included in that list and let them know about the changes.
 
-If you used the Run API in the last few days, we sent you an email with more information. If your val is allow-listed, it will show up as the new "RPC" type. Other vals don't have access to this type. If you accidentally change the type out of RPC, you won’t be able to change it back.
+If you used the Run API recently, we sent you an email with more information. If your val is allow-listed, it will show up as the new "RPC" type. Other vals don't have access to this type. If you accidentally change the type out of RPC, you won’t be able to change it back.
 
 If we somehow missed you in this transition, or you have any other questions, reach out: we’re very active in our [Discord](https://discord.gg/dHv45uN5RY), and we’d love to have a community chat about this! You can also submit specific ideas on our [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
