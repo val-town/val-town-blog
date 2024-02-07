@@ -68,11 +68,9 @@ TODOs:
 - link to the discussion (can't find the discussion)
 - and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
-### Suggest & vote on feature requests
+### 💡 Suggest & vote on feature requests
 
-on GitHub Discussions
-
-The description of the discussions for feature-requests on GitHub [Discussions](https://github.com/val-town/val-town-product/discussions)
+We now have a [dedicated place for requesting and voting on features](https://github.com/val-town/val-town-product/discussions). Feel free to submit your own suggestions, or comment and vote on existing feature requests.
 
 https://x.com/stevekrouse/status/1744721315024802285?s=20
 
