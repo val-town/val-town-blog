@@ -85,7 +85,7 @@ export default async function add_numbers(req: Request): Promise<Response> {
 If you did like how the `/run` API worked, we built a [helper](https://www.val.town/v/std/rpc) for you:
 
 ```tsx
-import { rpc } from "https://esm.town/v/std/rpc?v=3";
+import { rpc } from "https://esm.town/v/std/rpc?v=5";
 
 export const add_numbers = rpc(async (a: number, b: number) => {
   return a + b;
