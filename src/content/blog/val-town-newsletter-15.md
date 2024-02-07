@@ -37,10 +37,6 @@ Val execution started
 Finished
 ```
 
-### Immediate HTTP responses
-
-Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately and wait for the promises to resolve afterwards. This introduces 2 benefits:
-
 ### ⚡️ HTTP vals respond 100ms faster on average
 
 Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's exieprience significantly.
@@ -48,7 +44,7 @@ Till now when HTTP val returned a response, Val Town waited for a while before s
 TODO:
 - link to the discussion (can't find the discussion)
 - and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
-- Add a fancy graph comparing before-and-after. Maybe in a style of Chrome dev tools network tab timimg? (Tom?)
+- Add a fancy graph comparing before-and-after. Maybe in a style of Chrome dev tools network tab timimg?
 
 ### ⏲️ Running tasks after returning the HTTP response
 
