@@ -67,7 +67,7 @@ In theory, the “RPC” type would allow us to keep the Run API running indefin
 
 # APIs on Val Town
 
-The proper way to build APIs in val town is via an HTTP val. Here’s how to do it:
+The way to build APIs in Val Town is via an HTTP val. It uses the web-standard [“fetch handler” API](https://blog.val.town/blog/the-api-we-forgot-to-name/).
 
 ```tsx
 function addNumbers(a: number, b: number) {
