@@ -192,6 +192,9 @@ https://x.com/stevekrouse/status/1749800319217700990?s=20
 - [@nbbaier](https://www.val.town/u/nbbaier) created a [val that can generate SQL](https://www.val.town/v/nbbaier/sqliteWriter) using [prisma-gpt](https://github.com/aliyeysides/prisma-gpt)
 - [@nbbaier](https://www.val.town/u/nbbaier) made a val that [generates readme for vals automatically](https://www.val.town/v/nbbaier/readmeGPT) using GPT
 - [@nbbaier](https://www.val.town/u/nbbaier) wrote a [Perplexity AI API wrapper val](https://www.val.town/v/nbbaier/perplextiyAPI)
+- [@pomdtr](https://www.val.town/u/pomdtr) continued his work on [lowdb adapter for Val Town](https://www.val.town/v/pomdtr/lowdb) allowing to use blobs as type-safe databases
+- [@joey](https://www.val.town/u/joey) made it easier to [use blobs as arrays](https://www.val.town/v/joey/BlobArray)
+- [@deepfates](https://www.val.town/u/deepfates) wrote a great [article on building a face swapping app with Val Town, HTMX, and Replicate]
 
 ---
 
@@ -207,8 +210,5 @@ To organize:
 - https://x.com/stevekrouse/status/1737173486047481887?s=20
 - https://x.com/stevekrouse/status/1738651539458171255?s=20
 - https://x.com/nbbaier/status/1744847782484070400?s=20
-- https://discord.com/channels/1020432421243592714/1020432421243592717/1201507447425208442
-- https://discord.com/channels/1020432421243592714/1020432421243592717/1201259951742521496
-- https://discord.com/channels/1020432421243592714/1020432421243592717/1199745917293703228
 - https://www.val.town/v/tomcritchlow/tom_og
 -
