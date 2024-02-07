@@ -1,8 +1,7 @@
 ---
 title: Deprecating the Run API
-generated: 1707243271823
 description: Not every function should be an API
-pubDate: February 6, 2024
+pubDate: February 7, 2024
 author: André Terron
 ---
 
