@@ -87,17 +87,15 @@ The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](
 
 # Deprecation without downtime
 
-Our first priority is always protecting user data. But we couldn't turn off the Run API without causing downtime to users that rely on it.
+Our first priority is always protecting user data. But we couldn't turn off the Run API without causing downtime for people who were using it.
 
-We came up with a deprecation plan that balances these competing interests. We wanted to allow vals that are currently being used via the Run API by their author's design to continue running, while blocking access from the Run API by vals that authors did not intend to be used that way.
+We came up with a deprecation plan that balances these requirements. We wanted to allow vals that are currently being used via the Run API by their author's design to continue running, while preventing any new Vals from being accessible via the Run API.
 
-1. Detect all current usage of the run API
+1. Detect all current usage of the Run API
 2. Disable the Run API on all vals that are not being accessed by it
-3. Email the authors of vals that are still accessible via the Run API, so that they can turn off the Run API if they don't intent for their vals to be accessible by it.
+3. Email the authors of vals that are still accessible via the Run API, so that they can turn off the Run API if they don't intend for their vals to be accessible by it.
 
 If you used the Run API in the last few days, we sent you an email with more information. If your val is allow-listed, it will show up as the new "RPC" type. It’s not possible to create new “RPC” vals. If you accidentally change the type out of "RPC", you won’t be able to change it back. Reach out to us if you need to allow-list one of your vals.
-
-In theory, the “RPC” type would allow us to keep the Run API running indefinitely. We wouldn’t even need to fully deprecate it. But if you want an API, we have a much better way of building one. You could even build your own `/run` endpoint on top of it:
 
 # APIs on Val Town
 
