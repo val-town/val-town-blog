@@ -8,9 +8,9 @@ author: André Terron
 
 Today we are deprecating our [Run API](https://docs.val.town/api/run/).
 
-<aside>
+:::note{.positive}
 ✅ This change does not impact current usage. No user action is required.
-</aside>
+:::
 
 [Val Town](https://val.town) is a social website to code in the cloud. We simplify how APIs are built and used.
 
@@ -34,7 +34,7 @@ As always, if you have any questions or comments, please reach out on [discord](
 
 If you want to build an API in Val Town today, you use an HTTP val. They provide a web-standard interface to receive requests and send responses. The Run API was a precursor to HTTP vals. It exposes a function to the internet. However, any publicly accessible function could be invoked by the Run API.
 
-Val Town's mission is to simplify programming. We think there's too much boilerplate to deploy an HTTP endpoint. _What if every function could instantly be an API?_, we wondered. 
+Val Town's mission is to simplify programming. We think there's too much boilerplate to deploy an HTTP endpoint. _What if every function could instantly be an API?_, we wondered.
 
 For example, consider this helper function you might write to call OpenAI's GPT4 API:
 
@@ -56,21 +56,22 @@ export const gpt4 = async (content: string, max_tokens: number = 50) => {
   return chatCompletion.choices[0].message.content;
 };
 ```
-The Run API turned this function immediately into a private API! You could run it via a URL like so: 
+
+The Run API turned this function immediately into a private API! You could run it via a URL like so:
 
 ```ts
 const completion = await fetch(
   `https://api.val.town/v1/run/stevekrouse.gpt4?args=["tell me a joke"]`,
   {
-     method: "POST",
-     body: JSON.stringify({
-        args: ["tell me a joke"],
-      }),
-      headers: {
-        authorization: "Bearer " + Deno.env.get("valtown")
-       }
-    }
-)
+    method: "POST",
+    body: JSON.stringify({
+      args: ["tell me a joke"],
+    }),
+    headers: {
+      authorization: "Bearer " + Deno.env.get("valtown"),
+    },
+  },
+);
 ```
 
 This is pretty magical for folks who have never done backend programming before. Just by making a function, you've made an API.

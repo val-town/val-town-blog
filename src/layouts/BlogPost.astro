@@ -58,6 +58,15 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
 				padding: 1em;
 				color: rgb(var(--gray-dark));
 			}
+			.prose :global(note.positive) {
+        display: block;
+        background-color: var(--light-green);
+        padding: 15px 20px;
+        border-radius: 10px;
+      }
+			.prose :global(note.positive p) {
+        margin: 0;
+      }
       /** This might be too aggressive - would
       * prefer it not be global.
       */
