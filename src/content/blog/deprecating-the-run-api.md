@@ -34,7 +34,9 @@ As always, if you have any questions or comments, please reach out on [discord](
 
 If you want to build an API in Val Town today, you use an HTTP val. They provide a web-standard interface to receive requests and send responses. The Run API was a precursor to HTTP vals. It exposes a function to the internet. However, any publicly accessible function could be invoked by the Run API.
 
-For example, consider this val you might write:
+Val Town's mission is to simplify programming. We think there's too much boilerplate to deploy an HTTP endpoint. _What if every function could instantly be an API?_, we wondered. 
+
+For example, consider this helper function you might write to call OpenAI's GPT4 API:
 
 ```tsx
 import { default: OpenAI } from "npm:openai";
