@@ -55,7 +55,7 @@ However, any public or unlisted val could be invoked by the Run API. So instead 
 
 The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
 
-# The new “RPC” val type
+# Deprecation without downtime
 
 Our first priority is always protecting user data. But we couldn't simply disable the API without causing downtime to our users.
 
