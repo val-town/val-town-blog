@@ -41,14 +41,41 @@ For example, consider this helper function you might write to call OpenAI's GPT4
 ```tsx
 import { default: OpenAI } from "npm:openai";
 
-export async function gpt3 (args) {
+export const gpt4 = async (content: string, max_tokens: number = 50) => {
   const openai = new OpenAI({
-    apiKey: Deno.env.get("openai")
+      apiKey: Deno.env.get("openai")
+    });
+  let chatCompletion = await openai.chat.completions.create({
+    messages: [{
+      role: "user",
+      content,
+    }],
+    model: "gpt-4-1106-preview",
+    max_tokens: max_tokens,
   });
-  return openai.chat.completions.create(args)
-}
+  return chatCompletion.choices[0].message.content;
+};
+```
+The Run API turned this function immediately into a private API! You could run it via a URL like so: 
+
+```ts
+const completion = await fetch(
+  `https://api.val.town/v1/run/stevekrouse.gpt4?args=["tell me a joke"]`,
+  {
+     method: "POST",
+     body: JSON.stringify({
+        args: ["tell me a joke"],
+      }),
+      headers: {
+        authorization: "Bearer " + Deno.env.get("valtown")
+       }
+    }
+)
 ```
 
+This is pretty magical for folks who have never done backend programming before. Just by making a function, you've made an API.
+
+Functions and APIs in Val Town are private by default. Above you'll notice that an `authorization` bearer token is required to access that function's API. That restriction is only true as long as the function is private. Public and unlisted functions ran on the Val Town Run API without authorization. And that was the problem.
 If the author intended on using this as the backend for a client app, they'd use the Run API to invoke it using their secrets – without leaking the token.
 
 And if the author wrote such a function to be used as a library, other users can import and run this val themselves. `Deno.env.get("openai")` would refer to the _invoker_'s OpenAI token.
@@ -59,9 +86,13 @@ The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](
 
 # Deprecation without downtime
 
-Our first priority is always protecting user data. But we couldn't simply disable the API without causing downtime to our users.
+Our first priority is always protecting user data. But we couldn't turn off the Run API without causing downtime to users that rely on it.
 
-The Run API resulted in a way to run vals that might not be aligned with the original intent of the author. We decided to immediately deprecate the `/run` endpoint. Vals that relied on that API were allow-listed to continue working.
+We came up with a deprecation plan that balances these competing interests. We wanted to allow vals that are currently being used via the Run API by their author's design to continue running, while blocking access from the Run API by vals that authors did not intend to be used that way.
+
+1. Detect all current usage of the run API
+2. Disable the Run API on all vals that are not being accessed by it
+3. Email the authors of vals that are still accessible via the Run API, so that they can turn off the Run API if they don't intent for their vals to be accessible by it.
 
 If you used the Run API in the last few days, we sent you an email with more information. If your val is allow-listed, it will show up as the new "RPC" type. It’s not possible to create new “RPC” vals. If you accidentally change the type out of "RPC", you won’t be able to change it back. Reach out to us if you need to allow-list one of your vals.
 
