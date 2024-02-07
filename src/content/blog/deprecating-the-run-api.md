@@ -74,7 +74,7 @@ What if you're proud of this val and you want to share it with other people, so 
 
 And when they run your gpt4 val via the Run API, it runs _under your own account_, so every request uses your OpenAI API token and counts toward your GPT usage. That probably isn't what you intended!
 
-The Run API was too much of a footgun. We knew we had to fix it ASAP when [Eas](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
+The Run API was too much of a footgun. We knew we had to fix it ASAP when [easrng](https://easrng.net/) reported a number of vals that could be exploited using the Run API, including from our own team.
 
 ### Migrating to HTTP vals
 
