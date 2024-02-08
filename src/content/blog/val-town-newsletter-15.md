@@ -176,9 +176,11 @@ https://x.com/stevekrouse/status/1749800319217700990?s=20
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
 - [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs, query SQLite tables, edit readmes and a lot more
 - [@saolsen](https://www.val.town/u/saolsen) explored the idea of [writing vals in Rust with WASM](https://gist.github.com/saolsen/d273bb1baba5e912e4dc2b187511affa)
+- [@stevekrouse](https://www.val.town/u/stevekrouse) rebuilt his [dateme.directory](https://www.val.town/v/stevekrouse/dateme) to utilize newest Val Town features
 - [@todepond](https://www.val.town/u/todepond) wrote about [making his supported dashboard using Val Town](https://todepond.com/wikiblogarden/tadi-web/fame/facts/)
 - [@pomdtr](https://www.val.town/u/pomdtr) created a val that [creates screenshots from another val](https://www.val.town/v/pomdtr/val2img)
 - [@saolsen](https://www.val.town/u/saolsen) created a [val version diff viewer](https://www.val.town/v/saolsen/changes)
+- [@stevekrouse](https://www.val.town/u/stevekrouse) made a val demonstrating how to [compressing HTTP responses](https://www.val.town/v/stevekrouse/compress_response)
 - [@saolsen](https://www.val.town/u/saolsen) implemented [val analytics with Plausible](https://www.val.town/v/saolsen/plausible)
 - [@pomdtr](https://www.val.town/u/pomdtr) created a [Chrome extension for Val Town](https://github.com/pomdtr/val-town-web-extension)
 - [@pomdtr](https://www.val.town/u/pomdtr) implemented [JWT authentication utility](https://www.val.town/v/pomdtr/auth_middleware) to protect your APIs
@@ -195,6 +197,11 @@ https://x.com/stevekrouse/status/1749800319217700990?s=20
 - [@pomdtr](https://www.val.town/u/pomdtr) continued his work on [lowdb adapter for Val Town](https://www.val.town/v/pomdtr/lowdb) allowing to use blobs as type-safe databases
 - [@joey](https://www.val.town/u/joey) made it easier to [use blobs as arrays](https://www.val.town/v/joey/BlobArray)
 - [@deepfates](https://www.val.town/u/deepfates) wrote a great [article on building a face swapping app with Val Town, HTMX, and Replicate]
+- [@tom_og](https://www.val.town/u/tomcritchlow) made a val that [generates open graph images with code](https://www.val.town/v/tomcritchlow/tom_og)
+- [@tmcw](https://www.val.town/u/tmcw) put together a [val that collects stats about his Figma plugins](https://www.val.town/v/tmcw/placemarkGlobeMonitor) that can be displayed as a [fancy graph](https://observablehq.com/@tmcw/placemark-figma-plugin-stats)
+- [@glommer](https://www.val.town/u/glommer) wrote an [amazing article on Turso blog](https://blog.turso.tech/i-needed-a-simple-discord-bot.-val-town-made-it-fun!-bf8339ab) documenting his adventure making a Discord bot using Val Town
+- [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
+- [@nbbaier](https://www.val.town/u/nbbaier) made a useful [utility val](https://www.val.town/v/nbbaier/sqliteDump) that generates SQL statements to dump the data and schema of tables in a SQLite database 
 
 ---
 
@@ -210,5 +217,3 @@ To organize:
 - https://x.com/stevekrouse/status/1737173486047481887?s=20
 - https://x.com/stevekrouse/status/1738651539458171255?s=20
 - https://x.com/nbbaier/status/1744847782484070400?s=20
-- https://www.val.town/v/tomcritchlow/tom_og
--
