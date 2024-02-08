@@ -2,7 +2,7 @@
 title: The first four Val Town runtimes
 generated: 1701894028894
 description: From vm to vm2 to workers to processes, the long journey to how we run vals today
-pubDate: February 5, 2024
+pubDate: February 8, 2024
 heroImage: ./first-four-val-town-runtimes/timeline.png
 author: Tom MacWright
 ---
@@ -54,7 +54,7 @@ about 35x slower.
 
 So, those are the properties we're aiming for. What have we tried so far? Buckle up.
 
-#### Runtime 1: Node.js + vm
+#### Runtime 1: Node.js + vm (protoype phase)
 
 The very first version of Val Town used Node.js’s [vm module](https://nodejs.org/api/vm.html).
 Schematically, running a val looked like this:
@@ -78,7 +78,9 @@ const [returnValue, logs, error] = vm.runInContext(`
 
 Now, the documentation for the vm module warns that "The node:vm module
 is not a security mechanism. Do not use it to run untrusted code."
-So it should be no surprise that this approach didn't last very long.
+So it should be no surprise that this approach didn't last very long: it
+was introduced in July 2022 and replaced on September 1st, well before any
+serious usage of Val Town in production.
 
 The Node.js vm module is incredibly convenient to use, but it was dangerous and
 didn't check our boxes:
