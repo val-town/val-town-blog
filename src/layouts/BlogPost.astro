@@ -113,7 +113,9 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
         <article itemscope itemtype="https://schema.org/Article">
           {heroImage && 
           <div class="hero-image">
-            <Image width={1020} height={510} src={heroImage} alt="" />
+            <Image 
+                densities={[1, 2, 3]}
+                width={900} height={510} src={heroImage} alt="" />
           </div>}
           <div class="prose">
             <div class="title">
