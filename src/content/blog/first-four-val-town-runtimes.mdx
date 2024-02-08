@@ -15,14 +15,19 @@ We take your TypeScript code and run it on a server, safely, quickly, and flexib
 
 #### Safety
 
-The default way to run arbitrary code is "dangerously". Modules in Node.js have unfettered
-access to your system's environment variables, filesystem, network, and much
-more. This access is [routinely abused in supply-chain attacks](https://socket.dev/blog/inside-node-modules).
-The easiest way to run an arbitrary string of code is with the `eval()` method,
-which doesn't provide any kind of sandbox protections, so it can easily become
-an attack vector.
+The default way to run untrusted code is _dangerously_. If you set up a
+server, like Val Town's, that receives bits of JavaScript code and simply runs
+all of the submitted code with Node.js, you'd be mining crypto and running a botnet
+within the hour.
 
-Security generally means isolation and containment:
+Code in Node.js has unfettered access to your system's environment variables,
+filesystem, network, and much more. This access
+is [routinely abused in supply-chain attacks](https://socket.dev/blog/inside-node-modules).
+In response, the Node.js project is adding [a permissions system](https://nodejs.org/api/permissions.html)
+that can allow & deny access to the filesystem and other resources,
+but it's still experimental.
+
+To safely run multiple vals, we need to sandbox and contain them:
 
 - Vals need to be isolated from the system they're running on: they shouldn't
   be able to read from the filesystem or learn about environment variables.
@@ -41,14 +46,23 @@ would be significant.
 
 #### Flexibility
 
-Val Town lets you bring a lot of experience from other systems. If you've used
+Val Town gives you the flexibility of using modules and APIs from a number
+of different ecoystems. If you've used
 Node.js, great - your NPM modules should mostly work. Thanks to our current system,
 a lot of DOM methods work too - you can parse query strings with [URLSearchParams](https://developer.mozilla.org/en-US/docs/Web/API/URLSearchParams) and use new APIs
-like web-standard streams. A way to square the safety + speed requirements
+like web-standard streams.
+
+A way to square the safety + speed requirements
 would be to use [QuickJS](https://bellard.org/quickjs/), a standalone JavaScript
 engine that's fast to start up and easily sandboxed with WebAssembly. But
-we'd be miles away from NPM or Node compatibility, and would run JavaScript
-about 35x slower.
+we'd be miles away from NPM or Node compatibility.
+
+### Tradeoffs
+
+Safety, speed, and flexibility are often in conflict with each other. Some approaches
+would be secure but limited, like QuickJS. Others would be flexible but bring
+complexity and performance questions, like Dockerizing every Val. We need to find
+a system that balances these concerns.
 
 ---
 
