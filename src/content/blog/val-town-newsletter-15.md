@@ -23,19 +23,30 @@ Big thanks to [SaaS Custom Domains](https://saascustomdomains.com/) for making t
 
 We upgraded the logs viewing experience. Now vals' logs are live-streamed, can be much larger and are stored in a much more scalable way, ensuring we have room for more logging-related features. As your val is being executed you are able to see the log messages appear in real-time. This was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
 
+```ts
+import { delay } from "https://deno.land/std/async/delay.ts";
+
+console.log("Val execution started");
+await delay(2000);
+console.log(" 10% [=         ] 100%");
+await delay(1000);
+console.log(" 30% [===       ] 100%");
+await delay(1000);
+console.log(" 70% [=======   ] 100%");
+await delay(1000);
+console.log("100% [==========] 100%");
+await delay(1000);
+console.log("Finished");
+```
+![A video showing how logs are being streamed](./val-town-newsletter-15/logs_vid.mp4)
+
 Previously, logs had a size limit of ??? and we were able to increase it to ???. This makes is possible to debug larger data sets or longer processing chains without worrying about the logs cutting of mid-execution.
 
 Initialy we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
 
 - TODO: Replace `???` with actual limit sizes.
 - TODO: Close: https://github.com/val-town/val-town-product/discussions/30
-- TODO: Video of logs in real time with an example of a progress bar:
-```
-Val execution started
-0% [==========] 100%
-    ^^^^^^^^^^
-Finished
-```
+
 
 ### ⚡️ HTTP vals respond 100ms faster on average
 
