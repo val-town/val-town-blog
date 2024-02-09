@@ -29,7 +29,6 @@ const today = new Date();
 <style>
 	footer {
 		padding: 2em 1em 6em 1em;
-		background: linear-gradient(var(--gray-gradient)) no-repeat;
 		color: rgb(var(--gray));
 		text-align: center;
 	}
@@ -46,4 +45,9 @@ const today = new Date();
 	.social-links a:hover {
 		color: rgb(var(--gray-dark));
 	}
+  @media (max-width: 720px) {
+    footer {
+      border-top: 1px solid var(--border);
+    }
+  }
 </style>

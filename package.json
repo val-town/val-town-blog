@@ -10,15 +10,20 @@
     "astro": "astro"
   },
   "dependencies": {
-    "@astrojs/check": "^0.3.4",
+    "@astrojs/check": "^0.4.1",
     "@astrojs/mdx": "^2.0.3",
-    "@astrojs/rss": "^4.0.1",
-    "@astrojs/sitemap": "^3.0.4",
-    "@fontsource/ibm-plex-sans": "^5.0.18",
+    "@astrojs/rss": "^4.0.4",
+    "@astrojs/sitemap": "^3.0.5",
     "@fontsource/ibm-plex-mono": "^5.0.8",
+    "@fontsource/ibm-plex-sans": "^5.0.18",
     "@fontsource/ibm-plex-serif": "^5.0.8",
-    "astro": "^4.0.8",
-    "astro-expressive-code": "^0.30.1",
+    "astro": "^4.3.0",
+    "astro-expressive-code": "^0.32.3",
+    "hastscript": "^9.0.0",
+    "remark-directive": "^3.0.0",
     "typescript": "^5.3.3"
+  },
+  "volta": {
+    "node": "20.11.0"
   }
 }
