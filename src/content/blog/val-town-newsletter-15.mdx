@@ -1,9 +1,12 @@
 ---
 title: Val Town Newsletter 15
-description: TODO
-pubDate: February 06, 2024
+description: Custom domains, Logs 3.0, Faster HTTP responses, Status page & much more!
+pubDate: February 12, 2024
 author: Steven Krouse
 ---
+
+import { Image } from "astro:assets";
+import FeedbackButton from "./val-town-newsletter-15/feedback-button.png";
 
 TODO description
 
@@ -39,32 +42,34 @@ await delay(1000);
 console.log("Finished");
 ```
 
-<video controls><source src="/video/newsletter_15_logs.mp4" /></video>
+<video controls>
+  <source src="/video/newsletter_15_logs.mp4" />
+</video>
 
 Previously, logs had a size limit of ??? and we were able to increase it to ???. This makes is possible to debug larger data sets or longer processing chains without worrying about the logs cutting of mid-execution.
 
-Initialy we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
+Initially we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
 
 This feature was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
 
 - TODO: Replace `???` with actual limit sizes.
 
-### ⚡️ HTTP vals respond 100ms faster on average
+### ⚡️ HTTP vals respond 100ms faster
 
-Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's exieprience significantly.
+Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's experience significantly.
 
 ![A graph highlighting the improvement](./val-town-newsletter-15/execution-graph.png)
 
 - TODO: link the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
-### ⏲️ Running tasks after returning the HTTP response
+### ⏲️ Run code after returning an HTTP response
 
 Because we're returning HTTP responses immediately, non-resolved promises continue their execution after the response has been returned.
 
 This allows you to speed your vals even more by performing some non-critical tasks (like logging) after sending the response. Here's [@neverstew's example](https://www.val.town/v/neverstew/earlyWebReturn):
 
 ```ts
-export default async function(req: Request): Promise<Response> {
+export default async function (req: Request): Promise<Response> {
   logTimeLater();
   return Response.json({ time: new Date() });
 }
@@ -75,6 +80,7 @@ async function logTimeLater() {
       console.info(new Date());
       resolve(null);
     }, 3000);
+    s;
   });
 }
 ```
@@ -82,11 +88,12 @@ async function logTimeLater() {
 You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`. Here's an [example of such approach](https://www.val.town/v/user/optimisticExecutionExample):
 
 - TODO: Include code example:
+
 ```ts
 import { sqlite } from "https://esm.town/v/std/sqlite?v=4";
 
 // Handle requests to create new database entry
-export default async function(req: Request): Promise<Response> {
+export default async function (req: Request): Promise<Response> {
   // Create ID for the new entry
   const id = crypto.randomUUID();
 
@@ -102,11 +109,21 @@ async function saveEntry(id: string) {
     sql: "INSERT INTO entries (id) VALUES (?)",
     args: [id],
   });
-  console.log("New entry has been created")
+  console.log("New entry has been created");
 }
 ```
 
 TODO: link the discord announcement: https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
+
+### Deprecating our Run API
+
+We removed Val Town's biggest footgun – the Run API – without any breaking changes or downtime. For more details, check out [the announcement post](/blog/deprecating-the-run-api/).
+
+### 📝 The first four Val Town runtimes
+
+We have built our runtime four times! We've learned a lot about balancing safety, speed, and flexibility. [Here's the story](/blog/first-four-val-town-runtimes/).
+
+[![timeline of runtimes](./first-four-val-town-runtimes/timeline.png)](/blog/first-four-val-town-runtimes/)
 
 ### 💡 Suggest & vote on feature requests
 
@@ -136,19 +153,34 @@ Those definitions are provided by the TypeScript Language Server !INSERT MORE EX
 
 We made the val editor feel ever more comfy by writing little CodeMirror extensions. [This particular extension](https://github.com/val-town/codemirror-continue) continues block comments when you hit **Enter**. This should make writing block comments, like JSDocs more pleasant.
 
-<video controls><source src="/video/newsletter_15_codemirror_comment.mp4" /></video>
+<video controls>
+  <source src="/video/newsletter_15_codemirror_comment.mp4" />
+</video>
 
 ### Improved Feedback button
 
-We improved the **Feedback** button. Now to allows you to quickly request a feature or report a bug through our new [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
+We ❤️ feedback. Our feedback form emails our team with you cc'ed. Or you can:
 
-![Popup window displayed after pressing the Feedback button](./val-town-newsletter-15/feedback-button.png)
+- [make a feature request](https://github.com/val-town/val-town-product/discussions/new?category=feature-request)
+- [report a bug](https://github.com/val-town/val-town-product/discussions/new?category=bug)
+- [join our discord](https://discord.com/invite/dHv45uN5RY)
+- [schedule a chat with our founder](https://calendly.com/steviekrouse)
+- [email us](mailto:hi@val.town)
+
+<div align="center">
+  <Image
+    src={FeedbackButton}
+    alt="Popup window displayed after pressing the Feedback button"
+  />
+</div>
 
 ### Add code folding
 
-Continuing with the trend of improving val editor, we added the ability to fold code blocks.
+We added the ability to fold code blocks. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for [the suggestion](https://github.com/val-town/val-town-product/discussions/11)!
 
-<video controls><source src="/video/newsletter_15_code_folding.mp4" /></video>
+<video controls>
+  <source src="/video/newsletter_15_code_folding.mp4" />
+</video>
 
 ### Misc updates
 
@@ -181,7 +213,7 @@ Continuing with the trend of improving val editor, we added the ability to fold 
 
 ### Roadmap
 
-#### Feburary
+#### February
 
 - AI autocomplete improvements
 - Improved val run scalability and pricing
@@ -251,11 +283,16 @@ Continuing with the trend of improving val editor, we added the ability to fold 
 - [@tmcw](https://www.val.town/u/tmcw) put together a [val that collects stats about his Figma plugins](https://www.val.town/v/tmcw/placemarkGlobeMonitor) that can be displayed as a [fancy graph](https://observablehq.com/@tmcw/placemark-figma-plugin-stats)
 - [@glommer](https://www.val.town/u/glommer) wrote an [amazing article on Turso blog](https://blog.turso.tech/i-needed-a-simple-discord-bot.-val-town-made-it-fun!-bf8339ab) documenting his adventure making a Discord bot using Val Town
 - [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
-- [@nbbaier](https://www.val.town/u/nbbaier) made a useful [utility val](https://www.val.town/v/nbbaier/sqliteDump) that generates SQL statements to dump the data and schema of tables in a SQLite database 
+- [@nbbaier](https://www.val.town/u/nbbaier) made a useful [utility val](https://www.val.town/v/nbbaier/sqliteDump) that generates SQL statements to dump the data and schema of tables in a SQLite database
 
 ---
 
 To organize:
+
+- https://x.com/stevekrouse/status/1755644251969355917?s=20
+- https://x.com/lopesgabe_/status/1754628312906011001?s=20
+
+---
 
 - https://x.com/deepfates/status/1751015063912399126?s=20
 - https://x.com/tmcw/status/1744406760301920559?s=20
