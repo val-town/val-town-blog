@@ -54,15 +54,12 @@ This feature was requested in a [discussion #30](https://github.com/val-town/val
 
 - TODO: Replace `???` with actual limit sizes.
 
-### ⚡️ HTTP vals respond 100ms faster
+### ⚡️ HTTP vals respond 100ms faster, and you can run code after returning a response
 
 Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's experience significantly.
 
 ![A graph highlighting the improvement](./val-town-newsletter-15/execution-graph.png)
-
-- TODO: link the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
-
-### ⏲️ Run code after returning an HTTP response
+{/* Source: https://excalidraw.com/#json=ukic9gIBIPzdJXGInKZNl,i0VeZeHpYmR8wEf3nhYkBg */}
 
 Because we're returning HTTP responses immediately, non-resolved promises continue their execution after the response has been returned.
 
