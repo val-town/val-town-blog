@@ -53,18 +53,31 @@ This feature was requested in a [discussion #30](https://github.com/val-town/val
 
 Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's exieprience significantly.
 
-TODO:
-- link to the discussion (can't find the discussion)
-- and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
-- Add a fancy graph comparing before-and-after. Maybe in a style of Chrome dev tools network tab timimg?
+![A graph highlighting the improvement](./val-town-newsletter-15/execution-graph.png)
+
+- TODO: link the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
 ### ⏲️ Running tasks after returning the HTTP response
 
 Because we're returning HTTP responses immediately, non-resolved promises continue their execution after the response has been returned.
 
-This allows you to speed your vals even more by performing some non-critical tasks (like logging) after sending the response:
+This allows you to speed your vals even more by performing some non-critical tasks (like logging) after sending the response. Here's [@neverstew's example](https://www.val.town/v/neverstew/earlyWebReturn):
 
-- TODO: Include code example https://www.val.town/v/neverstew/earlyWebReturn
+```ts
+export default async function(req: Request): Promise<Response> {
+  logTimeLater();
+  return Response.json({ time: new Date() });
+}
+
+async function logTimeLater() {
+  await new Promise((resolve) => {
+    setTimeout(() => {
+      console.info(new Date());
+      resolve(null);
+    }, 3000);
+  });
+}
+```
 
 You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`:
 
