@@ -79,14 +79,31 @@ async function logTimeLater() {
 }
 ```
 
-You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`:
+You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`. Here's an [example of such approach](https://www.val.town/v/user/optimisticExecutionExample):
 
 - TODO: Include code example:
 ```ts
-// HTTP val handling PUT request
-// 1. Generate new UUID
-// 2. Return new UUID early
-// 3. Save data to DB after the response
+import { sqlite } from "https://esm.town/v/std/sqlite?v=4";
+
+// Handle requests to create new database entry
+export default async function(req: Request): Promise<Response> {
+  // Create ID for the new entry
+  const id = crypto.randomUUID();
+
+  // Start further processing without awaiting
+  saveEntry(id);
+
+  // Assume processing will succeed and return response with new ID
+  return Response.json({ id });
+}
+
+async function saveEntry(id: string) {
+  await sqlite.execute({
+    sql: "INSERT INTO entries (id) VALUES (?)",
+    args: [id],
+  });
+  console.log("New entry has been created")
+}
 ```
 
 TODO: link the discord announcement: https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
