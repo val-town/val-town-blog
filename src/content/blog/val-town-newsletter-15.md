@@ -38,7 +38,8 @@ console.log("100% [==========] 100%");
 await delay(1000);
 console.log("Finished");
 ```
-![A video showing how logs are being streamed](./val-town-newsletter-15/logs_vid.mp4)
+
+<video controls><source src="/video/newsletter_15_logs.mp4" /></video>
 
 Previously, logs had a size limit of ??? and we were able to increase it to ???. This makes is possible to debug larger data sets or longer processing chains without worrying about the logs cutting of mid-execution.
 
