@@ -21,7 +21,7 @@ Big thanks to [SaaS Custom Domains](https://saascustomdomains.com/) for making t
 
 ### Logs – larger, faster, streamed, and scalable
 
-We upgraded the logs viewing experience. Now vals' logs are live-streamed, can be much larger and are stored in a much more scalable way, ensuring we have room for more logging-related features. As your val is being executed you are able to see the log messages appear in real-time. This was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
+We upgraded the logs viewing experience. Now vals' logs are live-streamed, can be much larger and are stored in a much more scalable way, ensuring we have room for more logging-related features. As your val is being executed you are able to see the log messages appear in real-time.
 
 ```ts
 import { delay } from "https://deno.land/std/async/delay.ts";
@@ -45,9 +45,9 @@ Previously, logs had a size limit of ??? and we were able to increase it to ???.
 
 Initialy we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
 
-- TODO: Replace `???` with actual limit sizes.
-- TODO: Close: https://github.com/val-town/val-town-product/discussions/30
+This feature was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
 
+- TODO: Replace `???` with actual limit sizes.
 
 ### ⚡️ HTTP vals respond 100ms faster on average
 
@@ -76,9 +76,7 @@ You can also take the _optimistic execution_ approach and perform your database 
 // 3. Save data to DB after the response
 ```
 
-TODOs:
-- link to the discussion (can't find the discussion)
-- and the discord announcement? https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
+TODO: link the discord announcement: https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
 
 ### 💡 Suggest & vote on feature requests
 
@@ -98,19 +96,29 @@ https://x.com/Andre_Terron/status/1750578181600649312?s=20
 
 ### TypeScript-driven autocompletion
 
-https://github.com/val-town/val.town/pull/3645
+Our val editor autocompletion now displays TypeScript-driven definitions.
+
+![Screenshot of the new TypeScript-driven autocompletion in action](./val-town-newsletter-15/typescript-autocomplete.png)
+
+Those definitions are provided by the TypeScript Language Server !INSERT MORE EXPLANATIONS HERE!
 
 ### CodeMirror Continue for comments
 
-https://x.com/tmcw/status/1745147192656957771?s=20
+We made the val editor feel ever more comfy by writing little CodeMirror extensions. [This particular extension](https://github.com/val-town/codemirror-continue) continues block comments when you hit **Enter**. This should make writing block comments, like JSDocs more pleasant.
+
+<video controls><source src="/video/newsletter_15_codemirror_comment.mp4" /></video>
 
 ### Improved Feedback button
 
-https://x.com/stevekrouse/status/1749800319217700990?s=20
+We improved the **Feedback** button. Now to allows you to quickly request a feature or report a bug through our new [GitHub Discussions page](https://github.com/val-town/val-town-product/discussions).
+
+![Popup window displayed after pressing the Feedback button](./val-town-newsletter-15/feedback-button.png)
 
 ### Add code folding
 
-- TODO ensure we closed this github discussion and link to it here
+Continuing with the trend of improving val editor, we added the ability to fold code blocks.
+
+<video controls><source src="/video/newsletter_15_code_folding.mp4" /></video>
 
 ### Misc updates
 
