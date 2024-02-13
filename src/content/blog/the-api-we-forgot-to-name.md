@@ -3,7 +3,7 @@ title: The API we forgot to name
 generated: 1701894028894
 description: An API that takes a Request and returns a Response - what was that, again?
 pubDate: October 19, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 [Two years ago](https://blog.cloudflare.com/workers-javascript-modules/) Cloudflare released an API for creating servers in JavaScript. Now every modern JavaScript cloud provider — Deno, Vercel, Bun, Netlify, Fastly, Lagon — supports it. If you’ve written a serverless JavaScript API in the last two years, you likely know it well.

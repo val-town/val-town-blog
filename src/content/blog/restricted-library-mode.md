@@ -3,7 +3,7 @@ title: Restricted Library Mode
 generated: 1701894028886
 description: Evolving Val Town’s security model
 pubDate: May 4, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 [Val Town](https://val.town) is a social programming environment to write, run,
@@ -27,7 +27,7 @@ have vals running in production,
 minimal downtime. It should only take a couple of minutes.
 
 We apologize for this no-warning rollout. We are committed to maintaining a
-stable __and__ secure platform. Unfortunately those commitments were at odds
+stable **and** secure platform. Unfortunately those commitments were at odds
 today: advance warning of these change could invite attacks to the very
 vulnerabilities we are closing. We had to choose between these two priorities,
 and we chose security.
@@ -99,10 +99,10 @@ were taken advantage of, but we think this is unlikely.
 We were able to find a scheme that allows for virtually all former uses of the
 platform to continue to exist, but in a secure way:
 
-- _If you want to use another person’s function with access to _your own_
-  secrets, pass those secrets as arguments._
-- _If you want to use another person’s function with access to _the other
-  person’s_ secrets, call it via API._
+- _If you want to use another person’s function with access to \_your own_
+  secrets, pass those secrets as arguments.\_
+- _If you want to use another person’s function with access to \_the other
+  person’s_ secrets, call it via API.\_
 
 The limitations of this scheme are:
 

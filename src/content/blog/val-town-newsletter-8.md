@@ -3,7 +3,7 @@ title: Val Town Newsletter 8
 generated: 1701894028975
 description: Announcing Val Town Pro
 pubDate: May 31, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 We shipped A LOT in the last two weeks, including Val Town Pro, a new logo, the

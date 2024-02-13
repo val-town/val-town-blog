@@ -3,7 +3,7 @@ title: Val Town Newsletter 2
 generated: 1701894028942
 description: Your monthly update of cool vals!
 pubDate: January 23, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Our Show HN had an great reception, we loved what you all did with the tool, we
@@ -54,7 +54,7 @@ delightful ways! Here’s some of my favorites:
   [https://www.val.town/shaya.keriatShemaReminser](https://www.val.town/shaya.keriatShemaReminser)
 
 - Some fun with GPT!
-  [https://api.val.town/eval/@nate.kindness()](https://api.val.town/eval/@nate.kindness())
+  [https://api.val.town/eval/@nate.kindness()](<https://api.val.town/eval/@nate.kindness()>)
   [https://www.val.town/patrickjm.aiSarcasticMotivationalMessage](https://www.val.town/patrickjm.aiSarcasticMotivationalMessage)
   [https://www.val.town/patrickjm.weatherTomorrowGpt3Example](https://www.val.town/patrickjm.weatherTomorrowGpt3Example)
 

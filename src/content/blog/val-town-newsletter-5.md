@@ -3,7 +3,7 @@ title: Val Town Newsletter 5
 generated: 1701894028961
 description: Shipping our Deno runtime
 pubDate: March 23, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 We shipped our new Deno runtime! We launched imports, from npm, esm.sh, deno.land. Our next focus is on quick wins, particularly in social directions. Y’all continue to dazzle us with very cool vals 🤩

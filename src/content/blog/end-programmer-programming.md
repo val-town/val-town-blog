@@ -3,7 +3,7 @@ title: End-programmer Programming
 generated: 1701894028842
 description: A reflection on the goal of making programming for everyone.
 pubDate: November 8, 2022
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 The dream of “end-user programming” is still too far away. Let’s set our sights
@@ -36,8 +36,6 @@ The dream is _end-user programming_.
 
 - [End-user Programming](https://www.inkandswitch.com/end-user-programming/)
   (Ink & Switch)
-
-
 
 ### Boiling the ocean
 
@@ -97,8 +95,6 @@ from achieving the dream of end-programmer programming?
 
 - [From free software to liberal software](https://lwn.net/Articles/712376/)
   (Jonathan Corbet)
-
-
 
 End-programmers need access to the deployed runtime environment, what Robert
 "r0ml" Lefkowitz calls [“liberal software”](https://lwn.net/Articles/712376/).
@@ -169,8 +165,8 @@ But the dream of Val Town is nothing short of end-user programming, with a
 little detour through end-programmer programming. Come join as we inch along
 towards the dream!
 
-🙏 _Thanks Karik Agaram, Sam Arbesman, Geoffrey Litt, Dan Levine, Rodrigo Tello,
-and André Terron for your contributions to this piece, HN Follow, and Val Town!_
+🙏 *Thanks Karik Agaram, Sam Arbesman, Geoffrey Litt, Dan Levine, Rodrigo Tello,
+and André Terron for your contributions to this piece, HN Follow, and Val Town!*
 
 ### Subscribe
 

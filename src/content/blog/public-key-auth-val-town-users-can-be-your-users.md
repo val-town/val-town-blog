@@ -3,7 +3,7 @@ title: "Public Key Auth: Val Town users can be your users"
 generated: 1701894028878
 description: A novel authorization scheme for Val Town
 pubDate: June 27, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Every public function in Val Town has [an API endpoint](https://docs.val.town/api#c9dc919e5001468f8c678d279e8532be). Some vals wrap premium APIs ([openai](https://www.val.town/v/patrickjm.gpt3), [rime](https://www.val.town/v/stevekrouse.rime)) that you can use for free. The idea is that sometimes you want to just try an API or use it a tiny amount (\<$0.10) and we’re happy to cover that.
@@ -29,7 +29,7 @@ It took an afternoon to get it working, and the main issue was struggling to und
 
 ### 1. Generate your keys
 
-Click *Run* to generate keys and see them in JSON. If you’re logged into Val Town, this will save those keys to your account.
+Click _Run_ to generate keys and see them in JSON. If you’re logged into Val Town, this will save those keys to your account.
 
 <div class="not-content">
   <iframe src="https://www.val.town/embed/new?code=import+%7B+set+%7D+from+%22https%3A%2F%2Fesm.town%2Fv%2Fstd%2Fset%22%3B%0Aimport+%7B+generateKeys+%7D+from+%22https%3A%2F%2Fesm.town%2Fv%2Fstevekrouse%2FgenerateKeys%22%3B%0A%0Alet+keys+%3D+await+generateKeys%28%29%0A%0Aexport+let+exportedKeySetter+%3D+Promise.all%28%5B%0A++set%28%22exportedKeys%22%2C+keys%29%2C%0A++set%28%22publicKey%22%2C+keys.publicKey%29%0A%5D%29" width="100%" frameborder="no" style="height: 400px;">

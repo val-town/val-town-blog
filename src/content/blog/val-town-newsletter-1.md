@@ -3,7 +3,7 @@ title: Val Town Newsletter 1
 generated: 1701894028904
 description: Programmatic notifications, Hacker News API, and more.
 pubDate: January 4, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Welcome to the 1st Val Town newsletter!

@@ -3,7 +3,7 @@ title: Val Town Newsletter 4
 generated: 1701894028953
 description: Rebuilding on Deno, HTML emails, and more
 pubDate: March 2, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 We’re almost done rebuilding our runtime on Deno! We also snuck in a dozen

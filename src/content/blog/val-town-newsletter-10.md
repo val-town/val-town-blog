@@ -2,7 +2,7 @@
 title: Val Town Newsletter 10
 description: A year of Val Town!
 pubDate: July 5, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Val Town turns one today! In the last two weeks we shipped Val READMEs, the new val.run Express API, a redesigned Val action menu, a dozen new guides, a RFC for an expanded Vals API, a blog post about Public Key Auth, example pages around NPM packages and APIs, more `fetch` proxies, and more. I also recorded a new video. A lot has changed since the [last one in February](https://www.loom.com/share/c075dc075909400a85591ac3f83d1ca5?sid=397333f9-c87d-4647-92ae-6e8903547da8)!

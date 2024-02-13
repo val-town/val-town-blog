@@ -3,7 +3,7 @@ title: "Post-mortem: SQLite data sharing"
 generated: 1701894028874
 description: Disclosing and fixing a recent security issue
 pubDate: November 24, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Val Town launched a SQLite integration with Turso leveraging their [new multitenancy feature](https://turso.tech/multitenancy) in private beta on Sept 11, 2023. We relaunched the integration as Val Town SQLite on Nov 15, 2023. On Nov 20th we became aware that all of our users’ queries were hitting the same SQLite database, instead of their own private databases.

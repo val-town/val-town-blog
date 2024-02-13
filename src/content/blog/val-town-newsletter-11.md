@@ -3,7 +3,7 @@ title: Val Town Newsletter 11
 generated: 1701894028921
 description: Hiring, podcasts, and more!
 pubDate: July 31, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 This month we shipped autosave, comments, email a val, an expanded API, and dozens more features, big and small. We’re hiring a full time engineer in NYC and a part-time docs writer. We were featured on a couple of podcasts and newsletters, and y’all tweeted some really cool vals.

@@ -2,7 +2,7 @@
 title: Val Town Newsletter 14
 description: Pull Requests, Val Editor Redesign, AI Suggestions, OSS Docs, New Astro Blog, Templates
 pubDate: December 15, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 In the last two weeks, we launched Pull Requests, redesigned the Val Editor, shipped Github Copilot-like AI Suggestions, relaunched our docs and blog sites on Astro, and a bunch of smaller things.

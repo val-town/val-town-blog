@@ -1,30 +1,28 @@
 ---
 title: Val Town Newsletter 15
 description: Custom domains, Logs 3.0, Faster HTTP responses, Status page & much more!
-pubDate: February 12, 2024
-author: Steven Krouse
+pubDate: February 13, 2024
+author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 import FeedbackButton from "./val-town-newsletter-15/feedback-button.png";
 
-TODO description
+We shipped Custom Domains, Logs 3.0, faster HTTP responses, and dozens of other improvements. We [deprecated our Run API](/blog/deprecating-the-run-api/) and released a post about [our first four runtimes](/blog/first-four-val-town-runtimes/).
 
-You all have made hundreds of really cool vals (links below). [Come join us in Discord!](https://discord.gg/dHv45uN5RY) 👋
+We're growing our team! We're [hiring engineers in NY](https://val-town.notion.site/Founding-Engineer-at-Val-Town-e6fa51bdb2974778a4669ccdcf50b146) who are passionate about democratizing programming.
 
-### Custom domains
+### 🌐 Custom domains
 
-We released a heavily requested feature - custom domains. Custom domains allow you to use your own domain names to access the HTTP vals you created. This feature enables a more branded and professional experience for users visiting your vals. This is a feature for [Pro subscribers](https://www.val.town/pricing) only.
+Give your [HTTP val](https://docs.val.town/types/http/) a [custom domain](https://docs.val.town/reference/custom-domains/)! For example, Steve's [dateme.directory](https://dateme.directory) is now powered by [a val](https://www.val.town/v/stevekrouse/dateme).
 
 ![A custom domain configured to direct HTTP requests to "amazingVal"](./val-town-newsletter-15/custom-domains.png)
 
-You can add your domain or subdomain in the [custom domain settings](https://www.val.town/settings/domains). For more info take a look at our [documentation page](https://docs.val.town/reference/custom-domains/).
+This is feature is available on [Val Town Pro](https://www.val.town/pricing). Big thanks to [Drago](https://twitter.com/dragocrnjac) at [SaaS Custom Domains](https://saascustomdomains.com/) 🙏
 
-Big thanks to [SaaS Custom Domains](https://saascustomdomains.com/) for making the implementation much easier.
+### 𝍌 Logs 3.0
 
-### Logs – larger, faster, streamed, and scalable
-
-We upgraded the logs viewing experience. Now vals' logs are live-streamed, can be much larger and are stored in a much more scalable way, ensuring we have room for more logging-related features. As your val is being executed you are able to see the log messages appear in real-time.
+We rebuilt our logs to be faster, larger, streamed, and scalable. Now you can see your val's logs in real-time.
 
 ```ts
 import { delay } from "https://deno.land/std/async/delay.ts";
@@ -42,127 +40,52 @@ await delay(1000);
 console.log("Finished");
 ```
 
-<video controls>
+<video controls autoplay>
   <source src="/video/newsletter_15_logs.mp4" />
 </video>
 
-Previously, logs had a size limit of ??? and we were able to increase it to ???. This makes is possible to debug larger data sets or longer processing chains without worrying about the logs cutting of mid-execution.
+The first version of logs were stored in our main Postgres database. The second version was stored in Cloudflare R2, which was more scalable, but trapped our data in blobs. This third version is stores your logs in ClickHouse, which makes the system faster, scalable, and paves the way for features to filter and search through your logs. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for the request for [real-time logging](https://github.com/val-town/val-town-product/discussions/30)!
 
-Initially we were storing logs locally and then after a while we moved them to [Cloudflare R2](https://www.cloudflare.com/developer-platform/r2/). Now we're using [ClickHouse](https://clickhouse.com/) which enabled the real-time preview functionality and makes the whole system more scalable.
+### ⚡️ HTTP vals are faster and async
 
-This feature was requested in a [discussion #30](https://github.com/val-town/val-town-product/discussions/30).
-
-- TODO: Replace `???` with actual limit sizes.
-
-### ⚡️ HTTP vals respond 100ms faster, and you can run code after returning a response
-
-Till now when HTTP val returned a response, Val Town waited for a while before sending that response. The reason for that was to ensure that all promises were resolved before terminating val's execution. We introduced an optimization, where we're returning the val's HTTP response immediately, speeding up client's experience significantly.
+We've made HTTP vals faster by sending the HTTP responses as soon as your function returns. This is a 100ms performance improvement for all HTTP vals. Vals with un-awaited promises will see a even bigger improvement on HTTP response times.
 
 ![A graph highlighting the improvement](./val-town-newsletter-15/execution-graph.png)
 {/* Source: https://excalidraw.com/#json=ukic9gIBIPzdJXGInKZNl,i0VeZeHpYmR8wEf3nhYkBg */}
 
-Because we're returning HTTP responses immediately, non-resolved promises continue their execution after the response has been returned.
-
-This allows you to speed your vals even more by performing some non-critical tasks (like logging) after sending the response. Here's [@neverstew's example](https://www.val.town/v/neverstew/earlyWebReturn):
+This change enables you to perform further computation after your HTTP handler responds, without needing to setup a queue. We continue to compute any un`await`ed `Promises` _after_ we send your `return`ed HTTP `Response`. For example:
 
 ```ts
-export default async function (req: Request): Promise<Response> {
-  logTimeLater();
-  return Response.json({ time: new Date() });
-}
+import { delay } from "https://deno.land/std/async/delay.ts";
 
-async function logTimeLater() {
-  await new Promise((resolve) => {
-    setTimeout(() => {
-      console.info(new Date());
-      resolve(null);
-    }, 3000);
-    s;
-  });
+export default async function handler(req: Request) {
+  const start = Date.now();
+  delay(1000).then(() => console.log(Date.now() - start)); // 1000, logged later
+  return Response.json(Date.now() - start); // 0, sent immediately
 }
 ```
 
-You can also take the _optimistic execution_ approach and perform your database operations after returning the `200 OK`. Here's an [example of such approach](https://www.val.town/v/user/optimisticExecutionExample):
+Thanks to [Alex](https://www.val.town/u/azirbel) and [Ross](https://www.val.town/u/rosshunter) from [Playbook](https://playbook.com/) for championing [this feature request](https://github.com/val-town/val-town-product/discussions/28)!
 
-- TODO: Include code example:
+### 🦶🔫 Deprecating our Run API
 
-```ts
-import { sqlite } from "https://esm.town/v/std/sqlite?v=4";
-
-// Handle requests to create new database entry
-export default async function (req: Request): Promise<Response> {
-  // Create ID for the new entry
-  const id = crypto.randomUUID();
-
-  // Start further processing without awaiting
-  saveEntry(id);
-
-  // Assume processing will succeed and return response with new ID
-  return Response.json({ id });
-}
-
-async function saveEntry(id: string) {
-  await sqlite.execute({
-    sql: "INSERT INTO entries (id) VALUES (?)",
-    args: [id],
-  });
-  console.log("New entry has been created");
-}
-```
-
-TODO: link the discord announcement: https://discord.com/channels/1020432421243592714/1020432421243592717/1201996373013319690
-
-### Deprecating our Run API
-
-We removed Val Town's biggest footgun – the Run API – without any breaking changes or downtime. For more details, check out [the announcement post](/blog/deprecating-the-run-api/).
+We removed Val Town's biggest footgun – the Run API – without breaking anyone in production. As it turns out: not every function should be an API. For more details, check out [the announcement post](/blog/deprecating-the-run-api/).
 
 ### 📝 The first four Val Town runtimes
 
-We have built our runtime four times! We've learned a lot about balancing safety, speed, and flexibility. [Here's the story](/blog/first-four-val-town-runtimes/).
+We've built and rebuilt our runtime four times, and learned a lot about balancing safety, speed, and flexibility. [Here's the story](/blog/first-four-val-town-runtimes/).
 
 [![timeline of runtimes](./first-four-val-town-runtimes/timeline.png)](/blog/first-four-val-town-runtimes/)
 
 ### 💡 Suggest & vote on feature requests
 
-We now have a [dedicated place for requesting and voting on features](https://github.com/val-town/val-town-product/discussions). Feel free to submit your own suggestions, or comment and vote on existing feature requests.
+You can now [request and vote on features](https://github.com/val-town/val-town-product/discussions). So far 60 features have been requested, and we've built & closed 3. The top features only have 5 upvotes, so it won't take much [community organizing](https://twitter.com/nbbaier/status/1744513027355877796) to get your requests to the top of our list.
 
-https://x.com/stevekrouse/status/1744721315024802285?s=20
-
-### Val Town status page
-
-Nobody likes when a website is down, but it's even worse not being able to figure out if it's down for everyone. We now have a public status page to answer that question!
-
-https://status.val.town/
-
-![Screenshot of the new Val Town status page](./val-town-newsletter-15/status-page.png)
-
-https://x.com/Andre_Terron/status/1750578181600649312?s=20
-
-### TypeScript-driven autocompletion
-
-Our val editor autocompletion now displays TypeScript-driven definitions.
-
-![Screenshot of the new TypeScript-driven autocompletion in action](./val-town-newsletter-15/typescript-autocomplete.png)
-
-Those definitions are provided by the TypeScript Language Server !INSERT MORE EXPLANATIONS HERE!
-
-### CodeMirror Continue for comments
-
-We made the val editor feel ever more comfy by writing little CodeMirror extensions. [This particular extension](https://github.com/val-town/codemirror-continue) continues block comments when you hit **Enter**. This should make writing block comments, like JSDocs more pleasant.
-
-<video controls>
-  <source src="/video/newsletter_15_codemirror_comment.mp4" />
-</video>
+[![Screenshot of the new Val Town status page](./val-town-newsletter-15/discussions.png)](https://github.com/val-town/val-town-product/discussions?discussions_q=is%3Aopen+sort%3Atop/)
 
 ### Improved Feedback button
 
-We ❤️ feedback. Our feedback form emails our team with you cc'ed. Or you can:
-
-- [make a feature request](https://github.com/val-town/val-town-product/discussions/new?category=feature-request)
-- [report a bug](https://github.com/val-town/val-town-product/discussions/new?category=bug)
-- [join our discord](https://discord.com/invite/dHv45uN5RY)
-- [schedule a chat with our founder](https://calendly.com/steviekrouse)
-- [email us](mailto:hi@val.town)
+We ❤️ feedback. Our feedback form now emails our whole team, with you cc'ed.
 
 <div align="center">
   <Image
@@ -171,86 +94,87 @@ We ❤️ feedback. Our feedback form emails our team with you cc'ed. Or you can
   />
 </div>
 
-### Add code folding
+Or you can [make a feature request](https://github.com/val-town/val-town-product/discussions/new?category=feature-request), [report a bug](https://github.com/val-town/val-town-product/discussions/new?category=bug), [join our discord](https://discord.com/invite/dHv45uN5RY), [schedule a chat with our founder](https://calendly.com/steviekrouse), or [email us directly](mailto:hi@val.town).
+
+### 🟩 Val Town status page
+
+Our [status page](https://status.val.town/) is live. Next stop – more nines.
+
+[![Screenshot of the new Val Town status page](./val-town-newsletter-15/status-page.png)](https://status.val.town/)
+
+### ⌨️ TypeScript-driven autocompletion
+
+Our autocomplete now displays helpful TypeScript docs inline.
+
+![Screenshot of the new TypeScript-driven autocompletion in action](./val-town-newsletter-15/typescript-autocomplete.png)
+
+### ⏎ CodeMirror Continue for comments
+
+We made the editor a little cozier by continuing block comments when you hit `Enter`. This should make writing block comments, like JSDocs, more pleasant. We also released this as an open-source CodeMirror extension – [CodeMirror Continue](https://github.com/val-town/codemirror-continue).
+
+<video controls autoplay>
+  <source src="/video/newsletter_15_codemirror_comment.mp4" />
+</video>
+
+### 🧘‍♀️ Code folding
 
 We added the ability to fold code blocks. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for [the suggestion](https://github.com/val-town/val-town-product/discussions/11)!
 
-<video controls>
+<video controls autoplay>
   <source src="/video/newsletter_15_code_folding.mp4" />
 </video>
 
-### Misc updates
+### ⬆️ Misc updates
 
-- Fixed the big, old, annoying flicker on page load
+- Finally fixed the whole page flicker on page load
 - Redesigned our scheduled val & cron UI
-- "Run Now" button on scheduled and cron vals
-- Tabs on the bottom of vals for viewing logs and previewing HTTP vals
-- Fix flicker bug with our AI autocomplete
-- New comments on a val notify anyone who commented on that val
-- HTTP responses can return up to 10Mb now (40x more than before)
-- Val readmes can be edited via API
-- Add URL ?search data to HTTP logs
+- Added a `Run Now` button on scheduled and cron vals
+- Added tabs on the bottom of vals for viewing logs and previewing HTTP vals
+- Shipped new [/about](https://www.val.town/about) and [/careers](https://www.val.town/careers) pages
+- Fixed the flicker bug with our AI autocomplete
+- Improved comment notifications so new comments on a val notify anyone who commented on that val
+- Increased HTTP response maximum size to 10Mb (40x more than before)
+- Added an API to edit Val READMEs
+- Added URL search data to HTTP logs
+- Removed `untitled_` from new val names
 - Updated Deno to 1.40.2 (there's now [an API for getting this version data](https://www.val.town/v/std/deno_version)!)
-- Fix [val.town/brand](https://val.town/brand) assets
-- Defer loading dprint to speed up page loading times
-- Fix scheduled val bugs
-- Include val readmes in val pull requests
-- Add `VALTOWN_API_URL` environment variable to enable std library usage locally
-- Deprecate showing output in favor of console logs
-- Forked vals default to the name of the original val
+- Fixed [val.town/brand](https://val.town/brand) assets
+- Defered loading dprint to speed up page loading times
+- Fixed scheduled val bugs
+- Included val readmes in val pull requests
+- Added `VALTOWN_API_URL` environment variable and [`std/API_URL`](https://www.val.town/v/std/API_URL) to enable std library usage locally
+- Deprecated showing output in favor of console logs
+- Default forked vals to the name of the original val
 - Renamed "Secrets" to "Environment Variables"
 - Improved error message to when users try to preview a private HTTP val
 - Speed up querying for the latest evaluation of a val (4 seconds to 40ms)
 - [Halved our database size](https://x.com/tmcw/status/1742559580255658462?s=20) by removing stale data
-- iframe previews of other peoples' HTTP vals are closed by default
+- Default iframe previews of other peoples' HTTP vals closed
 - Disable grammarly correction in the editor
 - [Improved Google indexing by adding pagination and noindex on vals without readmes](https://x.com/tmcw/status/1753458573764337783?s=20) (thanks [@tomcritchlow](https://www.val.town/u/tomcritchlow))
-- Limit the number of versions a val can have to 14,400 (10 days in minutes)
-- Fix bugs with our homepage buttons
+- Limited the number of versions a val can have to 14,400
+- Fixed bugs with our homepage buttons
+- Fought a losing war against z-index bugs
+- Started migrating our Express server to Fastify
+- Removed Posthog to simplify our compliance requirements
 
-### Roadmap
+## 🛣️ Roadmap
 
-#### February
-
-- AI autocomplete improvements
 - Improved val run scalability and pricing
-- Improved workflows for POST-request HTTP vals
-- Improved /trending ranking
-- Button to request someone to publish a val
-- Job posting & careers page
+- AI autocomplete improvements
+- A button to request someone to publish a val (like on google docs)
+- [Improved workflows for POST-request HTTP vals](https://github.com/val-town/val-town-product/discussions/53)
+- Improved [/trending](http://val.town/trending) ranking
 - New intro video
 - Better onboarding for new users
-- Drop "untitled\_" from new val names
+- Improved [val organization](https://github.com/val-town/val-town-product/discussions/10) & [dashboard](https://github.com/val-town/val-town-product/discussions/10)
+- OpenAI and Puppeteer in hosted in our Standard Library
+- Projects – a way to group vals together for branching, versioning, permissions, sharing
+- & [what you suggest](https://github.com/val-town/val-town-product/discussions/new?category=feature-request)!
 
-### Soon-ish
+## 😎 Cool vals
 
-- Speed up val execution
-- Improved val organization in sidebar (TODO link to feature request)
-- Val Town Projects (for more complex projects, branching and pull requests as groups of vals)
-- TODO pull more from feature requests
-
-## Kind words
-
-- https://x.com/meekaale/status/1740818276152996271?s=20
-- https://x.com/spences10/status/1741090256852586689?s=20
-- https://x.com/ibuildthecloud/status/1742565036944740660?s=20
-- https://x.com/arsalanbashir/status/1742830957374144658?s=20
-- https://x.com/GrantSlatton/status/1743441341030486256?s=20
-- https://x.com/alexzirbel/status/1744595109101101346?s=20
-- https://x.com/rossSpeak/status/1744864326727737363?s=20
-- https://x.com/CompuIves/status/1745400326654706144?s=20
-- https://x.com/rossSpeak/status/1747310275773296841?s=20
-- https://x.com/zeke/status/1748107363419332698?s=20
-- https://x.com/IrvinZhan/status/1748079715515339074?s=20
-- https://x.com/whelan_boyd/status/1722299311608807710?s=20
-- https://x.com/glcst/status/1742554321965691324?s=20
-- https://x.com/webtwozero/status/1750528451059368408?s=20
-- https://x.com/okpasquale/status/1750653517629473014?s=20
-- https://x.com/albfresco/status/1740955772144738738?s=20
-- https://x.com/nerdymomocat/status/1743041429331689901?s=20
-
-### Cool vals
-
+- [@deepfates](https://www.val.town/u/deepfates) wrote a guide on building [a face swapping app with Val Town, HTMX, and Replicate](https://replicate.com/guides/hypermedia-api)
 - [@pomdtr](https://www.val.town/u/pomdtr) made a val that [serves VSCode](https://www.val.town/v/pomdtr/vscode)
 - [@saolsen](https://www.val.town/u/saolsen) created a val for [tracing with OpenTelemetry](https://www.val.town/v/saolsen/tracing)
 - [@pomdtr](https://www.val.town/u/pomdtr) kept updating his [Val Town VSCode extension](https://marketplace.visualstudio.com/items?itemName=pomdtr.valtown) so that now it allows to manage/edit blobs, query SQLite tables, edit readmes and a lot more
@@ -261,43 +185,24 @@ We added the ability to fold code blocks. Thanks [@nbbaier](https://www.val.town
 - [@saolsen](https://www.val.town/u/saolsen) created a [val version diff viewer](https://www.val.town/v/saolsen/changes)
 - [@stevekrouse](https://www.val.town/u/stevekrouse) made a val demonstrating how to [compressing HTTP responses](https://www.val.town/v/stevekrouse/compress_response)
 - [@saolsen](https://www.val.town/u/saolsen) implemented [val analytics with Plausible](https://www.val.town/v/saolsen/plausible)
+- [@stevekrouse](https://www.val.town/u/stevekrouse) made a val that [forwards emails from Render to Val Town's team Discord](https://www.val.town/v/stevekrouse/renderEmails)
 - [@pomdtr](https://www.val.town/u/pomdtr) created a [Chrome extension for Val Town](https://github.com/pomdtr/val-town-web-extension)
 - [@pomdtr](https://www.val.town/u/pomdtr) implemented [JWT authentication utility](https://www.val.town/v/pomdtr/auth_middleware) to protect your APIs
 - [@xkonti](https://www.val.town/u/xkonti) created a [GPT Action Framework](https://www.val.town/v/xkonti/gptApiFramework) for simplifying creation of APIs compatible with OpenAI GPTs
 - [@saolsen](https://www.val.town/u/saolsen) created a Deno script that will [sync your vals to GitHub](https://www.val.town/v/saolsen/git_sync)
+- [@gaprl](https://www.val.town/u/gaprl) demonstrated how to use [Sentry Crons for monitoring a scheduled val](https://www.val.town/v/gaprl/sentry_crons_example)
 - [@pomdtr](https://www.val.town/u/pomdtr) ported [blakeembrey/sql-template-tag](https://github.com/blakeembrey/sql-template-tag) to Val Town to simplify [building safe SQL queries](https://www.val.town/v/pomdtr/sql)
 - [@saolsen](https://www.val.town/u/saolsen) experimented with [writing tests with Jest ](https://www.val.town/v/saolsen/tiny_jest_example)
-- [@pomdtr](https://www.val.town/u/pomdtr) found a way to [serve static content by using val's readme]()https://www.val.town/v/pomdtr/notebook
-- [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
+- [@pomdtr](https://www.val.town/u/pomdtr) found a way to [serve static content by using val's readme](https://www.val.town/v/pomdtr/notebook)
 - [@saolsen](https://www.val.town/u/saolsen) wrote a useful [val that can automatically prune multiple versions of other vals](https://www.val.town/v/saolsen/prune_val)
 - [@nbbaier](https://www.val.town/u/nbbaier) created a [val that can generate SQL](https://www.val.town/v/nbbaier/sqliteWriter) using [prisma-gpt](https://github.com/aliyeysides/prisma-gpt)
 - [@nbbaier](https://www.val.town/u/nbbaier) made a val that [generates readme for vals automatically](https://www.val.town/v/nbbaier/readmeGPT) using GPT
 - [@nbbaier](https://www.val.town/u/nbbaier) wrote a [Perplexity AI API wrapper val](https://www.val.town/v/nbbaier/perplextiyAPI)
 - [@pomdtr](https://www.val.town/u/pomdtr) continued his work on [lowdb adapter for Val Town](https://www.val.town/v/pomdtr/lowdb) allowing to use blobs as type-safe databases
 - [@joey](https://www.val.town/u/joey) made it easier to [use blobs as arrays](https://www.val.town/v/joey/BlobArray)
-- [@deepfates](https://www.val.town/u/deepfates) wrote a great [article on building a face swapping app with Val Town, HTMX, and Replicate]
 - [@tom_og](https://www.val.town/u/tomcritchlow) made a val that [generates open graph images with code](https://www.val.town/v/tomcritchlow/tom_og)
 - [@tmcw](https://www.val.town/u/tmcw) put together a [val that collects stats about his Figma plugins](https://www.val.town/v/tmcw/placemarkGlobeMonitor) that can be displayed as a [fancy graph](https://observablehq.com/@tmcw/placemark-figma-plugin-stats)
 - [@glommer](https://www.val.town/u/glommer) wrote an [amazing article on Turso blog](https://blog.turso.tech/i-needed-a-simple-discord-bot.-val-town-made-it-fun!-bf8339ab) documenting his adventure making a Discord bot using Val Town
-- [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
 - [@nbbaier](https://www.val.town/u/nbbaier) made a useful [utility val](https://www.val.town/v/nbbaier/sqliteDump) that generates SQL statements to dump the data and schema of tables in a SQLite database
-
----
-
-To organize:
-
-- https://x.com/stevekrouse/status/1755644251969355917?s=20
-- https://x.com/lopesgabe_/status/1754628312906011001?s=20
-
----
-
-- https://x.com/deepfates/status/1751015063912399126?s=20
-- https://x.com/tmcw/status/1744406760301920559?s=20
-- https://x.com/stevedylandev/status/1745667977393910096?s=200
-- https://x.com/stevekrouse/status/1747365282547478828?s=20
-- https://x.com/nbbaier/status/1748564488029147417?s=20
-- https://x.com/nbbaier/status/1748564489375502417?s=20
-- https://x.com/glcst/status/1749888541612544292?s=20
-- https://x.com/stevekrouse/status/1737173486047481887?s=20
-- https://x.com/stevekrouse/status/1738651539458171255?s=20
-- https://x.com/nbbaier/status/1744847782484070400?s=20
+- [@stevekrouse](https://www.val.town/u/stevekrouse) wrote a whole fullstack (sqlite, backend js, frontend js, html) app in a [single val](https://www.val.town/v/stevekrouse/backend_in_a_file)
+- & lots more to explore at [/newest](https://www.val.town/newest) and [/trending](https://www.val.town/trending)!

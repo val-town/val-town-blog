@@ -3,7 +3,7 @@ title: Val Town Newsletter 0
 generated: 1701894028899
 description: Smarter typeahead, tutorials, much more.
 pubDate: September 20, 2022
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Welcome to Val Town Newsletter #0!
