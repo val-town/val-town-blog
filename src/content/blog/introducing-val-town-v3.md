@@ -3,7 +3,7 @@ title: Introducing Val Town v3
 generated: 1701894028856
 description: Our move to embrace web standards
 pubDate: October 3, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Shipping later this month, Val Town v3 is faster, simpler, and more reliable. It comes packed with long-requested features and bug fixes:

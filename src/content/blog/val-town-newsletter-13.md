@@ -3,7 +3,7 @@ title: Val Town Newsletter 13
 generated: 1701894028937
 description: SQLite, Blob Storage, updates to how Vals are named, and more
 pubDate: November 28, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 It’s been almost three months since the [last Val Town Newsletter](https://blog.val.town/blog/val-town-newsletter-12) in early Sept! We went into a deep engineering hole to build [Val Town v3](https://blog.val.town/blog/introducing-val-town-v3). It shipped on Oct 23rd.

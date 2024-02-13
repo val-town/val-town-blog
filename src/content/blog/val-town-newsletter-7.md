@@ -3,7 +3,7 @@ title: Val Town Newsletter 7
 generated: 1701894028970
 description: Moving off of Supabase and enhancing our security with restricted library mode
 pubDate: May 15, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 The last month saw us do two huge infrastructure projects: moving off of

@@ -2,7 +2,7 @@
 title: An Introduction to OpenAI fine-tuning
 generated: 1701894028827
 pubDate: August 25, 2023
-author: Steven Krouse
+author: Steve Krouse
 description: How to customize OpenAI to your liking
 heroImage: ./an-introduction-to-openai-fine-tuning/screenshot_2023-08-24_at_1758482x.png
 ---

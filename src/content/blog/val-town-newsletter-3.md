@@ -3,7 +3,7 @@ title: Val Town Newsletter 3
 generated: 1701894028947
 description: Expanding our founding team
 pubDate: February 7, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Founding team, assembled! Cool users continue to sign up and make cool vals. We

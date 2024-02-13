@@ -3,7 +3,7 @@ title: Val Town Newsletter 12
 generated: 1701894028930
 description: Product Hunt, v3 in development, and more
 pubDate: September 5, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 We’re [on Product Hunt](https://www.producthunt.com/posts/val-town)! Please show

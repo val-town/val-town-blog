@@ -3,7 +3,7 @@ title: Val Town Newsletter 6
 generated: 1701894028966
 description: Lots of little updates!
 pubDate: April 7, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 We shipped so many fun, little improvements over the past two weeks! There’s something in the release for everyone: val.new, run vals unauthenticated, better login (with Github!), val usage analytics, share URL images, better search & autocomplete, 2x faster fetch, vim keybindings, and a way to run scheduled vals immediately!

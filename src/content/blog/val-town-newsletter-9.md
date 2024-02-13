@@ -3,7 +3,7 @@ title: Val Town Newsletter 9
 generated: 1701894028982
 description: Refactoring the core component of Val Town for better performance.
 pubDate: June 20, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 In the last two weeks, we shipped a huge refactor of our main val editor

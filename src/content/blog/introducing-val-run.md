@@ -3,7 +3,7 @@ title: Introducing val.run
 generated: 1701894028864
 description: Increasing the security of Val Town by isolating domains.
 pubDate: June 23, 2023
-author: Steven Krouse
+author: Steve Krouse
 ---
 
 Today we are introducing a new API scheme under the new `val.run` domain. In addition to an urgent security upgrade, the new API scheme is subdomain-based to leave the URL path clear for arbitrary webhook handlers. For example, this is what’s needed to create a [ChatGPT plugin](https://platform.openai.com/docs/plugins/getting-started), [Matrix Push Gateway](https://spec.matrix.org/unstable/push-gateway-api/#post_matrixpushv1notify), or [Bluesky Feed Generator](https://github.com/bluesky-social/feed-generator#overview).

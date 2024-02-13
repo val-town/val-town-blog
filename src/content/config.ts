@@ -8,7 +8,7 @@ const blog = defineCollection({
       description: z.string(),
       // Transform string to Date object
       pubDate: z.coerce.date(),
-      author: z.enum(["Tom MacWright", "Steven Krouse", "André Terron"]),
+      author: z.enum(["Tom MacWright", "Steve Krouse", "André Terron"]),
       updatedDate: z.coerce.date().optional(),
       heroImage: image().optional(),
     }),
