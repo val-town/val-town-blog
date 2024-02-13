@@ -44,7 +44,7 @@ console.log("Finished");
   <source src="/video/newsletter_15_logs.mp4" />
 </video>
 
-The first version of logs were stored in our main Postgres database. The second version was stored in Cloudflare R2, which was more scalable, but trapped our data in blobs. This third version is stores your logs in ClickHouse, which makes the system faster, scalable, and paves the way for features to filter and search through your logs. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for the request for [real-time logging](https://github.com/val-town/val-town-product/discussions/30)!
+The first version of logs were stored in our main Postgres database. The second version was stored in Cloudflare R2, which was more scalable, but trapped our data in blobs. This third version stores your logs in ClickHouse, which makes the system faster, scalable, and paves the way for features to filter and search through your logs. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for the request for [real-time logging](https://github.com/val-town/val-town-product/discussions/30)!
 
 ### ⚡️ HTTP vals are faster and async
 
@@ -65,7 +65,7 @@ export default async function handler(req: Request) {
 }
 ```
 
-Thanks to [Alex](https://www.val.town/u/azirbel) and [Ross](https://www.val.town/u/rosshunter) from [Playbook](https://playbook.com/) for championing [this feature request](https://github.com/val-town/val-town-product/discussions/28)!
+Thanks to [Alex](https://www.val.town/u/azirbel) and [Ross](https://www.val.town/u/rosshunter) from [Playbook](https://playbook.com/) for championing [this feature request](https://github.com/val-town/val-town-product/discussions/28)! You can read more about it [here in our docs](https://docs.val.town/types/http/early-return/).
 
 ### 🦶🔫 Deprecating our Run API
 
