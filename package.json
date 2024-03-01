@@ -17,7 +17,7 @@
     "@fontsource/ibm-plex-mono": "^5.0.8",
     "@fontsource/ibm-plex-sans": "^5.0.18",
     "@fontsource/ibm-plex-serif": "^5.0.8",
-    "astro": "^4.3.0",
+    "astro": "^4.4.7",
     "astro-expressive-code": "^0.32.3",
     "hastscript": "^9.0.0",
     "remark-directive": "^3.0.0",
