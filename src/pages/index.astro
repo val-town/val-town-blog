@@ -19,11 +19,12 @@ const posts = (await getCollection('blog')).sort(
 		<BaseHead title={SITE_TITLE} description={SITE_DESCRIPTION} />
 		<style>
 			main {
-        padding: 20px 40px;
+        padding: 20px 0px;
 			}
       h4.title {
+        font-family: 'IBM Plex Sans Condensed';
         font-weight: 700;
-        font-size: 24px;
+        font-size: 32px;
       }
 			ul {
 				gap: 2rem;
@@ -46,23 +47,16 @@ const posts = (await getCollection('blog')).sort(
 			ul li a {
         padding: 20px 0;
 				display: block;
+				color: rgb(var(--black));
 			}
 			.title {
 				margin: 0;
 				color: rgb(var(--black));
 				line-height: 1.4;
 			}
-      .title-layout {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-      }
-      .subtitle {
-        font-size: 80%;
-				color: rgb(var(--gray));
-      }
       .description {
 				color: rgb(var(--black));
+        font-size: 22px;
         margin: 0;
       }
 			.date {
@@ -73,11 +67,11 @@ const posts = (await getCollection('blog')).sort(
         border-radius: 5px;
         padding: 20px;
       }
-			ul li a:hover {
-        background-color: #eef;
+			ul li a:hover h4 {
+        text-decoration: underline;
       }
 			ul li a:hover h4 {
-				color: rgb(var(--accent));
+				color: var(--accent);
 			}
 			ul a:hover img {
 				box-shadow: var(--box-shadow);
@@ -108,15 +102,9 @@ const posts = (await getCollection('blog')).sort(
               posts.map((post) => (
                 <li>
                   <a href={`/blog/${post.slug}/`}>
-                    <div class='title-layout'>
                       <h4 class="title">{post.data.title}</h4>
-                    </div>
                     <p class="description">{post.data.description}</p>
-                    <div class='subtitle'>
-                      <FormattedDate date={post.data.pubDate} />
-                      ·
-                      {post.data.author}
-                    </div>
+                    
                   </a>
                 </li>
               ))

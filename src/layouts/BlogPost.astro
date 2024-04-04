@@ -39,8 +39,8 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
         margin: 0;
       }
       .prose :global(a) {
+        color: #143f9d;
         text-decoration: none;
-        color: #2563EB;
       }
       .prose :global(a:hover) {
         text-decoration: underline;
@@ -55,7 +55,7 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
         width: 100%;
 			}
 			.prose {
-				width: 720px;
+				width: 900px;
 				max-width: calc(100% - 2em);
 				margin: auto;
 				padding: 1em;
@@ -82,10 +82,15 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
 				line-height: 1;
 			}
 			.title h1 {
+        font-size: 50px;
 				margin: 0 0 10px 0;
+        font-family: 'IBM Plex Sans Condensed';
 			}
+      .prose :global(h1, h2, h3, h4) {
+        font-family: 'IBM Plex Sans Condensed';
+      }
 			.date {
-				color: rgb(var(--gray));
+        font-size: 20px;
 			}
 			.last-updated-on {
 				font-style: italic;
@@ -97,9 +102,8 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
         }
       }
       .avatar {
-        border-radius: 100%;
+        border-radius: 4px;
         vertical-align: middle;
-        border: 1px solid var(--border);
         margin-right: 2px;
         margin-top: -3px;
       }
@@ -123,7 +127,7 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
               <div class="date">
                 <Image 
                   densities={[1, 2, 3]}
-                  width="28" height="28" class='avatar' alt={author} src={
+                  width="20" height="20" class='avatar' alt={author} src={
                   author === 'Tom MacWright' ?
                   tom : author === 'André Terron' ? andre :
                   steve}
