@@ -66,3 +66,14 @@ Check out [our documentation](https://docs.astro.build) or jump into our [Discor
 ## Credit
 
 This theme is based off of the lovely [Bear Blog](https://github.com/HermanMartinus/bearblog/).
+
+## Private fork development
+
+If you're a Val Town employee, working on a super secret blog post, here's how to develop on this repo in secret:
+
+1. `git lfs install`
+2. Create a new branch off the main of this public blog repo `git checkout -b super-secret-branch`
+3. Add the private fork as a remote: `git remote add private https://github.com/val-town/private-blog.git`
+4. Push the new branch to the private fork: `git push private super-secret-branch`
+5. Develop in secret on the private fork
+6. When you're ready to publish, merge the private branch into the public branch and push to the public repo
