@@ -7,6 +7,8 @@ author: Steve Krouse
 
 import { Image } from "astro:assets";
 import AnnotatedVal from "./seed/annotated-val.png";
+import Explorer from "./seed/explorer.png";
+import Dependencies from "./seed/dependencies.png";
 import LogoSquare from "./seed/logo-square.png";
 import Team from "./seed/team.jpg";
 
@@ -33,11 +35,32 @@ We believe that code is still the best interface (so far) to build applications.
 
 In Val Town, you write code and hit save. Your code is immediately deployed. Basic versions of everything are right at hand: logging, monitoring, versions, error tracking, persistence, scaling, and more. Every Val Town account comes with a hosted [SQLite](https://docs.val.town/std/sqlite/) database, [blob](https://docs.val.town/std/blob/) storage, the ability to [send](https://docs.val.town/std/email/) and [receive](https://docs.val.town/types/email/) emails, and limited [OpenAI](https://docs.val.town/std/openai/) access. Everything you need, right at your fingertips.
 
-If we don't include it, likely someone in Val Town community has already built it and shared it. You can just import it. We're a social coding platform, with hosting built-in. Anyone else's public code is instantly runnable within your own account. A fork is like an install. There's nothing to setup, install, or deploy.
+If we don't include something, likely someone in Val Town community has already built and shared it. You can just import it. We're a social coding platform, with hosting built-in. Anyone else's public code is instantly runnable within your own account. A fork is like an install. There's nothing to setup, install, or deploy.
+
+[Nico](https://www.val.town/u/nbbaier)'s [SQLite Explorer](https://www.val.town/v/nbbaier/sqliteExplorerApp) is a good example of our community at play. It's a handy admin view for your built-in SQLite database. The val imports from dozens of other vals, from [@postpostscript](https://www.val.town/v/postpostscript/sqliteBuilder), [@pomdtr](https://www.val.town/v/pomdtr/password_auth), and [@andreterron](https://www.val.town/v/andreterron/codeOnValTown).
+
+<div align="center">
+  <Image
+    src={Explorer}
+    alt="Val Editor with annotations showing different val types, publicly hosted url, 100ms deploys, ai suggestions, etc"
+  />
+</div>
+
+I found this list of dependencies by – you guessed it – another community val, [Robert](https://www.val.town/u/rlesser)'s [Dependency Graph Viewer](https://rlesser-dependency_graph.web.val.run/).
+
+<div align="center">
+  <Image
+    src={Dependencies}
+    alt="Dependency Graph Viewer showing the dependencies of Nico's SQLite Explorer"
+    height="500px"
+  />
+</div>
 
 Programming in Val Town should feel more like editing a spreadsheet (live, fluid, reactive, learnable) than using a traditional IDE. We want to make it so fast, fun, and collaborative to write apps that you're constantly whipping them up for yourself, communities, and workplace.
 
-I fell in love with programming as a kid. LOGO is programming language that lets you control a turtle on the screen. You can make it move forward, turn, and draw lines. I still remember the feeling of empowerment when I figured out how to draw a square.
+{/* TOOD - In the past you may have had an idea for a little app, but never had the time to do it... activation energy line */}
+
+I fell in love with programming as a kid. LOGO is a programming language that lets you control a turtle on the screen. You can make it move forward, turn, and draw lines. I still remember the feeling of empowerment when I figured out how to draw a square.
 
 <div align="center">
   <Image
@@ -68,3 +91,5 @@ We're a small team that ships quickly and dreams big.
 We're hiring a design engineer and generalist engineer in Brooklyn. [Join us!](https://www.val.town/careers)
 
 The next time you have an app idea, try [Val Town](https://val.town).
+
+_Thanks for reviewing this post, Tom MacWright, André Terron, Max McDonnell, Dan Levine, Pete Millspaugh, Matthew Williams, Achille Lacoin, Max Bittker, Rodger Krouse, and Ross Boucher._
