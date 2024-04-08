@@ -1,6 +1,6 @@
 ---
 title: Val Town's Seed Round
-description: We raised $5.5m in a round led by Accel to make it fast and fun to write apps.
+description: We raised $5.5m to make programming more fun, accessible, and collaborative.
 pubDate: April 9, 2024
 author: Steve Krouse
 ---
@@ -8,14 +8,17 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import AnnotatedVal from "./seed/annotated-val.png";
 import LogoSquare from "./seed/logo-square.png";
+import Team from "./seed/team.jpg";
 
-[Val Town](https://www.val.town/pulls/d9b1df70-e2e2-11ee-846a-8aad37b30b4b) is a social website to write and deploy serverless functions. You can create [websites](https://docs.val.town/types/http/jsx/), [APIs](https://docs.val.town/types/http/), and [crons](https://docs.val.town/types/scheduled/) from your browser.
+Today we're announcing our $5.5m seed round led by [Dan Levine](https://www.accel.com/people/daniel-levine) at Accel. Dan has been a spiritual cofounder for Val Town since before the first line of code. Dan led our $1.5m pre-seed in August 2022, and is now joining our board.
 
-Build [a battle royale for connect4 bots](https://saolsen-connect4_site.web.val.run/), craft [a custom RSS feed](https://www.val.town/v/Glench/googlePhotosMarketingRSS), react to [new subscribers from Stripe](https://www.val.town/v/stevekrouse/newStripeEvent), start your [Subaru's engine](https://www.val.town/v/seep/subaru), generate [SVG badges](https://www.val.town/v/vladimyr/podcastBadge) or [open graph images](https://www.val.town/v/tomcritchlow/tom_og), send [RSS items to Posthog](https://posthog.com/tutorials/rss-item-capture), scrape for when your [sea light swizzles are in stock](https://nateeagle.com/posts/val-town-scraper/), build a [custom newsletter system](https://www.petemillspaugh.com/cultivating-emails), or book [reservations on Resy](https://www.val.town/v/alp/bookReservationOnResy).
+[Val Town](https://www.val.town/pulls/d9b1df70-e2e2-11ee-846a-8aad37b30b4b) is a social website to write and deploy serverless functions. You can create [websites](https://docs.val.town/types/http/jsx/), [APIs](https://docs.val.town/types/http/), and [crons](https://docs.val.town/types/scheduled/) from your browser. For example, you could:
 
-I've built [my personal website](https://stevekrouse.com/), [an alternative dating app](https://dateme.directory/), [Discord stand-up bot](https://www.val.town/v/stevekrouse/dailyStandupBot), and a [handful](https://www.val.town/v/stevekrouse/umbrellaReminder) [of](https://www.val.town/v/stevekrouse/BIGweather) [weather](https://www.val.town/v/stevekrouse/weatherGPT) [apps](https://www.val.town/v/stevekrouse/aqi) on Val Town.
-
-{/* TODO - try to polish these apps, and make their READMEs good */}
+- Scrape for when your [sea light swizzles are in stock](https://nateeagle.com/posts/val-town-scraper/)
+- Toot your [latest blog posts to Mastadon](https://sebastiandedeyne.com/tags/val-town)
+- Send [RSS items to Posthog](https://posthog.com/tutorials/rss-item-capture)
+- Generate [SVG badges](https://www.val.town/v/vladimyr/podcastBadge) or [open graph images](https://www.val.town/v/tomcritchlow/tom_og)
+- Build a [face swaping app](https://replicate.com/guides/hypermedia/build-hypermedia-app) with Replicate
 
 <div align="center">
   <Image
@@ -24,32 +27,44 @@ I've built [my personal website](https://stevekrouse.com/), [an alternative dati
   />
 </div>
 
-Our mission is [end-user programming](https://www.inkandswitch.com/end-user-programming/). Everyone should be able to create software.
+Our mission is [end-user programming](https://www.inkandswitch.com/end-user-programming/). Everyone should be able to code.
 
-We believe that code is still the best interface (so far) to build applications. But even if someone knows how to code, they can't ship useful software. There is so much around the code that needs to happen: setting up a development environment, deployment, hosting, scaling, logging, monitoring, version control, persistence...
+We believe that code is still the best interface (so far) to build applications. But knowing how to code isn't enough for someone to ship useful software. There is so much around the code that needs to happen: setting up a development environment, setting up a deployment environment, scaling, logging, monitoring, version control, persistence...
 
-In Val Town, you open a tab, write code, and hit ⌘s. We handle everything else. We deploy in 100ms, scale up or down as needed, and include the basics of everything you need: logging, monitoring, versions, error tracking, persistence... Programming in Val Town should feel more like [editing a spreadsheet](https://x.com/stevekrouse/status/1076979937440161793?s=20) (live, fluid, reactive, learnable) than using a traditional IDE. We want to make it so fast and fun to write apps that you’re constantly whipping them up for yourself, your communities, and your workplace.
+In Val Town, you write code and hit save. Your code is immediately deployed. Basic versions of everything are right at hand: logging, monitoring, versions, error tracking, persistence, scaling, and more. Every Val Town account comes with a hosted [SQLite](https://docs.val.town/std/sqlite/) database, [blob](https://docs.val.town/std/blob/) storage, the ability to [send](https://docs.val.town/std/email/) and [receive](https://docs.val.town/types/email/) emails, and limited [OpenAI](https://docs.val.town/std/openai/) access. Everything you need, right at your fingertips.
 
-Community is at the heart of Val Town. We're building a town, not just a tool. We're a social coding platform, with hosting built-in. This means that anyone else's public code is instantly _runnable_ within your own Val Town account. A _fork_ is like an _install_. There's nothing to setup, install, or deploy.
+If we don't include it, likely someone in Val Town community has already built it and shared it. You can just import it. We're a social coding platform, with hosting built-in. Anyone else's public code is instantly runnable within your own account. A fork is like an install. There's nothing to setup, install, or deploy.
 
-The origins of Val Town can be traced back to my childhood. I was bitten by a radioactive turtle. I was a LOGO kid. I fell in love with this strange “turtle.” I could tell it to `repeat 4[fd 10 rt 90]` and it'd draw a square! ([Try it out for yourself.](https://turtleacademy.com/lessons/11)) The powers this radioactive turtle granted me were subtle but powerful. I became really good at math. It felt like I gained 20 IQ points.
+Programming in Val Town should feel more like editing a spreadsheet (live, fluid, reactive, learnable) than using a traditional IDE. We want to make it so fast, fun, and collaborative to write apps that you're constantly whipping them up for yourself, communities, and workplace.
+
+I fell in love with programming as a kid. LOGO is programming language that lets you control a turtle on the screen. You can make it move forward, turn, and draw lines. I still remember the feeling of empowerment when I figured out how to draw a square.
 
 <div align="center">
   <Image
     src={LogoSquare}
     alt="LOGO turtle drawing a square with the code `repeat 4[fd 10 rt 90]`"
-    style={`max-width:300px`}
+    style="max-width:300px"
   />
 </div>
 
-Seymour Papert, the creator of LOGO, had a theory. Mathematics should be learned the same way your native language is learned: through community and play. If French kids learn French simply growing up in France, could kids learn math better by growing up in “Mathland”? He created LOGO to be such a “Mathland” for kids to naturally assimilate powerful mathematical mental models: a debugging mindset, precision, abstraction, modularity, looping, recursion, reasoning from definitions… and a warm, fuzzy feeling of ownership of these skills. For example, I learned to imagine myself in the turtle's shoes and walk out the route I wanted it to follow, and then encode that route into code. A couple years later in high school calculus, I was able to effortlessly assimilate the concept of a derivative as the rate of change: I could just imagine myself walking along the curve and the derivative was my orientation at any point. I could feel it in my bones. To my classmates, it just looked like I was smart. But I was just a kid who had grown up in Mathland.
+Seymour Papert, the creator of LOGO, had a theory. If French kids learn French simply growing up in France, could kids learn math better by growing up in “Mathland”? He created LOGO to be such a “Mathland” for kids to naturally assimilate powerful mathematical mental models: a debugging mindset, precision, abstraction, modularity, looping, recursion, reasoning from definitions... and a warm feeling of ownership of these skills.
 
-Val Town is not an educational tool. It's a pro tool for building real software. But we are designing it to be [learnable](https://worrydream.com/LearnableProgramming/) by everyone. Eventually including non-programmers and kids. We're already welcoming to new programmers. Some of our best users barely knew how to code when they made their first val. Like the spreadsheet, Val Town will be where beginners get their start _and_ big companies run core infrastructure. Come for the code hosting, stay for the community, and become smarter along the way. Software is eating the world. If creating software is made accessible enough, the whole world becomes “Codeland”, and the powerful mental models I learned in childhood are accessible to everyone. It's a step towards what Alan Kay calls the “real computer revolution.”
+I learned to imagine myself in the turtle's shoes and walk out the route I wanted it to follow, and then encode that route into code. Later in calculus, I was able to effortlessly assimilate the concept of a derivative: I imagined myself walking along the curve, and the derivative just was my orientation at any point. To my classmates, it looked like I was smart. But I was just a kid who had grown up in Mathland. I've long dreamed of building my own Mathland and a programming environment that shares the love I have of programming.
 
-Today we're announcing our $5.5m seed, led by [Dan Levine](https://www.accel.com/people/daniel-levine) at Accel. Dan has been a spiritual cofounder for Val Town since before the first line of code. He led our $1.5m pre-seed in August 2022 and is now joining our board.
+Val Town is not an educational tool. It's a pro tool for building real software. But it is designed to be [learnable](https://worrydream.com/LearnableProgramming/). Like the spreadsheet, Val Town is where beginners start _and_ big companies run core infrastructure. Come for the code hosting, stay for the community, and become smarter along the way.
 
-We are excited to have so many heroes, role models, friends, and advisors joining our cap table. It takes a ~~village~~ town: Tom Preston-Warner, Guillermo Rauch, James Lindenbaum, Adam Wiggins, David Cramer, Simon Last, Calvin French-Owen, Matthew McClure, Zapier's Investment Fund, Tod Sacerdoti, Cristina Cordova, Matt Brezina, Ben Vinegar, Chet Corcos, Devon Zuegel, Sebastian Bensusan, Linus Lee, Michelle Lim, Dan Shipper, Shawn @swyx Wang, Meagan Gamache, Yasyf Mohamedali, Daniel Marcotte, Nick Arner, and Jordan Scales.
+We are excited to have so many heroes, friends, and advisors joining our cap table. It takes a ~~village~~ town: Tom Preston-Warner, Guillermo Rauch, James Lindenbaum, Adam Wiggins, David Cramer, Simon Last, Calvin French-Owen, Matthew McClure, Zapier's Investment Fund, Tod Sacerdoti, Cristina Cordova, Matt Brezina, Ben Vinegar, Chet Corcos, Devon Zuegel, Sebastian Bensusan, Linus Lee, Michelle Lim, Dan Shipper, Shawn @swyx Wang, Meagan Gamache, Yasyf Mohamedali, Daniel Marcotte, Nick Arner, and Jordan Scales.
 
-We're a team of 4 that ships quickly and dreams big. [Come join us!](https://www.val.town/careers)
+We're a small team that ships quickly and dreams big.
 
-The next time you want to build a little app, code it in [Val Town](https://val.town).
+<div align="center">
+  <Image src={Team} alt="Val Town team photo" />
+  <figcaption style="margin-top: -20px;">
+    [Max](https://maxmcd.com/), [Steve](https://stevekrouse.com/),
+    [Tom](https://macwright.com/), [André](https://www.andreterron.com/)
+  </figcaption>
+</div>
+
+We're hiring a design engineer and generalist engineer in Brooklyn. [Join us!](https://www.val.town/careers)
+
+The next time you have an app idea, try [Val Town](https://val.town).
