@@ -76,4 +76,6 @@ If you're a Val Town employee, working on a super secret blog post, here's how t
 3. Add the private fork as a remote: `git remote add private https://github.com/val-town/private-blog.git`
 4. Push the new branch to the private fork: `git push private super-secret-branch`
 5. Develop in secret on the private fork
-6. When you're ready to publish, merge the private branch into the public branch and push to the public repo
+6. When you're ready to publish, create a public remote on the private repo: `git remote add public https://github.com/val-town/val-town-blog.git`
+7. Push the branch to the public repo: `git push public super-secret-branch`
+8. Open a PR from the public repo to the main branch of the public blog repo
