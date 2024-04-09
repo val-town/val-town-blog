@@ -1,3 +1,5 @@
 {
-  "cSpell.words": ["Astro", "Krouse", "vals"]
+  "cSpell.words": ["Astro", "Krouse", "vals"],
+  "cSpell.enabled": true,
+  "cSpell.enableFiletypes": ["mdx"]
 }
