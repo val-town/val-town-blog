@@ -1,6 +1,6 @@
 ---
 title: Code Search is Hard
-description: Searching code at scale without a search team is hard
+description: Searching code at scale without employing a search team is hard
 pubDate: April 10, 2024
 author: Tom MacWright
 ---
