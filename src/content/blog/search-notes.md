@@ -40,7 +40,8 @@ Postgres has a [Full Text Search](https://www.postgresql.org/docs/current/textse
 
 If we can use Postgres for something, we will: keeping infrastructure as simple as possible is essential with a small team.
 
-However, the previous projects I've used FTS for have run into performance problems and struggled to scale. We have a ton of vals, and are testing the limits of a single-node Postgres cluster. It's hard to find any accounts of code-search using FTS, though people might be quietly succeeding with it. I wanted to avoid this as a first option but keep it in my back pocket.
+However, the previous projects I've used FTS for have run into performance problems and struggled to scale - [Observable](https://observablehq.com/) ended up
+moving to Elasticsearch. We have a ton of vals, and are testing the limits of a single-node Postgres cluster. It's hard to find any accounts of code-search using FTS, though people might be quietly succeeding with it. I wanted to avoid this as a first option but keep it in my back pocket.
 
 ### pg_trgrm
 
