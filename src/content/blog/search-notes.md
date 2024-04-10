@@ -6,8 +6,17 @@ author: Tom MacWright
 ---
 
 Val Town's search functionality isn't very good. Right now it's built on the Postgres [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) functionality, which just performs a substring search: if your search term is in the code, it appears in search results. There's virtually no ranking involved, and queries with multiple words are pretty poorly supported.
+Better search is [one of our most-requested features](https://github.com/val-town/val-town-product/discussions/69).
 
-I'm working on improving this, but we haven't found a solution that fits our needs yet. Here are some notes from our research.
+I'm working on improving this, but we haven't found a solution that fits our needs yet.
+Here are some notes from our research. So far what we've learned is that:
+
+- Mainstream search solutions are designed for natural language, not code.
+- Big companies with code search needs have spent a lot of time and money
+  building their own custom solutions.
+- We have a lot of data already, and need a solution that scales well.
+- The infrastructure and complexity tradeoffs involved in using a separate
+  search service instead of a database extension are important.
 
 ### Code search versus natural language search
 
