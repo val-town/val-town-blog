@@ -5,7 +5,7 @@ pubDate: April 10, 2024
 author: Tom MacWright
 ---
 
-Val Town's search functionality isn't very good. Right now it's built on the Postgres [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) functionality, which just performs a substring search: if your search term is in the Val, it should appear in search results. There's virtually no ranking involved, and queries with multiple words are pretty poorly supported.
+Val Town's search functionality isn't very good. Right now it's built on the Postgres [ILIKE](https://www.postgresql.org/docs/current/functions-matching.html) functionality, which just performs a substring search: if your search term is in the code, it appears in search results. There's virtually no ranking involved, and queries with multiple words are pretty poorly supported.
 
 I'm working on improving this, but we haven't found a solution that fits our needs yet. Here are some notes from our research.
 
