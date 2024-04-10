@@ -62,12 +62,13 @@ The conclusion so far is that this is a great solution for regex search, but we'
 
 ### The universe of options
 
-| Option                                        | Architecture       | Language | Stars |
-| --------------------------------------------- | ------------------ | -------- | ----- |
-| [Meilisearch](https://www.meilisearch.com/)   | Standalone         | Rust     | 41k   |
-| [Typesense](https://typesense.org/)           | Standalone         | C++      | 17k   |
-| [Zoekt](https://github.com/sourcegraph/zoekt) | Standalone         | Go       | 406   |
-| [ParadeDB](https://www.paradedb.com/)         | Postgres extension | Rust     | 3.2k  |
+| Option                                           | Architecture       | Language | Stars |
+| ------------------------------------------------ | ------------------ | -------- | ----- |
+| [Meilisearch](https://www.meilisearch.com/)      | Standalone         | Rust     | 41k   |
+| [Typesense](https://typesense.org/)              | Standalone         | C++      | 17k   |
+| [Zoekt](https://github.com/sourcegraph/zoekt)    | Standalone         | Go       | 406   |
+| [ParadeDB](https://www.paradedb.com/)            | Postgres extension | Rust     | 3.2k  |
+| [Sonic](https://github.com/valeriansaliou/sonic) | Standalone         | Rust     | 19.4k |
 
 There are code-specific tools that exist, but most of them are closed-source: GitHub's search is excellent, but is obviously the work of a dedicated team with a real time budget.
 
