@@ -1,5 +1,5 @@
 ---
-title: Researching Search at Val Town
+title: Code Search is Hard
 description: Searching code at scale without creating the need for a search team is hard
 pubDate: April 10, 2024
 author: Tom MacWright
@@ -63,7 +63,7 @@ There are code-specific tools that exist, but most of them are closed-source: Gi
 
 - Sourcegraph's maintained fork of [Zoekt](https://github.com/google/zoekt) is pretty cool, but is pretty fearfully niche and would be a big, new infrastructure commitment.
 - [Elasticsearch](https://github.com/elastic/elasticsearch) might be the eventual, unavoidable solution to this problem. It doesn't have code-specific handling, but can be tuned in nearly infinite ways. We're not excited to start learning about Java memory tuning and to introduce the first persistent disk storage to our application, as well as an additional source of truth for our data.
-- [Mellisearch](https://github.com/meilisearch/meilisearch) seems like a promising ES alternative with the shininess of ✨Rust✨, but they [seem to emphasize latency over scalability](https://blog.meilisearch.com/meilisearch-vs-elasticsearch/), and we're not sure if the infrastructure commitment would be any lower.
+- [Meilisearch](https://github.com/meilisearch/meilisearch) seems like a promising ES alternative with the shininess of ✨Rust✨, but they [seem to emphasize latency over scalability](https://blog.meilisearch.com/meilisearch-vs-elasticsearch/), and we're not sure if the infrastructure commitment would be any lower.
 - [ParadeDB](https://www.paradedb.com/) promises to be like Elasticsearch but "just Postgres," which is very appealing, but we [can't use their extension in Render yet](https://docs.render.com/postgresql-extensions).
 
 ---
