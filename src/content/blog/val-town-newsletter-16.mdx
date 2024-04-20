@@ -7,6 +7,7 @@ author: Steve Krouse
 
 import { Image } from "astro:assets";
 import Team from "./seed/team.jpg";
+import Codeium from "./val-town-newsletter-16/codium.png";
 
 We announced our seed round, welcomed [Max](https://maxmcd.com/) to our team, launched some small and medium-sized features, made significant progress on bigger ones, and seen some amazing vals from the community.
 
@@ -42,11 +43,16 @@ We're hiring a design engineer and generalist engineer in Brooklyn. [**Join us!*
 
 ### 🦾 Codeium Completions
 
-TODO PHOTO
+<div align="center">
+  <Image src={Codeium} alt="The Codeium code completion agent completes a snippet of code on Val Town" />
+  <figcaption style="margin-top: -20px;">
+    Using the new Codeium integration can really speed up your development!
+  </figcaption>
+</div>
 
 TODO (steve) talk about how much better they are (we haven't officially launched this)
 
-Also brag about the OSS Codemirror Codeium library.
+As it turns out, nobody has integrated Codeium into the CodeMirror editor (the open source editor that we use). We love sharing code, it's what Val Town is all about, so [codemirror-codeium](https://github.com/val-town/codemirror-codeium) was born!
 
 ### 🤖 OpenAI in the Standard Library
 
