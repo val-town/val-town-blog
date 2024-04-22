@@ -1,30 +1,33 @@
 ---
 title: Val Town Newsletter 16
-description: Val Town's seed round, growing team, and new features
-pubDate: April 19, 2024
+description: Our seed round, growing team, Codeium completions, @std/openai, and more
+pubDate: April 22, 2024
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 import Team from "./seed/team.jpg";
 import Codeium from "./val-town-newsletter-16/codeium.png";
+import OnboardingText from "./val-town-newsletter-16/onboarding-text.png";
+import OnboardingVal from "./val-town-newsletter-16/onboarding-val.png";
+import CronPrompt from "./val-town-newsletter-16/cronprompt.png";
 import Cmdk from "./val-town-newsletter-16/cmdk.png";
 
-We announced our seed round, welcomed [Max](https://maxmcd.com/) to our team, launched some small and medium-sized features, made significant progress on bigger ones, and seen some amazing vals from the community.
+Over the last two months, we raised our seed round, welcomed [Max](https://maxmcd.com/) to the team, shipped many new features and fixes, and seen awesome vals from the community.
 
-Coming soon: a redesign of the val page and big performance improvements.
+We're currently working on val runtime performance improvements and a redesign of the val page. We're hiring a design engineer and generalist engineer in Brooklyn. [Join us!](https://www.val.town/careers)
 
 {/* Prefer video? This newsletter has a video talkthrough as well. TODO (steve) */}
 
 ## 🌱 Val Town's Seed Round
 
-[Val Town raised $5.5m](https://blog.val.town/blog/seed/) in a round led by Accel. Our mission is end-user programming. Everyone should be able to build software, tailor apps to their needs, and automate their lives.
+We [raised $5.5m](https://blog.val.town/blog/seed/) in a round led by Accel. Our mission is end-user programming: everyone should be able to build software, tailor apps to their needs, and automate their lives.
 
-We want to make it so fast and fun to solve problems with code that you actually ship all those wonderful ideas you have to improve things for yourself, communities, and workplace. We’re building the place where you write the first line of code that becomes your next side project, internal tool, or startup.
+We want to make it so fast and fun to solve problems with code that you actually ship all those wonderful ideas you have to improve things for yourself, communities, and workplace. We're building the place where you write the first line of code that becomes your next side project, internal tool, or startup.
 
 ## 🤗 Welcome Max!
 
-We are thrilled to welcome [Max McDonnell](https://maxmcd.com/) to the team! Max is joining us from Voltus, where he was most recently a Staff Software Engineer, and formerly Director of Engineering. Max is extremely passionate about simplifying cloud development. In his free time, he's built three ([1](https://github.com/maxmcd/gitbao), [2](https://github.com/embly/embly), [3](https://github.com/maxmcd/256kb.cloud)) FaaS prototypes! We're pumped to have him on the team. Expect things to run faster very soonf.
+[Max](https://maxmcd.com/) is joining us from Voltus, where he was most recently a Staff Software Engineer, and formerly Director of Engineering. Max is extremely passionate about simplifying cloud development. In his free time, he's built three ([1](https://github.com/maxmcd/gitbao), [2](https://github.com/embly/embly), [3](https://github.com/maxmcd/256kb.cloud)) FaaS prototypes! We're pumped to have him on the team. Expect things to run faster very soon.
 
 <div align="center">
   <Image src={Team} alt="Val Town team photo" />
@@ -38,126 +41,133 @@ We are thrilled to welcome [Max McDonnell](https://maxmcd.com/) to the team! Max
 
 ...to help us build the future of programming!
 
-We're hiring a design engineer and generalist engineer in Brooklyn. [**Join us!**](https://www.val.town/careers)
+We're hiring a design engineer and generalist engineer in Brooklyn. [Join us!](https://www.val.town/careers)
 
 ## What's new in Val Town
 
-### 🦾 Codeium Completions
+Over the last couple months, we've been focused on on improving the onboarding experience for new users. We've also made it easier to code with the OpenAI API, rebuilt our AI code completion, added the ability to replay previous inputs, and many other improvements.
 
-<div align="center">
-  <Image src={Codeium} alt="The Codeium code completion agent completes a snippet of code on Val Town" />
-  <figcaption style="margin-top: -20px;">
-    Using the new Codeium integration can really speed up your development!
-  </figcaption>
+### 🎓 Onboarding
+
+We've shipped [a new onboarding page](https://www.val.town/onboarding/val) that guides you through creating your first val.
+
+<div style="display: flex; flex-direction: row;  align-items: flex-start; justify-content: center; flex-wrap: wrap;">
+  <img src={OnboardingText.src} width="400px" alt="New onboarding text" />
+  <img src={OnboardingVal.src} width="400px" alt="New i=user's first val" />
 </div>
-
-TODO (steve) talk about how much better they are (we haven't officially launched this)
-
-As it turns out, nobody has integrated Codeium into the CodeMirror editor (the open source editor that we use). We love sharing code, it's what Val Town is all about, so [codemirror-codeium](https://github.com/val-town/codemirror-codeium) was born!
 
 ### 🤖 OpenAI in the Standard Library
 
-You can now code with a little bit of ChatGPT with zero setup via [@std/openai](https://docs.val.town/std/openai/). A small amount of OpenAI usage is included free in every Val Town account.
+You can now code with the OpenAI API with zero setup via [@std/openai](https://docs.val.town/std/openai/). A small amount of free OpenAI usage is included in every Val Town account. For example, [Cron Prompt](https://cronprompt.com/), which converts English into cron syntax, is now powered by [this val](https://www.val.town/v/peddi/cronprompt):
+
+<div align="center">
+  <img
+    src={CronPrompt.src}
+    width="700px"
+    alt="Val that powers the Cron Prompt API"
+  />
+</div>
+
+### 🦾 Codeium Completions
+
+We've rebuilt our AI code completion from the ground up on top of [Codeium](https://codeium.com/). It's incredibly fast and accurate. We even send it your val's readme and logs to have even more context to help you. You can turn it on or off in your [editor settings](https://www.val.town/settings/editor). Our [codemirror-codeium](https://github.com/val-town/codemirror-codeium) component is now open-source.
+
+<div align="center">
+  <img
+    src={Codeium.src}
+    width="700px"
+    alt="The Codeium code completion agent completes a snippet of code on Val Town"
+  />
+</div>
 
 ### 🔄 Replay previous inputs
 
-Vals can now be re-triggered by replaying previous inputs. This is a great [community feature request](https://github.com/val-town/val-town-product/discussions/73) that makes testing your vals, especially ones generated by external services, much easier. You'll find a refresh button next to each line of your vals logs to activate this. A big thanks to [@robinsloan](https://www.val.town/u/robinsloan) for suggesting this excellent feature.
-
-### ⌨️ Powerbar
+Vals can now be triggered by replaying previous inputs to iterate faster on your code. Below is an example of an email handler val. I sent it an email but forgot to log it to the console. I can add a `console.log` and replay the previous email it received, without re-sending that email. Thanks [@robinsloan](https://www.val.town/u/robinsloan) for [suggesting this feature](https://github.com/val-town/val-town-product/discussions/73).
 
 <div align="center">
-  <Image src={Cmdk} alt="The new powerbar lets you access common actions at the touch of a button." />
-  <figcaption style="margin-top: -20px;">
-    Creating a new val is only a few keystrokes away with the new powerbar.
-  </figcaption>
+  <video controls style="width: 700px">
+    <source src="/video/replayEmailExample.mp4" />
+  </video>
 </div>
 
-Val Town has a new quick menu, where you can take common actions like creating a new val, navigate straight to specific pages or search for vals. Access it by using ⌘-K or CTRL-K.
+### ⌨️ Power Bar
 
-### 🎓 Onboarding page
+Val Town now has a `⌘-K` / `CTRL-K` Power Bar. You can create or find vals, navigate to pages, or take val-specific actions, like fork or copy. Thanks [@nbbaier](https://www.val.town/u/nbbaier) for [the feature request](https://github.com/val-town/val-town-product/discussions/13).
 
 <div align="center">
-  <Image src={Onboarding} alt="The new onboarding screen " />
-  <figcaption style="margin-top: -20px;">
-    Making Val Town easy for new users is really important to us.
-  </figcaption>
+  <Image
+    src={Cmdk}
+    alt="The new powerbar lets you access common actions at the touch of a button."
+  />
 </div>
-
-TODO (Steve) Onboarding notes
 
 ### 🔻 Downtime
 
-We take downtime extremely seriously. We had our longest downtime ever (about 100 minutes) due to [Render's outage](https://status.render.com/incidents/thmx6pj4xqvl?u=yty96s4ggns1). We talked with Render about it and they're working hard to make sure it doesn't happen again. We will keep an eye on it, and will be looking into ways to make Val Town more resilient.
+We take downtime extremely seriously. We had our longest downtime ever (about 100 minutes) due to [Render's outage](https://status.render.com/incidents/thmx6pj4xqvl?u=yty96s4ggns1). We talked with Render about it. They're working hard to make sure it doesn't happen again. We are keeping an eye on it, and will be looking into ways to make Val Town more resilient.
 
 ### Other updates
 
-- You can now link to line ranges in vals using familiar, GitHub-like syntax: https://www.val.town/v/nbbaier/readmeGPT#L20-29
-- HTTP vals have a preview with an editable URL, to make previewing your web pages much easier. Thanks go to [@alexmcroberts-hs](https://github.com/alexmcroberts-hs) for this feature request.
-- New keybindings are available! Enable emacs and vscode bindings in [your editor settings](https://www.val.town/settings/editor) now.
-- We've got [a snazzy new trending page](https://val.town/trending) to make it easier to find the hot new vals in town.
-- We now lazy-load log lines to make loading large logs more responsive.
-- PRs can now be created for README-only changes.
-- Images can be pasted into straight into READMEs and comments.
-- Forking vals is faster than before.
-- Profile menu & settings redesigned
-- New login page (TODO thank suggester from twitter)
-- You can format code without save (in the cmd+k menu)
-- Lots of bugs have been squashed!
+- You can edit HTTP val's preview URL. Thanks [@alexmcroberts](https://www.val.town/u/alexmcroberts) for [the feature request](https://github.com/val-town/val-town-product/discussions/86).
+- Click on line numbers to link to lines: [`val.town/v/nbbaier/readmeGPT#L20-29`](https://www.val.town/v/nbbaier/readmeGPT#L20-29)
+- New emacs and vscode bindings are available in [editor settings](https://www.val.town/settings/editor).
+- We've got [a cleaner trending page](https://val.town/trending).
+- We lazy-load log lines to make loading large logs more responsive.
+- Images can be pasted into straight into readmes and comments.
+- Forking vals is now one-click instead of two
+- Profile menu & setting pages have been redesigned
+- New login page, inspired by [Amit Patel's feedback on Twitter](https://x.com/redblobgames/status/1774915029974065337)
+- You can format code without save (in the cmd+k menu). Thanks to [@nbbaier](https://www.val.town/u/nbbaier), [@pomdtr](https://www.val.town/u/pomdtr), and the dozens other users who asked for this.
+- Val logs now show absolute time instead of relative time ago, which was confusing new users.
+- We reorganized our homepage to display more use-cases and moved features to a new [features page](https://www.val.town/features).
+- Send fewer val error notifications when you're actively working on a val.
+- Add a `Run preview` button on other's users' HTTP vals.
+- Improve Email handler argument types.
+- [Popular packages](https://www.val.town/examples/packages) now include `https://esm.sh` imports.
 
 ## 🛣️ Roadmap
 
-### Val Page redesign
+### 🎨 Val Page redesign
 
 Vals are rich objects. They have: a name, versions, privacy, readme, type, links, comments, pull requests, forks, references, imports, and likes. We're redesigning val pages to better surface all this information.
 
-### Performance
+### ⚡️ Performance
 
-Max is [on it](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-9097473)! We're hopeful that we can reduce val baseline request time from from 300ms to under 100ms, and even bigger improvements to more complex vals, in the next couple of weeks.
+Max is [on it](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-9097473). We're hopeful that we can reduce val baseline request time by 60% in the next couple of weeks!
 
-### Code Search
+### 🔎 Code Search
 
-[Code search](https://github.com/val-town/val-town-product/discussions/69) is such an integral part of making vals easier to find, share and re-use, so we're investing a lot of time into finding the right solution. We quietly launched a `v2 beta` search (which you can toggle on in the current search UI), but aren't thrilled with it.
+[Code search](https://github.com/val-town/val-town-product/discussions/69) is key to find, share and re-use vals. We quietly launched a `v2 beta` search ([example](https://www.val.town/search?q=openai+function+calling&version=2)), but aren't thrilled with it. Tom wrote a blog about how [Code Search is Hard](https://blog.val.town/blog/search-notes/) and we've gotten back dozens of suggestions. Thank you all!
 
-Tom wrote a blog post about how [Code Search is Hard](https://blog.val.town/blog/search-notes/) and we've gotten back dozens of suggestions. Thank you all! We'll be working on this in the coming weeks.
+### Coming soon
 
-_Shoutout to [@pomdtr](https://www.val.town/u/pomdtr), who very quickly showed us [an unexpected way](https://pomdtr-code_search_is_easy.web.val.run/) to search through public vals... by uploading them all the GitHub and using Github's code search!_
+Here's what we plan to work on in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
-### On the roadmap
+- [HTTP streaming](https://github.com/val-town/val-town-product/discussions/14)
+- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
+- [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
+- [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
 
-- Val HTTP streaming
-- Code Search
-- New pricing
-- TODO add more here from github discussions
-- TODO (steve) add more from linear
-- & [what you suggest](https://github.com/val-town/val-town-product/discussions/new?category=feature-request)!
+## 🌟 Community Vals
 
-## 👏 Friends of Val Town
-
-Val Town has been representing itself on the world stage as well. Here are some of the highlights from the last couple of months:
-
-- Steve appeared on the [Learn With Jason Show](https://youtu.be/WnOcLog2P1Y) and live-streamed some Val Town wizardry.
-- TODO - maggie appleton, shoutout to robin sloan
-- Simon Willison shared a great TIL about [importing Atom feeds into Datasette Cloud using Val Town](https://til.simonwillison.net/valtown/scheduled).
-- [@emnudge](https://twitter.com/emnudge) wrote a lovely article on how they used Val Town to create themselves an ["actually useful to-do list"](https://emnudge.dev/notes/todo-list-api/).
-- [Todepond happened](https://x.com/stevekrouse/status/1775910924764807437)
-- [Hono & Val Town](https://x.com/honojs/status/1765380474388816321).
-- Taras wrote [an excellent piece](https://taras.glek.net/post/markdown.download/) on how he combined Val Town with other tools like Deno Deploy and jsr.io to craft their perfect markdown -> e-reader conversion tool
-- Pomdtr val town by example TODO
-- invisval sqlite editor TODO
-
-## 😎 Shoutouts and cool vals
-
-- [@eidam](https://www.val.town/u/eidam) built the delightful [Is My Plane a Boeing?](https://thecurryman-ismyplaneaboeing.web.val.run/).
-- [@eidam](https://www.val.town/u/eidam) showed us all how easy it can be to [add rate limiting to your vals](https://www.val.town/v/eidam/ratelimit_example).
-- [@pomdtr](https://www.val.town/u/pomdtr) created a simple way to [add authentication to vals](https://www.val.town/v/pomdtr/password_auth)
-- [@mmcc](https://www.val.town/u/mmcc) built [hono auth middleware](https://www.val.town/v/mmcc/honoBasicAuth)
-- [@pomdtr](https://www.val.town/u/pomdtr) is keeping us all organised with his [Val Town TODO list](https://pomdtr-todo.web.val.run), which lists all the TODOs on the public vals in Val Town.
-- [@pranjaldotdev](https://www.val.town/u/pranjaldotdev) now [notifies themselves](https://www.val.town/v/pranjaldotdev/poller) of new episodes of bytes.dev using Val Town.
-- [@stevekrouse](https://www.val.town/u/stevekrouse) shared [the world's simplest daily standup bot](https://www.val.town/v/stevekrouse/dailyStandupBot)
-- [@willthereader](https://www.val.town/u/willthereader) made his [first ever website](https://willkrouse.com) in Val Town!
-  ]- [@dvsj](https://www.val.town/u/dvsj) made it easier for us to [grab the images and text that appear on any links when you paste them into social media](https://www.val.town/v/dvsj/GetWebsiteMetadata) apps.
-- [@stevekrouse](https://www.val.town/u/stevekrouse) moved his [personal website](https://stevekrouse.com/) to Val Town
-- [@kaleidawave](https://www.val.town/u/kaleidawave) is always [up to date with their GitHub stars](https://www.val.town/v/kaleidawave/GitHubStarsToDiscord).
-- [@saolsen](https://www.val.town/u/saolsen) built a whole [tracing engine](https://saolsen-traces.web.val.run/v/saolsen/widgets/t/96b1c40658f66327d948dc2e5ff0c9bc/s/469215bd138a642b) on Val Town to help us monitor our own val performance.
-- [@stevekrouse](https://www.val.town/u/stevekrouse) shared how [Val Town email groups are routed - using Val Town itself](https://www.val.town/v/stevekrouse/company)!
-- [@andreterron](https://www.val.town/u/andreterron) created our version of the "Code on GitHub" banner that appears atop websites: [Code on Val Town](https://www.val.town/v/andreterron/codeOnValTown)
+- Maggie Appleton [added a backend](https://www.youtube.com/watch?v=kJTeyskdYpk) inspired by Robin Sloan's [An app can be a home-cooked meal](https://www.robinsloan.com/notes/home-cooked-app/)
+- Steve went on Learn With Jason and made [a collaborative poem builder app](https://youtu.be/WnOcLog2P1Y)
+- Simon Willison [imported Atom feeds into Datasette Cloud](https://til.simonwillison.net/valtown/scheduled)
+- [emnudge](https://twitter.com/emnudge) created an ["actually useful to-do list"](https://emnudge.dev/notes/todo-list-api/)
+- [saolsen](https://www.val.town/u/saolsen) built a whole [tracing engine](https://www.val.town/v/saolsen/telemetry)
+- [LibSQL Studio](https://libsqlstudio.com/) (a SQLite dashboard) added first-class support for Val Town
+- Todepond [ran over 100k vals](https://twitter.com/TodePond/status/1775935509996408998) in one day
+- [eidam](https://www.val.town/u/eidam) helps you check [Is My Plane a Boeing?](https://thecurryman-ismyplaneaboeing.web.val.run/)
+- Taras converted [markdown to e-reader](https://taras.glek.net/post/markdown.download/)
+- [eidam](https://www.val.town/u/eidam) of [rlimit.com](https://rlimit.com) shows how to [add rate limiting ](https://www.val.town/v/eidam/ratelimit_example) to vals
+- [pomdtr](https://www.val.town/u/pomdtr) created two new ways to add authentication to vals: [password](https://www.val.town/v/pomdtr/password_auth) and [email](https://www.val.town/v/pomdtr/email_auth), and [a postman-like UI to make test HTTP requests to your vals](https://www.val.town/v/pomdtr/http_client)
+- [mmcc](https://www.val.town/u/mmcc) from Mux built [hono auth middleware](https://www.val.town/v/mmcc/honoBasicAuth) and [mux webhook handler](https://www.val.town/v/mmcc/muxWebhookHandler)
+- Hono [tweeted](https://x.com/honojs/status/1765380474388816321) about Val Town
+- [willthereader](https://www.val.town/u/willthereader) made his [first website](https://willkrouse.com)
+- [dvsj](https://www.val.town/u/dvsj) [parses website social metadata](https://www.val.town/v/dvsj/GetWebsiteMetadata) apps
+- [pranjaldotdev](https://www.val.town/u/pranjaldotdev) gets notifications for [new episodes of bytes.dev](https://www.val.town/v/pranjaldotdev/poller)
+- [ramkarthik](https://www.val.town/u/ramkarthik) made a [minimal bookmarking tool](https://www.val.town/v/ramkarthik/bookmark)
+- [kaleidawave](https://www.val.town/u/kaleidawave) is always [up to date with his GitHub stars](https://www.val.town/v/kaleidawave/GitHubStarsToDiscord).
+- [andreterron](https://www.val.town/u/andreterron) created our version of the "Code on GitHub" banner that appears atop websites: [Code on Val Town](https://www.val.town/v/andreterron/codeOnValTown)
+- [stevekrouse](https://www.val.town/u/stevekrouse) moved his [personal website](https://stevekrouse.com/) to Val Town, [routes emails to the Val Town team](https://www.val.town/v/stevekrouse/company), and made the [the world's simplest daily standup bot](https://www.val.town/v/stevekrouse/dailyStandupBot)
+- [pomdtr](https://www.val.town/u/pomdtr) is keeping us all organised with his [Val Town TODO list](https://pomdtr-todo.web.val.run), which lists all the TODOs on the public vals in Val Town.
