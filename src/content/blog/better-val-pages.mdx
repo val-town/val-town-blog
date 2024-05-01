@@ -1,0 +1,60 @@
+---
+title: Better Val Pages
+description: A more understandable entry-point to Val Town
+pubDate: May 1, 2024
+author: Tom MacWright
+---
+
+import { Image } from "astro:assets";
+import Before from "./better-val-pages/before.png";
+import After from "./better-val-pages/after.png";
+
+<style>
+{`
+  @media (min-width: 800px) {
+    .lineup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+    }
+  }
+  figcaption {
+    margin-top: -20px;
+  }
+`}
+</style>
+
+Today we're revamping the design of standalone val pages to make
+them a lot more understandable. Something that we've learned
+from hours spent walking new folks through Val Town is that
+the individual val page could be disorienting and hard to visually
+parse.
+
+People are making amazing vals, and we want them to shine! So we've
+made a pretty big design pass for the val page:
+
+<div class='lineup'>
+  <div align="center">
+    <Image src={Before} alt="Val Page Before Redesign" />
+    <figcaption>
+    Val page before
+    </figcaption>
+  </div>
+
+  <div align="center">
+    <Image src={After} alt="Val Page After" />
+    <figcaption>
+    Val page after
+    </figcaption>
+  </div>
+</div>
+
+Vals in list contexts will look the same for now: the val editor
+was designed for those kinds of space-constrained situations. But
+now val pages make it much clearer what val you're looking at,
+who made it, and what you can do with it. They also make the readme
+much more obviously a readme. The goal is understandability.
+
+We hope this is a big improvement for folks new to Val Town, and
+it makes val pages a lot more readable and shareable. We'd love
+to hear from you about this - [join us in the Discord](https://discord.gg/dHv45uN5RY)!https://discord.gg/dHv45uN5RY
