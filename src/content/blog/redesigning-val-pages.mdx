@@ -1,0 +1,65 @@
+---
+title: Redesigning Val Pages
+description: A more understandable entry-point to Val Town
+pubDate: May 1, 2024
+author: Tom MacWright
+---
+
+import { Image } from "astro:assets";
+import Before from "./better-val-pages/before.png";
+import After from "./better-val-pages/after.png";
+
+<style>
+  {`
+  @media (min-width: 800px) {
+    .lineup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 10px;
+    }
+  }
+  figcaption {
+    margin-top: -20px;
+  }
+`}
+</style>
+
+Today we're revamping the design of standalone val pages. Something that we've learned
+from hours spent walking new folks through Val Town is that
+the individual val page could be disorienting and hard to visually
+parse.
+
+A val is a rich object with a readme, comments, forks, versions,
+pull requests, references, and likes. We want to surface all of that information and ways to interact with a val, but we also want to keep vals feeling lightweight.
+
+People are making amazing vals ([some recent favorites](https://blog.val.town/blog/val-town-newsletter-16/#-community-vals)), and we want them to shine. So we
+made a pretty big redesign to the val page:
+
+<div class='lineup'>
+  <div align="center">
+    <Image src={Before} alt="Val Page Before Redesign" />
+    <figcaption>
+    Val page before
+    </figcaption>
+  </div>
+
+  <div align="center">
+    <Image src={After} alt="Val Page After" />
+    <figcaption>
+    Val page after
+    </figcaption>
+  </div>
+</div>
+
+In list and embed contexts, vals will look the same for now: the val editor
+was designed for those kinds of space-constrained situations. But
+now val pages make it much clearer what val you're looking at,
+who made it, and what you can do with it. They also make the readme
+much more obviously a readme. The goal is understandability.
+
+We hope this is a big improvement, particularly for folks new to Val Town, and
+it makes val pages a lot more readable and shareable. In traditional Val Town style,
+this improvement was made incrementally. There's a lot more work to do to make vals
+more understandable and useful.
+
+How do you think we did? We'd love to hear from you about this - [join us in the Discord](https://discord.gg/dHv45uN5RY) or [tweet at us](https://twitter.com/ValDotTown). Or if you really want to help us move forward the way we code socially, consider [joining us at Val Town](https://val.town/careers).
