@@ -3,7 +3,7 @@ title: "Post-mortem: Blob Storage Outage"
 generated: 1701894028874
 description: Disclosure, mitigation, and next steps
 pubDate: May 2, 2024
-author: Steve Krouse
+author: Max McDonnell
 ---
 
 Val Town [provides blob storage](https://docs.val.town/std/blob/) for use within Vals. Blob storage is used by many Vals as a quick key value store or as a place to store larger files like images and logs. Here's a basic example:
