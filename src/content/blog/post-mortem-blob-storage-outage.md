@@ -18,7 +18,7 @@ console.log(isBlob)
 
 Under the hood, blob storage is backed by [Cloudflare's S3-compatible object storage offering: R2](https://www.cloudflare.com/developer-platform/r2/).
 
-On April 30th at 5:05pm UTC while offboarding a Val Town employee, we removed their user account from our Cloudflare organization. The API keys that we had been using to communicate with R2 were tied to the user account, and stopped working once the account was removed. At 8:00pm we had received a handful of user-reports about unexpected blob storage errors. Over the next hour, we raised an alert internally, identified the issue and replaced the credentials.
+On April 30th at 5:05pm UTC while offboarding a Val Town employee, we removed their user account from our Cloudflare organization. The API credentials that we had been using to communicate with R2 were tied to the user account, and stopped working once the account was removed. At 8:00pm UTC we had received a handful of user-reports about unexpected blob storage errors. Over the next hour, we raised an alert internally, identified the issue and replaced the credentials.
 
 ### Impact
 
@@ -34,7 +34,7 @@ Cloudflare's API credentials are tied to user accounts. When clicking through Cl
 
 Val Town is taking the following steps to ensure issues like this do not happen in the future:
 
-1. As Cloudflare recommends, we'll create a system account and associate our Cloudflare tokens with that account.
-2. Audit our API keys used with other services and ensure they don't face similar issues.
-3. We'll set up continually-running integration tests for core Val Town features to make sure we're alerted about downtime like this promptly and directly.
-4. We are emailing all affected users to work with them to recover any lost data, or draw their attention to any error logs that might have resulted from the outage.
+1. As Cloudflare recommends, create a system account and associate our Cloudflare API credentials with that account.
+2. Audit our API credentials used with other services and ensure they don't face similar issues.
+3. Set up continually-running integration tests for core Val Town features to make sure we're alerted about downtime like this promptly and directly.
+4. Email all affected users to work with them to recover any lost data, or draw their attention to any error logs that might have resulted from the outage.
