@@ -7,6 +7,7 @@ import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import FormattedDate from '../components/FormattedDate.astro';
 import andre from "../content/authors/andre.jpg";
+import max from "../content/authors/max.jpg";
 import tom from "../content/authors/tom.jpg";
 import steve from "../content/authors/steve.jpg";
 
@@ -115,9 +116,9 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
       <Header />
       <main>
         <article itemscope itemtype="https://schema.org/Article">
-          {heroImage && 
+          {heroImage &&
           <div class="hero-image">
-            <Image 
+            <Image
                 densities={[1, 2, 3]}
                 width={900} height={510} src={heroImage} alt="" />
           </div>}
@@ -125,13 +126,11 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
             <div class="title">
               <h1 itemprop="name">{title}</h1>
               <div class="date">
-                <Image 
+                <Image
                   densities={[1, 2, 3]}
-                  width="20" height="20" class='avatar' alt={author} src={
-                  author === 'Tom MacWright' ?
-                  tom : author === 'André Terron' ? andre :
-                  steve}
-                }>
+                  width="20" height="20" class='avatar' alt={author}
+                  src={{'Tom MacWright': tom, 'André Terron': andre, "Steve Krouse": steve, "Max McDonnell": max}[author]}
+                >
                 </Image>
                 <span itemprop="author">{author}</span>
                 on
