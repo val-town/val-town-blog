@@ -46,6 +46,10 @@ The `src/content/` directory contains "collections" of related Markdown and MDX 
 
 Any static assets, like images, can be placed in the `public/` directory.
 
+## 📦 Git LFS
+
+Make sure you have [git lfs](https://git-lfs.com/) (`brew install git-lfs`) installed before cloning. If you get errors when building you might be working with LFS references instead of downloaded images. Install git-lfs and re-clone the repo.
+
 ## 🧞 Commands
 
 All commands are run from the root of the project, from a terminal:
