@@ -6,12 +6,7 @@ author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
-import Team from "./seed/team.jpg";
-import Codeium from "./val-town-newsletter-16/codeium.png";
-import OnboardingText from "./val-town-newsletter-16/onboarding-text.png";
-import OnboardingVal from "./val-town-newsletter-16/onboarding-val.png";
-import CronPrompt from "./val-town-newsletter-16/cronprompt.png";
-import Cmdk from "./val-town-newsletter-16/cmdk.png";
+import After from "./better-val-pages/after.png";
 
 Over the last month, we drastically improved val runtime performance and redesigned the val page. Jackson. TODO
 
@@ -36,40 +31,53 @@ TODO
 
 ### ⚡️ Vals are 2x faster!
 
+TODO
+
 https://x.com/stevekrouse/status/1782840487939878964
 
 ### Val Page Redesign
 
-TODO - https://blog.val.town/blog/redesigning-val-pages/
+Tom redesigned the val page to make it easier to read and navigate. [Read more](https://blog.val.town/blog/redesigning-val-pages/) about the changes.
 
-### Codeium Autocomplete
-
-TODO https://x.com/stevekrouse/status/1791176716049645894
+<div align="center">
+  <Image src={After} alt="Val Page After" />
+  <figcaption>Val page after</figcaption>
+</div>
 
 ### Quickstarts
+
+We shipped two quickstart tutorials to help you get started with vals:
 
 TODO https://x.com/stevekrouse/status/1788694731435683964
 https://x.com/stevekrouse/status/1789036314106511638
 
 ### Livestreams
 
-https://x.com/stevekrouse/status/1787182067521868172
-https://x.com/jamiew/status/1789307087538868414
-https://x.com/stevekrouse/status/1790005740054151665
-https://x.com/stevekrouse/status/1791891822383653010
-https://x.com/stevekrouse/status/1792916543614890098
+Steve started weekly Val Town live coding
+
+1. Jamie Dubbs
+2. Jordan Scales (@jdan)
+3. Lu Wilson (@todepond)
+
+If you want even more livestreams, you can also check out the older ones with Maggie Appleton and Jason TODO.
 
 TODO - subscribe on youtube to get notified of when they get scheduled!
 
+We're looking for live coding guests! If you're interested, please [shoot Steve a DM](https://twitter.com/stevekrouse).
+
 ### New OG Image for vals
 
-https://x.com/stevekrouse/status/1791126791341449250
+Jackson shipped a new OG image for vals
+
+TODO photo https://x.com/stevekrouse/status/1791126791341449250
 
 TODO - you can create OG images in vals!
 
 ### Fixer for JSX Pragma
 
-TODO
+Val Town supports any kind of JSX. The problem is you have to specify which kind of JSX (React, Preact, Vue, Hono, etc) at the top of the val in this hard to remember pragma, ie for React it's `/** @jsxImportSource https://esm.sh/react */`. Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
+
+TODO video or GIF
 
 ### Options for viewing vals in a list
 
@@ -116,31 +124,30 @@ Here's what we plan to work on in the coming months. Please [make feature reques
 
 ## 🌟 Community Vals
 
-- [Static Chess] https://x.com/stevekrouse/status/1790042338280001669 & https://x.com/stevekrouse/status/1790131838867902519
+- [Static Chess](https://www.val.town/v/maxm/staticChess) by [Max](https://val.town/u/maxm) got to [#1](https://x.com/stevekrouse/status/1790131838867902519) on [Hacker News](https://news.ycombinator.com/item?id=40342803)
+- Robin Sloan is using an email handler val to [track preorders of his upcoming novel](https://www.robinsloan.com/lab/at-home-in-high-dimensional-space/#valtown) - go preorder it!
+- [Cameron](https://www.val.town/u/cameronpak) built [a Custom GPT](https://chatgpt.com/g/g-EHnfrHg8L-homeless-helper-by-ourtechnology) with [a backend on Val Town](https://www.val.town/v/cameronpak/homeless) to help homeless individuals find resources
+- [Jan](https://www.val.town/u/yawnxyz) made surprisingly fast [AI audio translator](https://x.com/yawnxyz/status/1788783516378964108)! - [try it here](https://yawnxyz-ai.web.val.run/)
+- [Guillermo Rauch](https://www.val.town/u/rauchg) made [a val](https://x.com/rauchg/status/1791983008905625882)
+- Arjun gets [Github start count alerts in Slack](https://x.com/arjunattam/status/1782694292412039470)
+- [Steven Tey](https://www.val.town/u/steventey) demoed how to [shorten a URL via the Dub API](https://x.com/steventey/status/1790318860031418575)
+- [Jamie] gets [a morning weather report & fashion suggestion](https://x.com/jamiew/status/1789307087538868414) with [Glif](https://glif.app/glifs)
+- [Max](https://www.val.town/u/mxdvl) is helping his family [track his sister at sea](https://x.com/mxdvl/status/1782858513074491454)
+- [Stephen](https://www.val.town/u/saolsen) expanded his [game agent battleground: texas-hold'm](https://x.com/olsenator4/status/1784934905614381182)
+- [Jordan](https://val.town/u/jdan) made a [word game inspired by TextTwist](https://x.com/jdan/status/1784362801932255340)
+- [JP](https://www.val.town/u/janpaul123) is [tracking changes to the Dynamicland website](https://x.com/JanPaul123/status/1792628819100086433)
+- [Jordan](https://val.town/u/jdan) made a [MySpace profile](https://x.com/jdan/status/1792199312866484465) - send him a PR to leave a comment!
+- [David](https://www.val.town/u/dctalbot) made [a val to get the dominant color from an image](https://www.val.town/v/dctalbot/getColor) - [try it here](https://stevekrouse-getcolor.web.val.run/)
+- [Steve](https://val.town/u/stevekrouse) made [exponential backoff as middleware](https://x.com/stevekrouse/status/1783982733124845852)
+- [Simplescraper] made a guide to [build an automated trading bot](https://x.com/simplescraper/status/1787862598098297022)
+- [Tom](https://val.town/u/tmcw) made a [pmtiles-to-geojson proxy](https://x.com/tmcw/status/1782577312904466819) to solve coastlines in his figma plugins
+- [Tahir](https://val.town/u/tfayyaz) put [tldraw in a val](https://x.com/TFayyaz/status/1782986916151099527) while _on his phone!_
+- [Steve](https://val.town/u/stevekrouse) made a [passkeys demo](https://x.com/stevekrouse/status/1784679866161369172)
+- [Jackson](https://www.val.town/u/jxnblk) made [a lightweight React SRR framework](https://www.val.town/v/jxnblk/resrv)
+- [Steve](https://val.town/u/stevekrouse) made [Static Wordle](https://x.com/stevekrouse/status/1791445063316185369)
+- [Batuhan](https://val.town/u/isidentical) made it really easy to play with Fal to super quickly generate images - [try it here](https://stevekrouse-fal_demo.web.val.run/) or [here](https://www.val.town/v/maxm/imgGenUrl)
 
-- Tom made a [pmtiles-to-geojson proxy](https://x.com/tmcw/status/1782577312904466819) to solve coastlines in his figma plugins
-
-https://x.com/arjunattam/status/1782694292412039470
-https://x.com/stevekrouse/status/1782855110734852174
-https://x.com/TFayyaz/status/1782986916151099527
-https://x.com/stevekrouse/status/1783982733124845852
-https://x.com/jdan/status/1784362801932255340
-https://x.com/JanPaul123/status/1784492152921493997
-https://x.com/stevekrouse/status/1784679866161369172
-https://x.com/olsenator4/status/1784934905614381182
-https://x.com/stevekrouse/status/1784992064104751112
-https://x.com/stevekrouse/status/1786129300229435676
-https://x.com/stevekrouse/status/1787944998710727043
-https://x.com/yawnxyz/status/1788783516378964108
-https://x.com/jamiew/status/1789307087538868414
-https://x.com/stevekrouse/status/1790060600665465173
-https://x.com/steventey/status/1790318860031418575
-https://x.com/stevekrouse/status/1791445063316185369
-https://x.com/rauchg/status/1791983008905625882
-https://x.com/jdan/status/1792199312866484465
-https://x.com/stevekrouse/status/1793718591512048027
-https://x.com/mxmcd/status/1793716195520372750
-https://x.com/iamseeley/status/1792241095029494158
+https://x.com/iamseeley/status/1792241095029494158 - TODO g
 https://www.val.town/v/stevekrouse/importValInChromeConsole
 https://www.val.town/v/maxm/tinygoHttpExample
 https://www.val.town/v/samk/Candlewood_Lake_Temp_Alerts
@@ -154,7 +161,11 @@ https://www.val.town/v/jdan/emojiGuessr
 https://www.val.town/v/maxm/httpStatusBehavior
 https://www.val.town/v/stevekrouse/pipedream
 https://www.val.town/v/cameronpak/homeless_services
-
+https://www.youtube.com/live/gudoXL2Uba0
+https://www.val.town/v/iamseeley/HonoHTMX
+https://www.val.town/v/stevekrouse/telegram
+https://www.val.town/v/neverstew/emailHole
+https://www.val.town/v/rayman/QuillEditor
 [yieldray/decorator_router | Val Town](https://www.val.town/v/yieldray/decorator_router)
 
 [maxm/huffmanEncoding | Val Town](https://www.val.town/v/maxm/huffmanEncoding)
@@ -177,6 +188,62 @@ https://www.val.town/v/cameronpak/homeless_services
 
 [geraldo/testPostToMastodon | Val Town](https://www.val.town/v/geraldo/testPostToMastodon)
 
-TODO - conntinue looking at newest from https://www.val.town/newest?page=11
-
-TODO - review discord
+https://www.val.town/v/platoff/salmonMonkey
+https://www.val.town/v/thecurryman/sapphireManatee
+https://www.val.town/v/jxnblk/pie
+https://www.val.town/v/samhashemi/testing
+https://www.val.town/v/dctalbot/getColor
+https://www.val.town/v/hacksore/orangeFish
+https://www.val.town/v/stevekrouse/dude
+https://www.val.town/v/tfayyaz/whiteMongoose
+https://www.val.town/v/willthereader/story_wordcount
+https://www.val.town/v/crif/Test_js_functions_and_stuff
+https://www.val.town/v/harper/pushover
+https://www.val.town/v/harper/ShopifyProductSearch
+https://www.val.town/v/harper/DropNotification
+https://www.val.town/v/tfayyaz/tahirsTil
+https://www.val.town/v/andreterron/violetPerch
+https://www.val.town/v/stevekrouse/cron_client_side_script_fork
+https://www.val.town/v/stevekrouse/cron_client_react_fork
+https://www.val.town/v/geraldo/tootLatestPosts
+https://www.val.town/v/vladimyr/bookmarkletHighlightForks
+https://www.val.town/v/yawnxyz/ai
+https://www.val.town/v/michaelmang/bookmark
+https://www.val.town/v/pomdtr/pipes
+https://www.val.town/v/jxnblk/svg_favicon
+https://www.val.town/v/pomdtr/blog_mdx
+https://www.val.town/v/andy_blum/PrintPOSTPayload
+https://www.val.town/v/pomdtr/sync
+https://www.val.town/v/jxnblk/color_contrast_api
+https://www.val.town/v/stevekrouse/isthegtrainfucked
+https://www.val.town/v/jxnblk/caviar
+https://www.val.town/v/jxnblk/tuna
+https://www.val.town/v/jxnblk/tuna_example
+https://www.val.town/v/stevekrouse/react_http
+https://www.val.town/v/stevekrouse/cors_example_backend
+https://www.val.town/v/mjweaver01/PersonalizationGPT
+https://www.val.town/v/stevekrouse/allVals
+https://www.val.town/v/git/fetch_timeout
+https://www.val.town/v/stevekrouse/clone_my_vals_to_sqlite
+https://www.val.town/v/mark05e/niceSnippetPostmanCodegen
+https://www.val.town/v/mvaodhan/showbot
+https://www.val.town/v/git/sparkle
+https://www.val.town/v/stevekrouse/getColor
+https://www.val.town/v/curtcox/_not_actually_private_so_that_you_can_see_it
+https://www.val.town/v/reosablo/sampleVanSSR
+https://www.val.town/v/reosablo/uuidGeneratorStream
+https://www.val.town/v/reosablo/sampleVanIsland
+https://www.val.town/v/vladimyr/oakExample
+https://www.val.town/v/yawnxyz/openAiExample
+https://www.val.town/v/iamseeley/HonoHTMX
+https://www.val.town/v/pbt/gtrainog
+https://www.val.town/v/pbt/gtrainalerts
+https://www.val.town/v/jamiedubs/ethereumTokenBalances
+https://www.val.town/v/jxnblk/contrast_swatch
+https://www.val.town/v/crif/Typescript_beginner_learning
+https://www.val.town/v/stevekrouse/telegramPhotoExample
+https://www.val.town/v/ravvi_kumar/greenPeafowl
+https://www.val.town/v/flxa/htmlExample
+https://www.val.town/v/jxnblk/color_contrast
+https://www.val.town/v/jxnblk/png_card
+https://www.val.town/v/jxnblk/svg_card
