@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 17
 description: Improved performance, redesigned val page, live coding, and much more!
-pubDate: May 24, 2024
+pubDate: May 28, 2024
 author: Steve Krouse
 ---
 
@@ -9,6 +9,7 @@ import { Image } from "astro:assets";
 import ValRedesign from "./val-town-newsletter-17/val-redesign.png";
 import FirstCron from "./val-town-newsletter-17/first-cron.png";
 import FirstWebsite from "./val-town-newsletter-17/first-website.png";
+import OGImage from "./val-town-newsletter-17/og-image.png";
 
 <style>
   {`
@@ -21,18 +22,16 @@ import FirstWebsite from "./val-town-newsletter-17/first-website.png";
       margin-top: -20px;
     }
     .quickstart {
-       border: 2px solid #eaeaea;
+      border: 2px solid #eaeaea;
       padding: 5px;
     }
     #subscribe {
       font-size: 20px; 
-      padding: 5px; 
       border: 2px solid #143f9d; 
       text-align:center; 
       border-radius: 5px; 
       text-decoration: none; 
-      display: block; 
-      margin-top: 20px;
+      display: block;
     }
     #subscribe:hover {
       background-color: #143f9d;
@@ -43,20 +42,7 @@ import FirstWebsite from "./val-town-newsletter-17/first-website.png";
 
 Over the last month, we drastically improved val runtime performance, redesigned the val page, and worked on dozens of other improvements and bug fixes. Jackson and JP joined the team! Steve started a weekly live coding series.
 
-Now we're working on HTTP streaming and improving user onboarding.
-
-Prefer video? Here's a walkthrough of the newsletter:
-
-<div align="center">
-  <iframe
-    src="TODO"
-    width="640"
-    height="360"
-    style="max-width:100%"
-    frameborder="0"
-    allowfullscreen
-  ></iframe>
-</div>
+Now we're working on HTTP streaming and improving user onboarding. Over the coming weeks and months, we'll work on better search, improved val organization, a new pricing plan, more performance improvements, and more.
 
 ### 🤗 Welcome Jackson & JP!
 
@@ -80,11 +66,10 @@ Tom redesigned the val page to make it easier to parse and navigate: [Redesignin
 
 ### 📺 Livestreams
 
-Steve started a weekly live coding series. They're a great way to learn Val Town and see how others use it. If you missed em, they're all on YouTube:
+Steve started a weekly live coding series. Tune into the next episodes:
 
-1. [Jamie Dubs of Glif](https://www.youtube.com/live/-HZyIm3Nlvo?feature=shared)
-2. [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared)
-3. [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared)
+- [Max Bittker – May 30, 12pm ET](https://www.youtube.com/watch?v=6QGjdDGEkyI)
+- [Linus Lee – June 6, 12pm ET](https://www.youtube.com/watch?v=5nYPeK9_X6o)
 
 <a
   href="https://www.youtube.com/channel/UCjMK2zia8a3IK04f3LEHdrw?sub_confirmation=1"
@@ -93,9 +78,13 @@ Steve started a weekly live coding series. They're a great way to learn Val Town
   🔔 Subscribe on YouTube to get notified when we go live
 </a>
 
-This series was inspired by Steve's livestreams with [Jason Lengstorf](https://www.youtube.com/watch?v=WnOcLog2P1Y) and [Maggie Appleton](https://www.youtube.com/watch?v=kJTeyskdYpk), which are also recommended watching! Maggie's episode is particularly great for front-end engineers who want to learn backend programming.
+They're a great way to learn Val Town by watching others use it. And if you watch live, you can ask questions and we'll answer! The first three episodes:
 
-We're looking for show guests! If you're interested, please [shoot Steve a DM](https://twitter.com/stevekrouse).
+- [Jamie Dubs (@jamiew)](https://www.youtube.com/live/-HZyIm3Nlvo?feature=shared)
+- [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared)
+- [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared)
+
+This series was inspired by Steve's livestreams with [Jason Lengstorf](https://www.youtube.com/watch?v=WnOcLog2P1Y) and [Maggie Appleton](https://www.youtube.com/watch?v=kJTeyskdYpk), which are also recommended watching! Jason's episode is great for pro JavaScripters who want to see us accomplish a lot in a short time. Maggie's episode is great for front-end engineers who want to learn backend programming.
 
 ### 📝 Quickstarts
 
@@ -126,40 +115,41 @@ We wrote two quickstart tutorials to help you make your first vals. Let us know 
 
 ### 🖼️ New OG Share Image
 
-Jackson shipped a new OG image for vals
+Jackson shipped a much improved OpenGraph share image for vals for when you share a val link with a friend – which you should all do every day – I hear it's good for the soul.
 
-TODO photo https://x.com/stevekrouse/status/1791126791341449250
-
-TODO - you can create OG images in vals!
+<div align="center">
+  <Image src={OGImage} alt="New OG share image" />
+</div>
 
 ### JSX Pragma Helper
 
-Val Town supports any kind of JSX. The problem is you have to specify which kind of JSX (React, Preact, Vue, Hono, etc) at the top of the val in this hard to remember pragma, ie for React it's `/** @jsxImportSource https://esm.sh/react */`. Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
+Val Town supports any kind of JSX. This is a blessing and a curse. The problem is you have to specify which kind of JSX (React, Preact, Hono, etc) at the top of the val in this hard to remember pragma. For example, for React it's `/** @jsxImportSource https://esm.sh/react */`. Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
 
-TODO video or GIF - TODO tweet this
+<video controls>
+  <source src="/video/jsx_pragma.mp4" />
+</video>
 
 ### Vals in a list switcher
 
 Jackson...
 
-TODO GIF - TODO tweet this
+TODO GIF - TODO tweet this and post on Discord
 
 ### Other updates
 
-- Better error message on invalid environment variable names
 - Prevent vals from being run in other context than their type
-- Redesign logs pages
+- Redesign evaluations pages
 - Trigger cmd+k on mobile using long press
 - "Copy Email" button on email handler vals
 - Remove Feedback button from header (not enough usage)
 - Link to editor and environment variable settings from val three dots ... menu
 - Link to [crongpt.com](https://crongpt.com) in cron vals
 - Lots of small improvements to onboarding
-- New og:image for vals
-- Redesigned val hover cards
+- Redesigned val hover cards in code
 - Hono/JSX template
-- Shorter val preview URL on mobile (thanks _TODO_ for the suggestion)
+- Shorter val preview URL on mobile (thanks _Matthew Williams_ for the suggestion)
 - Settings submenu in user profile menu https://x.com/stevekrouse/status/1790470900078260276
+- Better error message on invalid environment variable names
 - Fixed bug where users weren't getting subscribed to our newsletter
 - Allow \<img\> and \<div\> tags in readme https://x.com/mxmcd/status/1791134100708901367
 - Adjusted fonts
@@ -167,9 +157,9 @@ TODO GIF - TODO tweet this
 - Hide ? menu for logged out users
 - Button to copy embed iframe
 - Add fork button to all embeds and ensure they open in new windows
-- Display yaml frontmatter in markdown READMEs (thanks TODO for feature request)
+- Display yaml frontmatter in markdown READMEs
 - Dealt with our first DDOS!
-- public suffix list - https://x.com/stevekrouse/status/1790027240207479080
+- [web.val.run and express.val.run are on the public suffix list](https://github.com/publicsuffix/list/pull/1964)!
 
 ## 🛣️ Roadmap
 
@@ -181,20 +171,21 @@ The rest of the team has been focused increasing signups, improving user onboard
 
 ### Coming soon
 
-Here's what we plan to work on in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
 - [HTTP Streaming](https://github.com/val-town/val-town-product/discussions/14) (almost done!)
-- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
 - [Better Search](https://github.com/val-town/val-town-product/discussions/69)
+- [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
 - [Val runtime performance](https://github.com/val-town/val-town-product/discussions/113)
+- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- New pricing plan (usage-based)
 - [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
 - [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
-- [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
 
 ## 🌟 Community Vals
 
 - [Static Chess](https://www.val.town/v/maxm/staticChess) by [Max](https://val.town/u/maxm) got to [#1](https://x.com/stevekrouse/status/1790131838867902519) on [Hacker News](https://news.ycombinator.com/item?id=40342803)
-- Robin Sloan is using an email handler val to [track preorders of his upcoming novel](https://www.robinsloan.com/lab/at-home-in-high-dimensional-space/#valtown) - go preorder it!
+- Robin Sloan is [tracking preorders of his upcoming novel](https://www.robinsloan.com/lab/at-home-in-high-dimensional-space/#valtown)!
 - [Cameron](https://www.val.town/u/cameronpak) built [a Custom GPT](https://chatgpt.com/g/g-EHnfrHg8L-homeless-helper-by-ourtechnology) with [a backend on Val Town](https://www.val.town/v/cameronpak/homeless) to help homeless individuals find resources
 - [Jan](https://www.val.town/u/yawnxyz) made surprisingly fast [AI audio translator](https://x.com/yawnxyz/status/1788783516378964108)! - [try it here](https://yawnxyz-ai.web.val.run/)
 - [Guillermo Rauch](https://www.val.town/u/rauchg) made [a val](https://x.com/rauchg/status/1791983008905625882)
@@ -207,112 +198,90 @@ Here's what we plan to work on in the coming months. Please [make feature reques
 - [JP](https://www.val.town/u/janpaul123) is [tracking changes to the Dynamicland website](https://x.com/JanPaul123/status/1792628819100086433)
 - [Jordan](https://val.town/u/jdan) made a [MySpace profile](https://x.com/jdan/status/1792199312866484465) - send him a PR to leave a comment!
 - [David](https://www.val.town/u/dctalbot) made [a val to get the dominant color from an image](https://www.val.town/v/dctalbot/getColor) - [try it here](https://stevekrouse-getcolor.web.val.run/)
+- [Thomas Seeley](https://www.val.town/u/iamseeley) made a number of awesome _python_ vals: [pyodideDataAnalysis](https://www.val.town/v/iamseeley/pyodideDataAnalysis), [pyodideDataVis](https://www.val.town/v/iamseeley/pyodideDataVis), [pyodidePowersVis](https://www.val.town/v/iamseeley/pyodidePowersVis), [pyodideSquare](https://www.val.town/v/iamseeley/pyodideSquare)
 - [Steve](https://val.town/u/stevekrouse) made [exponential backoff as middleware](https://x.com/stevekrouse/status/1783982733124845852)
 - Simplescraper made a guide to [build an automated trading bot](https://x.com/simplescraper/status/1787862598098297022)
+- [Jackson](https://val.town/u/jxnblk) made [a new "view source on val town" badge](https://www.val.town/v/jxnblk/valTownBadge)
 - [Tom](https://val.town/u/tmcw) made a [pmtiles-to-geojson proxy](https://x.com/tmcw/status/1782577312904466819) to solve coastlines in his figma plugins
 - [Tahir](https://val.town/u/tfayyaz) put [tldraw in a val](https://x.com/TFayyaz/status/1782986916151099527) while _on his phone!_
 - [Steve](https://val.town/u/stevekrouse) made a [passkeys demo](https://x.com/stevekrouse/status/1784679866161369172)
 - [Jackson](https://www.val.town/u/jxnblk) made [a lightweight React SRR framework](https://www.val.town/v/jxnblk/resrv)
 - [Steve](https://val.town/u/stevekrouse) made [Static Wordle](https://x.com/stevekrouse/status/1791445063316185369)
 - [Batuhan](https://val.town/u/isidentical) made it really easy to play with Fal to super quickly generate images - [try it here](https://stevekrouse-fal_demo.web.val.run/) or [here](https://www.val.town/v/maxm/imgGenUrl)
-
-https://x.com/iamseeley/status/1792241095029494158 - TODO g
-https://www.val.town/v/stevekrouse/importValInChromeConsole
-https://www.val.town/v/maxm/tinygoHttpExample
-https://www.val.town/v/samk/Candlewood_Lake_Temp_Alerts
-https://www.val.town/v/iamseeley/pyodideDataAnalysis
-https://www.val.town/v/iamseeley/pyodideDataVis
-https://www.val.town/v/iamseeley/pyodidePowersVis
-https://www.val.town/v/maxm/codemirrorTsBrowser
-https://www.val.town/v/iamseeley/pyodideSquare
-https://www.val.town/v/jdan/blobImages
-https://www.val.town/v/jdan/emojiGuessr
-https://www.val.town/v/maxm/httpStatusBehavior
-https://www.val.town/v/stevekrouse/pipedream
-https://www.val.town/v/cameronpak/homeless_services
-https://www.youtube.com/live/gudoXL2Uba0
-https://www.val.town/v/iamseeley/HonoHTMX
-https://www.val.town/v/stevekrouse/telegram
-https://www.val.town/v/neverstew/emailHole
-https://www.val.town/v/rayman/QuillEditor
-[yieldray/decorator_router | Val Town](https://www.val.town/v/yieldray/decorator_router)
-
-[maxm/huffmanEncoding | Val Town](https://www.val.town/v/maxm/huffmanEncoding)
-
-[curtcox/markdown_download | Val Town](https://www.val.town/v/curtcox/markdown_download)
-
-[stevekrouse/jsrExample | Val Town](https://www.val.town/v/stevekrouse/jsrExample)
-
-[jxnblk/valTownBadge | Val Town](https://www.val.town/v/jxnblk/valTownBadge)
-
-[ckersey2/zodStringToJSON | Val Town](https://www.val.town/v/ckersey2/zodStringToJSON)
-
-[sjerred/renderFormAndSaveData | Val Town](https://www.val.town/v/sjerred/renderFormAndSaveData)
-
-[cotr/launch_thrifty_idea_generator | Val Town](https://www.val.town/v/cotr/launch_thrifty_idea_generator)
-
-[evilsteventey/dubLinksUpsert | Val Town](https://www.val.town/v/evilsteventey/dubLinksUpsert)
-
-[steventey/dubLinksUpsert | Val Town](https://www.val.town/v/steventey/dubLinksUpsert)
-
-[geraldo/testPostToMastodon | Val Town](https://www.val.town/v/geraldo/testPostToMastodon)
-
-https://www.val.town/v/platoff/salmonMonkey
-https://www.val.town/v/thecurryman/sapphireManatee
-https://www.val.town/v/jxnblk/pie
-https://www.val.town/v/samhashemi/testing
-https://www.val.town/v/dctalbot/getColor
-https://www.val.town/v/hacksore/orangeFish
-https://www.val.town/v/stevekrouse/dude
-https://www.val.town/v/tfayyaz/whiteMongoose
-https://www.val.town/v/willthereader/story_wordcount
-https://www.val.town/v/crif/Test_js_functions_and_stuff
-https://www.val.town/v/harper/pushover
-https://www.val.town/v/harper/ShopifyProductSearch
-https://www.val.town/v/harper/DropNotification
-https://www.val.town/v/tfayyaz/tahirsTil
-https://www.val.town/v/andreterron/violetPerch
-https://www.val.town/v/stevekrouse/cron_client_side_script_fork
-https://www.val.town/v/stevekrouse/cron_client_react_fork
-https://www.val.town/v/geraldo/tootLatestPosts
-https://www.val.town/v/vladimyr/bookmarkletHighlightForks
-https://www.val.town/v/yawnxyz/ai
-https://www.val.town/v/michaelmang/bookmark
-https://www.val.town/v/pomdtr/pipes
-https://www.val.town/v/jxnblk/svg_favicon
-https://www.val.town/v/pomdtr/blog_mdx
-https://www.val.town/v/andy_blum/PrintPOSTPayload
-https://www.val.town/v/pomdtr/sync
-https://www.val.town/v/jxnblk/color_contrast_api
-https://www.val.town/v/stevekrouse/isthegtrainfucked
-https://www.val.town/v/jxnblk/caviar
-https://www.val.town/v/jxnblk/tuna
-https://www.val.town/v/jxnblk/tuna_example
-https://www.val.town/v/stevekrouse/react_http
-https://www.val.town/v/stevekrouse/cors_example_backend
-https://www.val.town/v/mjweaver01/PersonalizationGPT
-https://www.val.town/v/stevekrouse/allVals
-https://www.val.town/v/git/fetch_timeout
-https://www.val.town/v/stevekrouse/clone_my_vals_to_sqlite
-https://www.val.town/v/mark05e/niceSnippetPostmanCodegen
-https://www.val.town/v/mvaodhan/showbot
-https://www.val.town/v/git/sparkle
-https://www.val.town/v/stevekrouse/getColor
-https://www.val.town/v/curtcox/_not_actually_private_so_that_you_can_see_it
-https://www.val.town/v/reosablo/sampleVanSSR
-https://www.val.town/v/reosablo/uuidGeneratorStream
-https://www.val.town/v/reosablo/sampleVanIsland
-https://www.val.town/v/vladimyr/oakExample
-https://www.val.town/v/yawnxyz/openAiExample
-https://www.val.town/v/iamseeley/HonoHTMX
-https://www.val.town/v/pbt/gtrainog
-https://www.val.town/v/pbt/gtrainalerts
-https://www.val.town/v/jamiedubs/ethereumTokenBalances
-https://www.val.town/v/jxnblk/contrast_swatch
-https://www.val.town/v/crif/Typescript_beginner_learning
-https://www.val.town/v/stevekrouse/telegramPhotoExample
-https://www.val.town/v/ravvi_kumar/greenPeafowl
-https://www.val.town/v/flxa/htmlExample
-https://www.val.town/v/jxnblk/color_contrast
-https://www.val.town/v/jxnblk/png_card
-https://www.val.town/v/jxnblk/svg_card
+- [Max](https://val.town/u/maxm) implemented the [huffman encoding](https://www.val.town/v/maxm/huffmanEncoding)
+- [Omar](https://www.val.town/u/git/) made some [sparkly text](https://www.val.town/v/git/sparkle)
+- [Achille](https://www.val.town/u/pomdtr) is at it again with [a tool to sync val from local to remote](https://www.val.town/v/pomdtr/sync)
+- [Curt](https://www.val.town/u/curtcox) made a [Slack helpers](https://www.val.town/v/curtcox/reply_to_slack_message)
+- https://www.val.town/v/stevekrouse/importValInChromeConsole
+- https://www.val.town/v/maxm/tinygoHttpExample
+- https://www.val.town/v/samk/Candlewood_Lake_Temp_Alerts
+- https://www.val.town/v/maxm/codemirrorTsBrowser
+- https://www.val.town/v/jdan/blobImages
+- https://www.val.town/v/jdan/emojiGuessr
+- https://www.val.town/v/maxm/httpStatusBehavior
+- https://www.val.town/v/stevekrouse/pipedream
+- https://www.youtube.com/live/gudoXL2Uba0
+- https://www.val.town/v/iamseeley/HonoHTMX
+- https://www.val.town/v/stevekrouse/telegram
+- https://www.val.town/v/neverstew/emailHole
+- https://www.val.town/v/rayman/QuillEditor
+- https://www.val.town/v/yieldray/decorator_router
+- https://www.val.town/v/ckersey2/zodStringToJSON
+- https://www.val.town/v/sjerred/renderFormAndSaveData
+- https://www.val.town/v/cotr/launch_thrifty_idea_generator
+- https://www.val.town/v/evilsteventey/dubLinksUpsert
+- https://www.val.town/v/steventey/dubLinksUpsert
+- https://www.val.town/v/geraldo/testPostToMastodon
+- https://www.val.town/v/platoff/salmonMonkey
+- https://www.val.town/v/thecurryman/sapphireManatee
+- https://www.val.town/v/jxnblk/pie
+- https://www.val.town/v/samhashemi/testing
+- https://www.val.town/v/hacksore/orangeFish
+- https://www.val.town/v/stevekrouse/dude
+- https://www.val.town/v/tfayyaz/whiteMongoose
+- https://www.val.town/v/willthereader/story_wordcount
+- https://www.val.town/v/crif/Test_js_functions_and_stuff
+- https://www.val.town/v/harper/pushover
+- https://www.val.town/v/harper/ShopifyProductSearch
+- https://www.val.town/v/harper/DropNotification
+- https://www.val.town/v/tfayyaz/tahirsTil
+- https://www.val.town/v/andreterron/violetPerch
+- https://www.val.town/v/stevekrouse/cron_client_side_script_fork
+- https://www.val.town/v/stevekrouse/cron_client_react_fork
+- https://www.val.town/v/geraldo/tootLatestPosts
+- https://www.val.town/v/vladimyr/bookmarkletHighlightForks
+- https://www.val.town/v/yawnxyz/ai
+- https://www.val.town/v/michaelmang/bookmark
+- https://www.val.town/v/pomdtr/pipes
+- https://www.val.town/v/jxnblk/svg_favicon
+- https://www.val.town/v/pomdtr/blog_mdx
+- https://www.val.town/v/andy_blum/PrintPOSTPayload
+- https://www.val.town/v/pomdtr/sync
+- https://www.val.town/v/jxnblk/color_contrast_api
+- https://www.val.town/v/stevekrouse/isthegtrainfucked
+- https://www.val.town/v/jxnblk/caviar
+- https://www.val.town/v/jxnblk/tuna
+- https://www.val.town/v/jxnblk/tuna_example
+- https://www.val.town/v/stevekrouse/react_http
+- https://www.val.town/v/stevekrouse/cors_example_backend
+- https://www.val.town/v/mjweaver01/PersonalizationGPT
+- https://www.val.town/v/stevekrouse/allVals
+- https://www.val.town/v/git/fetch_timeout
+- https://www.val.town/v/stevekrouse/clone_my_vals_to_sqlite
+- https://www.val.town/v/mark05e/niceSnippetPostmanCodegen
+- https://www.val.town/v/mvaodhan/showbot
+- https://www.val.town/v/reosablo/sampleVanSSR
+- https://www.val.town/v/reosablo/uuidGeneratorStream
+- https://www.val.town/v/reosablo/sampleVanIsland
+- https://www.val.town/v/vladimyr/oakExample
+- https://www.val.town/v/yawnxyz/openAiExample
+- https://www.val.town/v/iamseeley/HonoHTMX
+- https://www.val.town/v/pbt/gtrainog
+- https://www.val.town/v/pbt/gtrainalerts
+- https://www.val.town/v/jamiedubs/ethereumTokenBalances
+- https://www.val.town/v/jxnblk/contrast_swatch
+- https://www.val.town/v/crif/Typescript_beginner_learning
+- https://www.val.town/v/stevekrouse/telegramPhotoExample
+- https://www.val.town/v/jxnblk/color_contrast
+- https://www.val.town/v/jxnblk/png_card
+- https://www.val.town/v/jxnblk/svg_card
