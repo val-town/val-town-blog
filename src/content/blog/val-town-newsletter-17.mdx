@@ -1,16 +1,49 @@
 ---
 title: Val Town Newsletter 17
-description: TODO
+description: Improved performance, redesigned val page, live coding, and much more!
 pubDate: May 24, 2024
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
-import After from "./better-val-pages/after.png";
+import ValRedesign from "./val-town-newsletter-17/val-redesign.png";
+import FirstCron from "./val-town-newsletter-17/first-cron.png";
+import FirstWebsite from "./val-town-newsletter-17/first-website.png";
 
-Over the last month, we drastically improved val runtime performance and redesigned the val page. Jackson. TODO
+<style>
+  {`
+    .lineup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+    }
+    figcaption {
+      margin-top: -20px;
+    }
+    .quickstart {
+       border: 2px solid #eaeaea;
+      padding: 5px;
+    }
+    #subscribe {
+      font-size: 20px; 
+      padding: 5px; 
+      border: 2px solid #143f9d; 
+      text-align:center; 
+      border-radius: 5px; 
+      text-decoration: none; 
+      display: block; 
+      margin-top: 20px;
+    }
+    #subscribe:hover {
+      background-color: #143f9d;
+      color: white;
+    }
+`}
+</style>
 
-Next month, TODO
+Over the last month, we drastically improved val runtime performance, redesigned the val page, and worked on dozens of other improvements and bug fixes. Jackson and JP joined the team! Steve started a weekly live coding series.
+
+Now we're working on HTTP streaming and improving user onboarding.
 
 Prefer video? Here's a walkthrough of the newsletter:
 
@@ -27,45 +60,71 @@ Prefer video? Here's a walkthrough of the newsletter:
 
 ### 🤗 Welcome Jackson & JP!
 
-TODO
+We're excited to welcome Jackson and JP to the team!
+
+[Jackson](https://jxnblk.com/) was most recently an indie game designer, and before that a Staff Engineer at Gatsby. He's known for [styled-system](https://styled-system.com/), [theme-ui](https://theme-ui.com/), and [MDX Deck](https://mdxjs.com/). He's joining full-time as our founding design engineer.
+
+[JP](https://janpaulposma.nl/) was most recently uncovering ancient Roman secrets at [Scroll Prize](https://scrollprize.org/), and before that founded [Zaplib](https://zaplib.com/) with Steve. He is joining part-time for the summer.
 
 ### ⚡️ Vals are 2x faster!
 
-TODO
+Max shipped [a huge performance improvement](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-9203997) to the val runtime by cutting out a network hop on imports. Vals are at least 60% faster. Vals with many imports are many times faster. For example, the [Date Me Directory](https://dateme.directory) (one of the most complex vals) runs 6x faster now – 0.5 second vs 3 seconds! There's more to do to make vals even faster, but this is a great start.
 
-https://x.com/stevekrouse/status/1782840487939878964
+### 🎨 Val Page Redesign
 
-### Val Page Redesign
-
-Tom redesigned the val page to make it easier to read and navigate. [Read more](https://blog.val.town/blog/redesigning-val-pages/) about the changes.
+Tom redesigned the val page to make it easier to parse and navigate: [Redesigning Val Pages](/blog/redesigning-val-pages/).
 
 <div align="center">
-  <Image src={After} alt="Val Page After" />
-  <figcaption>Val page after</figcaption>
+  <Image src={ValRedesign} alt="Val page, before and after" />
 </div>
 
-### Quickstarts
+### 📺 Livestreams
 
-We shipped two quickstart tutorials to help you get started with vals:
+Steve started a weekly live coding series. They're a great way to learn Val Town and see how others use it. If you missed em, they're all on YouTube:
 
-TODO https://x.com/stevekrouse/status/1788694731435683964
-https://x.com/stevekrouse/status/1789036314106511638
+1. [Jamie Dubs of Glif](https://www.youtube.com/live/-HZyIm3Nlvo?feature=shared)
+2. [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared)
+3. [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared)
 
-### Livestreams
+<a
+  href="https://www.youtube.com/channel/UCjMK2zia8a3IK04f3LEHdrw?sub_confirmation=1"
+  id="subscribe"
+>
+  🔔 Subscribe on YouTube to get notified when we go live
+</a>
 
-Steve started weekly Val Town live coding
+This series was inspired by Steve's livestreams with [Jason Lengstorf](https://www.youtube.com/watch?v=WnOcLog2P1Y) and [Maggie Appleton](https://www.youtube.com/watch?v=kJTeyskdYpk), which are also recommended watching! Maggie's episode is particularly great for front-end engineers who want to learn backend programming.
 
-1. Jamie Dubbs
-2. Jordan Scales (@jdan)
-3. Lu Wilson (@todepond)
+We're looking for show guests! If you're interested, please [shoot Steve a DM](https://twitter.com/stevekrouse).
 
-If you want even more livestreams, you can also check out the older ones with Maggie Appleton and Jason TODO.
+### 📝 Quickstarts
 
-TODO - subscribe on youtube to get notified of when they get scheduled!
+We wrote two quickstart tutorials to help you make your first vals. Let us know if you get stuck!
 
-We're looking for live coding guests! If you're interested, please [shoot Steve a DM](https://twitter.com/stevekrouse).
+1. [Your first cron val](https://docs.val.town/quickstarts/first-cron/) - a personalized weather email every morning
+2. [Your first website val](https://docs.val.town/quickstarts/first-website/) - a link in bio website template you can fork and customize
 
-### New OG Image for vals
+<div class='lineup'>
+  <div align="center">
+    <a href="https://docs.val.town/quickstarts/first-cron/"> 
+      <Image src={FirstCron} alt="Your first cron val" class="quickstart" />
+      <figcaption>
+        Your first cron val
+      </figcaption>
+    </a>
+  </div>
+
+  <div align="center">
+    <a href="https://docs.val.town/quickstarts/first-website/">
+      <Image src=  {FirstWebsite} alt="Your first website val" class="quickstart" />
+      <figcaption>
+      Your first website val
+      </figcaption>
+    </a>
+  </div>
+</div>
+
+### 🖼️ New OG Share Image
 
 Jackson shipped a new OG image for vals
 
@@ -73,15 +132,17 @@ TODO photo https://x.com/stevekrouse/status/1791126791341449250
 
 TODO - you can create OG images in vals!
 
-### Fixer for JSX Pragma
+### JSX Pragma Helper
 
 Val Town supports any kind of JSX. The problem is you have to specify which kind of JSX (React, Preact, Vue, Hono, etc) at the top of the val in this hard to remember pragma, ie for React it's `/** @jsxImportSource https://esm.sh/react */`. Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
 
-TODO video or GIF
+TODO video or GIF - TODO tweet this
 
-### Options for viewing vals in a list
+### Vals in a list switcher
 
-TODO GIF
+Jackson...
+
+TODO GIF - TODO tweet this
 
 ### Other updates
 
@@ -112,12 +173,20 @@ TODO GIF
 
 ## 🛣️ Roadmap
 
+### What we're working on
+
+Max is almost done rewriting our core networking code to make HTTP streaming possible. This will also improve performance for HTTP vals and pave the way for websocket support.
+
+The rest of the team has been focused increasing signups, improving user onboarding, and making usability improvements. We're making user interviews a regular part of every Val Town employee's job. They really impact what we work on. If you want to have a personalized onboarding or a voice in the future of Val Town, email [interviews@val.town](mailto:interviews@val.town) and we'll set up a time to chat!
+
 ### Coming soon
 
 Here's what we plan to work on in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
-- [HTTP streaming](https://github.com/val-town/val-town-product/discussions/14)
+- [HTTP Streaming](https://github.com/val-town/val-town-product/discussions/14) (almost done!)
 - [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- [Better Search](https://github.com/val-town/val-town-product/discussions/69)
+- [Val runtime performance](https://github.com/val-town/val-town-product/discussions/113)
 - [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
 - [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
 - [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
@@ -131,7 +200,7 @@ Here's what we plan to work on in the coming months. Please [make feature reques
 - [Guillermo Rauch](https://www.val.town/u/rauchg) made [a val](https://x.com/rauchg/status/1791983008905625882)
 - Arjun gets [Github start count alerts in Slack](https://x.com/arjunattam/status/1782694292412039470)
 - [Steven Tey](https://www.val.town/u/steventey) demoed how to [shorten a URL via the Dub API](https://x.com/steventey/status/1790318860031418575)
-- [Jamie] gets [a morning weather report & fashion suggestion](https://x.com/jamiew/status/1789307087538868414) with [Glif](https://glif.app/glifs)
+- [Jamie](https://www.val.town/u/jamiedubs) gets [a morning weather report & fashion suggestion](https://x.com/jamiew/status/1789307087538868414) with [Glif](https://glif.app/glifs)
 - [Max](https://www.val.town/u/mxdvl) is helping his family [track his sister at sea](https://x.com/mxdvl/status/1782858513074491454)
 - [Stephen](https://www.val.town/u/saolsen) expanded his [game agent battleground: texas-hold'm](https://x.com/olsenator4/status/1784934905614381182)
 - [Jordan](https://val.town/u/jdan) made a [word game inspired by TextTwist](https://x.com/jdan/status/1784362801932255340)
@@ -139,7 +208,7 @@ Here's what we plan to work on in the coming months. Please [make feature reques
 - [Jordan](https://val.town/u/jdan) made a [MySpace profile](https://x.com/jdan/status/1792199312866484465) - send him a PR to leave a comment!
 - [David](https://www.val.town/u/dctalbot) made [a val to get the dominant color from an image](https://www.val.town/v/dctalbot/getColor) - [try it here](https://stevekrouse-getcolor.web.val.run/)
 - [Steve](https://val.town/u/stevekrouse) made [exponential backoff as middleware](https://x.com/stevekrouse/status/1783982733124845852)
-- [Simplescraper] made a guide to [build an automated trading bot](https://x.com/simplescraper/status/1787862598098297022)
+- Simplescraper made a guide to [build an automated trading bot](https://x.com/simplescraper/status/1787862598098297022)
 - [Tom](https://val.town/u/tmcw) made a [pmtiles-to-geojson proxy](https://x.com/tmcw/status/1782577312904466819) to solve coastlines in his figma plugins
 - [Tahir](https://val.town/u/tfayyaz) put [tldraw in a val](https://x.com/TFayyaz/status/1782986916151099527) while _on his phone!_
 - [Steve](https://val.town/u/stevekrouse) made a [passkeys demo](https://x.com/stevekrouse/status/1784679866161369172)
