@@ -6,7 +6,8 @@ author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
-import ValRedesign from "./val-town-newsletter-17/val-redesign.png";
+import Before from "./val-town-newsletter-17/before.png";
+import After from "./val-town-newsletter-17/after.png";
 import FirstCron from "./val-town-newsletter-17/first-cron.png";
 import FirstWebsite from "./val-town-newsletter-17/first-website.png";
 import OGImage from "./val-town-newsletter-17/og-image.png";
@@ -18,7 +19,7 @@ import OGImage from "./val-town-newsletter-17/og-image.png";
       grid-template-columns: 1fr 1fr;
       grid-gap: 20px;
     }
-    figcaption {
+    a > figcaption {
       margin-top: -20px;
     }
     .quickstart {
@@ -58,10 +59,17 @@ Max shipped [a huge performance improvement](https://github.com/val-town/val-tow
 
 ### 🎨 Val Page Redesign
 
-Tom redesigned the val page to make it easier to parse and navigate: [Redesigning Val Pages](/blog/redesigning-val-pages/).
+Tom [redesigned the val page](/blog/redesigning-val-pages/), and then Jackson redesign them again!
 
-<div align="center">
-  <Image src={ValRedesign} alt="Val page, before and after" />
+<div class="lineup">
+  <div align="center">
+    <Image src={Before} alt="Val Page Before Redesign" class="cropped" />
+    <figcaption>Before</figcaption>
+  </div>
+  <div align="center">
+    <Image src={After} alt="Val Page After" class="cropped" />
+    <figcaption>Tom's redesign</figcaption>
+  </div>
 </div>
 
 ### 📺 Livestreams
@@ -84,7 +92,7 @@ They're a great way to learn Val Town by watching others use it. And if you watc
 - [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared)
 - [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared)
 
-This series was inspired by Steve's livestreams with [Jason Lengstorf](https://www.youtube.com/watch?v=WnOcLog2P1Y) and [Maggie Appleton](https://www.youtube.com/watch?v=kJTeyskdYpk), which are also recommended watching! Jason's episode is great for pro JavaScripters who want to see us accomplish a lot in a short time. Maggie's episode is great for front-end engineers who want to learn backend programming.
+This series was inspired by Steve's livestreams with Jason Lengstorf and Maggie Appleton, which are also recommended watching! [Jason's episode](https://www.youtube.com/watch?v=WnOcLog2P1Y) is great for pro JavaScripters who want to see us accomplish a lot in a short time. [Maggie's episode](https://www.youtube.com/watch?v=kJTeyskdYpk) is great for front-end engineers who want to learn backend programming.
 
 ### 📝 Quickstarts
 
@@ -149,7 +157,7 @@ Jackson shipped alternative views for vals in a list. You can toggle between car
 - Lots of small improvements to onboarding
 - Redesigned val hover cards in code
 - Hono/JSX template
-- Shorter val preview URL on mobile (thanks _Matthew Williams_ for the suggestion)
+- Shorter val preview URL on mobile (thanks Matthew Williams for the suggestion)
 - Settings submenu in user profile menu https://x.com/stevekrouse/status/1790470900078260276
 - Better error message on invalid environment variable names
 - Fixed bug where users weren't getting subscribed to our newsletter
