@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 17
 description: Improved performance, redesigned val page, live coding, and much more!
-pubDate: May 28, 2024
+pubDate: May 29, 2024
 author: Steve Krouse
 ---
 
@@ -45,9 +45,11 @@ Over the last month, we drastically improved val runtime performance, redesigned
 
 Now we're working on HTTP streaming and improving user onboarding. Over the coming weeks and months, we'll work on better search, improved val organization, a new pricing plan, more performance improvements, and more.
 
+There were so many amazing community vals this month! Here are a few highlights: [Static Chess](https://www.val.town/v/maxm/staticChess), [Robin Sloan's book preorder email handler](https://www.robinsloan.com/lab/at-home-in-high-dimensional-space/#valtown), and [Cameron's homeless resources Custom GPT](https://www.val.town/v/cameronpak/homeless). See below for _sixty_ (!!) more awesome vals from the last month.
+
 ### 🤗 Welcome Jackson & JP!
 
-We're excited to welcome Jackson and JP to the team!
+We're so excited to welcome Jackson and JP to the team!
 
 [Jackson](https://jxnblk.com/) was most recently an indie game designer, and before that a Staff Engineer at Gatsby. He's known for [styled-system](https://styled-system.com/), [theme-ui](https://theme-ui.com/), and [MDX Deck](https://mdxjs.com/). He's joining full-time as our founding design engineer.
 
@@ -55,7 +57,7 @@ We're excited to welcome Jackson and JP to the team!
 
 ### ⚡️ Vals are 2x faster!
 
-Max shipped [a huge performance improvement](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-9203997) to the val runtime by cutting out a network hop on imports. Vals are at least 60% faster. Vals with many imports are many times faster. For example, the [Date Me Directory](https://dateme.directory) (one of the most complex vals) runs 6x faster now – 0.5 second vs 3 seconds! There's more to do to make vals even faster, but this is a great start.
+Max shipped [a huge performance improvement](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-9203997) to the val runtime by cutting out a network hop on imports. Vals are at least 60% faster, and vals with many imports are many times faster. For example, the [Date Me Directory](https://dateme.directory) (one of the most complex vals) runs 6x faster now – half a second vs 3 seconds!
 
 ### 🎨 Val Page Redesign
 
@@ -86,13 +88,13 @@ Steve started a weekly live coding series. Tune into the next episodes:
   🔔 Subscribe on YouTube to get notified when we go live
 </a>
 
-They're a great way to learn Val Town by watching others use it. And if you watch live, you can ask questions and we'll answer! The first three episodes:
+They're a great way to learn Val Town by watching others use it. And if you watch live, you can ask questions and we'll answer! Or heckle. That's fun too. The first three episodes:
 
-- [Jamie Dubs (@jamiew)](https://www.youtube.com/live/-HZyIm3Nlvo?feature=shared)
-- [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared)
-- [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared)
+- [Jamie Dubs (@jamiew)](https://www.youtube.com/live/-HZyIm3Nlvo?feature=shared) - making a morning weather email photo with Glif
+- [Jordan Scales (@jdan)](https://www.youtube.com/live/zbl5KHf7_YY?feature=shared) - building an image uploader and emoji guesser
+- [Lu Wilson (@todepond)](https://www.youtube.com/live/5Em6D7n-ggs?feature=shared) - upgrading their button clicker from blob to sqlite storage
 
-This series was inspired by Steve's livestreams with Jason Lengstorf and Maggie Appleton, which are also recommended watching! [Jason's episode](https://www.youtube.com/watch?v=WnOcLog2P1Y) is great for pro JavaScripters who want to see us accomplish a lot in a short time. [Maggie's episode](https://www.youtube.com/watch?v=kJTeyskdYpk) is great for front-end engineers who want to learn backend programming.
+This series was inspired by Steve's livestreams with Jason Lengstorf and Maggie Appleton, which are also recommended watching! [Jason's episode](https://www.youtube.com/watch?v=WnOcLog2P1Y) is great for pro JavaScripters who want to see us accomplish a lot in a short time. [Maggie's episode](https://www.youtube.com/watch?v=kJTeyskdYpk) is great for front-end engineers who want to learn backend.
 
 ### 📝 Quickstarts
 
@@ -131,7 +133,7 @@ Jackson shipped a much improved OpenGraph share image for vals for when you shar
 
 ### `</>` JSX Pragma Helper
 
-Val Town supports any kind of JSX. This is a blessing and a curse. The problem is you have to specify which kind of JSX (React, Preact, Hono, etc) at the top of the val in this hard to remember pragma. For example, for React it's `/** @jsxImportSource https://esm.sh/react */`. Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
+Val Town supports any kind of JSX. This is a blessing and a curse. The problem is you have to specify which kind of JSX (React, Preact, Hono, etc). Tom shipped a fixer that detects the missing pragma when you use JSX and helps you add it in.
 
 <video controls>
   <source src="/video/jsx_pragma.mp4" />
@@ -139,7 +141,7 @@ Val Town supports any kind of JSX. This is a blessing and a curse. The problem i
 
 ### 🗂️ Viewing vals in a list
 
-Jackson shipped alternative views for vals in a list. You can toggle between cards, full vals, and a compact list view. This switcher is available on user profiles, [examples](https://www.val.town/examples/apis) and [packages](https://www.val.town/examples/packages).
+Jackson shipped alternative views for vals in a list. You can toggle between cards, full vals, and a compact list view. This switcher is available on user profiles, [examples](https://www.val.town/examples/apis) and [packages](https://www.val.town/examples/packages). This is a first step towards making it easier to navigate vals – let us know which representation you prefer!
 
 <video controls>
   <source src="/video/list-toggle.mp4" />
@@ -158,10 +160,10 @@ Jackson shipped alternative views for vals in a list. You can toggle between car
 - Redesigned val hover cards in code
 - Hono/JSX template
 - Shorter val preview URL on mobile (thanks Matthew Williams for the suggestion)
-- Settings submenu in user profile menu https://x.com/stevekrouse/status/1790470900078260276
+- Settings submenu in user profile menu ([photo](https://x.com/stevekrouse/status/1790470900078260276))
 - Better error message on invalid environment variable names
 - Fixed bug where users weren't getting subscribed to our newsletter
-- Allow \<img\> and \<div\> tags in readme https://x.com/mxmcd/status/1791134100708901367
+- Allow \<img\> and \<div\> tags in readme ([demo](https://x.com/mxmcd/status/1791134100708901367))
 - Adjusted fonts
 - Added more prominent sign up banner when logged out
 - Hide ? menu for logged out users
@@ -175,13 +177,13 @@ Jackson shipped alternative views for vals in a list. You can toggle between car
 
 ### What we're working on
 
-Max is almost done rewriting our core networking code to make HTTP streaming possible. This will also improve performance for HTTP vals and pave the way for websocket support.
+Max is almost done rewriting our core networking to make HTTP streaming possible. This will also improve performance for HTTP vals and pave the way for websocket support.
 
 The rest of the team has been focused increasing signups, improving user onboarding, and making usability improvements. We're making user interviews a regular part of every Val Town employee's job. They really impact what we work on. If you want to have a personalized onboarding or a voice in the future of Val Town, email [interviews@val.town](mailto:interviews@val.town) and we'll set up a time to chat!
 
 ### Coming soon
 
-Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
 - [HTTP Streaming](https://github.com/val-town/val-town-product/discussions/14) (almost done!)
 - [Better Search](https://github.com/val-town/val-town-product/discussions/69)
@@ -198,9 +200,10 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - Robin Sloan is [tracking preorders of his upcoming novel](https://www.robinsloan.com/lab/at-home-in-high-dimensional-space/#valtown)!
 - [Cameron](https://www.val.town/u/cameronpak) built [a Custom GPT](https://chatgpt.com/g/g-EHnfrHg8L-homeless-helper-by-ourtechnology) with [a backend on Val Town](https://www.val.town/v/cameronpak/homeless) to help homeless individuals find resources
 - [p.b. hua](https://www.val.town/u/pbt) made a [isthegtrainfucked.com](https://isthegtrainfucked.com/), possibly the new yorkest val ever, ([view source](https://www.val.town/v/pbt/isthegtrainfucked))
-- [Ben](https://www.val.town/u/xkonti) did a [livestream](https://www.youtube.com/live/gudoXL2Uba0), [tutorial video](https://www.youtube.com/live/WwMAPz4gpZc) on making a [custom GPT](https://www.val.town/v/xkonti/gameIdeaApi). It's an excellent place to start if you want to make a custom GPT!
+- [Ben](https://www.val.town/u/xkonti) did a [livestream](https://www.youtube.com/live/gudoXL2Uba0) and [tutorial video](https://www.youtube.com/live/WwMAPz4gpZc) on making a [custom GPT](https://www.val.town/v/xkonti/gameIdeaApi). It's an excellent place to start if you want to make a custom GPT!
 - [Jan](https://www.val.town/u/yawnxyz) made surprisingly fast [AI audio translator](https://x.com/yawnxyz/status/1788783516378964108)! - [try it here](https://yawnxyz-ai.web.val.run/)
 - [Guillermo Rauch](https://www.val.town/u/rauchg) made [a val](https://x.com/rauchg/status/1791983008905625882)
+- [Batuhan](https://val.town/u/isidentical) made it really easy to play with Fal to super quickly generate images - which was built on by [Steve](https://stevekrouse-fal_demo.web.val.run/), [Max](https://www.val.town/v/maxm/imgGenUrl) and [Andrew](https://www.val.town/v/andrewgao/imgGenUrl)
 - Arjun gets [Github start count alerts in Slack](https://x.com/arjunattam/status/1782694292412039470)
 - [Steven Tey](https://www.val.town/u/steventey) demoed how to [shorten a URL via the Dub API](https://x.com/steventey/status/1790318860031418575)
 - [Jamie](https://www.val.town/u/jamiedubs) gets [a morning weather report & fashion suggestion](https://x.com/jamiew/status/1789307087538868414) with [Glif](https://glif.app/glifs)
@@ -219,11 +222,10 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [Steve](https://val.town/u/stevekrouse) made a [passkeys demo](https://x.com/stevekrouse/status/1784679866161369172)
 - [Jackson](https://www.val.town/u/jxnblk) made [a lightweight React SRR framework](https://www.val.town/v/jxnblk/resrv)
 - [Steve](https://val.town/u/stevekrouse) made [Static Wordle](https://x.com/stevekrouse/status/1791445063316185369)
-- [Batuhan](https://val.town/u/isidentical) made it really easy to play with Fal to super quickly generate images - which was built on by [Steve](https://stevekrouse-fal_demo.web.val.run/), [Max](https://www.val.town/v/maxm/imgGenUrl) and [Andrew](https://www.val.town/v/andrewgao/imgGenUrl)
 - [Max](https://val.town/u/maxm) implemented the [huffman encoding](https://www.val.town/v/maxm/huffmanEncoding)
 - [Omar](https://www.val.town/u/git/) made some [sparkly text](https://www.val.town/v/git/sparkle)
 - [Achille](https://www.val.town/u/pomdtr) is at it again with [a tool to sync val from local to remote](https://www.val.town/v/pomdtr/sync)
-- [Curt](https://www.val.town/u/curtcox) made a [Slack helpers](https://www.val.town/v/curtcox/reply_to_slack_message)
+- [Curt](https://www.val.town/u/curtcox) made [Slack helpers](https://www.val.town/v/curtcox/reply_to_slack_message)
 - [Steve](https://www.val.town/u/stevekrouse) made a [guide for how to import val in the Chrome console](https://www.val.town/v/stevekrouse/importValInChromeConsole)
 - [Max](https://www.val.town/u/maxm) got [a tiny Go server](https://www.val.town/v/maxm/tinygoHttpExample) running in a val via wasm
 - [Sammy](https://www.val.town/u/samk) made a [Candlewood Lake temperature alerts](https://www.val.town/v/samk/Candlewood_Lake_Temp_Alerts) to know when to go wakesurfing
