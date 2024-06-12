@@ -1,7 +1,7 @@
 ---
 title: "Val Town: Now With HTTP Streaming"
 generated: 1717773046864
-description: HTTP Vals can now handle large streaming uploads and streaming responses and Server-Sent Events.
+description: HTTP Vals support large streaming uploads, streaming responses and Server-Sent Events.
 pubDate: June 7, 2024
 author: Max McDonnell
 ---
