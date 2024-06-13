@@ -1,0 +1,174 @@
+---
+title: HTTP Streaming in Val Town
+description: Val Town supports HTTP streaming for streaming LLMs, large requests and responses, and server-sent events
+pubDate: June 13, 2024
+author: Max McDonnell
+---
+
+import { Image } from "astro:assets";
+import JamesWebb from "./http-streaming/james-webb.gif";
+
+Val Town now supports HTTP streaming, [our most-requested feature](https://github.com/val-town/val-town-product/discussions/14). (You may recognize me as the guy who originally requested that feature. Now I work here and I shipped it!) Streaming opens up many new use-cases: streaming LLM responses, large requests and responses, and server-sent events.
+
+## Streaming LLM Responses
+
+LLMs are a classic use-case for streaming: show the user the response as it's being generated. Here is a minimal example of a streaming OpenAI response. Add `stream: true` in the request payload and a streaming response will be returned.
+
+```ts
+import { OpenAI } from "https://esm.town/v/std/openai";
+
+export default async function (req: Request): Promise<Response> {
+  const openai = new OpenAI();
+  const stream = await openai.chat.completions.create({
+    stream: true,
+    messages: [
+      {
+        role: "user",
+        content: "Write a poem in the style of beowulf about the DMV",
+      },
+    ],
+    model: "gpt-3.5-turbo",
+    max_tokens: 2048,
+  });
+  return new Response(
+    new ReadableStream({
+      async start(controller) {
+        for await (const chunk of stream) {
+          controller.enqueue(
+            new TextEncoder().encode(chunk.choices[0]?.delta?.content)
+          );
+          controller.close();
+        }
+      },
+    }),
+    { headers: { "Content-Type": "text/event-stream" } }
+  );
+}
+```
+
+<br />
+
+<video controls loop autoplay>
+  <source src="/video/chatgpt-streaming.mp4" />
+</video>
+
+[Fork on Val Town](https://www.val.town/v/maxm/openAIStreamingExample) | [View live output](https://maxm-openaistreamingexample.web.val.run)
+
+### Large Requests
+
+We've increased the limit on request body size from 2mb to
+to 100mb. Here's [an example val](https://www.val.town/v/maxm/reportBodySize) that returns the size of the request body without holding all of it in memory:
+
+```ts
+export default async function (req: Request): Promise<Response> {
+  if (req.method !== "POST") {
+    return new Response("Method not allowed", { status: 405 });
+  }
+  const reader = req.body.getReader();
+  let totalBytes = 0;
+  console.log(performance.now());
+  while (true) {
+    const { done, value } = await reader.read();
+    if (done) break;
+    console.log(value.byteLength, performance.now());
+    totalBytes += value.byteLength;
+  }
+  return new Response(`${totalBytes}`);
+}
+```
+
+If we upload a large file to that endpoint it will respond as we'd expect:
+
+```bash
+$ curl --data @image.png https://maxm-reportbodysize.web.val.run
+66799801
+```
+
+## Large Responses
+
+Now any HTTP response that is written incrementally will now stream to the client. And now that we don't buffer responses, we can scalable allow you to work with large files. We used to have a 10mb limit on response size, but now you can stream responses of any size.
+
+In the example below we proxy the latest [130mb
+supernovae image](https://www.flickr.com/photos/nasawebbtelescope/53782948438/in/album-72177720313923911/) from the Webb Telescope. The client can begin downloading the image before the server has finished downloading it.
+
+```ts
+export default async function (req: Request) {
+  return fetch(
+    "https://live.staticflickr.com/65535/53782948438_9b85e57a6c_o_d.png"
+  );
+}
+```
+
+<br />
+
+<Image src={JamesWebb} alt="James Webb Space Telescope" />
+
+[Fork on Val Town](https://www.val.town/v/maxm/jamesWebbImageProxy) | [View live output](https://maxm-jameswebbimageproxy.web.val.run)
+
+## Server-Sent Events
+
+Server-Sent Events are similar to a one way websocket. The ChatGPT example above actually used server-sent events. They're useful when you want to work with a stream of discrete events vs a continuous stream of data. Here's an example of constructing a server-sent event stream manually to make a clone of [robpike.io](https://robpike.io/).
+
+```ts
+const msg = new TextEncoder().encode("💩");
+const initialDelay = 20;
+export default async function (req: Request): Promise<Response> {
+  let timerId: number | undefined;
+  const body = new ReadableStream({
+    start(controller) {
+      let currentDelay = initialDelay;
+      function writeToStream() {
+        currentDelay *= 1.03;
+        controller.enqueue(msg);
+        timerId = setTimeout(writeToStream, currentDelay);
+      }
+      writeToStream();
+    },
+    cancel() {
+      if (typeof timerId === "number") {
+        clearInterval(timerId);
+      }
+    },
+  });
+  return new Response(body, {
+    headers: {
+      "Content-Type": "text/event-stream",
+    },
+  });
+}
+```
+
+<br />
+
+<video controls loop autoplay>
+  <source src="/video/robpike.mp4" />
+</video>
+
+[Fork on Val Town](https://www.val.town/v/maxm/robPikeIO) | [View live output](https://maxm-robpikeio.web.val.run)
+
+For a more complex application using server-sent events, check out my [little ChatGPT clone](https://www.val.town/v/maxm/valTownChatGPT).
+
+### Under the hood
+
+{/* TODO - max should work on this section */}
+
+We had to entirely reorient the way we run user code to support streaming. Previously, we would run the user code and buffer the entire response, serialize it, and send it on. Now we ...
+
+This architectural change also paves the way for future support for
+[websockets](https://github.com/val-town/val-town-product/discussions/144).
+
+We built this functionality in a library, and we open-sourced it! Check it out: https://github.com/val-town/deno-http-worker
+
+Be careful what you wish for – you just may end up joining the company and building it.
+
+### Go forth and stream!
+
+We're excited to see what you build with these new features!
+
+Here's a few more examples to inspire your next Val:
+
+- [maxm/multiplayerCircles](https://www.val.town/v/maxm/multiplayerCircles) - a
+  collaborative canvas of movable circles that polls the database on the backend
+  and streams changes to the frontend.
+- [thesephist/webgen](https://www.val.town/v/thesephist/webgen) - ask chatGPT to generate a website and watch it render bit by bit in front of your eyes. (watch this built live [on Steve's live stream](https://x.com/i/broadcasts/1yNGaZYkdVXJj))
+- [maxm/asciiNycCameras](https://www.val.town/v/maxm/asciiNycCameras) - streaming ASCII videos of NYC traffic cameras.
