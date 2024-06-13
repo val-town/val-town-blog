@@ -150,14 +150,9 @@ For a more complex application using server-sent events, check out my [little Ch
 
 ### Under the hood
 
-{/* TODO - max should work on this section */}
+We had to entirely reorient the way we run user code to support streaming. Previously, we would run the user code and buffer the entire response, serialize it, and send it on. Now, we only communicate with user code over HTTP. If you're running a script, email, or interval Val we send an HTTP request with the relevant information and wait for a response. With HTTP vals we simply proxy the incoming request straight to the worker. This way we don't mess too much with the request structure and you'll see a request lifecycle that is very similar to running your own HTTP server.
 
-We had to entirely reorient the way we run user code to support streaming. Previously, we would run the user code and buffer the entire response, serialize it, and send it on. Now we ...
-
-This architectural change also paves the way for future support for
-[websockets](https://github.com/val-town/val-town-product/discussions/144).
-
-We built this functionality in a library, and we open-sourced it! Check it out: https://github.com/val-town/deno-http-worker
+Now that we're just talking HTTP this paves the way for future support for [websockets](https://github.com/val-town/val-town-product/discussions/144). We built this functionality in a library, and we open-sourced it! Check it out: https://github.com/val-town/deno-http-worker
 
 Be careful what you wish for – you just may end up joining the company and building it.
 
