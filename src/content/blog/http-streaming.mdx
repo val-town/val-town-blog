@@ -7,12 +7,25 @@ author: Max McDonnell
 
 import { Image } from "astro:assets";
 import JamesWebb from "./http-streaming/james-webb.gif";
+import StreamingIssue from "./http-streaming/streaming-issue.png";
 
-Val Town now supports HTTP streaming, [our most-requested feature](https://github.com/val-town/val-town-product/discussions/14). (You may recognize me as the guy who originally requested that feature. Now I work here and I shipped it!) Streaming opens up many new use-cases: streaming LLM responses, large requests and responses, and server-sent events.
+Val Town now supports HTTP streaming, [our most-requested feature](https://github.com/val-town/val-town-product/discussions/14).
+
+<Image
+  style={{
+    border: '1px solid #ccc',
+    borderRadius: '5px'
+  }}
+  src={StreamingIssue}
+  alt="The issue that started it all" />
+
+You may recognize me as the guy who originally requested that feature. Now I work here and I shipped it!
+
+Streaming opens up many new use-cases: streaming LLM responses, large requests and responses, and server-sent events.
 
 ## Streaming LLM Responses
 
-LLMs are a classic use-case for streaming: show the user the response as it's being generated. Here is a minimal example of a streaming OpenAI response. Add `stream: true` in the request payload and a streaming response will be returned.
+LLMs are a classic use-case for streaming: they send responses word-by-word as they're generated. Here is a minimal example of a streaming OpenAI response: OpenAPI’s SDK lets us request a streaming response by specifying `stream: true`. They return an [AsyncIterator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/AsyncIterator) and we turn that into a [ReadableStream](https://developer.mozilla.org/en-US/docs/Web/API/ReadableStream/ReadableStream) for our response.
 
 ```ts
 import { OpenAI } from "https://esm.town/v/std/openai";
@@ -46,7 +59,7 @@ export default async function (req: Request): Promise<Response> {
 }
 ```
 
-<br />
+It's a little bit of a dance to connect the two tools together, but the result is fun:
 
 <video controls loop autoplay>
   <source src="/video/chatgpt-streaming.mp4" />
@@ -54,7 +67,7 @@ export default async function (req: Request): Promise<Response> {
 
 [Fork on Val Town](https://www.val.town/v/maxm/openAIStreamingExample) | [View live output](https://maxm-openaistreamingexample.web.val.run)
 
-### Large Requests
+### The request limit is now 100mb
 
 We've increased the limit on request body size from 2mb to
 to 100mb. Here's [an example val](https://www.val.town/v/maxm/reportBodySize) that returns the size of the request body without holding all of it in memory:
@@ -84,9 +97,9 @@ $ curl --data @image.png https://maxm-reportbodysize.web.val.run
 66799801
 ```
 
-## Large Responses
+## Unlimited response sizes
 
-Now any HTTP response that is written incrementally will now stream to the client. And now that we don't buffer responses, we can scalable allow you to work with large files. We used to have a 10mb limit on response size, but now you can stream responses of any size.
+We used to buffer and store responses, which imposed a 10mb limit on how much send from an HTTP val. Now we don't, and you can send very big responses:
 
 In the example below we proxy the latest [130mb
 supernovae image](https://www.flickr.com/photos/nasawebbtelescope/53782948438/in/album-72177720313923911/) from the Webb Telescope. The client can begin downloading the image before the server has finished downloading it.
@@ -107,7 +120,7 @@ export default async function (req: Request) {
 
 ## Server-Sent Events
 
-Server-Sent Events are similar to a one way websocket. The ChatGPT example above actually used server-sent events. They're useful when you want to work with a stream of discrete events vs a continuous stream of data. Here's an example of constructing a server-sent event stream manually to make a clone of [robpike.io](https://robpike.io/).
+[Server-Sent Events](https://developer.mozilla.org/en-US/docs/Web/API/Server-sent_events/Using_server-sent_events) are kind of like a one-way WebSocket. The ChatGPT example above actually used server-sent events. They're useful when you want to work with a stream of discrete events, rather than a continuous stream of data. Here's an example of constructing a server-sent event stream manually to make a clone of [robpike.io](https://robpike.io/).
 
 ```ts
 const msg = new TextEncoder().encode("💩");
@@ -150,9 +163,15 @@ For a more complex application using server-sent events, check out my [little Ch
 
 ### Under the hood
 
-We had to entirely reorient the way we run user code to support streaming. Previously, we would run the user code and buffer the entire response, serialize it, and send it on. Now, we only communicate with user code over HTTP. With HTTP vals we simply proxy the incoming request straight to the worker. This way we don't mess too much with the request structure and you'll see a request lifecycle that is very similar to running your own HTTP server. If you're running a script, email, or cron val we send an HTTP request with the relevant information and wait for a response. Now that we're just talking HTTP this paves the way for future support for [websockets](https://github.com/val-town/val-town-product/discussions/144).
+We had to entirely reorient the way we run user code to support streaming.
 
-We built most of this functionality in a library, and open-sourced it. Check it out: https://github.com/val-town/deno-http-worker
+Previously, both requests and responses were read into buffers before being sent to and from the val. This had both speed and scalability issues, as we wouldn't want to buffer a very large response in memory. Now, we only communicate with user code over HTTP.
+
+With HTTP vals, we proxy the incoming request straight to the worker. This way we don't mess too much with the request structure and you'll see a request lifecycle that is very similar to running your own HTTP server.
+
+If you're running a script, email, or cron val we send an HTTP request with the relevant information and wait for a response. Now that we're talking HTTP, this paves the way for future support for [websockets](https://github.com/val-town/val-town-product/discussions/144).
+
+We built most of this functionality in a library called deno-http-worker, [which we've open sourced on GitHub](https://github.com/val-town/deno-http-worker).
 
 And let this be a lesson to you: be careful what features you wish for – you just may end up joining the company and building them.
 
