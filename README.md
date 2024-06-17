@@ -73,7 +73,7 @@ This theme is based off of the lovely [Bear Blog](https://github.com/HermanMarti
 
 ## Private fork development
 
-If you're a Val Town employee, working on a super secret blog post, here's how to develop on this repo in secret:
+If you're a Val Town employee, working on a super secret blog post, here's how to develop on this repo in secret. Please only do this when really necessary, we prefer most blog posts to be developed in public.
 
 1. `git lfs install`
 2. Create a new branch off the main of this public blog repo `git checkout -b super-secret-branch`
