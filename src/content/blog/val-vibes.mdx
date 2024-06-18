@@ -1,6 +1,6 @@
 ---
 title: "Val Vibes: Semantic search in Val Town"
-description: How to build semantic search for Val Town within Val Town itself
+description: How to build semantic search with embeddings for Val Town within Val Town itself
 pubDate: June 18, 2024
 author: JP Posma
 ---
@@ -19,51 +19,56 @@ import Blobsearch from "./val-vibes/blobsearch.png";
 import ManLicksDog from "./val-vibes/man-licks-dog.jpg";
 import Prod from "./val-vibes/prod.png";
 
-We've launched a new feature: semantic search! In this post we'll look at what it is, how we prototyped it, and what's next.
+If you've been following along, you know that [code search is hard](/blog/search-notes/). Matching a search query to a particular val, allowing for misspellings, adding ranking signals to prioritize the best content, is a complicated and error-prone quest.
+
+But what if it wasn't? Instead of parsing code to extract terms and creating inverted indexes for trigrams, we used _vibes_ to search?
+
+With using text embeddings, a newly-popularized AI technique, we can do just that. We can create an index in which all vals are floating in a high-dimensional space, we find a position for your search query in that space, and deliver all the vals that are closest to it. It sounds complicated, but it's surprisingly simple to build: here's how:
 
 ### Similar vibes
 
-“Search” is finding documents based on a query, using some sort of sorting mechanism that ranks the most relevant documents. A typical sorting mechnism is counting how often a search term appears in the document, but that has the downside that words need to match exactly.
+“Search” is about finding documents based on a query, using some sort of sorting mechanism that ranks the most relevant documents. You might rank a document higher if it contains the search term more often, or prioritize documents with an exact match over those that only roughly match the search term.
 
-We'll look at a different sorting mechanism called “semantic search”, which uses one of those crazy features to come out of the world of machine learning: embeddings. It works like this: you put in a string into an API, and you get an array of numbers (the “embedding”), with the property that things that have the same “vibe” will get similar numbers.
+We'll look at a vastly different sorting mechanism called “semantic search”, which uses one of those crazy features to come out of the world of machine learning: embeddings. It works like this: you put in a string into an API, and you get an array of numbers which we'll call the “embedding”, with the property that things that have the same “vibe” will get similar numbers.
 
 For example, “animal that barks” should have similar vibes to “dog”. And “dog bites man” should have different vibes than “man bites dog”. And “discord bot” should have _very_ different vibes still.
 
-<figure style={{ maxWidth: "300px" }}>
-  <Image src={ManBitesDog} alt="Man bites dog" />
+<figure style={{ maxWidth: "200px", float: 'right', marginBottom: '20px', marginLeft: '20px' }} >
+  <Image src={ManBitesDog} alt="Man bites dog"  style={{ borderRadius: '10px' }} />
   <figcaption>
+    The AI has trouble imagining a man biting a dog.
   </figcaption>
 </figure>
 
-For a search system based on embeddings, you need to generate an embedding for every document, usually at the time when it's created or updated. Then, when someone searches for something, you create an embedding for their search query too, and find the document embeddings that are closest to the query embedding.
+So we need to generate an embedding for every document at the time when it's created or updated. Then, when someone searches for something, we create an embedding for their search query. Then we find the document embeddings that are closest to the query embedding.
 
-That's the idea, though in practice embeddings can be quite unpredictable and surprising. Our examples above already break down… “animal that barks” apparently vibes more with “woof woof woof” than with “dog”. And “dog bites man” and “man bites dog” have even more similar vibes than that, presumably because there's lots of biting going on in both cases.
+That's the idea, though in practice embeddings can be quite unpredictable and surprising. Our examples above already break down… “animal that barks” vibes more with “woof woof woof” than with “dog”. And “dog bites man” and “man bites dog” have even more similar vibes than that, presumably because there's lots of biting going on in both cases.
 
 For our purposes though, embedding similarity is high between “discord bot” and “github api”, or “chat server integration”. This helps in finding code that is not exactly the same, but still very relevant to your search query.
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={CompareEmbeddings} alt="" />
   <figcaption>
     Woof woof woof.
   </figcaption>
 </figure>
 
-At Val Town we had existing search for executable code snippets (“vals”), but it did only exact matches, which meant that it only returned a few results, or often none at all. It was very literal. Semantic search would help return vals with similar vibes, despite getting confused by barking and biting.
+We had a search algorithm already to find Vals, but it did only exact matches, which meant that it only returned a few results, and often none at all. It was very literal. Semantic search would help return vals with similar vibes, despite getting confused by barking and biting.
 
 ### Prototyping in Val Town
 
 I ended up making three different prototypes, using different storage engines: [Postgres](https://www.postgresql.org/) (using [Neon](https://neon.tech/)), [SQLite](https://sqlite.org/) (using [Turso](https://turso.tech/)), and in-memory (using [blob storage](https://docs.val.town/std/blob/)). Let's look at Postgres first, and at the end I'll also show how to do this in-memory.
 
-I started prototyping this on my computer, but then realized: this is Val Town, the ultimate prototyping tool for things like this. Let's build this in Val Town.
+I started prototyping this on my computer, but then realized: this is Val Town, the ultimate prototyping tool for things like this. _Let's build this in Val Town._
 
 There are two phases to semantic search:
 
-1. Indexing: generating embeddings for all public vals.
-2. Querying: generating an embedding for the search query, and comparing to the indexed embeddings.
+1. **Indexing**: generating embeddings for all public vals.
+2. **Querying**: generating an embedding for the search query, and comparing to the indexed embeddings.
 
 For indexing, we first create a Postgres table on Neon (using the [pgvector](https://github.com/pgvector/pgvector) extension):
 
-```
+```sql
 CREATE TABLE vals_embeddings (id TEXT PRIMARY KEY, embedding VECTOR(1536));
 ```
 
@@ -71,7 +76,7 @@ Then we create a [cron val](https://docs.val.town/quickstarts/first-cron/) (or a
 
 First we query all vals, for which <a href="https://www.val.town/u/pomdtr">Achille Lacoin</a> had already made an <a href="https://www.val.town/v/sqlite/db">excellent val</a>:
 
-<figure style={{ maxWidth: "600px" }}>
+<figure style={{ maxWidth: "600px", margin: '0 auto' }}>
   <Image src={QueryVals} alt="" />
   <figcaption>
     Querying public vals, by <a href="https://www.val.town/u/pomdtr">Achille Lacoin</a>.
@@ -80,7 +85,7 @@ First we query all vals, for which <a href="https://www.val.town/u/pomdtr">Achil
 
 We filter out vals for which we have existing embeddings, and work in batches of 100 of the rest.
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Indexing1} alt="" />
   <figcaption>
   </figcaption>
@@ -88,7 +93,7 @@ We filter out vals for which we have existing embeddings, and work in batches of
 
 Then we fetch embeddings from OpenAI for each batch of 100 in parallel, and save them to Postgres.
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Indexing2} alt="" />
   <figcaption>
   </figcaption>
@@ -96,7 +101,7 @@ Then we fetch embeddings from OpenAI for each batch of 100 in parallel, and save
 
 This works! Here are the logs from a recent incremental run:
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Indexing3} alt="" />
   <figcaption>
   </figcaption>
@@ -104,7 +109,7 @@ This works! Here are the logs from a recent incremental run:
 
 Querying is simpler still. We turn the query string into an embedding, and sort by similarity:
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Search1} alt="" />
   <figcaption>
   </figcaption>
@@ -112,7 +117,7 @@ Querying is simpler still. We turn the query string into an embedding, and sort 
 
 For a nicer UI, I forked an HTTP val (also by <a href="https://www.val.town/u/pomdtr">Achille Lacoin</a>) and hooked it up to my search function:
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto', border: '1px solid var(--border)' }}>
   <Image src={Search2} alt="" />
   <figcaption>
   </figcaption>
@@ -122,11 +127,11 @@ This works pretty well! Check out all my semantic search prototypes [here](https
 
 ### Product
 
-We have since integrated this into the search of Val Town properly. The implementation is basically the same: we added a pgvector `embedding` column to our Postgres table that stores vals, and we regenerate the embedding whenever a val is updated.
+We made it real: semantic search is now built into Val Town. The implementation is roughly the same: we added a pgvector `embedding` column to our Postgres table that stores vals, and we regenerate the embedding whenever a val is updated.
 
-You can use it by going to the search page and selecting “semantic search”.
+You can use it by going to the [search page](https://www.val.town/search) and selecting “semantic search”.
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto', border: '1px solid var(--border)' }}>
   <Image src={Prod} alt="" />
   <figcaption>
   </figcaption>
@@ -134,11 +139,11 @@ You can use it by going to the search page and selecting “semantic search”.
 
 We're still iterating on this feature. Here are some ideas we have to improve it, but if you have your own, please let us know on [Discord](https://discord.gg/dHv45uN5RY) or [Github](https://github.com/val-town/val-town-product/discussions)!
 
-- Simply concatenate exact and semantic search. Label them differently by highlighting exact matches for exact search, and maybe label semantic results different.
-- For searches that return a lot of exact results, do a bit smarter ranking by using the semantic distance as a ranking feature, in lieu of not having [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) stats with our current search setup.
-- For both exact and semantic results, add popularity stats (references, forks, likes) as ranking features. We can manually tweak how to weight the different ranking features. Show all of these in the search results for easier debugging of ranking (currently only likes are shown).
-- Do fuzzy search (e.g. levenshtein or similar) in JS, using the top N results from semantic search, to account for misspellings or similar spellings.
-- Split exact search on spaces, giving ranking preference to a) exact phrases b) number of parts matching.
+- Combine exact and semantic search. Label them differently by highlighting exact matches for exact search, and maybe label semantic results different.
+- For searches that return a lot of exact results, improve ranking by using the semantic distance as a ranking feature, in lieu of not having [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) stats with our current search setup.
+- For both exact and semantic results, add popularity stats (references, forks, likes) as ranking signals. Show all of these in the search results for easier debugging of ranking (currently only likes are shown).
+- Do fuzzy search (e.g. [levenshtein](https://en.wikipedia.org/wiki/Levenshtein_distance) or similar) in JavaScript, using the top N results from semantic search, to account for misspellings or similar spellings.
+- Split exact search on spaces, giving ranking preference to exact phrases and number of parts matching.
 
 ### Bonus: In-memory
 
@@ -146,15 +151,15 @@ As promised, here is the implementation using in-memory comparisons and blob sto
 
 This doesn't require any sort of database, just a place to store bytes. I used Val Town's standard library, which contains [blob storage functions](https://docs.val.town/std/blob/). You can use it to store binary data, or JSON (which gets serialized/deserialized). So we can simply store a blob for every batch of 100 vals, and keep a separate JSON storage to keep track of which embedding is stored where:
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Blobindex} alt="" />
   <figcaption>
   </figcaption>
 </figure>
 
-Then for querying, we load all the blobs in memory, and compare them all against the embedding from the query string. This is of course not as efficient as using an indexed optimized for this sort of sorting, but not too bad for our (still) small number of vals.
+Then to query, we load all the blobs in memory, and compare them all against the embedding from the query string. This is of course not as efficient as using an index optimized for this sort of sorting, but not too bad for our (still) small number of vals.
 
-<figure style={{ maxWidth: "700px" }}>
+<figure style={{ maxWidth: "700px", margin: '0 auto' }}>
   <Image src={Blobsearch} alt="" />
   <figcaption>
   </figcaption>
@@ -162,8 +167,8 @@ Then for querying, we load all the blobs in memory, and compare them all against
 
 Thanks for reading!
 
-<figure style={{ maxWidth: "300px" }}>
-  <Image src={ManLicksDog} alt="" />
+<figure style={{ maxWidth: '300px', margin: '40px auto 0 auto' }} >
+  <Image src={ManLicksDog} alt="Man bites dog"  style={{ borderRadius: '10px' }} />
   <figcaption>
     Wat.
   </figcaption>
