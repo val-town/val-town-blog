@@ -120,7 +120,7 @@ This works pretty well! Check out all my semantic search prototypes [here](https
 
 ### Product
 
-We have since integrated this into the search of Val Town properly. The implementation is basically the same: we added a pgvector `embedding` column to our Postgres table that stores vals, and we update the embedding whenever changing the code of a val (or its name or readme).
+We have since integrated this into the search of Val Town properly. The implementation is basically the same: we added a pgvector `embedding` column to our Postgres table that stores vals, and we regenerate the embedding whenever a val is updated.
 
 You can use it by going to the search page and selecting “semantic search”.
 
