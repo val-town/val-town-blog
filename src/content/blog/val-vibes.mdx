@@ -52,7 +52,9 @@ At Val Town we had existing search for executable code snippets (“vals”), bu
 
 I ended up making three different prototypes, using different storage engines: [Postgres](https://www.postgresql.org/) (using [Neon](https://neon.tech/)), [SQLite](https://sqlite.org/) (using [Turso](https://turso.tech/)), and in-memory (using [blob storage](https://docs.val.town/std/blob/)). Let's look at Postgres first, and at the end I'll also show how to do this in-memory.
 
-I started prototyping this on my computer, but then realized: this is Val Town, the ultimate prototyping tool for things like this. There are two phases to semantic search:
+I started prototyping this on my computer, but then realized: this is Val Town, the ultimate prototyping tool for things like this. Let's build this in Val Town.
+
+There are two phases to semantic search:
 
 1. Indexing: generating embeddings for all public vals.
 2. Querying: generating an embedding for the search query, and comparing to the indexed embeddings.
