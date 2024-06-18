@@ -10,6 +10,7 @@ import andre from "../content/authors/andre.jpg";
 import max from "../content/authors/max.jpg";
 import tom from "../content/authors/tom.jpg";
 import steve from "../content/authors/steve.jpg";
+import jp from "../content/authors/jp.jpg";
 
 type Props = CollectionEntry<'blog'>['data'] & { id: string };
 
@@ -129,7 +130,7 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } = Astr
                 <Image
                   densities={[1, 2, 3]}
                   width="20" height="20" class='avatar' alt={author}
-                  src={{'Tom MacWright': tom, 'André Terron': andre, "Steve Krouse": steve, "Max McDonnell": max}[author]}
+                  src={{'Tom MacWright': tom, 'André Terron': andre, "Steve Krouse": steve, "Max McDonnell": max, "JP Posma": jp}[author]}
                 >
                 </Image>
                 <span itemprop="author">{author}</span>

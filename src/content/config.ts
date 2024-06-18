@@ -13,6 +13,7 @@ const blog = defineCollection({
         "Steve Krouse",
         "André Terron",
         "Max McDonnell",
+        "JP Posma",
       ]),
       updatedDate: z.coerce.date().optional(),
       heroImage: image().optional(),
