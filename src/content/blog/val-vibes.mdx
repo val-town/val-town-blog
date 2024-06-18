@@ -135,7 +135,7 @@ We're still iterating on this feature. Here are some ideas we have to improve it
 - Simply concatenate exact and semantic search. Label them differently by highlighting exact matches for exact search, and maybe label semantic results different.
 - For searches that return a lot of exact results, do a bit smarter ranking by using the semantic distance as a ranking feature (in lieu of tf-idf stats with our current search setup).
 - For both exact and semantic results, add popularity stats (references, forks, likes) as ranking features. We can manually tweak how to weight the different ranking features. Show all of these in the search results for easier debugging of ranking (currently only likes are shown).
-- Do fuzzy search (e.g. lehvenstein or similar) in JS, using the top N results from semantic search, to account for misspellings or similar spellings.
+- Do fuzzy search (e.g. levenshtein or similar) in JS, using the top N results from semantic search, to account for misspellings or similar spellings.
 - Split exact search on spaces, giving ranking preference to a) exact phrases b) number of parts matching.
 
 ### Bonus: In-memory
