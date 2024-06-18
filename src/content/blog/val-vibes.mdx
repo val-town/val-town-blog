@@ -23,7 +23,9 @@ We've launched a new feature: semantic search! In this post we'll look at what i
 
 ### Similar vibes
 
-“Search” is finding documents based on a query, using some sort of sorting mechanism that ranks the most relevant documents. One such sorting mechanism is “semantic search”, which uses one of those crazy features to come out of the world of machine learning: embeddings. It works like this: you put in a string into an API, and you get an array of numbers (the “embedding”), with the property that things that have the same “vibe” will get similar numbers.
+“Search” is finding documents based on a query, using some sort of sorting mechanism that ranks the most relevant documents. A typical sorting mechnism is counting how often a search term appears in the document, but that has the downside that words need to match exactly.
+
+We'll look at a different sorting mechanism called “semantic search”, which uses one of those crazy features to come out of the world of machine learning: embeddings. It works like this: you put in a string into an API, and you get an array of numbers (the “embedding”), with the property that things that have the same “vibe” will get similar numbers.
 
 For example, “animal that barks” should have similar vibes to “dog”. And “dog bites man” should have different vibes than “man bites dog”. And “discord bot” should have _very_ different vibes still.
 
@@ -133,7 +135,7 @@ You can use it by going to the search page and selecting “semantic search”.
 We're still iterating on this feature. Here are some ideas we have to improve it, but if you have your own, please let us know on [Discord](https://discord.gg/dHv45uN5RY) or [Github](https://github.com/val-town/val-town-product/discussions)!
 
 - Simply concatenate exact and semantic search. Label them differently by highlighting exact matches for exact search, and maybe label semantic results different.
-- For searches that return a lot of exact results, do a bit smarter ranking by using the semantic distance as a ranking feature (in lieu of tf-idf stats with our current search setup).
+- For searches that return a lot of exact results, do a bit smarter ranking by using the semantic distance as a ranking feature, in lieu of not having [tf-idf](https://en.wikipedia.org/wiki/Tf%E2%80%93idf) stats with our current search setup.
 - For both exact and semantic results, add popularity stats (references, forks, likes) as ranking features. We can manually tweak how to weight the different ranking features. Show all of these in the search results for easier debugging of ranking (currently only likes are shown).
 - Do fuzzy search (e.g. levenshtein or similar) in JS, using the top N results from semantic search, to account for misspellings or similar spellings.
 - Split exact search on spaces, giving ranking preference to a) exact phrases b) number of parts matching.
