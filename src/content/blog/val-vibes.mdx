@@ -33,7 +33,7 @@ For example, “animal that barks” should have similar vibes to “dog”. And
   </figcaption>
 </figure>
 
-You generate embeddings for all your documents (ahead of time), as well as for the search query, and then you return documents sorted by how similar the embeddings are.
+For a search system based on embeddings, you need to generate an embedding for every document, usually at the time when it's created or updated. Then, when someone searches for something, you create an embedding for their search query too, and find the document embeddings that are closest to the query embedding.
 
 That's the idea, though in practice embeddings can be quite unpredictable and surprising. Our examples above already break down… “animal that barks” apparently vibes more with “woof woof woof” than with “dog”. And “dog bites man” and “man bites dog” have even more similar vibes than that, presumably because there's lots of biting going on in both cases.
 
