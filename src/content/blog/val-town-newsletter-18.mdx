@@ -1,52 +1,52 @@
 ---
 title: Val Town Newsletter 18
-description: HTTP Streaming, Semantic Search, Townie AI Chat, and more!
+description: HTTP Streaming, Semantic Search, Townie AI Chat, and a TypeScript SDK
 pubDate: June 24, 2024
 author: Steve Krouse
 ---
 
-Over the last month,
+import { Image } from "astro:assets";
+import Semantic from "./val-town-newsletter-18/semantic.png";
 
-Now we're working on
+Over the last month, we shipped HTTP streaming, val semantic search, and Townie, our AI chatbot. We also released a shiny TypeScript SDK for the Val Town API, redesigned profiles, public likes, named API tokens, and more.
 
-Community vals
+We're currently working on more search improvements, a side panel for folders & vals, stopping a running val, and usage tracking.
+
+Community vals - TODO summary
 
 ### 🌊 HTTP Streaming
 
-TODO
+You can stream data from vals! Our new [open-sourced HTTP worker](https://github.com/val-town/deno-http-worker) enables us to increase request size limits from 2mb to 100mb and make response sizes unlimited. Read more in the [HTTP Streaming announcement](/blog/http-streaming/).
 
-TODO link to blog
-
-## Townie
-
-TODO
+<video controls loop autoplay>
+  <source src="/video/chatgpt-streaming.mp4" />
+</video>
 
 ## Val Semantic Search
 
-TODO link to blog
+We have a new search mode that uses OpenAI embeddings to give you a val with the same "vibes" as your search query. It's currently its own mode labelled "semantic search" – [try it out yourself!](https://www.val.town/search?searchType=semantic) We're planning to combine it with the exact search to give you a wholistic search experience. Learn more in the [Semantic Search announcement](/blog/val-vibes/).
 
-TODO subscribe on youtube button
+<Image src={Semantic} alt="Semantic search for 'wikipedia api'" />
 
-## Livestreams
+## Townie
 
-- Mine TODO
-- Xkonti’s TODO
-
-## Getting Started suggestions
+We built our own AI chatbot, Townie, using a novel backpropagation algorith combined with a new concept similar to attention that supports large context windows... Okay, okay, it's just pre-prompted chatgpt. [Try it out!](https://www.val.town/townie)
 
 TODO photo
+
+## TypeScript SDK
+
+After a herculean effort to port our Express server to Fastify with good type annotations, we were able to generate a good OpenAPI schema, which we then used to generate a TypeScript SDK via Stainless.
+
+TODO links to github and npm and val town demo - maybe a video demo with types would be nice
 
 ## Profile redesign, public likes
 
-TODO photo
-
-more coming soon, in particular sorts and filters
-
-## Named API Tokens
+Your profile page is now a bit prettier and more functional. You can view your vals in a list or a grid, as well as the vals you liked. We're reimagining your profile as a jumping off point to explore your vals. Coming soon is sorting and filtering for vals in your profile.
 
 TODO photo
 
-### 📺 Livestreams
+## 📺 Livestreams
 
 They're a great way to learn Val Town by watching others use it. And if you watch live, you can ask questions and we'll answer! Or heckle. That's fun too.
 
@@ -55,6 +55,8 @@ Steve started a weekly live coding series. Since the last newsletter, I spoke wi
 Tune into the next episode:
 
 TODO
+
+- Xkonti’s TODO
 
 ### Other updates
 
@@ -68,27 +70,27 @@ TODO
 - Copy code button in markdown js, ts, jsx and tsx snippets
 - Moved the search icon to a better spot in the mobile header
 - Create val with types via API
+- Added three "getting started" examples to user's workspaces
+- Names for Val Town API tokens
 
 ## 🛣️ Roadmap
 
 ### What we're working on
 
-- Val organization
 - Side panel for folders & vals
-- Usage tracking
-- Express → Fastify port & new OpenAPI spec & Stainless API client
+- Filters & sorts in user profiles
+- [Better features for organizing vals](https://github.com/val-town/val-town-product/discussions/10)
+- [Usage tracking](https://github.com/val-town/val-town-product/discussions/19)
 - Val detail page improvements
-- Ability to cancel a val
-- Search improvements (combining exact & semantic)
+- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- [Search improvements](https://github.com/val-town/val-town-product/discussions/69) (combining exact & semantic)
 
 ### Coming soon
 
 Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
-- [Better Search](https://github.com/val-town/val-town-product/discussions/69)
-- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- [Receive attachments from email handlers](https://github.com/val-town/val-town-product/discussions/75)
 - [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
-- Receive attachments from email handlers (newly upvoted)
 - [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
 - New pricing plan (usage-based)
 - [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
