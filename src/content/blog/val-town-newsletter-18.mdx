@@ -1,13 +1,15 @@
 ---
 title: Val Town Newsletter 18
 description: HTTP Streaming, Semantic Search, Townie AI Chat, and a TypeScript SDK
-pubDate: June 24, 2024
+pubDate: June 25, 2024
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 import Semantic from "./val-town-newsletter-18/semantic.png";
 import Townie from "./val-town-newsletter-18/townie.png";
+import Profile from "./val-town-newsletter-18/profile.png";
+import SDK from "./val-town-newsletter-18/sdk.png";
 
 We shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We released a TypeScript SDK and OpenAPI spec for the Val Town API. We redesigned profiles, public likes, and named API tokens.
 
@@ -37,29 +39,37 @@ We built a toy little chatbot, Townie, that's basically ChatGPT that knows a bun
 
 <Image src={Townie} alt="Townie chatbot example generating a wikipedia proxy" />
 
-## TypeScript SDK
+## Upgraded OpenAPI & TypeScript SDK
 
-After a herculean effort to port our Express server to Fastify with good type annotations, we were able to generate a good OpenAPI schema, which we then used to generate a TypeScript SDK via Stainless.
+After a herculean effort to port our Express server to Fastify, we were able to generate a good [OpenAPI schema](https://api.val.town/openapi.json), [interactive API docs](https://api.val.town/documentation), and [TypeScript SDK](https://github.com/val-town/sdk). [Try it out yourself!](https://www.val.town/v/stevekrouse/demoSDK) Shout-out to our friends at [Stainless](https://www.stainlessapi.com/) for help with the SDK.
 
-TODO links to github and npm and val town demo - maybe a video demo on val town with types would be nice
+<Image src={SDK} alt="Demo of the Val Town's API SDK" />
 
 ## Profile redesign, public likes
 
 Your profile page is now prettier and a bit more functional. You can view your vals in a list or a grid, as well as the vals you liked. We're reimagining your profile as a jumping off point to explore your vals. Coming soon: sorting and filtering for vals in your profile.
 
+<Image
+  src={Profile}
+  alt="Screenshot of @iamseeley's Val Town profile with 143 vals, 14 public likes, and a grid of their vals"
+/>
+
 ## 📺 Livestreams
 
-Livestreams are a great way to learn Val Town by watching others use it. And if you watch live, you can ask questions and we'll answer! Or heckle. That's fun too.
+Livestreams are a great way to learn Val Town by watching others. And if you watch live, you can ask questions and we'll answer! Or heckle. That's fun too.
 
-Steve started a weekly live coding series. Since the last newsletter, I spoke with:
+Since the last newsletter, I spoke with:
 
-TODO
+{/* TODO add in what we built & links */}
 
-Tune into the next episode:
+- [Simon Willison](https://www.youtube.com/watch?v=9pmC3P1fUFo)
+- [Linus Lee](https://www.youtube.com/watch?v=5nYPeK9_X6o) - made a [websim clone](https://www.val.town/v/thesephist/webgen) to hallucinate websites
+- [Geoffrey Litt](https://www.youtube.com/watch?v=X9h5wxUuuTI)
+- [Max Bittker](https://www.youtube.com/watch?v=6QGjdDGEkyI)
 
-TODO
+Tune into the [next episode this Thursday at 10am ET with Mary Rose Cook](https://www.youtube.com/watch?v=QrOSpPWg8gc)!
 
-- Xkonti’s TODO
+Our friend Beniamin also is making wonderful Val Town livestreams! I loved this one where he [used GPT4 to summarize many newsletters into one](https://www.youtube.com/watch?v=u9tU5p3uSKQ).
 
 ### Other updates
 
@@ -75,6 +85,7 @@ TODO
 - Create val with types via API
 - Added three "getting started" examples to user's workspaces
 - Names for Val Town API tokens
+- TODO get more from the commit log
 
 ## 🛣️ Roadmap
 
@@ -101,10 +112,8 @@ Here's some of the top features we're planning to work in the coming months. Ple
 
 ## 🌟 Community Vals
 
-{/* - https://www.val.town/v/thesephist/webgen */}
+{/* - https://www.val.town/v/pomdtr/lastlogin */}
 
-- [Linus](https://val.town/u/thesephist) made a [websim clone](https://www.val.town/v/thesephist/webgen) TODO link to livestream
-  {/* - https://www.val.town/v/pomdtr/lastlogin */}
 - [Achille](https://val.town/u/pomdtr) stunned us all again with an authentication middleware val so powerful, it just may be the ["last login" you'll ever need](https://www.val.town/v/pomdtr/lastlogin). It also comes with a [hono adapter](https://www.val.town/v/pomdtr/lastloginHono).
   {/* - https://www.val.town/v/maxm/valTownChatGPT */}
 - [Max](https://val.town/u/maxm) made a series of demos to show us all how to stream: [hello world for streaming HTTP responses](https://www.val.town/v/maxm/streamingResponseExample) that sends a new message every second, [simple server-sent events demo](https://www.val.town/v/maxm/SSEDemo), a [clone of robpike.io](https://www.val.town/v/maxm/robPikeIO), [streaming OpenAI threads](https://www.val.town/v/maxm/openAIStreaming), a [mini ChatGPT clone](https://www.val.town/v/maxm/valTownChatGPT), a [GIF that streams frames](https://www.val.town/v/maxm/streamingGif), [multiplayer circles](https://www.val.town/v/maxm/multiplayerCircles), [an endless maze](https://www.val.town/v/maxm/endlessMazeStream), [NYC's traffic cameras as streaming ASCII images](https://www.val.town/v/maxm/asciiNycCameras)
