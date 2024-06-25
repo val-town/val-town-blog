@@ -9,9 +9,9 @@ import { Image } from "astro:assets";
 import Semantic from "./val-town-newsletter-18/semantic.png";
 import Townie from "./val-town-newsletter-18/townie.png";
 
-Over the last month, we shipped HTTP streaming, val semantic search, and Townie, an AI chatbot that knows how to write vals. We also released a shiny TypeScript SDK and OpenAI spec for the Val Town API, redesigned profiles, public likes, named API tokens, and more.
+We shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We released a TypeScript SDK and OpenAPI spec for the Val Town API. We redesigned profiles, public likes, and named API tokens.
 
-We're currently working on more search improvements, a side panel for folders & vals, stopping a running val, and usage tracking.
+We're working on making it easier to organize and navigate vals, along with improvements to search, Townie and other LLM experiments, and the ability to stop a running val.
 
 Community vals - TODO summary
 
@@ -95,62 +95,75 @@ Here's some of the top features we're planning to work in the coming months. Ple
 - [Receive attachments from email handlers](https://github.com/val-town/val-town-product/discussions/75)
 - [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
 - [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
-- New pricing plan (usage-based)
+- Usage-based pricing plan
 - [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
 - [Val runtime performance](https://github.com/val-town/val-town-product/discussions/113)
 
 ## 🌟 Community Vals
 
-- https://www.val.town/v/pomdtr/lastlogin
-- https://www.val.town/v/alvi/SteamPlaytimeHistory_playHistoryToSqlite
-- https://www.val.town/v/stevekrouse/favFarm
-- https://www.val.town/v/pomdtr/sms
-- https://www.val.town/v/arrudaricardo/random_change_github_status
-- https://www.val.town/v/jcoleman/saveEmailSignupsDeerSpringBakery
-- https://www.val.town/v/pomdtr/freeformServer
-- https://www.val.town/v/maxm/freshChartsExample
-- https://www.val.town/v/domingo1987/problemPython
-- https://www.val.town/v/nws/api
-- https://www.val.town/v/nws/warnings
-- https://www.val.town/v/pomdtr/devtools
-- https://www.val.town/v/kingishb/blackLobster
-- https://www.val.town/v/pomdtr/setEnv
-- https://www.val.town/v/pomdtr/notMyAccount
-- https://www.val.town/v/maxm/streamingResponseExample
-- https://www.val.town/v/yawnxyz/buildclubProjectSearch
-- https://www.val.town/v/camajudson/handleDiscordInteraction
-- https://www.val.town/v/maxm/openAIStreaming
-- https://www.val.town/v/maxm/SSEDemo
-- https://www.val.town/v/maxm/valTownChatGPT
-- https://www.val.town/v/stevekrouse/openaiStreamingDemo
-- https://www.val.town/v/stevekrouse/openaistreaminghtml
-- https://www.val.town/v/thesephist/webgen
-- https://www.val.town/v/yawnxyz/blurbs
-- https://www.val.town/v/maxm/robPikeIO
-- https://www.val.town/v/maxm/streamingGif
-- https://www.val.town/v/maxm/multiplayerCircles
-- https://www.val.town/v/tfayyaz/searchmessages
-- https://www.val.town/v/stevekrouse/dateme_react_client
-- https://www.val.town/v/jonbo/MADBOTS
-- https://www.val.town/v/maxm/endlessMazeStream
-- https://www.val.town/v/maxm/imageToAscii
-- https://www.val.town/v/maxm/asciiNycCameras
-- https://www.val.town/v/stevekrouse/geolocation_api_demo
-- https://www.val.town/v/nmsilva/supabaseCache
-- how to import wasm binary manually https://www.val.town/v/maxm/imageMagickWasmExample
-- https://www.val.town/v/l3gacyb3ta/heat_at_point
+{/* - https://www.val.town/v/thesephist/webgen */}
+
+- [Linus](https://val.town/u/thesephist) made a [websim clone](https://www.val.town/v/thesephist/webgen) TODO link to livestream
+  {/* - https://www.val.town/v/pomdtr/lastlogin */}
+- [Achille](https://val.town/u/pomdtr) stunned us all again with an authentication middleware val so powerful, it just may be the [last one you'll ever need](https://www.val.town/v/pomdtr/lastlogin). It also comes with a [hono adapter](https://www.val.town/v/pomdtr/lastloginHono).
+  {/* - https://www.val.town/v/maxm/valTownChatGPT */}
+- [Max](https://val.town/u/maxm) made a series of demos to show us all how to stream: [hello world for streaming HTTP responses](https://www.val.town/v/maxm/streamingResponseExample) that sends a new message every second, [simple server-sent events demo](https://www.val.town/v/maxm/SSEDemo), a [clone of robpike.io](https://www.val.town/v/maxm/robPikeIO), [streaming OpenAI threads](https://www.val.town/v/maxm/openAIStreaming), a [mini ChatGPT clone](https://www.val.town/v/maxm/valTownChatGPT), a [GIF that streams frames](https://www.val.town/v/maxm/streamingGif), [multiplayer circles](https://www.val.town/v/maxm/multiplayerCircles), [an endless maze](https://www.val.town/v/maxm/endlessMazeStream), [NYC's traffic cameras as streaming ASCII images](https://www.val.town/v/maxm/asciiNycCameras)
+- [Thomas](https://www.val.town/u/iamseeley) made and remade his personal website 8 times (!!!) to show different frontend patterns on Val Town and their [relative performance](https://www.val.town/v/iamseeley/webPerformance): [Client-side React](https://www.val.town/v/iamseeley/reactServer), [Client-side React via CDN](https://www.val.town/v/iamseeley/clientMultirouteReact), [Svelte](https://www.val.town/v/iamseeley/multirouteSvelte), [Preact](https://www.val.town/v/iamseeley/multiroutePreact), [Vue](https://www.val.town/v/iamseeley/multirouteVue), [Hono](https://www.val.town/v/iamseeley/multirouteHono), [React](https://www.val.town/v/iamseeley/multirouteReact), and [HTML as String](https://www.val.town/v/iamseeley/multirouteHTML)
+- [Steve](https://val.town/u/stevekrouse) rebuilt the [Date Me Directory](https://dateme.directory) (currently in Hono HTML) as [client-side React (with React Router)](https://www.val.town/v/stevekrouse/dateme_react_client), as well as a version that also has [server-side rendering](https://www.val.town/v/stevekrouse/dateme_react_hydrated). We'll figure out the frontend patterns if we have to build and rebuild all our vals a million times to do it!
+  {/* - https://www.val.town/v/alvi/SteamPlaytimeHistory_playHistoryToSqlite */}
+- [Alvi](https://val.town/u/alvi) is [collecting his Steam playtime history](https://www.val.town/v/alvi/SteamPlaytimeHistory_playHistoryToSqlite) to a SQLite database, so he can analyze his gaming habits
+  {/* - https://www.val.town/v/jonbo/MADBOTS */}
+- [Jon](https://val.town/u/jonbo) made [a bot that ensures a Supabase websocket listener is alive](https://www.val.town/v/jonbo/MADBOTS)
+  {/* - https://www.val.town/v/arrudaricardo/random_change_github_status */}
+- [@arrudaricardo](https://val.town/u/arrudaricardo) [changes his GitHub status](https://www.val.town/v/arrudaricardo/random_change_github_status) to a random emoji every day
+  {/* - https://www.val.town/v/jcoleman/saveEmailSignupsDeerSpringBakery */}
+- [@jcoleman](https://val.town/u/jcoleman) [saves email signups](https://www.val.town/v/jcoleman/saveEmailSignupsDeerSpringBakery) for Deer Spring Bakery
+  {/* - https://www.val.town/v/pomdtr/freeformServer */}
+- [Achille](https://val.town/u/pomdtr) brought a [taste of Observable Framework to Val Town](https://www.val.town/v/pomdtr/freeformServer)
+  {/* - https://www.val.town/v/maxm/freshChartsExample */}
+- [Max](https://val.town/u/maxm) cobbled together [some Deno fresh charts](https://www.val.town/v/maxm/freshChartsExample) as HTML or images
+  {/* - https://www.val.town/v/domingo1987/problemPython */}
+- [Domingo](https://val.town/u/domingo1987) created a [Python problem exchange backend](https://www.val.town/v/domingo1987/problemPython) for a custom GPT
+  {/* - https://www.val.town/v/nws/api */}
+- [Jordan](https://www.val.town/u/jordan) made some [vals relating to the National Weather Service](https://www.val.town/u/nws), including [a Bluesky feed generator](https://www.val.town/v/nws/feeds)
+  {/* - https://www.val.town/v/kingishb/blackLobster */}
+- [@kingish](https://val.town/u/kingishb) gets a [weekly email digest of good times to go on a bike ride](https://www.val.town/v/kingishb/blackLobster)
+  {/* - https://www.val.town/v/pomdtr/devtools */}
+- [Achille](https://val.town/u/pomdtr) created [middleware that adds handy debug links](https://www.val.town/v/pomdtr/devtools) to get to a val's code and log
+  {/* - https://www.val.town/v/stevekrouse/favFarm */}
+- [Steve](https://val.town/u/stevekrouse) made [a little clone](https://www.val.town/v/stevekrouse/favFarm) of Wes Bos's wonderful [fav.farm](https://fav.farm/) for when you need a quick little favicon out of an emoji
+  {/* - https://www.val.town/v/pomdtr/setEnv */}
+- [Achille](https://val.town/u/pomdtr) found a clever workaround to [set temporary environment variables](https://www.val.town/v/pomdtr/setEnv)
+  {/* - https://www.val.town/v/yawnxyz/buildclubProjectSearch */}
+- [Jan](https://val.town/u/yawnxyz) built an [vector search](https://www.val.town/v/yawnxyz/buildclubProjectSearch) on top of Lunr and Airtable
+  {/* - https://www.val.town/v/camajudson/handleDiscordInteraction */}
+- [@camajudson](https://val.town/u/camajudson) built a [Discord bot for the Cama community](https://www.val.town/v/camajudson/handleDiscordInteraction)
+  {/* - https://www.val.town/v/stevekrouse/openaiStreamingDemo */}
+- [Steve](https://val.town/u/stevekrouse) made a [simple OpenAI streaming demo](https://www.val.town/v/stevekrouse/openaiStreamingDemo) and [one that streams back _rendered_ HTML](https://www.val.town/v/stevekrouse/openaistreaminghtml). Why make HTML when ChatGPT will write it for you?
+  {/* - https://www.val.town/v/yawnxyz/blurbs */}
+- [Jan](https://val.town/u/yawnxyz) made a [blurb generator](https://www.val.town/v/yawnxyz/blurbs) that inputs a link and outputs a blurb and a bunch of tags
+  {/* - https://www.val.town/v/tfayyaz/searchmessages */}
+- [@tfayyaz](https://val.town/u/tfayyaz) demoed [search messages](https://www.val.town/v/tfayyaz/searchmessages) with HTMX
+  {/* - https://www.val.town/v/chet/HtmlFormatter */}
+- [Chet](https://val.town/u/chet) made an [HTML formatter](https://www.val.town/v/chet/HtmlFormatter)
+  {/* - https://www.val.town/v/stevekrouse/geolocation_api_demo */}
+- [Steve](https://val.town/u/stevekrouse) demoed how to get [geolocation data in a website](https://www.val.town/v/stevekrouse/geolocation_api_demo)
+  {/* - https://www.val.town/v/nmsilva/supabaseCache */}
+- [@nmsilva](https://val.town/u/nmsilva) made a [Supabase cache](https://www.val.town/v/nmsilva/supabaseCache)
+  {/* - how to import wasm binary manually https://www.val.town/v/maxm/imageMagickWasmExample */}
+- [Max](https://val.town/u/maxm) showed us how to [import a wasm binary manually](https://www.val.town/v/maxm/imageMagickWasmExample)
+  {/* - https://www.val.town/v/l3gacyb3ta/heat_at_point */}
+
 - https://www.val.town/v/janpaul123/blogPostEmbeddingsDimensionalityReduction
 - most popular obsidian plugins https://www.val.town/v/danielkerrigan/obsidianPlugins
 - https://iamseeley-texttoimageplayground.web.val.run/
 - https://www.val.town/v/banebot/GreetingCard
 - https://www.val.town/v/stevekrouse/status
-- https://www.val.town/v/maxm/valTownChatGPT
 - https://www.val.town/v/yawnxyz/getContentFromUrl
 - https://www.val.town/v/pomdtr/wanix
 - https://www.val.town/v/iamseeley/valBackup
 - https://www.val.town/v/nicoalbanese/tomatoMinnow - vercel streaming ai
 - https://www.val.town/v/stevekrouse/emojiExploder / jdan’s and mine with backlinks / jdan notion emoji thing
-  - TODO continue from here
 - https://www.val.town/v/rattrayalex/slack_cleaner
 - https://www.val.town/v/jasonhibbs/priceTracker
 - https://www.val.town/v/seanehalpin/placemarkGlobeMonitor (using tom's thing)
@@ -170,8 +183,25 @@ Here's some of the top features we're planning to work in the coming months. Ple
 - https://www.val.town/v/vawogbemi/dateme
 - https://www.val.town/v/zerovox/readwiseReaderReadItemsRss
 - https://www.val.town/v/yawnxyz/duckdbExample
-
+- https://www.val.town/v/iamseeley/multirouteHTML
+- https://www.val.town/v/plr/fetchTodaysNytCxPuzzle & https://www.val.town/v/plr/fetchTodaysNytCxGridAndClues
+- https://www.val.town/v/nerdymomocat/add_to_habitify_from_todoist_w_ai
+- https://www.val.town/v/iamseeley/hfApiGateway
+- https://www.val.town/v/ashryanio/generateRandomSecret
+- https://www.val.town/v/gwoods22/macdonald_block_updates
+- https://www.val.town/v/emarref/XeroWebhookMiddlewareValidateRequest & https://www.val.town/v/emarref/HttpMiddlewareRequireValidHmacSignature & https://www.val.town/v/emarref/HttpMiddlewareChain & https://www.val.town/v/emarref/IntentToReceive
+- https://www.val.town/v/stevekrouse/blobbyFace
+- https://www.val.town/v/saolsen/codemirrorTsBrowserEmacs on top of https://www.val.town/v/maxm/codemirrorTsBrowser
+- https://www.val.town/v/charlypoly/exampleTopHackerNewsDailyEmail
+- https://www.val.town/v/xuybin/vscode
+- https://www.val.town/v/nws/feeds
+- https://www.val.town/v/ashryanio/generateQrCode
+- https://www.val.town/v/geoffreylitt/twitterDailyDigest (link to tweet?) https://www.val.town/v/geoffreylitt/getTweets
+- https://www.val.town/v/brianleroux/scrapecapfriendly
+- https://www.val.town/v/stevekrouse/valwriter_react_clientside
+- https://www.val.town/v/yawnxyz/SidebarToArchive
 - TODO
   - review tweets on my personal and company
   - review discord messages
   - add all the new subscribers to sendgrid
+  - continue looking in newest
