@@ -11,13 +11,13 @@ import Townie from "./val-town-newsletter-18/townie.png";
 import Profile from "./val-town-newsletter-18/profile.png";
 import SDK from "./val-town-newsletter-18/sdk.png";
 
-We shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We released a TypeScript SDK and OpenAPI spec for the Val Town API. We redesigned profiles, public likes, and named API tokens.
+In the last month, we shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We released a TypeScript SDK on top of our new OpenAPI spec for the Val Town API. We redesigned profile pages, public likes, and named API tokens.
 
-We're working on making it easier to organize and navigate vals, along with improvements to search, Townie and other LLM experiments, and the ability to stop a running val.
+We're currently working on making it easier to organize and navigate vals, improvements to search, and the ability to stop a running val.
 
-Community vals - TODO summary
+You all have been making some amazing vals! We've seeing a lot of AI, streaming demos, personal websites, emojis, and a hundred others that are hard to categorize but are listed at the bottom of this newsletter.
 
-If you enjoy reading these newsletters so much that you'd like to write them, we're [hiring a content-focused devrel person](https://x.com/stevekrouse/status/1805316371804569626) at Val Town. I think it's a very fun job! (I'm biased.)
+If you enjoy reading these newsletters, consider joining Val Town to help write them! We're hiring a [content-focused devrel person](https://x.com/stevekrouse/status/1805316371804569626). I think it's a very fun job! (I'm biased.)
 
 ### 🌊 HTTP Streaming
 
@@ -35,7 +35,7 @@ We have a new search mode that uses OpenAI embeddings to give you a val with the
 
 ## Townie
 
-We built a toy little chatbot, Townie, that's basically ChatGPT that knows a bunch of common Val Town patterns. Pretty good at generating working code. You can see below me asking it for help on a fairly complex task [from Pat LaVarre](https://x.com/pelavarre/status/1804191746760544676). It doesn't give me what I ask for – it gives me something better – that immediately worked. And it did it zero-shot (on its first try). It works even better if you give it feedback in a couple iterations. [Try it out!](https://www.val.town/townie)
+We built a little chatbot, Townie, that's basically ChatGPT but it knows a bunch of common Val Town patterns. It's surprisingly good at generating working code. You can see below me asking it for help on a fairly complex task [from Pat LaVarre](https://x.com/pelavarre/status/1804191746760544676). It doesn't give me what I ask for – it gives me something better – that immediately worked. And it did it zero-shot (on its first try). It works even better if you give it feedback in a couple iterations. [Try it out!](https://www.val.town/townie)
 
 <Image src={Townie} alt="Townie chatbot example generating a wikipedia proxy" />
 
@@ -56,22 +56,22 @@ Your profile page is now prettier and a bit more functional. You can view your v
 
 ## 📺 Livestreams
 
-Livestreams are a great way to learn Val Town by watching others. And if you watch live, you can ask questions and we'll answer! Or heckle. That's fun too.
+Livestreams are a great way to learn Val Town by watching others. And if you watch live, you can ask questions and we'll answer! Or heckle – that's fun too.
 
 Since the last newsletter, I spoke with:
 
-{/* TODO add in what we built & links */}
-
-- [Simon Willison](https://www.youtube.com/watch?v=9pmC3P1fUFo)
+- [Simon Willison](https://www.youtube.com/watch?v=9pmC3P1fUFo) - prototyped a [search-based RAG](https://simonwillison.net/2024/Jun/21/search-based-rag/) (Retrieval Augmented Generation) with the new Claude 3.5 Sonnet
 - [Linus Lee](https://www.youtube.com/watch?v=5nYPeK9_X6o) - made a [websim clone](https://www.val.town/v/thesephist/webgen) to hallucinate websites
-- [Geoffrey Litt](https://www.youtube.com/watch?v=X9h5wxUuuTI) - {/* - https://www.val.town/v/geoffreylitt/twitterDailyDigest (link to tweet?) https://www.val.town/v/geoffreylitt/getTweets TODO */}
-- [Max Bittker](https://www.youtube.com/watch?v=6QGjdDGEkyI)
+- [Geoffrey Litt](https://www.youtube.com/watch?v=X9h5wxUuuTI) - created [a twitter email digest](https://x.com/geoffreylitt/status/1800952306998845660) where you control the algorithm
+- [Max Bittker](https://www.youtube.com/watch?v=6QGjdDGEkyI) - built a backend to power a community showcase
 
-Tune into the [next episode this Thursday at 10am ET with Mary Rose Cook](https://www.youtube.com/watch?v=QrOSpPWg8gc)!
+Tune into the next episode [this Thursday, June 27th at 10am ET with Mary Rose Cook](https://www.youtube.com/watch?v=QrOSpPWg8gc)!
 
-Our friend Beniamin also is making wonderful Val Town livestreams! I loved this one where he [used GPT4 to summarize many newsletters into one](https://www.youtube.com/watch?v=u9tU5p3uSKQ).
+Our friend Beniamin also is making wonderful Val Town livestreams! I loved this one where he [used GPT4 summarization to combine many newsletters into one](https://www.youtube.com/watch?v=u9tU5p3uSKQ).
 
 ### Other updates
+
+{/* TODO clean up this section and get more from the recent commits, and proof from here down */}
 
 - Fixed bug where the cursor would reset to the beginning of the first line! (really annoying)
 - Have logs stream in while a val is running (very confusing)
@@ -85,7 +85,6 @@ Our friend Beniamin also is making wonderful Val Town livestreams! I loved this 
 - Create val with types via API
 - Added three "getting started" examples to user's workspaces
 - Names for Val Town API tokens
-- TODO get more from the commit log
 
 ## 🛣️ Roadmap
 
@@ -123,6 +122,7 @@ Here's some of the top features we're planning to work in the coming months. Ple
 - [Thomas](https://val.town/u/iamseeley) made [a series of vals around JSON Resume](https://iamseeley-resumehandler.web.val.run/)
 - [Thomas](https://val.town/u/iamseeley) is [sending SMS](https://www.val.town/v/iamseeley/sendSMS) via email!
 - [Victor](https://val.town/u/vawogbemi) made a [Date Me Directory clone](https://www.val.town/v/vawogbemi/dateme) but for a man in finance (6'5, blue eyes)
+- [@midnightlightning](https://val.town/u/midnightlightning) made [an endpoint to calculate additional metadata for a Uniswap liquidity position](https://www.val.town/v/midnightlightning/uniswapV3Position)
 - [Jon](https://val.town/u/jonbo) made [a bot that ensures a Supabase websocket listener is alive](https://www.val.town/v/jonbo/MADBOTS)
 - [Achille](https://val.town/u/pomdtr) somehow figured out how to [run Astro in Val Town](https://www.val.town/v/pomdtr/astro)! Here are the [Val Town Docs hosted in Val Town](https://pomdtr-docs.web.val.run/) 🤯
 - [@arrudaricardo](https://val.town/u/arrudaricardo) [changes his GitHub status](https://www.val.town/v/arrudaricardo/random_change_github_status) to a random emoji every day
@@ -170,9 +170,8 @@ Here's some of the top features we're planning to work in the coming months. Ple
 - [Thomas](https://val.town/u/iamseeley) made an [HuggingFace API Gateway](https://www.val.town/v/iamseeley/hfApiGateway)
 - [@ashryan](https://val.town/u/ashryanio) made a [random secret generator](https://www.val.town/v/ashryanio/generateRandomSecret)
 - [@gwoods22](https://val.town/u/gwoods22) made a [cron to get updates on the Macdonald Block Reconstruction Project](https://www.val.town/v/gwoods22/macdonald_block_updates)
-- [@saolsen](https://val.town/u/saolsen) made a [Codemirror TypeScript Emacs demo](https://www.val.town/v/saolsen/codemirrorTsBrowserEmacs) on top of [Max's Codemirror TypeScript demo](https://www.val.town/v/maxm/codemirrorTsBrowser)
+- [@saolsen](https://val.town/u/saolsen) made a [Codemirror TypeScript Emacs demo](https://www.val.town/v/saolsen/codemirrorTsBrowserEmacs) on top ofs [Max's Codemirror TypeScript demo](https://www.val.town/v/maxm/codemirrorTsBrowser)
 - [Brian](https://val.town/u/brianleroux) is [scraping CapFriendly](https://www.val.town/v/brianleroux/scrapecapfriendly)
 - [Jan](https://val.town/u/yawnxyz) is archiving [Sidebar.io](https://www.val.town/v/yawnxyz/SidebarToArchive) to Google Sheets
 - [Thomas](https://val.town/u/iamseeley) made a [3D emoji generator](https://www.val.town/v/iamseeley/threedEmoji)
 - [@triptych](https://val.town/u/triptych) made a [hit counter](https://www.val.town/v/triptych/hitCounter) you can attach to any website via fetch
-- [@midnightlightning](https://val.town/u/midnightlightning) made [an endpoint to calculate additional metadata for a Uniswap liquidity position](https://www.val.town/v/midnightlightning/uniswapV3Position)
