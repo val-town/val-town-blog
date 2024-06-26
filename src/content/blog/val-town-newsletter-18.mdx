@@ -11,17 +11,17 @@ import Townie from "./val-town-newsletter-18/townie.png";
 import Profile from "./val-town-newsletter-18/profile.png";
 import SDK from "./val-town-newsletter-18/sdk.png";
 
-In the last month, we shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We released a TypeScript SDK on top of our new OpenAPI spec for the Val Town API. We redesigned profile pages, public likes, and named API tokens.
+In the last month, we shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We also released a TypeScript SDK on top of our new OpenAPI spec for the Val Town API, redesigned profile pages, public likes, and nameable API tokens.
 
-We're currently working on making it easier to organize and navigate vals, improvements to search, and the ability to stop a running val.
+We're currently working on making it easier to navigate and organize vals, improvements to search, the ability to stop a running val, and performance improvements.
 
-You all have been making some amazing vals! We've seeing a lot of AI, streaming demos, personal websites, emojis, and a hundred others that are hard to categorize but are listed at the bottom of this newsletter.
+You all have been making some amazing vals! We've seeing AI apps, streaming demos, personal websites, emojis, authentication middleware, and a hundred others listed at the bottom of this newsletter.
 
-If you enjoy reading these newsletters, consider joining Val Town to help write them! We're hiring a [content-focused devrel person](https://val-town.notion.site/DevRel-at-Val-Town-117abe97069449e58df53d7a794ebfac?pvs=4) to help us make a million vals and tutorials and guides and newsletters and videos and streams and all the things to show off what you can do with Val Town.
+If you enjoy reading these newsletters, join our team at Val Town to help write them! We're hiring someone to do [content-focused devrel](https://val-town.notion.site/DevRel-at-Val-Town-117abe97069449e58df53d7a794ebfac?pvs=4) to inspire and support the next 100k programmers to build on Val Town.
 
 ### 🌊 HTTP Streaming
 
-You can stream data from vals! Our new [open-sourced HTTP worker](https://github.com/val-town/deno-http-worker) enables us to increase request size limits from 2mb to 100mb and make response sizes unlimited. Read more in the [HTTP Streaming announcement](/blog/http-streaming/).
+You can stream from vals!!! Our new open-source [deno-http-worker](https://github.com/val-town/deno-http-worker) also enables us to increase request size limits from 2mb to 100mb and make response sizes unlimited. Read more in the [HTTP Streaming announcement](/blog/http-streaming/).
 
 <video controls loop autoplay>
   <source src="/video/chatgpt-streaming.mp4" />
@@ -29,25 +29,25 @@ You can stream data from vals! Our new [open-sourced HTTP worker](https://github
 
 ## 🔎 Val Semantic Search
 
-We have a new search mode that uses OpenAI embeddings to give you a val with the same "vibes" as your search query. It's currently its own mode labelled "semantic search" – [try it out yourself!](https://www.val.town/search?searchType=semantic) We're planning to combine it with the exact search to give you a wholistic search experience. Learn more in the [Semantic Search announcement](/blog/val-vibes/).
+Are there any vals related to...? We have a new search mode that uses embeddings to give you a val with the same "vibes" as your search query. It's currently its own mode labelled "semantic search" – [try it out yourself](https://www.val.town/search?searchType=semantic)! We're working on combining it with the exact search to give you a wholistic search experience. Learn more in the [Semantic Search announcement](/blog/val-vibes/).
 
 <Image src={Semantic} alt="Semantic search for 'wikipedia api'" />
 
 ## 🤖 Townie
 
-We built a little chatbot, Townie, that's basically ChatGPT but it knows a bunch of common Val Town patterns. It's surprisingly good at generating working code. You can see below me asking it for help on a fairly complex task [from Pat LaVarre](https://x.com/pelavarre/status/1804191746760544676). It doesn't give me what I ask for – it gives me something better – that immediately worked. And it did it zero-shot (on its first try). It works even better if you give it feedback in a couple iterations. [Try it out!](https://www.val.town/townie)
+We built a Townie, a chatbot that knows common Val Town patterns. It's surprisingly good at generating working code. You can see below me asking it for help on a fairly complex task [from Pat LaVarre](https://x.com/pelavarre/status/1804191746760544676). It doesn't give me what I ask for – it gives me something better – and it immediately ran, zero-shot (on its first try). It works even better if you give it feedback in a couple iterations. [Try it out!](https://www.val.town/townie)
 
 <Image src={Townie} alt="Townie chatbot example generating a wikipedia proxy" />
 
 ## ✨ Upgraded OpenAPI & TypeScript SDK
 
-After a herculean effort to port our Express server to Fastify, we were able to generate a good [OpenAPI schema](https://api.val.town/openapi.json), [interactive API docs](https://api.val.town/documentation), and [TypeScript SDK](https://github.com/val-town/sdk). [Try it out yourself!](https://www.val.town/v/stevekrouse/demoSDK) Shout-out to our friends at [Stainless](https://www.stainlessapi.com/) for help with the SDK.
+After a herculean effort to port our Express server to Fastify, we were able to generate a good [OpenAPI schema](https://api.val.town/openapi.json), [interactive API docs](https://api.val.town/documentation), and a [TypeScript SDK](https://github.com/val-town/sdk). [Try it out yourself!](https://www.val.town/v/stevekrouse/demoSDK) Shout-out to our friends at [Stainless](https://www.stainlessapi.com/) for help generating the SDK.
 
 <Image src={SDK} alt="Demo of the Val Town's API SDK" />
 
 ## ❤️ Profile redesign, public likes
 
-Your profile page is now prettier and a bit more functional. You can view your vals in a list or a grid, as well as the vals you liked. We're reimagining your profile as a jumping off point to explore your vals. Coming soon: sorting and filtering for vals in your profile.
+Your profile page is now prettier and a bit more functional. You can view your vals in a list or a grid, as well as the vals you liked. We're reimagining users' profile as a jumping off point to explore. Coming soon: sorting and filtering for vals in your profile.
 
 <Image
   src={Profile}
@@ -79,20 +79,20 @@ Our friend Beniamin also is making wonderful Val Town livestreams! I loved this 
 
 ### 🎉 Other updates
 
-- Tom fixed an extremely annoying bug where the cursor would reset to the beginning of the first line after formatting. Now it stays where you left it!
+- Fixed an extremely annoying bug where the cursor would reset to the beginning of the first line after formatting. Now it stays where you left it.
 - Added the ability to create a val via the API with a specific type (except cron)
 - Improved log streaming & a button to refresh logs
 - Ability to name Val Town API tokens
 - Added three "getting started" examples for new users
-- Cleaned up val logs for better readability
-- Fully selectable URL box for the Val Preview iframe
+- Reorganized val logs for better readability
+- The URL box in the Val Preview iframe is now fairlyully selectable
 - Long val READMEs get truncated with a “view more” button
-- [val.town/newest](https://www.val.town/newest) with list-view options
-- "Copy code" button in markdown js, ts, jsx, tsx snippets
+- [val.town/newest](https://www.val.town/newest) now has list-view options
+- There's now a "copy code" button in markdown js, ts, jsx, tsx snippets
 - Moved the search icon to a better spot in mobile header
 - Improved observability and usage tracking
 - Upgraded database to high-available cluster
-- Made VIM SVG logo transparent
+- Made VIM logo background transparent
 - Refactored the code that runs vals, fixing inconsistencies
 
 ## 🛣️ Roadmap
