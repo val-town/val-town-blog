@@ -1,0 +1,185 @@
+---
+title: Val Town Newsletter 18
+description: HTTP Streaming, Semantic Search, Townie AI Chat, and a TypeScript SDK
+pubDate: June 25, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+import Semantic from "./val-town-newsletter-18/semantic.png";
+import Townie from "./val-town-newsletter-18/townie.png";
+import Profile from "./val-town-newsletter-18/profile.png";
+import SDK from "./val-town-newsletter-18/sdk.png";
+
+In the last month, we shipped HTTP streaming, semantic search, and Townie, an AI chatbot that knows how to write vals. We also released a TypeScript SDK on top of our new OpenAPI spec for the Val Town API, redesigned profile pages, public likes, and nameable API tokens.
+
+We're currently working on making it easier to navigate and organize vals, improvements to search, the ability to stop a running val, and performance improvements.
+
+You all have been making some amazing vals! We've seeing AI apps, streaming demos, personal websites, emojis, authentication middleware, and a hundred others listed at the bottom of this newsletter.
+
+If you enjoy reading these newsletters, join our team at Val Town to help write them! We're hiring someone to do [content-focused devrel](https://val-town.notion.site/DevRel-at-Val-Town-117abe97069449e58df53d7a794ebfac?pvs=4) to inspire and support the next 100k programmers to build on Val Town.
+
+### 🌊 HTTP Streaming
+
+You can stream from vals!!! Our new open-source [deno-http-worker](https://github.com/val-town/deno-http-worker) also enables us to increase request size limits from 2mb to 100mb and make response sizes unlimited. Read more in the [HTTP Streaming announcement](/blog/http-streaming/).
+
+<video controls loop autoplay>
+  <source src="/video/chatgpt-streaming.mp4" />
+</video>
+
+## 🔎 Val Semantic Search
+
+Are there any vals related to...? We have a new search mode that uses embeddings to give you a val with the same "vibes" as your search query. It's currently its own mode labelled "semantic search" – [try it out yourself](https://www.val.town/search?searchType=semantic)! We're working on combining it with the exact search to give you a wholistic search experience. Learn more in the [Semantic Search announcement](/blog/val-vibes/).
+
+<Image src={Semantic} alt="Semantic search for 'wikipedia api'" />
+
+## 🤖 Townie
+
+We built a Townie, a chatbot that knows common Val Town patterns. It's surprisingly good at generating working code. You can see below me asking it for help on a fairly complex task [from Pat LaVarre](https://x.com/pelavarre/status/1804191746760544676). It doesn't give me what I ask for – it gives me something better – and it immediately ran, zero-shot (on its first try). It works even better if you give it feedback in a couple iterations. [Try it out!](https://www.val.town/townie)
+
+<Image src={Townie} alt="Townie chatbot example generating a wikipedia proxy" />
+
+## ✨ Upgraded OpenAPI & TypeScript SDK
+
+After a herculean effort to port our Express server to Fastify, we were able to generate a good [OpenAPI schema](https://api.val.town/openapi.json), [interactive API docs](https://api.val.town/documentation), and a [TypeScript SDK](https://github.com/val-town/sdk). [Try it out yourself!](https://www.val.town/v/stevekrouse/demoSDK) Shout-out to our friends at [Stainless](https://www.stainlessapi.com/) for help generating the SDK.
+
+<Image src={SDK} alt="Demo of the Val Town's API SDK" />
+
+## ❤️ Profile redesign, public likes
+
+Your profile page is now prettier and a bit more functional. You can view your vals in a list or a grid, as well as the vals you liked. We're reimagining users' profile as a jumping off point to explore. Coming soon: sorting and filtering for vals in your profile.
+
+<Image
+  src={Profile}
+  alt="Screenshot of @iamseeley's Val Town profile with 143 vals, 14 public likes, and a grid of their vals"
+/>
+
+## 𝍌 Custom formatter settings
+
+You can use tabs instead of spaces and banish trailing semicolons. Customize dprint to your heart's content in your [editor settings](https://www.val.town/settings/editor). Shout out to [David Sherret](https://x.com/DavidSherret) for creating the wonderful [dprint](https://dprint.dev/). Thanks Adrian Sieber for the original feature request and Nikita for [the final kick](https://x.com/nikitavoloboev/status/1801038544623882590) to get it done.
+
+<video controls loop autoplay>
+  <source src="/video/dprint.mp4" />
+</video>
+
+## 📺 Livestreams
+
+Livestreams are a great way to learn Val Town by watching others. And if you watch live, you can ask questions and we'll answer! Or heckle – that's fun too.
+
+Since the last newsletter, I spoke with:
+
+- [Simon Willison](https://www.youtube.com/watch?v=9pmC3P1fUFo) - prototyped a [search-based RAG](https://simonwillison.net/2024/Jun/21/search-based-rag/) (Retrieval Augmented Generation) with the new Claude 3.5 Sonnet
+- [Linus Lee](https://www.youtube.com/watch?v=5nYPeK9_X6o) - made a [websim clone](https://www.val.town/v/thesephist/webgen) to hallucinate websites
+- [Geoffrey Litt](https://www.youtube.com/watch?v=X9h5wxUuuTI) - created [a twitter email digest](https://x.com/geoffreylitt/status/1800952306998845660) where you control the algorithm
+- [Max Bittker](https://www.youtube.com/watch?v=6QGjdDGEkyI) - built a backend to power a community showcase
+
+Tune into the next episode [this Thursday, June 27th at 10am ET with Mary Rose Cook](https://www.youtube.com/watch?v=QrOSpPWg8gc)!
+
+Our friend Beniamin also is making wonderful Val Town livestreams! I loved this one where he [used GPT4 summarization to combine many newsletters into one](https://www.youtube.com/watch?v=u9tU5p3uSKQ).
+
+### 🎉 Other updates
+
+- Fixed an extremely annoying bug where the cursor would reset to the beginning of the first line after formatting. Now it stays where you left it.
+- Added the ability to create a val via the API with a specific type (except cron)
+- Improved log streaming & a button to refresh logs
+- Ability to name Val Town API tokens
+- Added three "getting started" examples for new users
+- Reorganized val logs for better readability
+- The URL box in the Val Preview iframe is now fairlyully selectable
+- Long val READMEs get truncated with a “view more” button
+- [val.town/newest](https://www.val.town/newest) now has list-view options
+- There's now a "copy code" button in markdown js, ts, jsx, tsx snippets
+- Moved the search icon to a better spot in mobile header
+- Improved observability and usage tracking
+- Upgraded database to high-available cluster
+- Made VIM logo background transparent
+- Refactored the code that runs vals, fixing inconsistencies
+
+## 🛣️ Roadmap
+
+### 💪 What we're working on
+
+- Side panel view for vals and folders
+- [Full-screen val editor](https://github.com/val-town/val-town-product/discussions/14)
+- Filters & sorts in user profiles
+- Val detail page improvements
+- [Usage tracking](https://github.com/val-town/val-town-product/discussions/19)
+- [Stop a running val](https://github.com/val-town/val-town-product/discussions/117)
+- [Val runtime performance](https://github.com/val-town/val-town-product/discussions/113)
+- [Search improvements](https://github.com/val-town/val-town-product/discussions/69) (combining exact & semantic)
+
+### 🔜 Coming soon
+
+Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+
+- [Receive attachments from email handlers](https://github.com/val-town/val-town-product/discussions/75)
+- [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
+- Usage-based pricing plan
+- [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47)
+
+## 🌟 Community Vals
+
+- [Achille](https://val.town/u/pomdtr) stunned us all again with an authentication middleware val so powerful, it just may be the ["last login" you'll ever need](https://www.val.town/v/pomdtr/lastlogin). It also comes with a [hono adapter](https://www.val.town/v/pomdtr/lastloginHono).
+- [Max](https://val.town/u/maxm) made a series of demos to show us all how to stream: [hello world for streaming HTTP responses](https://www.val.town/v/maxm/streamingResponseExample) that sends a new message every second, [simple server-sent events demo](https://www.val.town/v/maxm/SSEDemo), a [clone of robpike.io](https://www.val.town/v/maxm/robPikeIO), [streaming OpenAI threads](https://www.val.town/v/maxm/openAIStreaming), a [mini ChatGPT clone](https://www.val.town/v/maxm/valTownChatGPT), a [GIF that streams frames](https://www.val.town/v/maxm/streamingGif), [multiplayer circles](https://www.val.town/v/maxm/multiplayerCircles), [an endless maze](https://www.val.town/v/maxm/endlessMazeStream), [NYC's traffic cameras as streaming ASCII images](https://www.val.town/v/maxm/asciiNycCameras)
+- [Thomas](https://www.val.town/u/iamseeley) made and remade his personal website 8 times (!!!) to show different frontend patterns on Val Town and their [relative performance](https://www.val.town/v/iamseeley/webPerformance): [Client-side React](https://www.val.town/v/iamseeley/reactServer), [Client-side React via CDN](https://www.val.town/v/iamseeley/clientMultirouteReact), [Svelte](https://www.val.town/v/iamseeley/multirouteSvelte), [Preact](https://www.val.town/v/iamseeley/multiroutePreact), [Vue](https://www.val.town/v/iamseeley/multirouteVue), [Hono](https://www.val.town/v/iamseeley/multirouteHono), [React](https://www.val.town/v/iamseeley/multirouteReact), and [HTML as String](https://www.val.town/v/iamseeley/multirouteHTML)
+- [Steve](https://val.town/u/stevekrouse) rebuilt the [Date Me Directory](https://dateme.directory) (currently in Hono HTML) as [client-side React (with React Router)](https://www.val.town/v/stevekrouse/dateme_react_client), as well as a version that also has [server-side rendering](https://www.val.town/v/stevekrouse/dateme_react_hydrated). We'll figure out the frontend patterns if we have to build and rebuild all our vals a million times to do it!
+- [Alvi](https://val.town/u/alvi) is [collecting his Steam playtime history](https://www.val.town/v/alvi/SteamPlaytimeHistory_playHistoryToSqlite) to a SQLite database, so he can analyze his gaming habits
+- [Jordan](https://www.val.town/u/jdan) made a val to [explode and explore emoji](https://www.val.town/v/jdan/emojiExploder) and [piped all emoji into a Notion database](https://x.com/jdan/status/1802386599235518473) [with backlinks](https://x.com/stevekrouse/status/1800876339928687047)
+- [@charlypoly](https://val.town/u/charlypoly) made a bunch of vals with Browserbase: [val that watches a blog for changes](https://www.val.town/v/charlypoly/valBlogWatcherCron), a [val that checks if a website has changed](https://www.val.town/v/charlypoly/websiteHasChanged), a [Puppeteer example](https://www.val.town/v/charlypoly/browserbasePuppeteerExample), and [browserbase utils](https://www.val.town/v/charlypoly/browserbaseUtils)
+- [Steve](https://val.town/u/stevekrouse) made an [uptime status page](https://www.val.town/v/stevekrouse/status) built on top of data collected by an [uptime monitor cron](https://www.val.town/v/healeycodes/isMyWebsiteDown)
+- [Thomas](https://val.town/u/iamseeley) made [a series of vals around JSON Resume](https://iamseeley-resumehandler.web.val.run/)
+- [Thomas](https://val.town/u/iamseeley) is [sending SMS](https://www.val.town/v/iamseeley/sendSMS) via email!
+- [Victor](https://val.town/u/vawogbemi) made a [Date Me Directory clone](https://www.val.town/v/vawogbemi/dateme) but for a man in finance (6'5, blue eyes)
+- [@midnightlightning](https://val.town/u/midnightlightning) made [an endpoint to calculate additional metadata for a Uniswap liquidity position](https://www.val.town/v/midnightlightning/uniswapV3Position)
+- [Jon](https://val.town/u/jonbo) made [a bot that ensures a Supabase websocket listener is alive](https://www.val.town/v/jonbo/MADBOTS)
+- [Achille](https://val.town/u/pomdtr) somehow figured out how to [run Astro in Val Town](https://www.val.town/v/pomdtr/astro)! Here are the [Val Town Docs hosted in Val Town](https://pomdtr-docs.web.val.run/) 🤯
+- [@arrudaricardo](https://val.town/u/arrudaricardo) [changes his GitHub status](https://www.val.town/v/arrudaricardo/random_change_github_status) to a random emoji every day
+- [Jan](https://val.town/u/yawnxyz) made an awesome [new blob admin](https://www.val.town/v/yawnxyz/blobbyFace)
+- [@jcoleman](https://val.town/u/jcoleman) [saves email signups](https://www.val.town/v/jcoleman/saveEmailSignupsDeerSpringBakery) for Deer Spring Bakery
+- [Achille](https://val.town/u/pomdtr) brought a [taste of Observable Framework to Val Town](https://www.val.town/v/pomdtr/freeformServer)
+- [Max](https://val.town/u/maxm) cobbled together [some Deno fresh charts](https://www.val.town/v/maxm/freshChartsExample) as HTML or images
+- [Domingo](https://val.town/u/domingo1987) created a [Python problem exchange backend](https://www.val.town/v/domingo1987/problemPython) for a custom GPT
+- [Jordan](https://www.val.town/u/jordan) made some [vals relating to the National Weather Service](https://www.val.town/u/nws), including [a Bluesky feed generator](https://www.val.town/v/nws/feeds)
+- [@kingish](https://val.town/u/kingishb) gets a [weekly email digest of good times to go on a bike ride](https://www.val.town/v/kingishb/blackLobster)
+- [Achille](https://val.town/u/pomdtr) created [middleware that adds handy debug links](https://www.val.town/v/pomdtr/devtools) to get to a val's code and log
+- [Steve](https://val.town/u/stevekrouse) made [a little clone](https://www.val.town/v/stevekrouse/favFarm) of Wes Bos's wonderful [fav.farm](https://fav.farm/) for when you need a quick little favicon out of an emoji
+- [Achille](https://val.town/u/pomdtr) found a clever workaround to [set temporary environment variables](https://www.val.town/v/pomdtr/setEnv)
+- [Jan](https://val.town/u/yawnxyz) built an [vector search](https://www.val.town/v/yawnxyz/buildclubProjectSearch) on top of Lunr and Airtable
+- [@camajudson](https://val.town/u/camajudson) built a [Discord bot for the Cama community](https://www.val.town/v/camajudson/handleDiscordInteraction)
+- [Steve](https://val.town/u/stevekrouse) made a [simple OpenAI streaming demo](https://www.val.town/v/stevekrouse/openaiStreamingDemo) and [one that streams back _rendered_ HTML](https://www.val.town/v/stevekrouse/openaistreaminghtml). Why make HTML when ChatGPT will write it for you?
+- [Jan](https://val.town/u/yawnxyz) made a [blurb generator](https://www.val.town/v/yawnxyz/blurbs) that inputs a link and outputs a blurb and a bunch of tags
+- [@tfayyaz](https://val.town/u/tfayyaz) demoed [search messages](https://www.val.town/v/tfayyaz/searchmessages) with HTMX
+- [Chet](https://val.town/u/chet) made an [HTML formatter](https://www.val.town/v/chet/HtmlFormatter)
+- [Steve](https://val.town/u/stevekrouse) demoed how to get [geolocation data in a website](https://www.val.town/v/stevekrouse/geolocation_api_demo)
+- [@nmsilva](https://val.town/u/nmsilva) made a [Supabase cache](https://www.val.town/v/nmsilva/supabaseCache)
+- [@nerdymomocat](https://val.town/u/nerdymomocat) syncs to [Habitify from Todoist with AI](https://www.val.town/v/nerdymomocat/add_to_habitify_from_todoist_w_ai)
+- [Max](https://val.town/u/maxm) showed us how to [import a wasm binary manually](https://www.val.town/v/maxm/imageMagickWasmExample)
+- [@l3gacyb3ta](https://val.town/u/l3gacyb3ta) wrote [a script to calculate the heat at a point](https://www.val.town/v/l3gacyb3ta/heat_at_point) on a map
+- [Daniel](https://val.town/u/danielkerrigan) fetched [the most popular Obsidian plugins](https://www.val.town/v/danielkerrigan/obsidianPlugins) from Github
+- [Thomas](https://val.town/u/iamseeley) made a [text to image playground](https://iamseeley-texttoimageplayground.web.val.run/) for Fal.ai
+- [@banebot](https://val.town/u/banebot) made a [greeting card generator](https://www.val.town/v/banebot/GreetingCard)
+- [Jan](https://val.town/u/yawnxyz) made a [val that gets content from a URL](https://www.val.town/v/yawnxyz/getContentFromUrl) for summerizers. It combines https://r.jina.ai/URL and markdown.download's Youtube transcription getter to do its best to retrieve content from URLs.
+- [Achille](https://val.town/u/pomdtr) got [WANIX](https://www.val.town/v/pomdtr/wanix) (a web-native unix) running in a val
+- [Thomas](https://val.town/u/iamseeley) made a [val that backs up his vals to Github](https://www.val.town/v/iamseeley/valBackup)
+- [Nico](https://val.town/u/nicoalbanese) demoed [Vercel's AI SDK Streaming](https://www.val.town/v/nicoalbanese/tomatoMinnow)
+- [Alex](https://val.town/u/rattrayalex) made a site to paste & clean [Slack messages](https://www.val.town/v/rattrayalex/slack_cleaner)
+- [Jason](https://val.town/u/jasonhibbs) made a [price tracker](https://www.val.town/v/jasonhibbs/priceTracker) for the Emma Luxe Cooling Mattress
+- [Sean](https://val.town/u/seanehalpin) is [tracking their figma plugin statistics](https://www.val.town/v/seanehalpin/placemarkGlobeMonitor)
+- [Achille](https://val.town/u/pomdtr) made a [val that serves a Github repo](https://www.val.town/v/pomdtr/serveGithubRepo)
+- [@hunty](https://val.town/u/hunty) made a [Spotify endpoints for play state](https://www.val.town/v/hunty/spotify)
+- [@bdon](https://val.town/u/bdon) made a [USD to TWD converter](https://www.val.town/v/bdon/usd_twd_converter)
+- [Matthias](https://val.town/u/matthiasraimann) made a [web component example](https://www.val.town/v/matthiasraimann/WebComponentExample)
+- [Steve](https://val.town/u/stevekrouse) made [a site to lookup DNS records](https://www.val.town/v/stevekrouse/dns)
+- [Jan](https://val.town/u/yawnxyz) made the beginnings of a [UI for a Simon Willison's RAG search](https://www.val.town/v/yawnxyz/ragwithclaude_ui)
+- [Steve](https://val.town/u/stevekrouse) made a [streaming demo with Anthropic Claude](https://www.val.town/v/stevekrouse/anthropicStreamDemo)
+- [@ashryan](https://val.town/u/ashryanio) made a [QR code generator](https://www.val.town/v/ashryanio/generateQrCode)
+- [@zerovox](https://val.town/u/zerovox) made [an RSS feed from his items from Readwise reader](https://www.val.town/v/zerovox/readwiseReaderReadItemsRss) to be ingested to Workflowy
+- [Jan](https://val.town/u/yawnxyz) demoed [DuckDB](https://www.val.town/v/yawnxyz/duckdbExample)
+- [Thomas](https://val.town/u/iamseeley) made an [HuggingFace API Gateway](https://www.val.town/v/iamseeley/hfApiGateway)
+- [@ashryan](https://val.town/u/ashryanio) made a [random secret generator](https://www.val.town/v/ashryanio/generateRandomSecret)
+- [@gwoods22](https://val.town/u/gwoods22) made a [cron to get updates on the Macdonald Block Reconstruction Project](https://www.val.town/v/gwoods22/macdonald_block_updates)
+- [@saolsen](https://val.town/u/saolsen) made a [Codemirror TypeScript Emacs demo](https://www.val.town/v/saolsen/codemirrorTsBrowserEmacs) on top ofs [Max's Codemirror TypeScript demo](https://www.val.town/v/maxm/codemirrorTsBrowser)
+- [Brian](https://val.town/u/brianleroux) is [scraping CapFriendly](https://www.val.town/v/brianleroux/scrapecapfriendly)
+- [Jan](https://val.town/u/yawnxyz) is archiving [Sidebar.io](https://www.val.town/v/yawnxyz/SidebarToArchive) to Google Sheets
+- [Thomas](https://val.town/u/iamseeley) made a [3D emoji generator](https://www.val.town/v/iamseeley/threedEmoji)
+- [@triptych](https://val.town/u/triptych) made a [hit counter](https://www.val.town/v/triptych/hitCounter) you can attach to any website via fetch
