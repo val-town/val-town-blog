@@ -50,8 +50,8 @@ export default async function (req: Request): Promise<Response> {
           controller.enqueue(
             new TextEncoder().encode(chunk.choices[0]?.delta?.content)
           );
-          controller.close();
         }
+        controller.close();
       },
     }),
     { headers: { "Content-Type": "text/event-stream" } }
