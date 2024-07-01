@@ -128,10 +128,9 @@ fastify were:
   that we could have tracing and telemetry from day one.
 - Finally, [@fastify/express](https://github.com/fastify/fastify-express)
   let us incrementally migrate from express to fastify.
-- We were already using [light-my-request](https://github.com/fastify/light-my-request) to test
-  our express server, but this is built-in to fastify and developed
-  under the fastify organization: testing routes with fastify is
-  as easy as calling the server with `.inject()`.
+- We were already using the [light-my-request](https://github.com/fastify/light-my-request) module to test
+  our express server. light-my-request is written and maintained
+  by the fastify folks, and it is built into fastify.
 
 Of course, fastify is also very fast, but web framework overhead
 wasn't a problem with express and most likely won't be a problem with
@@ -158,6 +157,13 @@ fastify PR just added the fastify dependency and wrapped our express
 server with fastify. Then each successive PR moved a few routes
 from express to fastify, until the application has been
 completely ported.
+
+Of course there were some bumps along the road, and lots of details
+to iron out. But as of today we're nearly 100% fastify for Val Town's
+backend, and it's unlocking stability and capabilities across
+the board. Stay tuned for the next update which will dive into those,
+including how this new backend strategy lets us automatically
+generate our new TypeScript SDK!
 
 [openapi]: https://en.wikipedia.org/wiki/OpenAPI_Specification
 [async_mdn]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
