@@ -1,0 +1,173 @@
+---
+title: "Revamping our API pt. 1: Moving from express to Fastify"
+description: How switching to Fastify let us embrace runtime and compile-time types
+pubDate: June 28, 2024
+author: Tom MacWright
+---
+import NpmChart from './fastify/NpmChart.astro';
+
+The JavaScript ecosystem has changed a lot in the last 15 years.
+We've gone from CommonJS to ESM, from browserify to webpack to vite,
+from mocha to vitest, from the request module to using web-standard
+fetch everywhere. The constant reinvention can
+be exciting or annoying from one day to the next.
+
+### The success of Express
+
+In the midst of all this churn, [express][express] has persevered.
+Express is a web framework for Node.js, introduced
+by [TJ Holowaychuk][tj] in 2009. Like a lot
+of early JavaScript modules and many of TJ's projects, it took inspiration
+from the land of Ruby - in particular, [Sinatra][sinatra], which
+was established in 2007.
+
+```js title="express-example.js"
+// This is a tiny example of using
+// express. Notice how there's almost no boilerplate
+// involved in creating a tiny web server.
+const app = require('express')();
+app.get('/', (req, res) => {
+  res.send('Hello World!');
+});
+app.listen(3000);
+```
+
+Express is a beautifully light abstraction: a
+'hello world' example is barely over 10 lines. Compared to the boilerplate
+required to do the same in Ruby on Rails or a Java server at the time, it
+was a breath of fresh air.
+
+<NpmChart />
+
+Express became the default for new JavaScript projects, and has stayed
+there. In a typical week, express is downloaded from NPM 30 million
+times. It's a roaring success in every way.
+
+### A need for types
+
+Express is an _expressive_ framework: like a classic Ruby or
+JavaScript framework, it lets you color outside the lines by using
+loosely-defined objects and types. Query string parameters in express
+become [freeform objects](https://expressjs.com/en/4x/api.html#req.query).
+The same goes for the bodies of requests, and the kinds of responses
+you can send: it's all a bit ad-hoc by default.
+
+But the vibes have shifted: we write [TypeScript][ts] now,
+and everyone's excited about validator modules like [Zod](https://zod.dev/)
+and [TypeBox](https://github.com/sinclairzx81/typebox). Interfaces
+are less ad-hoc and more declared, tested, and strictly typed.
+
+Modern tooling is written to take full advantage of types
+and schemas. With [tRPC](https://trpc.io/), we're writing backend
+endpoints and calling them from auto-generated, auto-typed functions
+on the frontend. Other backends are embracing [OpenAPI][openapi]
+(née Swagger) to generate clients, test suites, and more.
+End-to-end typesafety is in vogue, and it is good.
+
+###  Issues with express
+
+Val Town started off with Express. It has served us pretty well.
+
+But the papercuts started to accumulate.
+When we started creating  [a public API with an OpenAPI spec][rfc],
+we immediately started to get a bad feeling about using express
+as we were doing before. The OpenAPI specification was making
+strong promises about the kinds of requests we accepted and responses
+we'd return. But the specification was just a dead document,
+a YAML file - it wasn't part our codebase, or our test suite. So it
+wasn't enforced, and what isn't enforced isn't true.
+
+The other pain point was async. We write the Val Town backend
+as TypeScript, but try to transpile it to modern code, so that means
+we keep our [async functions][async_mdn] and ESM syntax when we
+run our code. Express far predates the existence of the
+async & await keywords in JavaScript, and it [does not mix well with them][express_async].
+
+### Finding an alternative
+
+One option would be waiting for the next version of express, v5,
+which includes support for async functions. That release is
+taking [a little while to complete][express_5], so we didn't want
+to bet on it landing soon.
+
+It is great, though, that express
+is still actively maintained, and I don't envy the task of rolling
+a major update to such a heavily-adopted project. There are certainly
+codebases with tens of thousands of lines of code that rely on
+express and can't easily jump to an alternative.
+
+But Val Town's backend is not an enormous legacy project and switching
+web frameworks wasn't going to require
+a [deadly from-scratch rewrite][never_rewrite].
+
+Technology choice is complicated. I don't want to make a decision
+based on some simplistic criteria like GitHub Stars, but it's equally
+fraught to rely on vibes and instinct. So I investigated whether
+projects had good documentation, maintainership, if they had
+a decent history of stability, and perhaps most importantly, whether
+they were trying to solve the problems that we needed to solve.
+
+### Fastify
+
+We landed on [fastify][fastify] as the technology to build the
+future of Val Town's public API. Some of the strongest points for
+fastify were:
+
+- An extremely strong [ecosystem](https://fastify.dev/ecosystem/),
+  which includes a lot of high-quality, first-party plugins. We're
+  building a system in production, which means things like rate
+  limiting are going to be necessary, and it's amazing that
+  fastify's [rate limiter](https://github.com/fastify/fastify-rate-limit)
+  is well-architected.
+- Great, thorough [documentation](https://fastify.dev/docs/latest/Reference/Routes/),
+  and an active community that has been really helpful for support.
+- Solid support for [plugins and encapsulation](https://fastify.dev/docs/latest/Reference/Encapsulation/) that let us structure the application into sub-applications.
+- Support for [validation and serialization](https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/) with multiple validators and validation for all inputs and ouputs.
+- [Good support for async/await](https://fastify.dev/docs/latest/Reference/Routes/#async-await), like you might expect from a modern framework.
+- Off-the-shelf integrations for [opentelemetry](https://www.npmjs.com/package/@opentelemetry/instrumentation-fastify) and [Sentry](https://docs.sentry.io/platforms/javascript/guides/fastify/) mean
+  that we could have tracing and telemetry from day one.
+- Finally, [@fastify/express](https://github.com/fastify/fastify-express)
+  let us incrementally migrate from express to fastify.
+- We were already using [light-my-request](https://github.com/fastify/light-my-request) to test
+  our express server, but this is built-in to fastify and developed
+  under the fastify organization: testing routes with fastify is
+  as easy as calling the server with `.inject()`.
+
+Of course, fastify is also very fast, but web framework overhead
+wasn't a problem with express and most likely won't be a problem with
+any framework we choose: most of our performance envelope has to
+do with operating [the Val Town runtime][runtimes] and interacting
+with the database.
+
+We considered a few other options, like [Hono](https://hono.dev/) and [Elysia](https://elysiajs.com/).
+Both are lovely projects - we use and recommend Hono a ton
+in Vals. Elysia has convenient typesafety and a lot of features,
+but its support for Node.js is very experimental. And Hono has
+a [first-party OpenAPI plugin](https://github.com/honojs/middleware/tree/main/packages/zod-openapi), but some of the ecosystem around fastify - for tracing,
+incremental migration from express, and plugins - was more built-out.
+
+For simpler projects and especially for situations where we want
+multi-platform compatibility so that code can run on Node.js, Deno,
+or Cloudflare Workers, we reach for Hono.
+
+### The port
+
+By using [@fastify/express](https://github.com/fastify/fastify-express)
+we were able to do this migration entirely incrementally: the first
+fastify PR just added the fastify dependency and wrapped our express
+server with fastify. Then each successive PR moved a few routes
+from express to fastify, until the application has been
+completely ported.
+
+[openapi]: https://en.wikipedia.org/wiki/OpenAPI_Specification
+[async_mdn]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
+[express_async]: https://zellwk.com/blog/async-await-express/
+[tj]: https://github.com/tj
+[express]: https://expressjs.com/
+[sinatra]: https://sinatrarb.com/
+[ts]: http://typescript.com/
+[rfc]: https://blog.val.town/blog/expanding-the-vals-api-rfc/
+[express_5]: https://github.com/expressjs/discussions/issues/233
+[never_rewrite]: https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/
+[fastify]: https://fastify.dev/
+[runtimes]: https://blog.val.town/blog/first-four-val-town-runtimes/
