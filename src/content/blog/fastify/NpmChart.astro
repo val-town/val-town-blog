@@ -4,18 +4,20 @@
 <div id='npm-chart'></div>
   <script type="module">
      import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
-    const lines = (await Promise.all(['express', 'fastify', 'hono'].map(p => 
-      fetch(`/data/${p}.json`).then(r => r.json())
-    ))).flatMap(ds => {
-      console.log(ds);
-      return ds.downloads.map(d => {
-        return {
-          ...d,
-          day: new Date(d.day),
-          pkg: ds.package
-        }
-      });
-    });
+
+     const series = await fetch('/data/series.json').then(r => r.json());
+
+     const lines = [];
+     const order = ['express', 'hono', 'fastify'];
+     for (let i = 0; i < order.length; i++) {
+       for (let n = 0; n < series[0].length; n++) {
+         lines.push({
+           pkg: order[i],
+           downloads: series[i + 1][n],
+           day: new Date(series[0][n])
+         });
+       }
+     }
     
     const elem = document.querySelector('#npm-chart');
     
