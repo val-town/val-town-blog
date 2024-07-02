@@ -7,6 +7,21 @@ import { h } from "hastscript";
 import { visit } from "unist-util-visit";
 
 import sitemap from "@astrojs/sitemap";
+import { visit } from "unist-util-visit";
+
+const mermaid = () => (tree) => {
+  visit(tree, "code", (node) => {
+    if (node.lang !== "mermaid") return;
+
+    // @ts-ignore
+    node.type = "html";
+    node.value = `
+      <script type='text/mermaid'>
+        ${node.value}
+      </script>
+    `;
+  });
+};
 
 /**
  * Allows for syntax like
@@ -44,7 +59,7 @@ export default defineConfig({
   site: "https://blog.val.town",
   integrations: [astroExpressiveCode(), mdx(), sitemap()],
   markdown: {
-    remarkPlugins: [remarkDirective, directiveToHtml],
+    remarkPlugins: [remarkDirective, directiveToHtml, mermaid],
   },
   editLink: {
     baseUrl: "https://github.com/val-town/val-town-docs/edit/main/",

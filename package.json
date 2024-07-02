@@ -18,9 +18,11 @@
     "@fontsource/ibm-plex-sans": "^5.0.20",
     "@fontsource/ibm-plex-sans-condensed": "^5.0.13",
     "@fontsource/ibm-plex-serif": "^5.0.13",
+    "@observablehq/plot": "^0.6.15",
     "astro": "^4.4.8",
     "astro-expressive-code": "^0.35.3",
     "hastscript": "^9.0.0",
+    "mermaid": "^10.9.1",
     "remark-directive": "^3.0.0",
     "typescript": "^5.5.2"
   },

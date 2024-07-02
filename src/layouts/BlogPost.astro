@@ -1,156 +1,179 @@
 ---
-import type { CollectionEntry } from 'astro:content';
+import type { CollectionEntry } from "astro:content";
 import { Image } from "astro:assets";
-import BaseHead from '../components/BaseHead.astro';
-import EditLink from '../components/EditLink.astro';
-import Header from '../components/Header.astro';
-import Footer from '../components/Footer.astro';
-import FormattedDate from '../components/FormattedDate.astro';
+import BaseHead from "../components/BaseHead.astro";
+import EditLink from "../components/EditLink.astro";
+import Header from "../components/Header.astro";
+import Footer from "../components/Footer.astro";
+import FormattedDate from "../components/FormattedDate.astro";
+import MermaidChart from "../components/MermaidChart.astro";
 import andre from "../content/authors/andre.jpg";
 import max from "../content/authors/max.jpg";
 import tom from "../content/authors/tom.jpg";
 import steve from "../content/authors/steve.jpg";
 import jp from "../content/authors/jp.jpg";
 
-type Props = CollectionEntry<'blog'>['data'] & { id: string };
+type Props = CollectionEntry<"blog">["data"] & { id: string };
 
-const { id, title, description, author, pubDate, updatedDate, heroImage } = Astro.props;
+const { id, title, description, author, pubDate, updatedDate, heroImage } =
+    Astro.props;
 ---
 
 <html lang="en">
-	<head>
-		<BaseHead title={title} description={description} heroImage={heroImage} />
-		<style>
-      .prose :global(.expressive-code .frame) {
-        box-shadow: none;
-      }
-      .prose :global(.expressive-code .frame pre) {
-        border-width: 1px;
-      }
-      .prose :global(p) {
-        margin: 20px 0;
-      }
-      .prose :global(p code) {
-        font-size: 80%;
-        background: #F0F6FF;
-        border-radius: 4px;
-        color: #1e3a8a;
-        font-family: var(--ec-codeFontFml);
-      }
-      .prose :global(p:has(img)) {
-        margin: 0;
-      }
-      .prose :global(a) {
-        color: #143f9d;
-        text-decoration: none;
-      }
-      .prose :global(a:hover) {
-        text-decoration: underline;
-      }
-			.hero-image {
-				width: 100%;
-        border-bottom: 1px solid var(--border);
-			}
-			.hero-image img {
-				display: block;
-				margin: 0 auto;
-        width: 100%;
-			}
-			.prose {
-				width: 900px;
-				max-width: calc(100% - 2em);
-				margin: auto;
-				padding: 1em;
-				color: rgb(var(--gray-dark));
-			}
-			.prose :global(note.positive) {
-        display: block;
-        background-color: var(--light-green);
-        padding: 15px 20px;
-        border-radius: 10px;
-      }
-			.prose :global(note.positive p) {
-        margin: 0;
-      }
-      /** This might be too aggressive - would
+    <head>
+        <BaseHead
+            title={title}
+            description={description}
+            heroImage={heroImage}
+        />
+        <style>
+            .prose :global(.expressive-code .frame) {
+                box-shadow: none;
+            }
+            .prose :global(.expressive-code .frame pre) {
+                border-width: 1px;
+            }
+            .prose :global(p) {
+                margin: 20px 0;
+            }
+            .prose :global(p code) {
+                font-size: 80%;
+                background: #f0f6ff;
+                border-radius: 4px;
+                color: #1e3a8a;
+                font-family: var(--ec-codeFontFml);
+            }
+            .prose :global(p:has(img)) {
+                margin: 0;
+            }
+            .prose :global(a) {
+                color: #143f9d;
+                text-decoration: none;
+            }
+            .prose :global(a:hover) {
+                text-decoration: underline;
+            }
+            .hero-image {
+                width: 100%;
+                border-bottom: 1px solid var(--border);
+            }
+            .hero-image img {
+                display: block;
+                margin: 0 auto;
+                width: 100%;
+            }
+            .prose {
+                width: 900px;
+                max-width: calc(100% - 2em);
+                margin: auto;
+                padding: 1em;
+                color: rgb(var(--gray-dark));
+            }
+            .prose :global(note.positive) {
+                display: block;
+                background-color: var(--light-green);
+                padding: 15px 20px;
+                border-radius: 10px;
+            }
+            .prose :global(note.positive p) {
+                margin: 0;
+            }
+            /** This might be too aggressive - would
       * prefer it not be global.
       */
-      .prose :global(video) {
-        width: 100%;
-      }
-			.title {
-				margin-bottom: 1em;
-				padding: 1em 0;
-				line-height: 1;
-			}
-			.title h1 {
-        font-size: 50px;
-				margin: 0 0 10px 0;
-        font-family: 'IBM Plex Sans Condensed';
-			}
-      .prose :global(h1, h2, h3, h4) {
-        font-family: 'IBM Plex Sans Condensed';
-      }
-			.date {
-        font-size: 20px;
-			}
-			.last-updated-on {
-				font-style: italic;
-			}
+            .prose :global(video) {
+                width: 100%;
+            }
+            .title {
+                margin-bottom: 1em;
+                padding: 1em 0;
+                line-height: 1;
+            }
+            .title h1 {
+                font-size: 50px;
+                margin: 0 0 10px 0;
+                font-family: "IBM Plex Sans Condensed";
+            }
+            .prose :global(h1, h2, h3, h4) {
+                font-family: "IBM Plex Sans Condensed";
+            }
+            .date {
+                font-size: 20px;
+            }
+            .last-updated-on {
+                font-style: italic;
+            }
 
-	    @media (max-width: 720px) {
-        .title h1 {
-          font-size: 30px;
-        }
-      }
-      .avatar {
-        border-radius: 4px;
-        vertical-align: middle;
-        margin-right: 2px;
-        margin-top: -3px;
-      }
-		</style>
-	</head>
-
-	<body>
-    <div id='wrapper'>
-      <Header />
-      <main>
-        <article itemscope itemtype="https://schema.org/Article">
-          {heroImage &&
-          <div class="hero-image">
-            <Image
-                densities={[1, 2, 3]}
-                width={900} height={510} src={heroImage} alt="" />
-          </div>}
-          <div class="prose">
-            <div class="title">
-              <h1 itemprop="name">{title}</h1>
-              <div class="date">
-                <Image
-                  densities={[1, 2, 3]}
-                  width="20" height="20" class='avatar' alt={author}
-                  src={{'Tom MacWright': tom, 'André Terron': andre, "Steve Krouse": steve, "Max McDonnell": max, "JP Posma": jp}[author]}
-                >
-                </Image>
-                <span itemprop="author">{author}</span>
-                on
-                <FormattedDate date={pubDate} />
-                {
-                  updatedDate && (
-                    <div class="last-updated-on">
-                      Last updated on <FormattedDate date={updatedDate} />
-                    </div>
-                  )
+            @media (max-width: 720px) {
+                .title h1 {
+                    font-size: 30px;
                 }
-              </div>
-            </div>
-            <slot />
-            <EditLink id={id} />
-          </div>
-        </article>
-      </main>
-    </div>
-		<Footer />
-	</body>
+            }
+            .avatar {
+                border-radius: 4px;
+                vertical-align: middle;
+                margin-right: 2px;
+                margin-top: -3px;
+            }
+        </style>
+    </head>
+
+    <body>
+        <div id="wrapper">
+            <Header />
+            <main>
+                <article itemscope itemtype="https://schema.org/Article">
+                    {
+                        heroImage && (
+                            <div class="hero-image">
+                                <Image
+                                    densities={[1, 2, 3]}
+                                    width={900}
+                                    height={510}
+                                    src={heroImage}
+                                    alt=""
+                                />
+                            </div>
+                        )
+                    }
+                    <div class="prose">
+                        <div class="title">
+                            <h1 itemprop="name">{title}</h1>
+                            <div class="date">
+                                <Image
+                                    densities={[1, 2, 3]}
+                                    width="20"
+                                    height="20"
+                                    class="avatar"
+                                    alt={author}
+                                    src={{
+                                        "Tom MacWright": tom,
+                                        "André Terron": andre,
+                                        "Steve Krouse": steve,
+                                        "Max McDonnell": max,
+                                        "JP Posma": jp,
+                                    }[author]}
+                                />
+                                <span itemprop="author">{author}</span>
+                                on
+                                <FormattedDate date={pubDate} />
+                                {
+                                    updatedDate && (
+                                        <div class="last-updated-on">
+                                            Last updated on{" "}
+                                            <FormattedDate date={updatedDate} />
+                                        </div>
+                                    )
+                                }
+                            </div>
+                        </div>
+                        <slot />
+                        <EditLink id={id} />
+                    </div>
+                </article>
+            </main>
+        </div>
+        <Footer />
+        <MermaidChart />
+    </body>
 </html>
