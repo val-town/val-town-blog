@@ -1,0 +1,71 @@
+---
+
+---
+
+<div id="issues-chart"></div>
+<script>
+    const Plot = await import("@observablehq/plot");
+    const series = await fetch("/data/fastify-issues-simple.json")
+        .then((r) => r.json())
+        .then((s) => {
+            return s
+                .map((s) => {
+                    return {
+                        ...s,
+                        completed: new Date(s.completed),
+                    };
+                })
+                .sort((a, b) => a.completed - b.completed)
+                .map((d, idx, arr) => {
+                    return {
+                        ...d,
+                        value: idx / (arr.length + 2),
+                    };
+                });
+        });
+
+    const elem = document.querySelector("#issues-chart");
+
+    const plot = Plot.plot({
+        height: 300,
+        y: { grid: true, label: "%", percent: true },
+        x: { label: null },
+        width: elem.offsetWidth,
+        marginRight: 80,
+        marginLeft: 30,
+        marks: [
+            Plot.ruleY([0]),
+            Plot.areaY(series, {
+                x: "completed",
+                y: "value",
+                curve: "step-before",
+                fill: "steelblue",
+                fillOpacity: 0.1,
+            }),
+            Plot.dot(series, {
+                x: "completed",
+                y: "value",
+                fill: "steelblue",
+                stroke: null,
+                r: 2,
+                curve: "step-before",
+            }),
+            Plot.text(series, {
+                x: "completed",
+                y: "value",
+                text: "title",
+                curve: "step-before",
+                textAnchor: "start",
+                dx: 5,
+            }),
+            Plot.lineY(series, {
+                x: "completed",
+                y: "value",
+                curve: "step-before",
+                stroke: "steelblue",
+            }),
+        ],
+    });
+
+    elem.appendChild(plot);
+</script>

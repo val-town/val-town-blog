@@ -1,10 +1,11 @@
 ---
-title: "Revamping our API pt. 1: Moving from express to Fastify"
+title: "Moving from express to fastify, pt 1"
 description: How switching to Fastify let us embrace runtime and compile-time types
-pubDate: June 28, 2024
+pubDate: July 2, 2024
 author: Tom MacWright
 ---
 import NpmChart from './fastify/NpmChart.astro';
+import IssuesChart from './fastify/IssuesChart.astro';
 
 The JavaScript ecosystem has changed a lot in the last 15 years.
 We've gone from CommonJS to ESM, from browserify to webpack to vite,
@@ -14,10 +15,10 @@ be exciting or annoying from one day to the next.
 
 ### The success of Express
 
-In the midst of all this churn, [express][express] has persevered.
+Amid all this churn, [express][express] has persevered.
 Express is a web framework for Node.js, introduced
-by [TJ Holowaychuk][tj] in 2009. Like a lot
-of early JavaScript modules and many of TJ's projects, it took inspiration
+by [TJ Holowaychuk][tj] in 2009. Like many early JavaScript
+modules and some of TJ's projects, it took inspiration
 from the land of Ruby - in particular, [Sinatra][sinatra], which
 was established in 2007.
 
@@ -39,21 +40,21 @@ was a breath of fresh air.
 
 <NpmChart />
 
-Express became the default for new JavaScript projects, and has stayed
+Express became the default for new JavaScript projects and has stayed
 there. In a typical week, express is downloaded from NPM 30 million
 times. It's a roaring success in every way.
 
 ### A need for types
 
 Express is an _expressive_ framework: like a classic Ruby or
-JavaScript framework, it lets you color outside the lines by using
-loosely-defined objects and types. Query string parameters in express
+JavaScript framework, it lets you color outside the lines using
+loosely defined objects and types. Query string parameters in express
 become [freeform objects](https://expressjs.com/en/4x/api.html#req.query).
 The same goes for the bodies of requests, and the kinds of responses
 you can send: it's all a bit ad-hoc by default.
 
 But the vibes have shifted: we write [TypeScript][ts] now,
-and everyone's excited about validator modules like [Zod](https://zod.dev/)
+and everyone's excited about validation modules like [Zod](https://zod.dev/)
 and [TypeBox](https://github.com/sinclairzx81/typebox). Interfaces
 are less ad-hoc and more declared, tested, and strictly typed.
 
@@ -62,30 +63,78 @@ and schemas. With [tRPC](https://trpc.io/), we're writing backend
 endpoints and calling them from auto-generated, auto-typed functions
 on the frontend. Other backends are embracing [OpenAPI][openapi]
 (née Swagger) to generate clients, test suites, and more.
-End-to-end typesafety is in vogue, and it is good.
+End-to-end type-safety is in vogue, and it is good.
+
+### The promise of OpenAPI
+
+In our case, we want our types as an [OpenAPI](https://en.wikipedia.org/wiki/OpenAPI_Specification)
+specification.
+OpenAPI is a JSON/YAML document that lets you describe your entire
+REST API strictly: what URLs are supported, how parameters, headers,
+and request bodies should be formatted, what kind of responses
+will be produced. It lets you enrich this strict machine-readable
+information with human-readable descriptions and helpful examples.
+It's a pretty exciting time for the OpenAPI spec.
+
+```mermaid
+flowchart TD
+  FR[Fastify routes] --> FS[@fastify/swagger]
+  FS --> OA[openapi.json]
+  OA --> C[OpenAPI consumers]
+  OA --> SSDK[TypeScript SDK]
+  OA --> DOCS[API Docs]
+  OA --> OAPI[OpenAPI Function calling]
+  OA --> V[Linter]
+  V -->|lint feedback| FR
+```
+
+A number of companies and open source projects, including
+[Stainless](https://www.stainlessapi.com/), [Speakeasy](https://www.speakeasyapi.dev/),
+and [OpenAPI TypeScript](https://openapi-ts.pages.dev/), are
+writing tools that can generate functional, clean SDKs straight
+from OpenAPI specifications.
+
+You can also generate great documentation from OpenAPI specifications.
+We're already [generating api.val.town/documentation][openapi_docs]
+using a library from [Scalar](https://scalar.com/).
+
+And in the near future, we should be able to use our OpenAPI specification
+to give our [AI assistant](https://x.com/tmcw/status/1803132938269175956)
+the ability to interact with our API via [function calling](https://platform.openai.com/docs/guides/function-calling):
+conveniently, OpenAPI and the OpenAI function calling
+system are both based on [JSON Schema](https://json-schema.org/),
+so translating between the two is possible.
 
 ###  Issues with express
 
 Val Town started off with Express. It has served us pretty well.
-
 But the papercuts started to accumulate.
+
 When we started creating  [a public API with an OpenAPI spec][rfc],
 we immediately started to get a bad feeling about using express
 as we were doing before. The OpenAPI specification was making
 strong promises about the kinds of requests we accepted and responses
 we'd return. But the specification was just a dead document,
 a YAML file - it wasn't part our codebase, or our test suite. So it
-wasn't enforced, and what isn't enforced isn't true.
+wasn't enforced or validated, and sure enough, it was slightly incorrect
+from day one.
 
 The other pain point was async. We write the Val Town backend
-as TypeScript, but try to transpile it to modern code, so that means
+as TypeScript but try to transpile it to modern code, so
 we keep our [async functions][async_mdn] and ESM syntax when we
 run our code. Express far predates the existence of the
 async & await keywords in JavaScript, and it [does not mix well with them][express_async].
 
 ### Finding an alternative
 
-One option would be waiting for the next version of express, v5,
+Because express is incredibly popular, there are ways to implement
+OpenAPI with it, and support async handlers - plugins like
+[express-openapi](https://github.com/kogosoftwarellc/open-api)
+and [express-async-errors](https://github.com/davidbanham/express-async-errors). But these are a bit bolted-on:
+they make it technically possible to achieve the goal, but
+nothing about them is idiomatic.
+
+Another option would be waiting for the next version of express, v5,
 which includes support for async functions. That release is
 taking [a little while to complete][express_5], so we didn't want
 to bet on it landing soon.
@@ -96,24 +145,27 @@ a major update to such a heavily-adopted project. There are certainly
 codebases with tens of thousands of lines of code that rely on
 express and can't easily jump to an alternative.
 
-But Val Town's backend is not an enormous legacy project and switching
-web frameworks wasn't going to require
-a [deadly from-scratch rewrite][never_rewrite].
+But Val Town's backend is not an enormous legacy project.
+Switching web frameworks wasn't going to require
+a [deadly from-scratch rewrite][never_rewrite]. We were ready to
+bid adieu to express.
 
 Technology choice is complicated. I don't want to make a decision
 based on some simplistic criteria like GitHub Stars, but it's equally
 fraught to rely on vibes and instinct. So I investigated whether
-projects had good documentation, maintainership, if they had
+projects had good documentation and maintainership, if they had
 a decent history of stability, and perhaps most importantly, whether
 they were trying to solve the problems that we needed to solve.
 
 ### Fastify
 
+![Fastify](./fastify/fastify-logo.png)
+
 We landed on [fastify][fastify] as the technology to build the
 future of Val Town's public API. Some of the strongest points for
 fastify were:
 
-- An extremely strong [ecosystem](https://fastify.dev/ecosystem/),
+- A comprehensive [ecosystem](https://fastify.dev/ecosystem/),
   which includes a lot of high-quality, first-party plugins. We're
   building a system in production, which means things like rate
   limiting are going to be necessary, and it's amazing that
@@ -126,11 +178,11 @@ fastify were:
 - [Good support for async/await](https://fastify.dev/docs/latest/Reference/Routes/#async-await), like you might expect from a modern framework.
 - Off-the-shelf integrations for [opentelemetry](https://www.npmjs.com/package/@opentelemetry/instrumentation-fastify) and [Sentry](https://docs.sentry.io/platforms/javascript/guides/fastify/) mean
   that we could have tracing and telemetry from day one.
-- Finally, [@fastify/express](https://github.com/fastify/fastify-express)
-  let us incrementally migrate from express to fastify.
 - We were already using the [light-my-request](https://github.com/fastify/light-my-request) module to test
   our express server. light-my-request is written and maintained
   by the fastify folks, and it is built into fastify.
+- Finally, [@fastify/express](https://github.com/fastify/fastify-express)
+    let us incrementally migrate from express to fastify.
 
 Of course, fastify is also very fast, but web framework overhead
 wasn't a problem with express and most likely won't be a problem with
@@ -147,9 +199,9 @@ incremental migration from express, and plugins - was more built-out.
 
 For simpler projects and especially for situations where we want
 multi-platform compatibility so that code can run on Node.js, Deno,
-or Cloudflare Workers, we reach for Hono.
+or Cloudflare Workers, [we reach for Hono](https://www.val.town/examples/packages/hono).
 
-### The port
+### Incrementally porting our application, route by route
 
 By using [@fastify/express](https://github.com/fastify/fastify-express)
 we were able to do this migration entirely incrementally: the first
@@ -158,12 +210,17 @@ server with fastify. Then each successive PR moved a few routes
 from express to fastify, until the application has been
 completely ported.
 
-Of course there were some bumps along the road, and lots of details
-to iron out. But as of today we're nearly 100% fastify for Val Town's
-backend, and it's unlocking stability and capabilities across
-the board. Stay tuned for the next update which will dive into those,
-including how this new backend strategy lets us automatically
-generate our new TypeScript SDK!
+<IssuesChart />
+
+As of today, we've ported all but two routes in our backend server.
+It's been an incredibly incremental effort, thanks to @fastify/express -
+such that we never had to stop work on feature development or freeze
+part of the codebase while switching frameworks.
+
+And the best is yet to come – next we'll be talking about our
+[new TypeScript SDK][sdk], which is generated directly from the OpenAPI
+documents that fastify produces, as well as [improved documentation](https://api.val.town/documentation)
+and more robust API endpoints. Stay tuned!
 
 [openapi]: https://en.wikipedia.org/wiki/OpenAPI_Specification
 [async_mdn]: https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/async_function
@@ -177,3 +234,5 @@ generate our new TypeScript SDK!
 [never_rewrite]: https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/
 [fastify]: https://fastify.dev/
 [runtimes]: https://blog.val.town/blog/first-four-val-town-runtimes/
+[sdk]: https://github.com/val-town/sdk
+[openapi_docs]: https://api.val.town/documentation

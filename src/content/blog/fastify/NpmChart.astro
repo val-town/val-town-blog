@@ -1,52 +1,62 @@
 ---
+
 ---
 
-<div id='npm-chart'></div>
-  <script type="module">
-     import * as Plot from "https://cdn.jsdelivr.net/npm/@observablehq/plot@0.6/+esm";
+<div id="npm-chart"></div>
+<script>
+    const Plot = await import("@observablehq/plot");
 
-     const series = await fetch('/data/series.json').then(r => r.json());
+    const series = await fetch("/data/series.json").then((r) => r.json());
 
-     const lines = [];
-     const order = ['express', 'hono', 'fastify'];
-     for (let i = 0; i < order.length; i++) {
-       for (let n = 0; n < series[0].length; n++) {
-         lines.push({
-           pkg: order[i],
-           downloads: series[i + 1][n],
-           day: new Date(series[0][n])
-         });
-       }
-     }
-    
-    const elem = document.querySelector('#npm-chart');
-    
+    const lines = [];
+    const order = ["express", "hono", "fastify"];
+    for (let i = 0; i < order.length; i++) {
+        for (let n = 0; n < series[0].length; n++) {
+            lines.push({
+                pkg: order[i],
+                downloads: series[i + 1][n],
+                day: new Date(series[0][n]),
+            });
+        }
+    }
+
+    const elem = document.querySelector("#npm-chart");
+
     const plot = Plot.plot({
-      style: "overflow: visible;",
-      y: {grid: true},
-      width: elem.offsetWidth,
-      marginRight: 80,
-      marginLeft: 80,
-      marks: [
-        Plot.ruleY([0]),
-        Plot.lineY(lines, Plot.windowY(7, {
-          x: "day",
-          y: "downloads",
-          stroke: "pkg"
-        })),
-        Plot.text(lines, Plot.selectLast(Plot.windowY(7, {
-          x: "day",
-          y: "downloads",
-          stroke: 'pkg',
-          fill: '#000',
-          anchor: 'end',
-          strokeOpacity: 0.1,
-          text: 'pkg',
-          textAnchor: "start",
-          dx: 5
-      })))
-      ]
+        style: "overflow: visible;",
+        y: { grid: true },
+        width: elem.offsetWidth,
+        marginRight: 80,
+        marginLeft: 80,
+        marks: [
+            Plot.ruleY([0]),
+            Plot.lineY(
+                lines,
+                Plot.windowY(7, {
+                    x: "day",
+                    y: "downloads",
+                    stroke: "pkg",
+                    strokeWidth: 2,
+                }),
+            ),
+            Plot.text(
+                lines,
+                Plot.selectLast(
+                    Plot.windowY(7, {
+                        x: "day",
+                        y: "downloads",
+                        stroke: "pkg",
+                        fill: "#000",
+                        anchor: "end",
+                        strokeOpacity: 0.1,
+                        text: "pkg",
+                        textAnchor: "start",
+                        dx: 5,
+                    }),
+                ),
+            ),
+        ],
     });
-    
-    elem.appendChild(plot)
-  </script>
+
+    elem.appendChild(plot);
+</script>

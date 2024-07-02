@@ -1,0 +1,36 @@
+---
+
+---
+
+<script>
+    async function renderDiagrams(graphs) {
+        const { default: mermaid } = await import("mermaid");
+        mermaid.initialize({
+            startOnLoad: false,
+            fontFamily: "var(--sans-font)",
+            theme: window.matchMedia("(prefers-color-scheme: dark)").matches
+                ? "dark"
+                : "default",
+        });
+
+        for (const graph of graphs) {
+            const content = graph.innerText;
+            if (!content) continue;
+            let svg = document.createElement("svg");
+            const id = (svg.id =
+                "mermaid-" + Math.round(Math.random() * 100000));
+            mermaid
+                .render(id, content)
+                .then((result) => {
+                    graph.insertAdjacentElement("afterend", svg);
+                    svg.outerHTML = result.svg;
+                })
+                .catch((e) => console.error(e));
+        }
+    }
+
+    const graphs = document.querySelectorAll('script[type="text/mermaid"]');
+    if (graphs.length > 0) {
+        renderDiagrams(graphs);
+    }
+</script>
