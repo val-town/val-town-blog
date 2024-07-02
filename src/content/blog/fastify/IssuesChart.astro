@@ -4,6 +4,7 @@
 
 <div id="issues-chart"></div>
 <script>
+// @ts-nocheck
     const Plot = await import("@observablehq/plot");
     const series = await fetch("/data/fastify-issues-simple.json")
         .then((r) => r.json())

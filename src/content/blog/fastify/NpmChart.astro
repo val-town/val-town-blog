@@ -4,6 +4,7 @@
 
 <div id="npm-chart"></div>
 <script>
+// @ts-nocheck
     const Plot = await import("@observablehq/plot");
 
     const series = await fetch("/data/series.json").then((r) => r.json());
