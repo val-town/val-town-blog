@@ -66,9 +66,11 @@ console.log(JSON.stringify(querystring));
 
 TypeBox objects are JSON Schema objects with extra in-memory magic!
 
-A fun way to think about TypeScript is that it does for JSON Schema what [drizzle does for SQL](https://orm.drizzle.team/) - it's a nice, TypeScript-friendly builder syntax for an existing spec that tries to expose all of the spec's power. That's not _all_ TypeBox is - the
+A fun way to think about TypeBox is that it does for JSON Schema what [drizzle does for SQL](https://orm.drizzle.team/) - it's a nice, TypeScript-friendly builder syntax for an existing spec that tries to expose all of the spec's power. That's not _all_ TypeBox is -
+it has an extremely fast built-in [type checker](https://github.com/sinclairzx81/typebox?tab=readme-ov-file#typecheck),
+it can [create example values based on schemas](https://github.com/sinclairzx81/typebox?tab=readme-ov-file#values), and a lot more.
 
-Now, of course, there _are_ ways to use Zod like this, because the open source community is endlessly clever and persistent. For example, there's [zod-to-json-schema](https://github.com/StefanTerdell/zod-to-json-schema):
+There _are_ ways to use Zod to produce JSON Schema. For example, there's [zod-to-json-schema](https://github.com/StefanTerdell/zod-to-json-schema):
 
 ```ts
 import { z } from "zod";
