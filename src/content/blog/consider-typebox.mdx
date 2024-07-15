@@ -1,0 +1,164 @@
+---
+title: Consider TypeBox
+description: Why we’re using TypeBox instead of Zod for our server validation layer
+pubDate: July 15, 2024
+author: Tom MacWright
+---
+
+I've written a bit about how much I like [Zod](https://zod.dev/). I've also [contributed a bunch of improvements to Zod](https://github.com/colinhacks/zod/pulls?q=is%3Apr+author%3Atmcw+is%3Aclosed), especially around performance.
+
+Zod has revolutionized how developers think about data validation because, I'd say, it has a wonderful API. Creating a shape for some data in Zod is really developer-friendly:
+
+```ts
+import { z } from "zod";
+
+const User = z.object({
+  username: z.string(),
+});
+
+User.parse({ username: "Ludwig" });
+
+// extract the inferred type
+type User = z.infer<typeof User>;
+// { username: string }
+```
+
+However, for [Val Town’s recent transition from express to Fastify](https://blog.val.town/blog/fastify/), we've been using [TypeBox](https://github.com/sinclairzx81/typebox) in place of Zod for validation. Fastify can support either Zod or TypeBox [via a Type Provider system](https://fastify.dev/docs/latest/Reference/Type-Providers/), but TypeBox was the clear option for us. Here's why!
+
+### TypeBox ↔ JSON Schema ↔ OpenAPI
+
+As we've been migrating to [Fastify](https://fastify.io/) for our API server, one of our major goals has been to strictly define all of the inputs and outputs, and to be able to express them all in an [OpenAPI specification](https://en.wikipedia.org/wiki/OpenAPI_Specification) that will have a lot of trickle-down benefits.
+
+OpenAPI 3.1.0 [is 100% compatible with JSON Schema](https://www.openapis.org/blog/2021/02/18/openapi-specification-3-1-released) – the types of query parameters, request bodies, response bodies, and more are all defined with [JSON Schema](https://json-schema.org/) objects.
+
+Here's an example of one of our simplest routes - the [esm.town](https://docs.val.town/api/esm-town/) endpoint that exposes Val contents as TypeScript or JavaScript modules so that they can be run in Deno or browsers:
+
+```ts
+fastify.route({
+  method: "GET",
+  url: "/v/:handle/:name",
+  schema: {
+    description: "Get source code for a val",
+    // TypeBox provides this Type variable
+    // which we use to build the schema
+    querystring: Type.Object({
+      v: Type.Optional(Type.Integer({ minimum: 0 })),
+    }),
+    params: Type.Object({
+      handle: Type.String(),
+      name: Type.String(),
+    }),
+  },
+  // …
+});
+```
+
+Let's look at the `querystring` type (and [here's a Val that shows doing just this](https://www.val.town/v/tmcw/typeboxExample)):
+
+```ts
+const querystring = Type.Object({
+  v: Type.Optional(Type.Integer({ minimum: 0 })),
+});
+
+console.log(JSON.stringify(querystring));
+// {"type":"object","properties":{"v":{"minimum":0,"type":"integer"}}}
+```
+
+TypeBox objects are JSON Schema objects with extra in-memory magic!
+
+A fun way to think about TypeScript is that it does for JSON Schema what [drizzle does for SQL](https://orm.drizzle.team/) - it's a nice, TypeScript-friendly builder syntax for an existing spec that tries to expose all of the spec's power. That's not _all_ TypeBox is - the
+
+Now, of course, there _are_ ways to use Zod like this, because the open source community is endlessly clever and persistent. For example, there's [zod-to-json-schema](https://github.com/StefanTerdell/zod-to-json-schema):
+
+```ts
+import { z } from "zod";
+import { zodToJsonSchema } from "zod-to-json-schema";
+
+const mySchema = z
+  .object({
+    myString: z.string().min(5),
+    myUnion: z.union([z.number(), z.boolean()]),
+  })
+  .describe("My neat object schema");
+
+const jsonSchema = zodToJsonSchema(mySchema, "mySchema");
+```
+
+That said, TypeBox’s supported validators mirror what you can do in JSON Schema precisely, whereas Zod's often stretch into things that JSON Schema can't do, for two reasons:
+
+- Zod is most often used without reference to JSON Schema, so there's no sense in it trying to be a _subset_ of JSON Schema.
+- Zod follows the _parse, don't validate philosophy_.
+
+### Parse, don't validate
+
+Alexis King [coined this snappy slogan and popularized it in this great blog post, "Parse, don't validate"](https://lexi-lambda.github.io/blog/2019/11/05/parse-don-t-validate/). Here's a vastly oversimplified example of how these two approaches might look in TypeScript:
+
+```ts
+// A validation-based approach
+if (isValid(object)) {
+  // This is valid
+  console.log(object);
+}
+
+// A parsing-based approach
+const { error, value } = parse(object);
+if (!error) {
+  // This is valid
+  console.log(value);
+}
+```
+
+Validating is the default approach of a module like [ajv](https://ajv.js.org/guide/typescript.html#utility-types-for-schemas) and the behavior of how TypeBox’s [Check](https://github.com/sinclairzx81/typebox?tab=readme-ov-file#check) method works: they do some form of [type narrowing](https://www.typescriptlang.org/docs/handbook/2/narrowing.html) to let the type system know that the given data is valid, but they do not copy or mutate the data.
+
+Zod, on the other hand, parses, and it creates a [deep clone](https://zod.dev/?id=parse) of its input data:
+
+```ts
+const stringSchema = z.string();
+
+stringSchema.safeParse("billie"); // => { success: true; data: 'billie' }
+```
+
+This, in most cases, is _awesome_. The flexibility of Zod lets you do a lot of useful work in the 'parsing' step. You can [transform inputs](https://zod.dev/?id=transform) and [strip extra keys on objects](https://zod.dev/?id=strip). Zod can guarantee that that your data is 'clean' - it has the expected keys, but doesn't have any extra keys. Most of the time, this is a thing about Zod that I greatly appreciate.
+
+However, for validating the types of our Fastify schema, this approach has two downsides:
+
+- All of the methods in Zod that rely on the "parse, don't validate" architecture won't be convertible to JSON Schema. JSON Schema doesn't let you transform data, or pick object properties: it's a system for validation.
+- Parsing and deep-copying inputs is one of the main reasons why Zod's performance [lags other type validators](https://moltar.github.io/typescript-runtime-type-benchmarks/). It is harder to optimize its approach than it is to optimize an approach that doesn't require copying data.
+
+### Performance
+
+Now that I've mentioned performance, I should reiterate something I've written before a bunch of times: performance wasn't the main reason for using TypeBox instead of Zod for this problem. Performance also wasn't the main reason for [switching to Fastify from express](https://blog.val.town/blog/fastify/).
+
+And this applies even though fastify is [benchmarked faster](https://fastify.dev/benchmarks/) than express and TypeBox is benchmarked faster than Zod.
+
+I am a strong believer in Carlos Bueno’s [mature optimization handbook](https://carlos.bueno.org/optimization/), which dictates that:
+
+> The trickiest part of speeding up a program is not doing it, but deciding whether it’s worth doing at all.
+
+And, later:
+
+> Before you can optimize anything you need a way to measure what you are optimizing. Otherwise you are just shooting in the dark. Before you can measure you need a clear, explicit statement of the problem you are trying to solve. Otherwise, in a very real sense, you don’t know what you are doing.
+
+So, I keep in mind that everything in the application that is not the bottleneck, is not the bottleneck. I know in my mind that there's a performance difference between different kinds of loops in JavaScript, but when I see an `Array.map` that's not strictly necessary but it's iterating over 100 items at most, it's best to take it easy.
+
+And in the vast majority of applications, validation and parsing is not the bottleneck. That's the case in Val Town. Our bottlenecks are things like network topology, cold-start times for processes, database access, and disk access. We have metrics in [Honeycomb](https://www.honeycomb.io/) that break down the time cost of running vals, and Fastify overhead isn't a major contributor.
+
+Take it from [the author of Arktype](https://www.reddit.com/r/typescript/comments/17cmt0q/comment/k5rcmvi/), one of the extremely fast Zod alternatives:
+
+> I'll tell you a secret- validator performance is mostly negligible in ~95% of situations and Zod's is totally reasonable.
+
+Now, I do write this as someone who spent a bunch of time writing those [performance-oriented Zod pull requests](https://github.com/colinhacks/zod/pulls?q=is%3Apr+author%3Atmcw+is%3Aclosed), which contributed to a pretty decent [performance improvement on some benchmarks](https://observablehq.com/@tmcw/zod-perf-by-versions). Why?
+
+Because at the time, I was working on [Placemark](https://play.placemark.io/), a geospatial data-editing tool, and that tool was using Zod to validate geospatial data. Geospatial data is large, often in the hundreds of megabytes to gigabytes and more. And it contains a lot of nested JSON structures, like huge arrays of longitude, latitude positions that describe the precise curves of a line.
+
+So on that project I genuinely used the [Chrome Profiling tools](https://developer.chrome.com/docs/devtools/performance) and got a result in which Zod was a big part of the total time spent, so it became a high priority to optimize it.
+
+### See also
+
+There is a [lot of competition](https://npmtrends.com/@badrap/valita-vs-@sinclair/typebox-vs-arktype-vs-valibot-vs-zod) happening in the TypeScript validation space right now, which is super exciting for me, free-riding on all this innovation. So forgive me for not comprehensively covering all of the projects.
+
+[Valibot](https://github.com/fabian-hiller/valibot) is cool because it be a much smaller addition to your JavaScript bundle than Zod.
+
+[Arktype](https://github.com/arktypeio/arktype) is extremely cool because it essentially does for the TypeScript type system what TypeBox does for JSON Schema: the Arktype idea is that you don't need to learn a new type syntax - you can just write TypeScript-style type syntax and it'll get compiled to type checkers that can run at runtime. TypeBox has something similar in its [codegen module](https://github.com/sinclairzx81/typebox-codegen).
+
+Not to mention, [Colin](https://x.com/colinhacks) just got funding to build [the next version of Zod, v4](https://zod.dev/blog/clerk-fellowship), which will undoubtedly be a major step up for performance and power.
