@@ -15,7 +15,7 @@ import jp from "../content/authors/jp.jpg";
 
 type Props = CollectionEntry<"blog">["data"] & { id: string };
 
-const { id, title, description, author, pubDate, updatedDate, heroImage } =
+const { id, title, image, description, author, pubDate, updatedDate, heroImage } =
     Astro.props;
 ---
 
@@ -24,6 +24,7 @@ const { id, title, description, author, pubDate, updatedDate, heroImage } =
         <BaseHead
             title={title}
             description={description}
+            image={image}
             heroImage={heroImage}
         />
         <style>

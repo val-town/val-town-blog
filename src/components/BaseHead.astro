@@ -13,15 +13,17 @@ interface Props {
 	title: string;
 	description: string;
 	heroImage?: LocalImageProps['src'];
-	image?: string;
+	image?: LocalImageProps['src'];
 }
 
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
-const { title, description, heroImage, image = '/blog-placeholder.png' } = Astro.props;
+const { title, description, heroImage, image } = Astro.props;
 
+const backupImage = new URL('/blog-placeholder.png', Astro.url);
 const optimizedHero = heroImage && await getImage({ src: heroImage });
-const socialImage = optimizedHero?.src ?? new URL(image, Astro.url)
+const optimizedImage = image && await getImage({ src: image });
+const socialImage = optimizedHero?.src ?? optimizedImage?.src ?? backupImage;
 ---
 
 <!-- Global Metadata -->
