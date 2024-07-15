@@ -1,9 +1,9 @@
 ---
-title: "Moving to fastify pt. 2: Docs, an SDK and AI tools"
+title: "The perks of a good OpenAPI spec"
 description: |
   Taking advantage of our typed REST API to build a platform around
   Val Town.
-pubDate: July 12, 2024
+pubDate: July 15, 2024
 author: Tom MacWright
 ---
 
@@ -38,7 +38,8 @@ is basically as simple as this:
 
 ### A TypeScript SDK
 
-How about [a new TypeScript SDK](https://github.com/val-town/sdk)?
+Meet our [new TypeScript SDK](https://github.com/val-town/sdk),
+`@valtown/sdk`, which we autogenerate from our OpenAPI spec:
 
 ```ts title="example.ts"
 // Import the SDK
