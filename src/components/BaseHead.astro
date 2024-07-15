@@ -20,10 +20,13 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, heroImage, image } = Astro.props;
 
-const backupImage = new URL('/blog-placeholder.png', Astro.url);
-const optimizedHero = heroImage && new URL((await getImage({ src: heroImage })).toString(), Astro.url);
-const optimizedImage = image && new URL((await getImage({ src: image, format: 'png' })).toString(), Astro.url);
-const socialImage = (optimizedHero ?? optimizedImage ?? backupImage).toString();
+let socialImage = new URL('/blog-placeholder.png', Astro.url);
+const customImage = heroImage || image;
+if (customImage) {
+  const { src } = (await getImage({ src: customImage, format: 'png' }));
+  // Make it absolute so it is og:image friendly
+  socialImage = new URL(src, Astro.url);
+}
 ---
 
 <!-- Global Metadata -->
