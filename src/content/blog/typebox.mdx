@@ -23,7 +23,11 @@ type User = z.infer<typeof User>;
 // { username: string }
 ```
 
-However, for [Val Town’s recent transition from express to Fastify](https://blog.val.town/blog/fastify/), we've been using [TypeBox](https://github.com/sinclairzx81/typebox) in place of Zod for validation. Fastify can support either Zod or TypeBox [via a Type Provider system](https://fastify.dev/docs/latest/Reference/Type-Providers/), but TypeBox was the clear option for us. Here's why!
+However, for [Val Town’s recent transition from express to Fastify](https://blog.val.town/blog/fastify/), we've been using [TypeBox](https://github.com/sinclairzx81/typebox) in place of Zod for validation. Fastify can support either Zod or TypeBox [via a Type Provider system](https://fastify.dev/docs/latest/Reference/Type-Providers/), but TypeBox was the clear option for us.
+
+Why? Mostly because TypeBox plays well with JSON Schema, and we need JSON Schema
+definitions for our [OpenAPI](https://en.wikipedia.org/wiki/OpenAPI_Specification)
+specification. Plus, it's pretty fast.
 
 ### TypeBox ↔ JSON Schema ↔ OpenAPI
 
