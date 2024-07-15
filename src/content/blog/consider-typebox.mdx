@@ -141,9 +141,12 @@ And, later:
 
 > Before you can optimize anything you need a way to measure what you are optimizing. Otherwise you are just shooting in the dark. Before you can measure you need a clear, explicit statement of the problem you are trying to solve. Otherwise, in a very real sense, you don’t know what you are doing.
 
-So, I keep in mind that everything in the application that is not the bottleneck, is not the bottleneck. I know in my mind that there's a performance difference between different kinds of loops in JavaScript, but when I see an `Array.map` that's not strictly necessary but it's iterating over 100 items at most, it's best to take it easy.
+So, I keep in mind that everything in the application that is not the bottleneck, is not the bottleneck. I know in my mind that there's a performance difference between different kinds of loops in JavaScript, but in almost every case that doesn't matter.
+The overhead of a `.forEach` call versus a `for` loop is going to be
+insignificant versus a single database call or network request.
 
-And in the vast majority of applications, validation and parsing is not the bottleneck. That's the case in Val Town. Our bottlenecks are things like network topology, cold-start times for processes, database access, and disk access. We have metrics in [Honeycomb](https://www.honeycomb.io/) that break down the time cost of running vals, and Fastify overhead isn't a major contributor.
+And in the vast majority of applications, validation and parsing is
+not the bottleneck. That's the case in Val Town. Our bottlenecks are things like network topology, cold-start times for processes, database access, and disk access. We have metrics in [Honeycomb](https://www.honeycomb.io/) that break down the time cost of running vals, and Fastify overhead isn't a major contributor.
 
 Take it from [the author of Arktype](https://www.reddit.com/r/typescript/comments/17cmt0q/comment/k5rcmvi/), one of the extremely fast Zod alternatives:
 
