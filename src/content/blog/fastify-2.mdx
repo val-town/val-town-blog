@@ -43,7 +43,7 @@ Meet our [new TypeScript SDK](https://github.com/val-town/sdk),
 
 ```ts title="example.ts"
 // Import the SDK
-import ValTown from "@valtown/sdk";
+import ValTown from "npm:@valtown/sdk";
 // Initialize it
 const valTown = new ValTown();
 // Use it
@@ -55,7 +55,7 @@ types for everything. Methods in our API that are paginated, like listing
 comments, vals, or search results, are implemented as async iterators
 in the SDK so you don't even have to implement any pagination logic.
 
-Just install it.
+For Node.js, you can install it as an NPM package:
 
 ```bash
 npm install @valtown/sdk
