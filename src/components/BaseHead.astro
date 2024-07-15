@@ -22,7 +22,7 @@ const { title, description, heroImage, image } = Astro.props;
 
 const backupImage = new URL('/blog-placeholder.png', Astro.url);
 const optimizedHero = heroImage && await getImage({ src: heroImage });
-const optimizedImage = image && await getImage({ src: image });
+const optimizedImage = image && await getImage({ src: image, format: 'png' });
 const socialImage = optimizedHero?.src ?? optimizedImage?.src ?? backupImage;
 ---
 
