@@ -21,7 +21,8 @@ const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 const { title, description, heroImage, image = '/blog-placeholder.png' } = Astro.props;
 
 const optimizedHero = heroImage && await getImage({ src: heroImage });
-const socialImage = optimizedHero?.src ?? image?.src ?? new URL(image, Astro.url)
+const optimizedImage = image && await getImage({ src: image });
+const socialImage = optimizedHero?.src ?? optimizedImage?.src ?? new URL(image, Astro.url)
 ---
 
 <!-- Global Metadata -->
