@@ -59,14 +59,10 @@ This is how most serverless platforms work, and we think it's a good model to fo
 
 ## Rollout
 
-We intend for this new runtime to be the default `HTTP` val type going forward. So what is now `HTTP` will become `HTTP (Deprecated)`, and what is now `HTTP (Preview)` will become `HTTP`. There are two phases to the rollout:
+This new runtime has the potential to be much faster and more scalable than our current approach, so we want it to be the default soon. But it's a big change, so we're being careful. Today we're rolling it out as an opt-in val type, `HTTP (Preview)`.
 
-1. **Preview** - `HTTP (Preview)` released to all users. This starts today, July 17th, 2024. You can opt-into `HTTP (Preview)` by changing your val type.
-2. **Release** - All new `HTTP` vals will default to the new runtime. We plan for this to happen on August 1st, 2024. We will rename the val types accordingly:
-   - What is now `HTTP (Preview)` will become `HTTP`
-   - What is now `HTTP` will become `HTTP (Deprecated)`
-
-We won't automatically upgrade `HTTP (Deprecated)` vals, because of the breaking change mentioned above. We'll let you manually opt-into the upgrade when you're ready.
+After we've ironed out the kinks and achieved feature parity between the two runtimes, we'll make this the default type for new HTTP vals,
+drop the (Preview), and encourage everyone to upgrade to the new system for that big performance boost! Depending on how it works out, we might be also be able to auto-upgrade some vals to the new system.
 
 ## Feedback
 
