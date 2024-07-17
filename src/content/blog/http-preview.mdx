@@ -22,7 +22,7 @@ That's it! Run your val 5 times in quick succession to see the difference.
 
 ## Architecture
 
-Up till now, every time you run a val it starts a new Deno process and installs all your dependencies from scratch. This takes 100 milliseconds or more, depending on how many dependencies you have.
+Up until now, every time you run a val it starts a new Deno process and installs all your dependencies from scratch. This takes 100 milliseconds or more, depending on how many dependencies you have.
 
 With the new `HTTP (Preview)` val, we keep your Deno process around and forward multiple requests to it. This means that the first request will still have the 100ms+ cold start time, but every request after that will be _much_ faster. For example, the simplest possible val that just returns "hello world!" will take 100ms to boot up the first time, but then only 10ms for subsequent requests. To be clear, that's not including network latency to the val (which from NYC is 90ms), just the time it takes for the val to respond.
 
