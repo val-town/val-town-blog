@@ -46,16 +46,23 @@ There is one breaking change with this new feature: it only re-runs your val han
 For example, this val will return a new random number for every request in our existing system, but after you switch to the next version, it'll return the same number - because the call to `Math.random()` is only run when the val is started up, not when a new request is handled.
 
 ```ts
-// Generate a random number
 const number = Math.random();
 
 export default function(req: Request) {
-  // Return it in a response
   return Response.json(number);
 }
 ```
 
-This is how most serverless platforms work, and we think it's a good model to follow. You'll only need to migrate your code if you upgrade to the new runtime.
+The upgrade path is to move anything you want to happen on every request into the request handler:
+
+```ts
+export default function(req: Request) {
+  const number = Math.random();
+  return Response.json(number);
+}
+```
+
+Now each call to this val will return a new random number. This is how most serverless platforms work, and we think it's a good model to follow. You'll only need to migrate your code if you upgrade to the new runtime.
 
 ## Rollout
 
