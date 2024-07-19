@@ -42,7 +42,7 @@ benchmarking with [bombardier](https://github.com/codesenberg/bombardier)
 running on the same machine. The command I'll run to benchmark each server is
 `bombardier -c 30 -n 10000 http://localhost:8001`. 10,000 total requests over 30
 connections. I prewarm each server before running the benchmark. I'm using Go
-v1.22.2, Rust v1.77.2, Node v22.3.0, Bun 1.1.20, Deno 1.44.2.
+v1.22.2, Rust v1.77.2, Node v22.3.0, Bun 1.1.20, and Deno 1.44.2.
 
 Here are the results:
 
@@ -100,7 +100,7 @@ Here are the results:
 | ---------------- | ----- | -------------------------------------------- |
 | Node             | 1,766 | `node cluster.js`                            |
 | Deno             | 2,133 | `deno run --allow-all cluster.js`            |
-| Bun              | n/a   | "node:cluster is not yet implemented in Bun" |
+| Bun              | n/a   | "node\:cluster is not yet implemented in Bun" |
 
 Super weird. Deno is slower, Bun doesn't work just yet, and Node has improved
 a lot, but I would have expected it to be even faster.
@@ -173,7 +173,7 @@ http
   .listen(8001);
 ```
 
-Results!:
+Results!
 
 | Language/Runtime | Req/s | Command                                        |
 | ---------------- | ----- | ---------------------------------------------- |
@@ -285,11 +285,11 @@ I tried:
    `serialization: "advanced"` so that you can send bytes without serialization.
    This doesn't work in Deno and Bun.
 3. I created a pair of [Abstract
-   Sockets](https://man7.org/linux/man-pages/man7/unix.7.html) for each spawn
+   Sockets](https://man7.org/linux/man-pages/man7/unix.7.html#:~:text=be%20inspected.%0A%0A%20%20%20%20%20%20%20abstract-,an%20abstract%20socket,-address%20is%20distinguished) for each spawn
    call and sent the logs over the socket. This spends too much time setting up
    the sockets to be worth it.
 
-Also abstract sockets are crazy. I'm familiar with [Unix Domain
+Also Abstract Sockets are crazy. I'm familiar with [Unix Domain
 Sockets](https://en.wikipedia.org/wiki/Unix_domain_socket) where you have a file
 called (eg) `something.sock` and you can listen on it and connect to it just
 like a network address. Turns out, that if you use a Unix socket and the
@@ -365,8 +365,8 @@ The Deno results are quite perplexing. In implementing this example I had a
 ```
 
 This 'fix' makes Deno a lot slower, but Node and Bun a lot faster! I wonder if
-that's because one has a faster toString() implementation or higher overhead for
-res.write?
+that's because one has a faster `toString()` implementation or higher overhead for
+`res.write`?
 
 
 | Language/Runtime     | Req/s | Command                                                    |
