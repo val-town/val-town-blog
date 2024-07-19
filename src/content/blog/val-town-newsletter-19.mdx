@@ -9,7 +9,11 @@ import { Image } from "astro:assets";
 
 In the last month, we shipped TODO
 
-TODO: link to Tom's new blogs.
+We've also been on a blogging spree:
+
+- [Moving from Express to Fastify](/blog/fastify/)
+- [Zod is amazing. Here's why we're also using TypeBox](/blog/typebox)
+- [Why spawning a new process in Node is so slow?](/blog/node-spawn-performance)
 
 We're currently working on TODO
 
@@ -17,32 +21,59 @@ You all have been making some amazing vals!
 
 ## ↔️ Fullscreen editor
 
-At long last, you can edit your vals in full-screen. This new editor also features a classic left-sidebar with all your vals and folders.
+At long last, you can edit your vals in full-screen. This new editor also features a classic left-sidebar with all your vals and folders. Thanks [bcjordan](https://www.val.town/u/bcjordan) and [hunter](https://www.val.town/u/hunter) for the [feature](https://github.com/val-town/val-town-product/discussions/58) [requests](https://github.com/val-town/val-town-product/discussions/137) for a full-screen editor 🙏
 
-TODO photo
+Try it out: [val.town/editor](https://val.town/editor)
 
-You can find the new editor by navigating to any val you own and clicking the `Code Editor (Beta)` button.
+import Editor from "./val-town-newsletter-19/Editor.png";
+
+<div align="center">
+  <Image src={Editor} alt="Demo of the new editor for @jxnblk" />
+</div>
 
 One of my favorite features is the ability to multi-select vals (shift-click) and drag them into folders to clean up your workspace.
 
-Thanks https://github.com/bcjordan and https://github.com/diamondalltheway for the feature requests https://github.com/val-town/val-town-product/discussions/58 https://github.com/val-town/val-town-product/discussions/137 - TODO clean this up
-
 ## ⚡️ HTTP (Preview)
 
-TODO
+We built a new runtime for HTTP vals that is much faster at scale by re-using existing Deno processes. We've seen up to a 5x speedup for some vals. Try it out by selecting `HTTP (Preview)` for your val's type. Learn more in [our announcement post](/blog/http-preview/).
+
+<video controls autoplay height="500px">
+  <source src="/video/HTTP-Preview.mp4" />
+</video>
 
 ## 📊 Dashboard
 
-- [Dashboard](https://github.com/val-town/val-town-product/discussions/8)
+We are working on a new dashboard to help you more quickly navigate your vals and see what's happening in Val Town. Thanks [nbbaier](https://www.val.town/u/nbbaier) for the [feature request](https://github.com/val-town/val-town-product/discussions/8) 🙏
+
+You can access your dashboard today at [val.town/dashboard](https://val.town/dashboard).
+
+import Dashboard from "./val-town-newsletter-19/dashboard.png";
+
+<div align="center">
+  <img
+    src={Dashboard.src}
+    alt="Demo of the new dashboard for @stevekrouse"
+    style="height: 900px;"
+  />
+</div>
 
 ## 🔎 Val Search
 
-- Combined exact and embedding
-- filters
-- highlighted matches
-- sorted in part by quality of val from metadata
+Search results are now powered by exact matching, exact phrase matching, and "vibes-based" vector search. We highlight matches and sort results in part by indicators of that val's quality, ie how many times it's been forked or liked. You can filter results by val type and by whether the val was created by you or not.
+
+import Search from "./val-town-newsletter-19/Search.png";
+
+<div align="center">
+  <img
+    src={Search.src}
+    alt="Search results for 'vercel ai sdk'"
+    width="700px"
+  />
+</div>
 
 ## 🤖 Townie redesign & tool-use!
+
+## 🦾 VALLE Demo
 
 TODO
 
