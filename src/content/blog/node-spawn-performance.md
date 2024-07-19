@@ -6,10 +6,6 @@ author: Max McDonnell
 pubDate: Jul 19, 2024
 ---
 
-<style>
-    table code { background-color: initial }
-    table td, table th { padding: 0.5rem }
-</style>
 
 At Val Town we run your code in Deno processes. We recently noticed, that under
 load, a single Val Town's Node server cannot exceed 40 spawns/s. It spends 30%
