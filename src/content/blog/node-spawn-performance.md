@@ -1,5 +1,5 @@
 ---
-title: "Why is spawning a new processes in Node so slow?"
+title: "Why is spawning a new process in Node so slow?"
 generated: 1701894028870
 description: "A deep dive into spawn call performance in Node."
 author: Max McDonnell
@@ -13,8 +13,9 @@ pubDate: Jul 19, 2024
 
 At Val Town we run your code in Deno processes. There are many request types
 where we spawn a new process to handle the request. While we're working [to
-reduce this](https://blog.val.town/blog/http-preview/), it is likely that we'll
-always have some requests that spawn a process, and we'd like them to be fast.
+reduce this by re-using Deno processes](https://blog.val.town/blog/http-preview/),
+it is likely that we'll always have some requests that spawn a process, and
+we'd like them to be fast.
 
 When under load, a single one of Val Town's Node servers cannot exceed 40 req/s
 and it spends 30% of the time blocked on calls to `spawn`. Why is it so slow?
@@ -27,8 +28,8 @@ each request. Like this:
 import { spawn } from "node:child_process";
 import http from "node:http";
 http
-.createServer((req, res) => spawn("echo", ["hi"]).stdout.pipe(res))
-.listen(8001);
+  .createServer((req, res) => spawn("echo", ["hi"]).stdout.pipe(res))
+  .listen(8001);
 ```
 
 We'll write similar implementations in Go
@@ -247,7 +248,6 @@ Nice. And the results:
 | Deno             | 3,800 | `deno run --allow-all child-process/index.js` |
 | Bun              | 3,871 | `bun run worker-threads/index.js`             |
 
-
 Good speedups all around. I am very curious what the bottleneck is that is
 preventing Deno and Bun from getting to Rust/Go speeds. Please let me know if
 you have suggestions for how to dig into that!
@@ -256,6 +256,7 @@ One fun thing here is that we can mix Node and Bun. Bun implements the Node IPC
 protocol, so we can configure Node to spawn Bun child processes. Let's try that.
 
 Update the `fork` arguments to use the `bun` binary instead of Node.
+
 ```js
 const worker = fork("./child-process/worker.js", {
   execPath: "/home/maxm/.bun/bin/bun",
@@ -267,7 +268,6 @@ const worker = fork("./child-process/worker.js", {
 | Node + Bun       | 3,853 | `node child-process/index.js` |
 
 Hah, cool. I get to use Node on the main thread and leverage Bun's performance.
-
 
 ## Stdio
 
@@ -309,6 +309,7 @@ from Sqlite's source. This is a 163Kb file. We'll run the command `cat main.c`
 to print it out.
 
 Here's our `baseline.js` again with that update:
+
 ```ts
 import { spawn } from "node:child_process";
 import http from "node:http";
@@ -326,7 +327,6 @@ I've updated the Go and Rust code as well. Let's see how they do:
 | Bun              | 1,374 | `bun run baseline.js`              |
 | Go               | 2,757 | `go run go/main.go`                |
 | Rust (tokio)     | 3,535 | `cd rust && cargo run --release`   |
-
 
 Fascinating. It's cool to see Bun and Rust pull ahead here compared to the
 previous benchmarks. Node is still slow very slow and Deno is surprisingly
@@ -368,7 +368,6 @@ This 'fix' makes Deno a lot slower, but Node and Bun a lot faster! I wonder if
 that's because one has a faster `toString()` implementation or higher overhead for
 `res.write`?
 
-
 | Language/Runtime     | Req/s | Command                                                    |
 | -------------------- | ----- | ---------------------------------------------------------- |
 | Deno + string buffer | 1,453 | `deno run --allow-all child-process-comm-channel/index.js` |
@@ -395,9 +394,9 @@ process.on("message", (message) => {
 });
 ```
 
-| Language/Runtime | Req/s | Command                                       |
-| ---------------- | ----- | --------------------------------------------- |
-| Node             | 1,179   | `node child-process-send-logs/index.js` |
+| Language/Runtime | Req/s | Command                                 |
+| ---------------- | ----- | --------------------------------------- |
+| Node             | 1,179 | `node child-process-send-logs/index.js` |
 
 Very nice, probably the practical choice if you are only targeting Node.
 
@@ -421,7 +420,7 @@ here](https://samwho.dev/load-balancing/).
 const pickWorkerInOrder = () => workers[(count += 1) % workers.length];
 const pickWorkerWithLeastRequests = () =>
   workers.reduce((selectedWorker, worker) =>
-    worker.requests < selectedWorker.requests ? worker : selectedWorker
+    worker.requests < selectedWorker.requests ? worker : selectedWorker,
   );
 ```
 
@@ -449,3 +448,4 @@ such a speedup. Please support Node's IPC Deno!
 
 Let me know if there's anything else I should experiment with here! See you next
 time :)
+
