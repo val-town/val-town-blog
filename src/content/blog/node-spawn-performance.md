@@ -97,10 +97,10 @@ still make spawns fast.
 
 Here are the results:
 
-| Language/Runtime | Req/s | Command                                      |
-| ---------------- | ----- | -------------------------------------------- |
-| Node             | 1,766 | `node cluster.js`                            |
-| Deno             | 2,133 | `deno run --allow-all cluster.js`            |
+| Language/Runtime | Req/s | Command                                       |
+| ---------------- | ----- | --------------------------------------------- |
+| Node             | 1,766 | `node cluster.js`                             |
+| Deno             | 2,133 | `deno run --allow-all cluster.js`             |
 | Bun              | n/a   | "node\:cluster is not yet implemented in Bun" |
 
 Super weird. Deno is slower, Bun doesn't work just yet, and Node has improved
@@ -444,8 +444,7 @@ It was really fun to see improved performance and what didn't, and the random
 moments where Deno/Bun/Node were affected differently.
 
 Using Node and Bun together is a fun pattern and it's nice to see it lead to
-such a speedup. Please support Node's IPC Deno!
+such a speedup. Please support Node's IPC, Deno!
 
 Let me know if there's anything else I should experiment with here! See you next
 time :)
-
