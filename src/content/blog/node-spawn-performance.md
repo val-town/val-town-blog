@@ -1,7 +1,7 @@
 ---
 title: "Why is spawning a new processes in Node so slow?"
 generated: 1701894028870
-description: "A deep dive into spawn call performance in Node."
+description: "At Val Town we spawn a lot of processes. We're working on making it faster"
 author: Max McDonnell
 pubDate: Jul 19, 2024
 ---
@@ -11,17 +11,13 @@ pubDate: Jul 19, 2024
     table td, table th { padding: 0.5rem }
 </style>
 
-At Val Town we run your code in Deno processes. There are many request types
-where we spawn a new process to handle the request. While we're working [to
-reduce this](https://blog.val.town/blog/http-preview/), it is likely that we'll
-always have some requests that spawn a process, and we'd like them to be fast.
+At Val Town we run your code in Deno processes. We recently noticed, that under
+load, a single Val Town's Node server cannot exceed 40 spawns/s. It spends
+30% of its time with the main thread blocked on calls to `spawn`. Why is it so
+slow? Can we make it any faster?
 
-When under load, a single one of Val Town's Node servers cannot exceed 40 req/s
-and it spends 30% of the time blocked on calls to `spawn`. Why is it so slow?
-Can we make it any faster?
-
-To simulate the slowdown we'll write an HTTP server that spawns `echo hi` for
-each request. Like this:
+To simulate this pattern we'll write an HTTP server that spawns a new process
+for each request. Like this:
 
 ```js
 import { spawn } from "node:child_process";
