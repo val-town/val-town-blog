@@ -1,5 +1,12 @@
 {
-  "cSpell.words": ["Astro", "Krouse", "quickstart", "quickstarts", "vals"],
+  "cSpell.words": [
+    "Astro",
+    "Krouse",
+    "leaderboard",
+    "quickstart",
+    "quickstarts",
+    "vals"
+  ],
   "cSpell.enabled": true,
   "cSpell.enableFiletypes": ["mdx"]
 }
