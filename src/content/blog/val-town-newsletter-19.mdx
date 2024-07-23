@@ -1,0 +1,179 @@
+---
+title: Val Town Newsletter 19
+description: Full-screen Editor, 5x faster HTTP vals, new Dashboard, improved Search, Townie redesign, Trending redesign, Profile filters, and more!
+pubDate: July 23, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+
+In the last month, we shipped a full-screen val Editor, a new 5x faster HTTP val runtime, a Dashboard for your account, a new Search experience, a redesign for our AI bot Townie and the ability to use tools, a new Trending leaderboard, User Profile filters and sorts, and a bunch of other improvements and bug fixes.
+
+We've also been on a blogging spree: [Moving from Express to Fastify](/blog/fastify/), [Here's why we're also using TypeBox](/blog/typebox), and [Why spawning a new process in Node is so slow?](/blog/node-spawn-performance).
+
+On the livestream, I coded with [Mary Rose Cook on concert ticket alerts](https://www.youtube.com/watch?v=RJ2uqaqD10E), [Sahil Lavingia on a stock buyback form](https://www.youtube.com/watch?v=3-TXoB0BmSA), and [Peter van Hardenberg on a Automerge change notifier](https://www.youtube.com/watch?v=CIVgi4mRXxk).
+
+## ↔️ Full-screen editor
+
+At long last, you can edit your vals in full-screen. This new editor also features a classic left-sidebars with all your vals and folders. Thanks [bcjordan](https://www.val.town/u/bcjordan) and [hunter](https://www.val.town/u/hunter) for the [feature](https://github.com/val-town/val-town-product/discussions/58) [requests](https://github.com/val-town/val-town-product/discussions/137) 🙏
+
+Try it out: [val.town/editor](https://val.town/editor)
+
+import Editor from "./val-town-newsletter-19/Editor.png";
+
+<div align="center">
+  <Image src={Editor} alt="Demo of the new editor for @jxnblk" />
+</div>
+
+One of my favorite features is the ability to multi-select vals (shift-click) and drag them into folders to clean up your workspace.
+
+## ⚡️ 5x Faster HTTP vals at scale
+
+We built a new runtime for HTTP vals that is much faster at scale by re-using existing Deno processes. We've seen up to a 5x speedup for some vals. Try it out by selecting `HTTP (Preview)` for your val's type. Learn more in [our announcement post](/blog/http-preview/).
+
+<video controls autoplay loop height="500px">
+  <source src="/video/HTTP-Preview.mp4" />
+</video>
+
+## 📊 Dashboard
+
+We built a Dashboard to help you more quickly navigate your vals and see what's happening in Val Town. Thanks [nbbaier](https://www.val.town/u/nbbaier) for the [feature request](https://github.com/val-town/val-town-product/discussions/8) 🙏
+
+You can access your dashboard today at [val.town/dashboard](https://val.town/dashboard).
+
+import Dashboard from "./val-town-newsletter-19/dashboard.png";
+
+<div align="center">
+  <img
+    src={Dashboard.src}
+    alt="Demo of the new dashboard for @stevekrouse"
+    style="height: 900px;"
+  />
+</div>
+
+## 🔎 Val Search
+
+Search results are now powered by exact matching, exact phrase matching, and "vibes-based" vector search. We sort results in part by indicators of that val's quality, ie how many times it's been forked or liked. You can filter results by val type and by whether the val was created by you or not.
+
+Try some searches: [anthropic](https://val.town/search?q=anthropic) | [openai](https://val.town/search?q=openai) | [substrate](https://val.town/search?q=substrate) | [embeddings](https://val.town/search?q=embeddings) | [react client side](https://val.town/search?q=react%20client%20side)
+
+import Search from "./val-town-newsletter-19/Search.png";
+
+<div align="center">
+  <img
+    src={Search.src}
+    alt="Search results for 'vercel ai sdk'"
+    width="700px"
+  />
+</div>
+
+## 🤖 Townie redesign & tool-use!
+
+Townie has a new look! It can also use the entire Val Town API for you. This means you can ask Townie to list, create, update, and delete not only vals but also blobs and sqlite data – it can run anything in our [new API](https://docs.val.town/openapi). Townie automatically performs GET requests and asks you to confirm before running any mutative action.
+
+In the following demo video, you'll notice a couple times Townie didn't do exactly what I wanted, but we were able to work around it by doing it ourselves or asking it again. Townie is still a work in progress, but it's a lot of fun to play with.
+
+<video controls autoplay loop height="700px">
+  <source src="/video/Townie_July_2024.mp4" />
+</video>
+
+## 🦾 VALLE Demo
+
+LLM code generation is so exciting right now that we weren't able to limit ourselves to just Townie. We built a prototype inspired by Anthropic Projects called [VALLE](https://val.town/v/janpaul123/valle) that's great at writing vals for you. We built another prototype, [VALLE Draw](https://www.val.town/v/janpaul123/valledraw), which embeds it in TLDraw! Both were built entirely in vals – so you can fork and tweak em!
+
+The video below demos how to create multiple apps simultaneously with VALLE Draw: a Hacker News clone with a real backend and a simple hello world example app with craazzzy styles. Here's [two](https://x.com/stevekrouse/status/1813699804729663495) [demos](https://x.com/stevekrouse/status/1812980867381489962) of the original VALLE.
+
+<video controls autoplay loop>
+  <source src="/video/VALLE_DRAW.mp4" />
+</video>
+
+## 🔥 Trending
+
+Collect likes, forks, and references to gain fame and fortune – well at least fame – on the new and improved Val Town trending leaderboard. The new trending has a fresh look and much more useful rankings.
+
+Check it out: [val.town/trending](https://val.town/trending)
+
+import Trending from "./val-town-newsletter-19/Trending.png";
+
+<div align="center">
+  <img
+    src={Trending.src}
+    alt="Trending screenshot of the top 7 vals as of July 22, 2024 at 4:08pm ET"
+    width="700px"
+  />
+</div>
+
+## ❤️ Profile filters and sorts
+
+Profile pages now have filters and sorts to help you find the vals you're looking for. You can filter by val type and sort by date created, date updated, likes, and alphabetically.
+
+Try it out on some power users' profiles: [pomdtr](https://val.town/u/pomdtr) | [iamseeley](https://val.town/u/iamseeley) | [nbbaier](https://www.val.town/u/nbbaier) | [substrate](https://val.town/u/substrate) | [yawnxyx](https://www.val.town/u/yawnxyz)
+
+<video controls autoplay height="700px">
+  <source src="/video/ProfileFilterSort.mp4" />
+</video>
+
+### 🎉 Other updates
+
+- [Cancel a running val](https://github.com/val-town/val-town-product/discussions/117). Thanks Dan Shipper, Matt McClure, and Jan Zheng for requesting this feature 🙏
+- Added a refresh button on the http preview iframe
+- Fixed links to errors in stacktraces
+- Upgraded the README editor to CodeMirror
+- Upgraded OpenAI in the standard library to gpt-4o-mini for free users (up from `gpt-3.5`)
+- Support updating val types through the API
+- Cleaned up Val Town SDK
+- Rewrote our [Saving data from a web page](https://docs.val.town/guides/saving-data-from-a-web-page/) guide. Thanks [mharris717](https://www.val.town/u/mharris717) [for the request](https://x.com/GFunk911/status/1808239507444990185)
+- Automatically generate the new Val Town SDK when our API changes
+- Val Town took stewardship of [val-town-playground](https://github.com/val-town/val-town-playground)
+  and [val-town-vscode](https://github.com/val-town/val-town-vscode) from the amazing [pomdtr](https://val.town/u/pomdtr)
+
+## 🛣️ Roadmap
+
+### 💪 What we're working on
+
+Next month we focusing on onboarding, polish, performance, reliability, and hiring – [join us!](https://val.town/careers)
+
+- Rolling out `HTTP (Preview)` as the new default `HTTP` val type
+- [Val runtime performance](https://github.com/val-town/val-town-product/discussions/113)
+- [LLM-generated vals](https://github.com/val-town/val-town-product/discussions/47), ie Townie and VALLE improvements
+
+### 🔜 Coming soon
+
+Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+
+- [Receive attachments from email handlers](https://github.com/val-town/val-town-product/discussions/75)
+- [Usage tracking and pricing](https://github.com/val-town/val-town-product/discussions/19)
+- [LLM-generated READMEs](https://github.com/val-town/val-town-product/discussions/26)
+
+## 🌟 Community Vals
+
+- The [Substrate](https://substrate.run) is on 🔥 with a dozen vals that show how much faster they run multi-step LLM flows: [sub.audio](https://sub.audio/), [Illustrated Primer](https://www.val.town/v/substrate/illustratedPrimer), [Hacker News RAG](https://www.val.town/v/substrate/hackerNewsRAG), [Similar Sites](https://www.val.town/v/substrate/similarSites), [Spanish Lesson](https://www.val.town/v/substrate/spanishLesson), [WebSim](https://www.val.town/v/substrate/websim)
+- [Kayla](https://www.val.town/u/kayla_lin) built a [yenny.app](https://www.yenny.app/), a yen conversion app, [powered by Val Town](https://x.com/kayladotdev/status/1808293579468550211)
+- [Nico](https://www.val.town/u/nicosuave) gave [ChatGPT the ability to install python packages](https://x.com/nicoritschel/status/1814716092801294786), powered by a val
+- [Sam Rose](https://www.val.town/v/samwho) built [Ping](https://samwho.dev/ping/) so you can send him anonymous messages, [powered by a val](https://x.com/samwhoo/status/1811304859334750493)
+- [Achille](https://www.val.town/u/pomdtr) found a [way to embed a full stack vite + honojs app in a single JSR import, ie excalidraw](https://x.com/pomdtrr/status/1805928035670994998)!
+- [Jan](https://val.town/u/yawnxyz) built [a Japanese Translator in Google Sheets](https://x.com/yawnxyz/status/1807120870248505434), [a clone of a viral drag effect](https://x.com/yawnxyz/status/1813713602819580376), and a function to [get citations](https://www.val.town/v/yawnxyz/citation)
+- [pvh](https://www.val.town/u/pvh) built a [cron that notifies of changes to Automerge documents](https://www.val.town/v/pvh/watcher)
+- [Mux](https://www.val.town/u/mux) built an [API to dub videos using Sieve](https://www.val.town/v/mux/seiveDubbing)
+- [Lu "todepond" Wilson](https://www.val.town/u/todepond) built a [magic iframe](https://x.com/TodePond/status/1814947568389931057) powered by Val Town
+- I built a bunch of fun utilities: ["the create react app"](https://www.val.town/v/stevekrouse/reactClientDemo) of Val Town and [a video explaining React, SSR, and Val Town](https://www.youtube.com/watch?v=HyhsMd0CBnk), [website load performance tester](https://www.val.town/v/stevekrouse/perf), [DNS lookup site](https://www.val.town/v/stevekrouse/dns), [lookup your internet twin](https://stevekrouse-twin.web.val.run/) with ExaAI, [played around with Browserbase](https://x.com/stevekrouse/status/1807812485711622617), [explained when esm.town transpiles](https://www.val.town/v/stevekrouse/esmTownTranspileDemo)
+- [Jackson](https://www.val.town/u/jackson) built a [VIM-mode markdown editor](https://www.val.town/v/jxnblk/vimarkdown)
+- [Max](https://www.val.town/u/maxm) built a [Infinite Graph of SVGs](https://maxm-infinitesvggraph.web.val.run/)
+- [Pete Millspaugh](https://www.val.town/u/petermillspaugh) wrote and sent the [June 2024 Edition](https://www.val.town/v/petermillspaugh/june2024) of his wonderful newsletter
+- [dglazkov](https://www.val.town/u/dglazkov) built a [better Discord helper function](https://www.val.town/v/dglazkov/discordBot), a [sample implementation of the Breadboard Servive Endpoint](https://www.val.town/v/dglazkov/googlenews), a [BaaS](https://www.val.town/v/dglazkov/bbaas) (Breadboard As a Service), and a [CORS-safe proxy for qdrant](https://www.val.town/v/dglazkov/qdrant)
+- [mharris717](https://mharris717.github.io/val-tools-doc/) wrote a [guide to use vals in tools for LLM calls](https://mharris717.github.io/val-tools-doc/)
+- Peter Zakin built [a similar websites explorer](https://x.com/pzakin/status/1814404672301814133)
+- [Will](https://www.val.town/u/willthereader) built a [jumpchain.net](https://jumpchain.net/) ([source](https://www.val.town/v/willthereader/Jumpchain_Website)), an info site and resource guide for the Jumpchain community
+- [Sam](https://www.val.town/u/samwillis) ran [Postgres Lite](https://www.val.town/v/samwillis/pglite_http_preview_runtime) in a val, which [runs much faster on our new HTTP runtime](https://x.com/samwillis/status/1814016232133173383)
+- [Triozer](https://www.val.town/u/triozer) built a [API to query if someone is live on YouTube or Twitch](https://www.val.town/v/triozer/livestatus)
+- [Kyle](https://www.val.town/u/kylem) built a [git release notes generator](https://www.val.town/v/kylem/gitReleaseNotes)
+- [Brian](https://www.val.town/u/brianleroux) built a [cap friendly scraper](https://x.com/brianleroux/status/1808228023029977482)
+- [Steve](https://www.val.town/u/saolsen) put the [Ace editor in a val](https://www.val.town/v/saolsen/ace)
+- [Matthias](https://www.val.town/u/matthiasraimann) built a [SAGA scraper and notifier](https://www.val.town/v/matthiasraimann/SagaImmoScraper)
+- [Park](https://www.val.town/u/park) built a [clean simple BTC price site](https://www.val.town/v/park/btc)
+- [bohaska](https://www.val.town/u/bohaska) built a [cron that automatically answers issues from NationStates](https://www.val.town/v/bohaska/nationstatesSentimentAI) using sentiment analysis
+- [vipshek](https://www.val.town/u/vipshek) built a [cron that detects new website contents](https://val.town/v/vipshek/detectNewWebsiteContents)
+- [jonbo](https://www.val.town/u/jonbo) built an [API that generates a fake server-side delay](https://www.val.town/v/jonbo/dynamicSleep)
+- [Seeley](https://www.val.town/u/iamseeley) built a [enterprise-grade FizzBuzz](https://www.val.town/v/iamseeley/fizzFuss)
+- [edgeeffect](https://www.val.town/u/edgeeffect) built a [smart garbage day notifier](https://www.val.town/v/edgeeffect/whatDoYouThinkOfItSoFar)
+- [Will](https://www.val.town/u/willthereader) built a [work time calculator](https://www.val.town/v/willthereader/Work_Time_Calculator_2)
