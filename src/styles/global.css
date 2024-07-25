@@ -170,3 +170,12 @@ figure figcaption p {
   margin: 0 !important;
   padding: 0;
 }
+
+.image-rounded {
+  border-radius: 5px;
+}
+
+.image-border {
+  border: 1px solid #ccc;
+  border-radius: 5px;
+}
