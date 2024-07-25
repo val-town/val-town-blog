@@ -17,13 +17,15 @@
         for (const graph of graphs) {
             const content = graph.innerText;
             if (!content) continue;
-            let svg = document.createElement("svg");
+            let div = document.createElement("div");
+            div.style.textAlign = 'center';
+            let svg = div.appendChild(document.createElement("svg"));
             const id = (svg.id =
                 "mermaid-" + Math.round(Math.random() * 100000));
             mermaid
                 .render(id, content)
                 .then((result) => {
-                    graph.insertAdjacentElement("afterend", svg);
+                    graph.insertAdjacentElement("afterend", div);
                     svg.outerHTML = result.svg;
                 })
                 .catch((e) => console.error(e));

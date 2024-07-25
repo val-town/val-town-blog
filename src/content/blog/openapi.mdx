@@ -15,7 +15,21 @@ win for robustness, gives us great type-safety with TypeScript, and lets us
 generate an [OpenAPI Specification][openapi] directly from our server code.
 
 But typesafety and robustness don't bring home the bacon. What do you,
-the user, get from our time spent refactoring?
+the user, get from our time spent refactoring? It turns out, quite a lot!
+Our OpenAPI spec let us improve our REST API documentation, generate
+a new TypeScript SDK, and laid the foundation for letting LLMs use
+our APIs.
+
+<script is:inline type="text/mermaid">
+  {`flowchart LR
+  Routes(Fastify routes) --> OpenAPI(OpenAPI Spec)
+  OpenAPI --> Chat(🤖 ChatGPT tools)
+  OpenAPI --> SDK(TypeScript SDK)
+  OpenAPI --> REST(📖 REST API Documentation)
+  classDef default fill:#3A5BC7,color:#edf2fe,stroke:none;
+  linkStyle default stroke:#D0CDD7,stroke-width:2px,color:black;
+`}
+</script>
 
 ### Nice new REST API documentation
 
