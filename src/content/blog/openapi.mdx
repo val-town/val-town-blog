@@ -1,0 +1,134 @@
+---
+title: "The perks of a good OpenAPI spec"
+description: |
+  Taking advantage of our typed REST API to build a platform around
+  Val Town.
+pubDate: July 25, 2024
+author: Tom MacWright
+---
+
+We recently [switched from express to fastify][last_post]
+for Val Town’s REST API. Fastify gives us a way to strictly
+define our routes, with all of the path and query string parameters,
+request and response bodies aligning to a specific schema. This is a big
+win for robustness, gives us great type-safety with TypeScript, and lets us
+generate an [OpenAPI Specification][openapi] directly from our server code.
+
+But typesafety and robustness don't bring home the bacon. What do you,
+the user, get from our time spent refactoring? It turns out, quite a lot!
+Our OpenAPI spec let us improve our REST API documentation, generate
+a new TypeScript SDK, and laid the foundation for letting LLMs use
+our APIs.
+
+<script is:inline type="text/mermaid">
+  {`flowchart LR
+  Routes(Fastify routes) --> OpenAPI(OpenAPI Spec)
+  OpenAPI --> Chat(🤖 ChatGPT tools)
+  OpenAPI --> SDK(TypeScript SDK)
+  OpenAPI --> REST(📖 REST API Documentation)
+  classDef default fill:#3A5BC7,color:#edf2fe,stroke:none;
+  linkStyle default stroke:#D0CDD7,stroke-width:2px,color:black;
+`}
+</script>
+
+### Nice new REST API documentation
+
+![Val Town REST API Documentation](./openapi/docs.png)
+
+First thing, we get **way better REST API documentation**. It has example
+requests, with everything from cURL to Python clients. It describes the precise
+shapes of the objects you'll get back. You can even test APIs right in
+the API docs. Hats off to [Scalar](https://scalar.com), whose
+[open source package](https://github.com/scalar/scalar) is powering this.
+
+The docs are based on our OpenAPI spec, which is emitted from Fastify and
+pulled from our server's routes. From there on, setting up nice documentation
+is basically as simple as this:
+
+```html
+<script id="api-reference" data-url="./openapi.documented.json"></script>
+<script src="https://cdn.jsdelivr.net/npm/@scalar/api-reference"></script>
+```
+
+### A TypeScript SDK
+
+Meet our [new TypeScript SDK](https://github.com/val-town/sdk),
+`@valtown/sdk`, which we autogenerate from our OpenAPI spec using
+[Stainless](https://www.stainlessapi.com/):
+
+```ts title="example.ts"
+// Import the SDK
+import ValTown from "npm:@valtown/sdk";
+// Initialize it
+const valTown = new ValTown();
+// Use it
+console.log(await valTown.me.profile.retrieve());
+```
+
+The SDK covers all of our major API methods, and has robust TypeScript
+types for everything. Methods in our API that are paginated, like listing
+comments, vals, or search results, are implemented as async iterators
+in the SDK so you don't even have to implement any pagination logic.
+
+For Node.js, you can install it as an NPM package:
+
+```bash
+npm install @valtown/sdk
+```
+
+The SDK works in Deno, of course, but also in Node.js, Bun, and other major
+runtimes. We're generating it with tools from our friends at [Stainless](https://www.stainlessapi.com/), and their system keeps it updated
+so that every time we update the REST API, we can quickly roll a new release
+of the SDK.
+
+### Our AI, Townie, can now call our REST API
+
+<iframe
+  width="100%"
+  height="420"
+  src="https://www.youtube-nocookie.com/embed/clj1prZunW0?si=O7l6qvW8B2OB79NT"
+  title="YouTube video player"
+  frameborder="0"
+  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+  referrerpolicy="strict-origin-when-cross-origin"
+  allowfullscreen
+></iframe>
+
+[Townie](https://www.val.town/townie) is Val Town's bot - it started as an
+experiment to see if we could coax an LLM into writing code that fit
+Val Town's runtime better. It has a long way to go before it reaches
+sentience, fortunately/unfortunately, but it can already write some pretty
+decent code.
+
+But it couldn't really interact with Val Town until now. Townie just got
+the ability to call our API directly, which means that it can do things like
+creating vals, searching for existing code, updating readmes – anything
+that the API can do, Townie can do too.
+To be safe, Townie will run `GET` requests against the API freely, but asks
+for permission before running `POST`, `PUT`, or `DELETE` requests.
+
+Townie knows the whole layout of the API because OpenAPI 3.1 is
+[compatible with JSON Schema][oa31], and
+the [OpenAI Function calling][calling]
+system is based on JSON Schema-defined parameters. So we can smoothly
+translate from our OpenAPI specification for our REST API, into a definition
+of functions that OpenAI can call – along with LLM-friendly descriptions
+for every function, parameter, and return value – and voila, the robot
+can use the machine.
+Avoiding OpenAPI-OpenAI mixup typos was one of the more
+mentally challenging parts of implementing this.
+
+Unfortunately ChatGPT does hallucinate incorrect parameters
+occasionally, despite having a very precise definition of what is correct.
+It does this so often that we added a prompt reminding it that it likes
+to make a particular mistake, but it shouldn't make that mistake:
+
+> When calling the valsCreate function, make sure to follow the schema,
+> which requires that 'code' and 'name' properties be nested in a 'body' object.
+
+This new era of software is funny and awe-inspiring!
+
+[last_post]: https://blog.val.town/blog/fastify/
+[openapi]: https://en.wikipedia.org/wiki/OpenAPI_Specification
+[oa31]: https://www.openapis.org/blog/2021/02/18/openapi-specification-3-1-released
+[calling]: https://platform.openai.com/docs/guides/function-calling
