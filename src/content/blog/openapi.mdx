@@ -3,7 +3,7 @@ title: "The perks of a good OpenAPI spec"
 description: |
   Taking advantage of our typed REST API to build a platform around
   Val Town.
-pubDate: July 23, 2024
+pubDate: July 25, 2024
 author: Tom MacWright
 ---
 
@@ -39,7 +39,8 @@ is basically as simple as this:
 ### A TypeScript SDK
 
 Meet our [new TypeScript SDK](https://github.com/val-town/sdk),
-`@valtown/sdk`, which we autogenerate from our OpenAPI spec:
+`@valtown/sdk`, which we autogenerate from our OpenAPI spec using
+[Stainless](https://www.stainlessapi.com/):
 
 ```ts title="example.ts"
 // Import the SDK
@@ -95,12 +96,23 @@ for permission before running `POST`, `PUT`, or `DELETE` requests.
 Townie knows the whole layout of the API because OpenAPI 3.1 is
 [compatible with JSON Schema][oa31], and
 the [OpenAI Function calling][calling]
-system is based on JSON Schema-defined parameters. So we can fairly smoothly
+system is based on JSON Schema-defined parameters. So we can smoothly
 translate from our OpenAPI specification for our REST API, into a definition
 of functions that OpenAI can call – along with LLM-friendly descriptions
 for every function, parameter, and return value – and voila, the robot
-can use the machine. Avoiding OpenAPI-OpenAI mixup typos was one of the more
+can use the machine.
+Avoiding OpenAPI-OpenAI mixup typos was one of the more
 mentally challenging parts of implementing this.
+
+Unfortunately ChatGPT does hallucinate incorrect parameters
+occasionally, despite having a very precise definition of what is correct.
+It does this so often that we added a prompt reminding it that it likes
+to make a particular mistake, but it shouldn't make that mistake:
+
+> When calling the valsCreate function, make sure to follow the schema,
+> which requires that 'code' and 'name' properties be nested in a 'body' object.
+
+This new era of software is funny and awe-inspiring!
 
 [last_post]: https://blog.val.town/blog/fastify/
 [openapi]: https://en.wikipedia.org/wiki/OpenAPI_Specification
