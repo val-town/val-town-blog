@@ -21,9 +21,7 @@ Try it out: [val.town/editor](https://val.town/editor)
 
 import Editor from "./val-town-newsletter-19/Editor.png";
 
-<div align="center">
-  <Image src={Editor} alt="Demo of the new editor for @jxnblk" />
-</div>
+<Image src={Editor} alt="Demo of the new editor for @jxnblk" />
 
 One of my favorite features is the ability to multi-select vals (shift-click) and drag them into folders to clean up your workspace.
 
@@ -31,7 +29,7 @@ One of my favorite features is the ability to multi-select vals (shift-click) an
 
 We built a new runtime for HTTP vals that is much faster at scale by re-using existing Deno processes. We've seen up to a 5x speedup for some vals. Try it out by selecting `HTTP (Preview)` for your val's type. Learn more in [our announcement post](/blog/http-preview/).
 
-<video controls autoplay loop>
+<video controls autoplay loop class="image-rounded">
   <source src="/video/HTTP-Preview.mp4" />
 </video>
 
@@ -43,9 +41,11 @@ You can access your dashboard today at [val.town/dashboard](https://val.town/das
 
 import Dashboard from "./val-town-newsletter-19/dashboard.png";
 
-<div align="center">
-  <Image src={Dashboard} alt="Demo of the new dashboard for @stevekrouse" />
-</div>
+<Image
+  class="image-border"
+  src={Dashboard}
+  alt="Demo of the new dashboard for @stevekrouse"
+/>
 
 ## 🔎 Val Search
 
@@ -55,9 +55,11 @@ Try some searches: [anthropic](https://val.town/search?q=anthropic) | [openai](h
 
 import Search from "./val-town-newsletter-19/Search.png";
 
-<div align="center">
-  <Image src={Search} alt="Search results for 'vercel ai sdk'" />
-</div>
+<Image
+  class="image-border"
+  src={Search}
+  alt="Search results for 'vercel ai sdk'"
+/>
 
 ## 🤖 Townie redesign & tool-use
 
@@ -65,7 +67,7 @@ Townie has a new look! It can also use the entire Val Town API for you. This mea
 
 In the following demo video, you'll notice a couple times Townie didn't do exactly what I wanted, but we were able to work around it by doing it ourselves or asking it again. Townie is still a work in progress, but it's a lot of fun to play with.
 
-<video controls autoplay loop>
+<video controls autoplay loop class="image-rounded">
   <source src="/video/Townie_July_2024.mp4" />
 </video>
 
@@ -75,7 +77,7 @@ LLM code generation is so exciting right now that we weren't able to limit ourse
 
 The video below demos how to create multiple apps simultaneously with VALL-E Draw: a Hacker News clone with a real backend and a simple hello world example app with craazzzy styles. Here's [two](https://x.com/stevekrouse/status/1813699804729663495) [demos](https://x.com/stevekrouse/status/1812980867381489962) of the original VALL-E.
 
-<video controls autoplay loop>
+<video controls autoplay loop class="image-rounded">
   <source src="/video/VALLE_DRAW.mp4" />
 </video>
 
@@ -87,12 +89,11 @@ Check it out: [val.town/trending](https://val.town/trending)
 
 import Trending from "./val-town-newsletter-19/Trending.png";
 
-<div align="center">
-  <Image
-    src={Trending}
-    alt="Trending screenshot of the top 7 vals as of July 22, 2024 at 4:08pm ET"
-  />
-</div>
+<Image
+  src={Trending}
+  class="image-rounded"
+  alt="Trending screenshot of the top 7 vals as of July 22, 2024 at 4:08pm ET"
+/>
 
 ## ❤️ Profile filters and sorts
 
@@ -100,7 +101,7 @@ Profile pages now have filters and sorts to help you find the vals you're lookin
 
 Try it out on some power users' profiles: [pomdtr](https://val.town/u/pomdtr) | [iamseeley](https://val.town/u/iamseeley) | [nbbaier](https://www.val.town/u/nbbaier) | [substrate](https://val.town/u/substrate) | [yawnxyx](https://www.val.town/u/yawnxyz)
 
-<video controls autoplay>
+<video controls autoplay class="image-rounded">
   <source src="/video/ProfileFilterSort.mp4" />
 </video>
 
