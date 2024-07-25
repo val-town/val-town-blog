@@ -31,7 +31,7 @@ One of my favorite features is the ability to multi-select vals (shift-click) an
 
 We built a new runtime for HTTP vals that is much faster at scale by re-using existing Deno processes. We've seen up to a 5x speedup for some vals. Try it out by selecting `HTTP (Preview)` for your val's type. Learn more in [our announcement post](/blog/http-preview/).
 
-<video controls autoplay loop height="500px">
+<video controls autoplay loop>
   <source src="/video/HTTP-Preview.mp4" />
 </video>
 
@@ -44,11 +44,7 @@ You can access your dashboard today at [val.town/dashboard](https://val.town/das
 import Dashboard from "./val-town-newsletter-19/dashboard.png";
 
 <div align="center">
-  <img
-    src={Dashboard.src}
-    alt="Demo of the new dashboard for @stevekrouse"
-    style="height: 900px;"
-  />
+  <Image src={Dashboard} alt="Demo of the new dashboard for @stevekrouse" />
 </div>
 
 ## 🔎 Val Search
@@ -60,20 +56,16 @@ Try some searches: [anthropic](https://val.town/search?q=anthropic) | [openai](h
 import Search from "./val-town-newsletter-19/Search.png";
 
 <div align="center">
-  <img
-    src={Search.src}
-    alt="Search results for 'vercel ai sdk'"
-    width="700px"
-  />
+  <Image src={Search} alt="Search results for 'vercel ai sdk'" />
 </div>
 
-## 🤖 Townie redesign & tool-use!
+## 🤖 Townie redesign & tool-use
 
 Townie has a new look! It can also use the entire Val Town API for you. This means you can ask Townie to list, create, update, and delete not only vals but also blobs and sqlite data – it can run anything in our [new API](https://docs.val.town/openapi). Townie automatically performs GET requests and asks you to confirm before running any mutative action.
 
 In the following demo video, you'll notice a couple times Townie didn't do exactly what I wanted, but we were able to work around it by doing it ourselves or asking it again. Townie is still a work in progress, but it's a lot of fun to play with.
 
-<video controls autoplay loop height="700px">
+<video controls autoplay loop>
   <source src="/video/Townie_July_2024.mp4" />
 </video>
 
@@ -96,10 +88,9 @@ Check it out: [val.town/trending](https://val.town/trending)
 import Trending from "./val-town-newsletter-19/Trending.png";
 
 <div align="center">
-  <img
-    src={Trending.src}
+  <Image
+    src={Trending}
     alt="Trending screenshot of the top 7 vals as of July 22, 2024 at 4:08pm ET"
-    width="700px"
   />
 </div>
 
@@ -109,7 +100,7 @@ Profile pages now have filters and sorts to help you find the vals you're lookin
 
 Try it out on some power users' profiles: [pomdtr](https://val.town/u/pomdtr) | [iamseeley](https://val.town/u/iamseeley) | [nbbaier](https://www.val.town/u/nbbaier) | [substrate](https://val.town/u/substrate) | [yawnxyx](https://www.val.town/u/yawnxyz)
 
-<video controls autoplay height="700px">
+<video controls autoplay>
   <source src="/video/ProfileFilterSort.mp4" />
 </video>
 
