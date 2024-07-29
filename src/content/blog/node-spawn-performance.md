@@ -81,7 +81,7 @@ Node shares the network socket between processes here, so all of our processes
 can listen on `:8001` and they'll be routed requests round-robin.
 
 The main issue with this approach for me is that each HTTP server is isolated in
-it's own process. This can complicate things if you manage any kind of in-memory
+its own process. This can complicate things if you manage any kind of in-memory
 caching or global state that needs to be shared between these processes. I'd
 ideally find a way to keep the single thread execution model of javascript and
 still make spawns fast.
