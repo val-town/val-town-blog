@@ -24,7 +24,7 @@
     "hastscript": "^9.0.0",
     "mermaid": "^10.9.1",
     "remark-directive": "^3.0.0",
-    "typescript": "^5.5.2"
+    "typescript": "^5.5.4"
   },
   "volta": {
     "node": "20.11.0"
