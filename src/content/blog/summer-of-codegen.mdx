@@ -1,0 +1,440 @@
+---
+title: "Codegen just got really good"
+description: TODO
+pubDate: August 9, 2024
+author: JP Posma
+---
+
+import { Image } from "astro:assets";
+import ClaudeImage from "./codegen/claude.png";
+import WebsimImage from "./codegen/websim.png";
+import AnnotatedValImage from "./codegen/annotated-val.png";
+import PasswordImage from "./codegen/password.png";
+import PromptscreenImage from "./codegen/promptscreen.png";
+import HelloworldgenImage from "./codegen/helloworldgen.png";
+import HelloworldappImage from "./codegen/helloworldapp.png";
+import EvalluatorImage from "./codegen/evalluator.png";
+import MatrixImage from "./codegen/matrix.png";
+import DiffsImage from "./codegen/diffs.png";
+import UidiffsImage from "./codegen/uidiffs.png";
+
+{/*
+
+- Title
+  - "Summer of Codegen"
+  - "Codegen for instantly deployed backends"
+- Intro
+  - Codegen - end-user programming
+  - Mention Websim, Cursor, Claude Artifacts
+  - Backends - Val Town's strength
+  - Blog post - about prototyping & learnings
+  - Video demo
+  - You can fork it! And soon in production.
+- Basic version
+  - Stripped down version for demoing
+  - Stream in code
+  - Prompt stuff
+    - Context window from readmes (start maximalist)
+    - Docs in context window
+    - Code fences, embrace them
+  - Parallel / html energy
+- Prompts for backends
+  - Blob storage (scoping trick)
+  - Sqlite issues
+- With side panel
+  - Cursed script tags to fill textbox
+  - Codemirror
+  - Claude vs GPT vs 4o-mini
+- Tldraw
+  - Talk recording from event
+- Costs + reductions
+  - E-VALL-UATOR
+    - Prompt size
+    - Catching runtime errors
+  - Aider / diffs
+- Long vals
+  - Diffs in UI
+    - End-user vs end-programmer?
+  - Backend + frontend vals?
+- Future
+  - RAG / imported vals for context
+  - Non-http vals, multiple vals
+  - "Social coding"
+  - Iterating on script vals
+    - Iterate w screenshots
+
+
+- Learnings
+  - Aider / diffs
+  - Code fences
+  - Prompt size / examples size
+  - E-VALL-UATOR
+  - Iterating on script vals
+  - Tldraw
+  - Parallel / html energy
+  - Claude determinism
+  - Claude vs GPT vs 4o-mini
+  - Diffs in UI
+  - Docs in prompts
+  - Costs + reductions
+  - Websim, Cursor, Claude Artifacts
+  - Future?
+    - Client side vs server side react code
+    - Better diffs (line numbers)
+    - RAG / imported vals for context
+    - Non-http vals, multiple vals
+    - "Social coding"
+    - Iterate w screenshots
+  - Talk recording from event
+  - Code streaming
+*/}
+
+Code generation ("codegen") has enabled a completely new style of building software for non-programmers, through conversation with an LLM. Millions of people are probably working on this, but some of the most successful products so far are:
+
+{/* TODO: links */}
+* [Vercel v0](): build website UIs from prompts.
+* [Claude Projects](): build interactive websites and other code through conversation. Websites can be viewed directly.
+* [Websim](): similar to Claude Projects, but built around "fake websites". So going to catgifs.com will generate a website with cat gifs on the fly.
+* [VSCode Copilot](): intelligent autocompletions of code within larger projects, for lots of programming languages.
+* [Cursor](): code editor with lots of AI: not just autocompletions but conversational code generation.
+
+<figure style={{ maxWidth: "900px", display: 'flex', justifyContent: 'space-between' }}>
+  <div style={{ maxWidth: "45%" }}>
+    <Image src={ClaudeImage} alt="" />
+    <figcaption>
+      Claude Projects: making a game.
+      {/* TODO: make gif? */}
+    </figcaption>
+  </div>
+  <div style={{ maxWidth: "53%" }}>
+    <Image src={WebsimImage} alt="" />
+    <figcaption>
+      Websim: catgifs.com.
+      {/* TODO: make gif? */}
+    </figcaption>
+  </div>
+</figure>
+
+The beauty of products like Vercel v0, Claude Projects, and Websim is that you immediately get a working program back. It's the old promise of [live coding](https://vimeo.com/906418692).
+
+However, if you want to store data or run backend computations, that won't work. Tools like VSCode Copilot and Cursor let you build larger software with a frontend and a backend, but now you need a place to deploy it, which is a significant barrier to non-programmers, and slows the iteration cycle.
+
+We saw many users generate their code in an external tool and then copy it into Val Town, since our "vals" (tiny full-stack webapps) get instantly deployed, and can have a **frontend, backend, and database**.
+
+We figured we're in a unique position to tighten the feedback loop of codegen to full-stack deployment, to finally approach the dream of [end-user programming](/blog/end-programmer-programming):
+
+> The dream is that the full power of computers be **accessible to all**, that our
+digital worlds will be as **moldable as clay**.
+
+{/* <figure style={{ maxWidth: "600px" }}>
+  <Image src={AnnotatedValImage} alt="" />
+  <figcaption>
+    A "val" in Val Town: frontend, backend, database; immediately deployed.
+  </figcaption>
+</figure> */}
+
+I spent the last few weeks prototyping codegen ideas in Val Town, with great results. In this blog post I'll show you what I built and what I learned. And since I built it all within Val Town itself, it's all open source, and you can fork it!
+
+We're now full steam ahead on productionizing this within the product, so this blog post will also give you a sneak peak at what you can expect to see soon. I really hope you enjoy.
+
+<figure style={{ maxWidth: "600px" }}>
+  <video controls loop>
+    <source src="/video/make-real-with-backend.mp4" />
+  </video>
+  <figcaption>
+    "Make Real with Backend": one of the prototypes I made.
+  </figcaption>
+</figure>
+
+# Basic codegen
+
+First we'll build the most basic version of code generation in Val Town. We can do this (with only a few dependencies) in less than 80 lines!
+
+Here is the basic structure. Try it out by forking this into your own Val Town account.
+
+<iframe width="100%" height="400px" src="https://www.val.town/embed/janpaul123/valleBlogV0" title="Val Town" frameborder="0" allow="web-share" allowfullscreen></iframe>
+
+We start with imports, followed by a single function that serves our HTTP endpoint. We initialize a `TransformStream` and we send some initial HTML on it, which renders a form to enter your prompt. Finally, we use `passwordAuth` to password-protect the val with our Val Town token, so our OpenAI account won't be exposed to abuse.
+
+When running this, you'll see:
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={PasswordImage} alt="" />
+</figure>
+
+Get your [Val Town token](https://www.val.town/settings/api), enter it, and you'll see:
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={PromptscreenImage} alt="" />
+</figure>
+
+Let's now add our main logic in place of the `// TODO`:
+
+```ts
+const stream = await streamText({
+  model: openai("gpt-4o-mini", {
+    baseURL: "https://std-openaiproxy.web.val.run/v1",
+    apiKey: Deno.env.get("valtown"),
+  } as any),
+  messages: [
+    ...(await valleGetValsContextWindow("gpt-4o-mini")),
+    {
+      role: "system",
+      content: ` Your entire response should only be TypeScript.
+      Your response should start with \`\`\`ts and end with \`\`\`, so full code fences.
+      There should be no comments like "more content here", it should be complete and directly runnable.
+      The val should have an "export default async function main".
+      The val should return a valid HTML website. Prefer using React and Tailwind.
+      `.replace("\n", " "),
+    },
+    { role: "user", content: userprompt },
+  ],
+});
+```
+
+We initialize `gpt-4o-mini` using [Vercel's AI SDK](https://sdk.vercel.ai/). We proxy it through our custom baseURL, which lets you make some [LLM calls for free](https://docs.val.town/std/openai/). If you want to use a better model with your own OpenAI key, you can remove `baseURL` and `apiKey`, and set an `OPENAI_API_KEY` in your [Val Town env vars](https://www.val.town/settings/environment-variables).
+
+Then we fill `messages` with context that we'd like the LLM to use. We first get some from [`valleGetValsContextWindow`](https://www.val.town/v/janpaul123/valleGetValsContextWindow), where we've hardcoded a ton of examples, and docs (as markdown pages). We use as much as we can fit in gpt-4o-mini's 128k context window, since we can always optimize it to use less later!
+
+Then we have a basic system prompt. Note that we tell it to keep typescript "fences" surrounding the code (<code>\`\`\`ts</code> and <code>\`\`\`</code>). We found that this works better than having the model omit them — we'll just strip them out ourselves later.
+
+Then we'll stream in the response, and forward it to our HTML stream as they come in:
+
+```ts
+write(`<div class="mb-4">I wrote some new code for your Val:
+  <div class="font-mono whitespace-pre-wrap text-xs p-2 mt-2 rounded bg-gray-100">`);
+
+const tokens = [];
+for await (const text of stream.textStream) {
+  write(_.escape(text));
+  tokens.push(text);
+}
+write(`</div></div>`);
+```
+
+Note that we also collect the tokens into a `tokens` array. When we're done, we can use the Val Town SDK to create a new val:
+
+```ts
+const tempValName = `valle_tmp_${Math.random()}`.replaceAll(".", "");
+await new ValTown({ bearerToken: Deno.env.get("valtown") }).vals.create({
+  name: tempValName,
+  code: tokens.join("").replaceAll("```ts", "").replaceAll("```", ""),
+  type: "http" as any,
+  privacy: "unlisted",
+});
+const username = extractValInfo(import.meta.url).author;
+write(`<div class="mt-4">
+  Open your val here:
+  <a class="underline hover:no-underline" href="https://${username}-${tempValName}.web.val.run">${username}/${tempValName}</a>.
+</div>`);
+```
+
+That's all it takes to generate a val:
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={HelloworldgenImage} alt="" />
+</figure>
+
+And when opening the link at the bottom:
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={HelloworldappImage} alt="" />
+</figure>
+
+We can even embrace the "HTML energy", and hold ctrl/cmd while clicking "Go", to get multiple tabs generating vals:
+
+<figure style={{ maxWidth: "600px" }}>
+  <video controls loop>
+    <source src="/video/htmlenergy.mp4" />
+  </video>
+  <figcaption>
+  </figcaption>
+</figure>
+
+# Advanced prototype
+
+Over the course of several weeks, I ended up adding lots of features to this prototype:
+
+* Side panel with code and preview. The code even streams in by adding a `<script>` tag for each token, that calls a function adding the token to the code editor (you end up with very cursed HTML, with a gazillion script tags).
+* CodeMirror for syntax highlighting.
+* Follow-up prompts to iterate. This generates a new val for every iteration, so you can easily go back, or generate multiple vals by holding ctrl/cmd.
+* Loading an existing val and iterating on that.
+* Editing code manually.
+* Switching between models (Claude, OpenAI) and context window size.
+
+<figure style={{ maxWidth: "600px" }}>
+  <video controls loop>
+    <source src="/video/valle-hackernews.mp4" />
+  </video>
+  <figcaption>
+  </figcaption>
+</figure>
+
+I called this prototype VALL-E, and you can [fork it yourself](https://www.val.town/v/janpaul123/valle). Let's look at the details of what we ran into.
+
+### Blob storage
+
+The whole benefit of codegen on Val Town is that we can instantly deploy backend code. But we have some particular APIs that LLMs are not familiar with.
+
+One of these is our [blob storage](https://docs.val.town/std/blob/). We teach LLMs about blob storage by adding some example vals in its context window, as well as the full markdown of the blob storage docs page. Still, it would make minor mistakes such as using common keys that can clash with other vals, so we explicitly told it how to avoid that, by adding to its prompt:
+
+```
+Use the current val name for the storage key, which you can get
+using the "pomdtr/extractValInfo" val, which you can call like this:
+\`\`\`ts
+const {author, name} = extractValInfo(import.meta.url);
+\`\`\`
+```
+
+### SQLite
+
+Each val has a [SQLite](https://docs.val.town/std/sqlite/) database, however LLMs had trouble with its API, since it uses arrays (instead of objects) as inputs and outputs. LLMs would consistently tripped up on this, so we told them to avoid SQLite for now. Instead of more prompting, we will soon write a wrapper that makes the SQLite API look more like what LLMs expect — this generally works better.
+
+### Model choice
+
+Claude Sonnet 3.5 is clearly the best model for writing code right now. However we found that it can be very deterministic, so it can help to crank up its `temperature`.
+
+We also played with `gpt-4o` vs `gpt-4o-mini`. The `mini` version is much cheaper but much worse, though it's pretty good at making websites, especially when given some examples.
+
+### Make real
+
+You might have seen the ["Make Real"](https://github.com/tldraw/make-real) demos of [tldraw](https://tldraw.dev/), where you can draw shapes on a canvas, and turn it into HTML. I made a prototype "Make Real with Backend". For this, I put tldraw in a [val](https://www.val.town/v/janpaul123/valledraw) (which you can fork), and put my VALL-E prototype in an iframe:
+
+<figure style={{ maxWidth: "600px" }}>
+  <video controls loop>
+    <source src="/video/make-real-with-backend.mp4" />
+  </video>
+  <figcaption>
+    "Make Real with Backend"
+  </figcaption>
+</figure>
+
+It currently only works with text prompts, but it should be easy to pass the SVGs of arbitrary drawings to the LLM, as with the original Make Draw demos.
+
+I modified the VALL-E prototype to pass the name of generated val up to tldraw, using the [`postMessage` API](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage). That way you can use a previously generated val as the basis for a new one, such as when I write "add more sample stories" in the video above.
+
+### Putting it all together
+
+Once I had built all this, I gave a lightning talk at an event hosted by [South Park Commons](https://www.southparkcommons.com/). It's 5 minutes of building lots of little apps.
+
+<iframe width="600" height="378" src="https://www.youtube.com/embed/XXMAwpOCiMI?si=RKFoGSxrFMcwq8cD" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
+# Reducing costs
+
+Since I started with a maximalist approach — put as much as possible in the context window — generation was costly and slow. Now let's look at ways to make it cheap and fast.
+
+### Evals
+
+Before cutting down our context window, let's measure how good our models are. In the LLM world these are called "evaluations" or "evals" for short (presumably because people forgot that the word "benchmark" already existed).
+
+For us the general idea is this: have a bunch of prompts for websites to generate, then run those websites and make sure they work. For the first part, I built ["E-VALL-UATOR"](https://www.val.town/v/janpaul123/eVALLuator):
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={EvalluatorImage} alt="" />
+</figure>
+
+This runs some basic prompts like "Create a simple todo list app" or "Create a quiz game with a scoring system", and then checks if it runs without errors, in which case we award 3 points. If there are errors, we'll retry but subtract a point. The maximum score for 10 prompts is thus 30 points.
+
+How do we evaluate if the generated code runs without errors? Let's look at the different types of mistakes we can capture:
+
+1. Syntax errors.
+2. Typescript errors.
+3. Backend errors on `GET /`.
+4. Frontend errors on `GET /`.
+5. Frontend errors when interacting (clicking on stuff).
+6. Backend errors when interacting (persistence issues, issues on other pages).
+7. Visual issues (site doesn't look good).
+8. Site doesn't do what we expect.
+
+For this prototype I implemented 1,3,4. For this I made a [val](https://www.val.town/v/janpaul123/httpValErrorCatcher) (or really, VALL-E made it) that wraps any arbitrary HTTP val, and injects a `<script>` that forwards runtime errors to the parent iframe using `postMessage`. It also captures backend errors and generates a new HTML page for them, again with a `postMessage` to the parent with the error message.
+
+<iframe width="100%" height="400px" src="https://www.val.town/embed/janpaul123/httpValErrorCatcher" title="Val Town" frameborder="0" allow="web-share" allowfullscreen></iframe>
+
+In future versions we could make the prompts specify desired behavior more precisely, like "the textbox for adding a todo item should have class 'todo-textbox' and add the todo item when pressing 'enter'", and then testing the resulting behavior with an actual browser.
+
+For point 7 we could even use a screenshot service, and do a visual diff with a reference image, or ask another LLM to score the resulting design.
+
+### E-VALL-UATOR Matrix
+
+With an eval in hand, I started trimming the context window. I made [another val](https://www.val.town/v/janpaul123/metaEVALLuator) (or again, VALL-E really made it) that loads E-VALL-UATOR in an iframe with different parameters, and I modified E-VALL-UATOR to report its score to the parent using `postMessage`.
+
+At this point we have iframes nested 3 levels deep (matrix => E-VALL-UATOR => VALL-E => preview), but it all works.
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={MatrixImage} alt="" />
+</figure>
+
+This showed that at least for such a basic evaluation, we could reduce the context window quite a bit, thereby saving a bunch of money on tokens.
+
+We can likely improve this even further, such as by only including examples that are relevant to the query ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)), or loading vals (or npm package docs, or typescript definitions) that are actually being imported.
+
+### Search & replace
+
+Now that we've reduced the number of input tokens, let's look at the output tokens. These are usually more expensive, and have a larger impact on total generation time, so reducing this can make a big difference on both fronts.
+
+The biggest reduction we've seen in output tokens is by using search & replace-blocks (instead of full regeneration), when iterating on existing vals. The longer the val is, the more it helps. We took inspiration from [aider](https://aider.chat/), which has implemented various versions of this.
+
+It's pretty easy to get LLMs to produce diffs in the form of `SEARCH:… REPLACE:…`. However, this requires repeating the entire code block that needs to be replaced. We managed to instead get LLMs to output the first and last lines of the "search" block, but omit everything in between. This is much faster and cheaper. You can try this yourself by using the "Make changes" mode in VALL-E.
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={DiffsImage} alt="" />
+</figure>
+
+However, this doesn't come natural to LLMs, and they often go off the rails. Especially weaker models seem to have trouble with this, but even Claude 3.5 Sonnet goes wrong on occasion.
+
+There is a lot we'd like to experiment with, such as different search & replace syntaxes and semantics, including line numbers (so the model has a better point of reference), or early abort + retry if the model goes wrong.
+
+# Other ideas
+
+### Diffs in UI
+
+Viewing diffs in the UI before accepting them can be very useful, especially when making incremental changes to large vals. This depends somewhat on the audience: non-programmer wouldn't know what to do with them, while for programmers they are essential.
+
+Note that diffs in the UI is completely independent from whether we use full regeneration or search & replace-blocks (which we could also call "diffs"). It is possible in either case to immediately apply the changes to the val, or to first show diffs to the user.
+
+<figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
+  <Image src={UidiffsImage} alt="" />
+</figure>
+
+We implemented this using [Codemirror's merge view](https://github.com/codemirror/merge). You can use this by selecting "use diffs" in VALL-E. I ended up using mode this quite a bit for the development of VALL-E itself.
+
+### Backend vs frontend code
+
+Vals are a single file of code, and typically include both backend and frontend code. This can be confusing LLMs. It can be confusing to humans too, and some solutions that are good for humans are good for LLMs as well, such as clearly demarkating the frontend vs backend parts of the code, or using better abstractions.
+
+LLMs run into unique issues though. They don't have the benefit of seeing syntax highlighting, and sometimes they like to put HTML in a long string with backticks. They then forget that they're already within a string with backticks, and forget to escape any inner backticks. We've looked into encouraging LLMs to use `(function() {}).toString()` instead, but we don't have conclusive solutions yet.
+
+### Iterating
+
+We already talked about evals — detecting mistakes in code generation to optimize prompts and context window size, and preventing regressions. However, we can use the exact same code to let LLMs fix their own mistakes. When we detect an error, we can feed it back to the LLM.
+
+This was actually the very first prototype that I made: IterateGPT. It would keep iterating on tricky tasks until there were no more errors. In this example I had it generate code for getting the current weather in Brooklyn, without much further information — it even had to think of APIs to do this from memory! This still worked remarkably well.
+
+<figure style={{ maxWidth: "600px" }}>
+  <video controls loop>
+    <source src="/video/iterategpt.mp4" />
+  </video>
+  <figcaption>
+  </figcaption>
+</figure>
+
+We can do this for all the types of mistakes we mentioned when talking to evals. We can feed syntax/Typescript/runtime errors back to the LLM; we can take screenshots of the website and feed them back; we can even have the LLM generate its own tests.
+
+### Social coding
+
+Val Town has another cool feature besides instant backend deployments: social coding. Vals can be easily imported by other vals, which encourages people to write small vals that do one thing well, and then many people can reuse it. It's like instant deployment for libraries.
+
+LLMs don't take much advantage of this yet — neither using nor producing vals of this sort. For using vals made by other people, we could search for relevant vals ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)) and encourage the model to import them instead.
+
+For producing vals that can be used by others, we could enable LLMs to refactor functionality out of a val and write it into a new, shared val. This would be mostly useful for programmers who want to share their code as open source mini-libraries, or companies who want to expose their APIs more easily on Val Town.
+
+# Conclusion
+
+Let's look back at the dream of end-user programming:
+
+> The dream is that the full power of computers be **accessible to all**, that our
+digital worlds will be as **moldable as clay**.
+
+I'd say we're starting to get there.
+
+Thank you for reading.
