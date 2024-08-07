@@ -89,7 +89,7 @@ import UidiffsImage from "./codegen/uidiffs.png";
   - Code streaming
 */}
 
-Code generation ("codegen") has enabled a completely new style of building software for non-programmers, through conversation with an LLM. Millions of people are probably working on this, but some of the most successful products so far are:
+Code generation ("codegen") has enabled a completely new style of building software for non-programmers, through conversation with an LLM. Some of the most successful products so far are:
 
 {/* TODO: links */}
 * [Vercel v0](): build website UIs from prompts.
@@ -115,13 +115,13 @@ Code generation ("codegen") has enabled a completely new style of building softw
   </div>
 </figure>
 
-The beauty of products like Vercel v0, Claude Projects, and Websim is that you immediately get a working program back. It's the old promise of [live coding](https://vimeo.com/906418692).
+The beauty of products like Vercel v0, Claude Projects, and Websim is that you immediately get a working program back even if you don't know anything about programming! For example, in Websim you don't even see the code, you just see the generated website.
 
-However, if you want to store data or run backend computations, that won't work. Tools like VSCode Copilot and Cursor let you build larger software with a frontend and a backend, but now you need a place to deploy it, which is a significant barrier to non-programmers, and slows the iteration cycle.
+So far these LLM-generated programs have been limited to the frontend or copied and pasted into a another placements. Tools like VSCode Copilot and Cursor let you build larger software with a frontend and a backend, but now you need a place to deploy it, which is a significant barrier to non-programmers, and slows the iteration cycle.
 
-We saw many users generate their code in an external tool and then copy it into Val Town, since our "vals" (tiny full-stack webapps) get instantly deployed, and can have a **frontend, backend, and database**.
+We se many users generate their code in an LLM and then copy it into Val Town, since our "vals" (tiny full-stack webapps) get instantly deployed, and can have a **frontend, backend, and database**.
 
-We figured we're in a unique position to tighten the feedback loop of codegen to full-stack deployment, to finally approach the dream of [end-user programming](/blog/end-programmer-programming):
+We figured we're in a unique position to tighten the feedback loop of codegen to full-stack deployment, to finally approach [end-user programming](/blog/end-programmer-programming):
 
 > The dream is that the full power of computers be **accessible to all**, that our
 digital worlds will be as **moldable as clay**.
@@ -135,7 +135,7 @@ digital worlds will be as **moldable as clay**.
 
 I spent the last few weeks prototyping codegen ideas in Val Town, with great results. In this blog post I'll show you what I built and what I learned. And since I built it all within Val Town itself, it's all open source, and you can fork it!
 
-We're now full steam ahead on productionizing this within the product, so this blog post will also give you a sneak peak at what you can expect to see soon. I really hope you enjoy.
+We're now full steam ahead on productionizing this within the product, so this blog post will also give you a sneak peak at what you can expect to see soon.
 
 <figure style={{ maxWidth: "600px" }}>
   <video controls loop>
