@@ -1,6 +1,6 @@
 ---
 title: "Codegen just got really good"
-description: TODO
+description: Claude Projects but with backends
 pubDate: August 9, 2024
 author: JP Posma
 ---
@@ -67,11 +67,11 @@ We're now full steam ahead on productionizing this within the product, so this b
 
 # Basic codegen
 
-First I built a basic version of code generation. We can do this (with only a few dependencies) in only 80 lines (you can fork it to play with it).
+First I built a basic version of code generation. We can do this in only 80 lines (and only a few dependencies). You can fork it to play with it.
 
 <iframe width="100%" height="400px" src="https://www.val.town/embed/janpaul123/valleBlogV0" title="Val Town" frameborder="0" allow="web-share" allowfullscreen></iframe>
 
-I use [Vercel's AI SDK](https://sdk.vercel.ai/) so we can easily switch between models. To teach the LLM how to write code on Val Town, I went for a maximalist approach: I downloaded as many public vals as I could fit in a 128k context window and put them in [`valleGetValsContextWindow`](https://www.val.town/v/janpaul123/valleGetValsContextWindow). I also found that adding docs to the context window helpful (as raw markdown pages).
+I used [Vercel's AI SDK](https://sdk.vercel.ai/) to easily switch between models. To teach the LLM how to write code on Val Town, I went for a maximalist approach: I downloaded as many public vals as I could fit in a context window and put them in [`valleGetValsContextWindow`](https://www.val.town/v/janpaul123/valleGetValsContextWindow). I also found that adding docs to the context window helpful (as raw markdown pages).
 
 I tell it to start outputting a Typescript fence immediately (<code>\`\`\`ts</code>), so it starts writing code right away. I then strip out the fence later.
 
@@ -170,17 +170,15 @@ Once I had built all this, I gave a lightning talk at an event hosted by [South 
 
 # Reducing costs
 
-I started with a maximalist approach of putting as much code and docs in the context window. Claude 3.5 Sonnet has a 200k token context window, I put hundreds of vals in there. However, a single query with a full context window costs at least $0.60 (just for the input tokens), which is a lot.
+I started with a maximalist approach of filling the context window with as many example vals and docs as possible. Claude 3.5 Sonnet has a 200k token context window and I put hundreds of vals in there. However, a single query with a full context window costs at least $0.60 (just for the input tokens), which is a lot.
 
-A full context window is also slower, and I hit rate limits much more quickly. I managed to get custom rate limits, but it's not ideal. Let's look at how I optimized our costs and speed.
+A full context window is also slower, and I hit rate limits much more quickly. I managed to get custom rate limits from Anthropic, but it's not ideal. Let's look at how I optimized our costs and speed.
 
 ### Evals
 
-Before cutting down our context window, I wanted to measure how good our models are, so I could see how much a smaller context window would affect performance.
+Before cutting down our context window, I wanted to measure how good our models are, so I could see how much performance would be affected by a smaller context window.
 
-In the LLM world these measurements are called "evaluations" or "evals" for short (presumably because people forgot that the word "benchmark" already existed).
-
-For us the general idea is this: have a bunch of prompts for websites to generate, then run those websites and make sure they work. For the first part, I built ["E-VALL-UATOR"](https://www.val.town/v/janpaul123/eVALLuator):
+In the world of LLMs these measurements are called "evaluations" or "evals" (presumably because people forgot that the word "benchmark" already existed). For us the general idea is this: generate a bunch of websites, then make sure they work. For this I built ["E-VALL-UATOR"](https://www.val.town/v/janpaul123/eVALLuator):
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={EvalluatorImage} alt="" />
@@ -199,19 +197,21 @@ How do we evaluate if the generated code runs without errors? Let's look at the 
 7. Visual issues (site doesn't look good).
 8. Site doesn't do what we expect.
 
-For this prototype I implemented 1,3,4. For this I made a [val](https://www.val.town/v/janpaul123/httpValErrorCatcher) (or really, VALL-E made it) that wraps any arbitrary HTTP val, and injects a `<script>` tag that passes runtime errors to the parent iframe using `postMessage`. It also captures backend errors and generates a new HTML page for them, again with a `postMessage` to the parent with the error message.
+For this prototype I implemented 1,3,4. I made a [val](https://www.val.town/v/janpaul123/httpValErrorCatcher) (or really, VALL-E made it) that wraps any arbitrary HTTP val, and injects a `<script>` tag that passes runtime errors to the parent iframe using `postMessage`. It also captures backend errors and generates a new HTML page for them, again with a `postMessage` to the parent with the error message.
 
 <iframe width="100%" height="400px" src="https://www.val.town/embed/janpaul123/httpValErrorCatcher" title="Val Town" frameborder="0" allow="web-share" allowfullscreen></iframe>
 
-In future versions we could make the prompts specify desired behavior more precisely, like "the textbox for adding a todo item should have class 'todo-textbox' and add the todo item when pressing 'enter'", and then testing the resulting behavior with an actual browser.
+In future versions we could make the prompts specify desired behavior more precisely, like "the textbox for adding a todo item should have class 'todo-textbox' and add the todo item when pressing 'enter'", and then testing the resulting code with an actual browser.
 
 For point 7 (visual issues) we could even use a screenshot service, and do a visual diff with a reference image, or ask another LLM to score the resulting design.
 
 ### E-VALL-UATOR Matrix
 
-With an eval in hand, I started trimming the context window. I made [another val](https://www.val.town/v/janpaul123/metaEVALLuator) (or again, VALL-E really made it) that loads E-VALL-UATOR in an iframe with different parameters, and I modified E-VALL-UATOR to report its score to the parent using `postMessage`.
+With an eval in hand, I started trimming the context window. I made [another val](https://www.val.town/v/janpaul123/metaEVALLuator) (or again, VALL-E really made it) that loads E-VALL-UATOR in an `<iframe>` with different parameters, and I modified E-VALL-UATOR to report its score to the parent using `postMessage`.
 
 At this point we have iframes nested 3 levels deep (matrix => E-VALL-UATOR => VALL-E => preview), but it all works.
+
+I sorted the example vals such that the most important ones are in the beginning. This way we can easily play with how many examples to include.
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={MatrixImage} alt="" />
@@ -219,15 +219,15 @@ At this point we have iframes nested 3 levels deep (matrix => E-VALL-UATOR => VA
 
 This showed that at least for such a basic evaluation, we could reduce the context window quite a bit, thereby saving a bunch of money on tokens.
 
-We can likely improve this even further, such as by only including examples that are relevant to the query ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)), or loading vals (or npm package docs, or typescript definitions) that are actually being imported.
+We can likely improve this even further, such as by only including examples that are relevant to the query ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)), or loading vals that are actually being imported (as well as npm package docs, typescript definitions, browser api docs).
 
 ### Generating diffs
 
-Now that we've reduced the number of input tokens, let's look at the output tokens. These are usually more expensive, and have a larger impact on total generation time, so reducing this can make a big difference on both fronts.
+After reducing the number of input tokens, I looked at the output tokens. These are usually more expensive, and have a much larger impact on total generation time, so reducing this can make a big difference in both cost and speed.
 
-The biggest reduction we've seen in output tokens is by using diffs (instead of full regeneration), when iterating on existing vals. The longer the val is, the more it helps. We took inspiration from [aider](https://aider.chat/), which has implemented various versions of this.
+When iterating on existing vals it takes a lot of tokens to regenerate all the code, so I looked into diffs. The longer the val is, the more diffs help. I took inspiration from [aider](https://aider.chat/), which has implemented various versions of this.
 
-It's pretty easy to get LLMs to produce diffs in the form of `SEARCH:… REPLACE:…`. However, this requires repeating the entire code block that needs to be replaced. We managed to instead get LLMs to output the first and last lines of the "search" block, but omit everything in between. This is much faster and cheaper. You can try this yourself by using the "Make changes" mode in VALL-E.
+It's pretty easy to get LLMs to produce diffs in the form of `SEARCH:… REPLACE:…`. However, this requires repeating the entire code block that needs to be replaced. I managed to instead get LLMs to output the first and last lines of the "search" block, but omit everything in between. This is much faster and cheaper. You can try this yourself by using the "Make changes" mode in VALL-E.
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={DiffsImage} alt="" />
@@ -235,33 +235,33 @@ It's pretty easy to get LLMs to produce diffs in the form of `SEARCH:… REPLACE
 
 However, this doesn't come natural to LLMs, and they often go off the rails. Especially weaker models seem to have trouble with this, but even Claude 3.5 Sonnet goes wrong on occasion.
 
-There is a lot we'd like to experiment with, such as different diff syntaxes and semantics, including line numbers (so the model has a better point of reference), or early abort + retry if the model goes wrong.
+There is a lot more I'd like to experiment with, such as different diff syntaxes and semantics, including line numbers (so the model has a better point of reference), or early abort + retry if the model goes wrong.
 
 # Other ideas
 
 ### Diffs in UI
 
-Viewing diffs in the UI before accepting them can be very useful, especially when making incremental changes to large vals. This depends somewhat on the audience: non-programmer wouldn't know what to do with them, while for programmers they are essential.
+Viewing diffs in the UI before accepting them can be very useful, especially when making incremental changes to large vals. This depends somewhat on the audience: non-programmers wouldn't know what to do with diffs, while for programmers they are essential.
 
-Note that diffs in the UI is completely independent from whether we use full regeneration or generating diffs. It is possible in either case to immediately apply the changes to the val, or to first show diffs to the user.
+Note that diffs in the UI is completely independent from whether the LLM generates diffs or not. It is possible in either case to immediately apply the changes to the val, or to first show diffs to the user.
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={UidiffsImage} alt="" />
 </figure>
 
-We implemented this using [Codemirror's merge view](https://github.com/codemirror/merge). You can use this by selecting "use diffs" in VALL-E. I ended up using mode this quite a bit for the development of VALL-E itself.
+I implemented this using [Codemirror's merge view](https://github.com/codemirror/merge). You can use this by selecting "use diffs" in VALL-E. I ended up using mode this quite a bit for the development of VALL-E itself.
 
 ### Backend vs frontend code
 
 Vals are a single file of code, and typically include both backend and frontend code. This can be confusing LLMs. It can be confusing to humans too, and some solutions that are good for humans are good for LLMs as well, such as clearly demarkating the frontend vs backend parts of the code, or using better abstractions.
 
-LLMs run into unique issues though. They don't have the benefit of seeing syntax highlighting, and sometimes they like to put HTML in a long string with backticks. They then forget that they're already within a string with backticks, and forget to escape any inner backticks. We've looked into encouraging LLMs to use `(function() {}).toString()` instead, but we don't have conclusive solutions yet.
+LLMs run into unique issues though. They don't have the benefit of seeing syntax highlighting, and sometimes they like to put HTML in a long string with backticks. They then forget that they're already within a string with backticks, and forget to escape any inner backticks. I've looked into encouraging LLMs to use `(function() {}).toString()` instead, but I haven't fully solved this yet.
 
 ### Iterating
 
-We already talked about evals — detecting mistakes in code generation to optimize prompts and context window size, and preventing regressions. However, we can use the exact same code to let LLMs fix their own mistakes. When we detect an error, we can feed it back to the LLM.
+I already mentioned evals — detecting mistakes in code generation to optimize prompts and context window size, and preventing regressions. However, we can use the exact same code to let LLMs fix their own mistakes. When we detect an error, we can feed it back to the LLM.
 
-This was actually the very first prototype that I made: IterateGPT. It would keep iterating on tricky tasks until there were no more errors. In this example I had it generate code for getting the current weather in Brooklyn, without much further information — it even had to think of APIs to do this from memory! This still worked remarkably well.
+This was actually the very first prototype that I made: IterateGPT. It would keep iterating on tricky tasks until there were no more errors. In this example I had it generate code for getting the current weather in Brooklyn, without providing it further information — it even had to think of APIs to do this from memory! This still worked remarkably well.
 
 <figure style={{ maxWidth: "600px" }}>
   <video controls loop>
@@ -275,17 +275,19 @@ We can do this for all the types of mistakes we mentioned when talking to evals.
 
 ### Social coding
 
-Val Town has another cool feature besides instant backend deployments: social coding. Vals can be easily imported by other vals, which encourages people to write small vals that do one thing well, and then many people can reuse it. It's like instant deployment for libraries.
+Val Town has another cool feature besides instant backend deployments: social coding. Vals can be easily imported by other vals, which encourages people to write small vals that do one thing well, and then many people can reuse it. It's like instant deployment for packages or libraries.
 
-LLMs don't take much advantage of this yet — neither using nor producing vals of this sort. For using vals made by other people, we could search for relevant vals ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)) and encourage the model to import them instead.
+LLMs don't take much advantage of this yet — neither *using* nor *producing* vals of this sort. For using vals made by other people, we could search for relevant vals ([RAG](https://en.wikipedia.org/wiki/Retrieval-augmented_generation)) and encourage the model to import them instead.
 
 For producing vals that can be used by others, we could enable LLMs to refactor functionality out of a val and write it into a new, shared val. This would be mostly useful for programmers who want to share their code as open source mini-libraries, or companies who want to expose their APIs more easily on Val Town.
 
 # Conclusion
+
+It has been incredibly fun to build this, and to build it all in "user space" within Val Town. Code generation works well, especially with the latest models — I can't imagine how good it will be in even a few months, let alone a few years. And even with the current models I feel like I've only been scratching the surface.
 
 Let's look back at the dream of end-user programming:
 
 > The dream is that the full power of computers be **accessible to all**, that our
 digital worlds will be as **moldable as clay**.
 
-We might get there sooner than I thought.
+We might get there sooner than I would have thought. We live in exciting times.
