@@ -46,34 +46,11 @@ For us, the issue was that we were relying on [CodeMirror](https://codemirror.ne
 
 Looking at this and the history of the lezer package is a reminder of how TypeScript is quite a complicated language and it adds features at a sort of alarming rate. It's fantastic to use as a developer, but building 'meta' tools around it is pretty challenging, because there are a lot of tricky details like this one.
 
-What makes this even a bit trickier is that if you are writing a `.ts` file for TypeScript, with no JSX support, then generic _without the extra comma_ is valid syntax:
+What makes this even a bit trickier is that if you are writing a `.ts` file for TypeScript, with no JSX support, then generic _without the extra comma_ is valid syntax!
 
 ```ts
+// Valid in a .ts file, but not a .tsx file
 const x = <X>(y: X) => true;
 ```
-
-For what it's worth, I don't use arrow functions that often - I like function declarations more because of hoisting, support for generators, and their kludgy-but-explicit syntax. For example, arrow functions also have a little syntax collision even if you don't consider TypeScript: you can generally omit the `{}` brackets around the arrow function return value, like
-
-```js
-const x = () => 1;
-```
-
-But what if it's an object that you're trying to return? If you write
-
-```js
-const x = () => {
-  y: 1;
-};
-```
-
-Then you may be surprised to learn that you aren't returning an object like `{ y: 1 }`, but you've defined a [labeled statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) and the function `x` will, in fact, return `undefined`. You can return an object from an arrow function, but you have to parenthesize it:
-
-```js
-const x = () => ({ y: 1 });
-```
-
-So I kind of like function declarations because I just don't have to think about these things that often.
-
----
 
 Thanks [David Siegel](https://dvdsgl.co/) for reporting this issue!
