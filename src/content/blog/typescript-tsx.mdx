@@ -1,0 +1,79 @@
+---
+title: "Digging into a TypeScript / TSX overlap"
+description: A fun dive into a programming language syntax conundrum
+pubDate: August 8, 2024
+author: Tom MacWright
+---
+
+Today we noticed an issue in [Val Town](https://www.val.town/)’s TypeScript support.
+
+```ts
+// The 'bug' was that source code like:
+const x = <X>(arg: X) => {};
+
+// Was getting formatted to this:
+const x = <X>(arg: X) => {};
+```
+
+This is an [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions) with a [generic argument](https://www.typescriptlang.org/docs/handbook/2/generics.html) called X.
+
+Interesting! Why would dprint want to insert a trailing comma in a generic? I discovered this [fascinating issue](https://github.com/dprint/dprint-plugin-typescript/issues/274).
+
+Let's say that the input was this instead:
+
+```ts
+export const SelectRow = <T>(row: Row<T>) => false;
+```
+
+Some people have probably guessed the issue already: this is colliding with TSX syntax. If that line of code were like
+
+```tsx
+export const SelectRow = <T>something</T>;
+```
+
+Then you'd expect this to be an _element_ with a tag name `T`, rather than `T` as a generic. The syntaxes collide! How is TypeScript to know as it is parsing the code whether it's looking at JSX or a generic argument?
+
+The comma lets TypeScript know that it’s a generic argument! If you check out some behavior:
+
+- [prettier adds the comma in a generic](https://prettier.io/playground/#N4Igxg9gdgLgprEAuEcAeAHCAnGACSKAZ3zTwF48AeADQD4AKALyTxoEoK69gBfAbhAAaEBAwwAltCLJQAQ2zYIAdwAKChDJRyANsrkBPGSIBG2OWADWcGAGU5AWzgAZCVDjIAZrqJxT5qxtbDAs3AHNkGGwAVz8QXwcJSJi49Aw4bAknWF0AFQyoBQk4LW8dXxEicJ04AEVoiHgvHziAKyI0W2q6hqakMoqQAEdeuFUlDC0QOSIAWnc4ABMl4RAouQkdcIBhCAcHOWRpnR1VqqgwmoBBGCiJE2j4VQzXd2byuIALGAcdAHVPhJ4EQQmA4LZNECJAA3IEGI5gIjGEDQ2IASSgy1gtjAmXEV0xthgBhq70GGCUvj+5gwRwpJQy0I8Ijcvlw4zkYQOZLiIWwbKOxPSRFxEnEqwpbhgfwkixgn2QAA4AAwibBwEYSdUcrmHfotEQwOQmGVyhVIABMImivlyxtKBtQDhMS2Wi2ccgu0U5cAAYjgDrdwkc5I8ICBeLwgA)
+- [biome’s parser does not allow the generic without a comma](https://biomejs.dev/playground/?code=ZQB4AHAAbwByAHQAIABjAG8AbgBzAHQAIAB4ACAAPQAgADwAWAA%2BACgAegA6ACAAWAApACAAPQA%2BACAAewB9ADsA)
+- [dprint adds the comma](https://dprint.dev/playground/#code/KYDwDg9gTgLgBAYwgOwM7xHAvHAPADQD4AKALwC44BNASm0LgG8BfAbiA/plugin/typescript)
+- [typescript doesn’t parse it](https://www.typescriptlang.org/play/?target=9&jsx=1#code/MYewdgzgLgBAHjAvDAPADQHwAoCeAuGNASiQxgDMBDAGwgFMBuIA)
+
+So, if you're using generics with arrow functions in TypeScript and your file is a TSX file, that comma is pretty important, and intentional!
+
+For us, the issue was that we were relying on [CodeMirror](https://codemirror.net/)’s syntax tree to check for the presence of JSX syntax, and it was incorrectly parsing arrow functions with generic arguments and the trailing comma as JSX. One of CodeMirror's dependencies, [@lezer/javascript](https://www.npmjs.com/package/@lezer/javascript), was out of date: they had [fixed this bug](https://github.com/lezer-parser/javascript/blob/main/CHANGELOG.md#1411-2023-12-18) late last year. Fixing that squashed the false warning in the UI and let the `<T,>` pattern work as intended.
+
+Looking at this and the history of the lezer package is a reminder of how TypeScript is quite a complicated language and it adds features at a sort of alarming rate. It's fantastic to use as a developer, but building 'meta' tools around it is pretty challenging, because there are a lot of tricky details like this one.
+
+What makes this even a bit trickier is that if you are writing a `.ts` file for TypeScript, with no JSX support, then generic _without the extra comma_ is valid syntax:
+
+```ts
+const x = <X>(y: X) => true;
+```
+
+For what it's worth, I don't use arrow functions that often - I like function declarations more because of hoisting, support for generators, and their kludgy-but-explicit syntax. For example, arrow functions also have a little syntax collision even if you don't consider TypeScript: you can generally omit the `{}` brackets around the arrow function return value, like
+
+```js
+const x = () => 1;
+```
+
+But what if it's an object that you're trying to return? If you write
+
+```js
+const x = () => {
+  y: 1;
+};
+```
+
+Then you may be surprised to learn that you aren't returning an object like `{ y: 1 }`, but you've defined a [labeled statement](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/label) and the function `x` will, in fact, return `undefined`. You can return an object from an arrow function, but you have to parenthesize it:
+
+```js
+const x = () => ({ y: 1 });
+```
+
+So I kind of like function declarations because I just don't have to think about these things that often.
+
+---
+
+Thanks [David Siegel](https://dvdsgl.co/) for reporting this issue!
