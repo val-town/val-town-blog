@@ -1,7 +1,7 @@
 ---
-title: "LLM codegen for full-stack apps"
-description: Like Claude Projects but with backends
-pubDate: August 9, 2024
+title: How we built Townie – an app that generates fullstack apps
+description: Like Claude Artifacts, but with a backend and database
+pubDate: August 22, 2024
 author: JP Posma
 ---
 
@@ -18,41 +18,47 @@ import MatrixImage from "./codegen/matrix.png";
 import DiffsImage from "./codegen/diffs.png";
 import UidiffsImage from "./codegen/uidiffs.png";
 
-<figure style={{ maxWidth: "600px" }}>
+
+[Townie](https://www.val.town/townie) has been completed redesigned in the past couple weeks. It's seriously good at writing fullstack apps. This is the post about how I prototyped this new version of Townie a couple weeks ago.
+
+<figure >
   <video controls loop autoplay>
-    <source src="/video/hndemo.mp4" />
+    <source src="/video/TownieChatDemo.mp4" />
   </video>
   <figcaption>
-    My prototype codegen with an instantly deployed backend and database.
+    The redesigned Townie, currently in beta at <a href="https://www.val.town/townie">val.town/townie</a>.
   </figcaption>
 </figure>
 
-Code generation ("codegen") has enabled a completely new style of building software for non-programmers, through conversation with an LLM. Some of the most successful products are:
+## Codegen
 
-* [Vercel v0](https://v0.dev/): build website UIs from prompts.
-* [Claude Projects](https://www.anthropic.com/news/projects): build interactive websites and other code through conversation. Websites can be viewed directly.
-* [Websim](https://websim.ai/): similar to Claude Projects, but built around "fake websites". So going to catgifs.com will generate a website with cat gifs on the fly.
-* [VSCode Copilot](https://code.visualstudio.com/docs/copilot/overview): intelligent autocompletions of code within larger projects, for lots of programming languages.
+Code generation ("codegen") has enabled a completely new style of building software for non-programmers, through conversation with an LLM. 
+
+Some of the most successful products are:
+
+* [Claude Artifacts](
+https://www.anthropic.com/news/claude-3-5-sonnet): build interactive websites and other code through conversation. Websites can be viewed directly.
 * [Cursor](https://www.cursor.com/): code editor with lots of AI: not just autocompletions but conversational code generation.
+* [Vercel v0](https://v0.dev/): build website UIs from prompts.
+* [Websim](https://websim.ai/): similar to Claude Artifacts, but built around "fake websites". So going to catgifs.com will generate a website with cat gifs on the fly.
+* [VSCode Copilot](https://code.visualstudio.com/docs/copilot/overview): intelligent autocompletions of code within larger projects, for lots of programming languages.
 
 <figure style={{ maxWidth: "900px", display: 'flex', justifyContent: 'space-between' }}>
   <div style={{ maxWidth: "45%" }}>
     <Image src={ClaudeImage} alt="" />
     <figcaption>
-      Claude Projects: making a game.
-      {/* TODO: make gif? */}
+      Claude Artifacts: making a game.
     </figcaption>
   </div>
   <div style={{ maxWidth: "53%" }}>
     <Image src={WebsimImage} alt="" />
     <figcaption>
       Websim: catgifs.com.
-      {/* TODO: make gif? */}
     </figcaption>
   </div>
 </figure>
 
-The beauty of products like Vercel v0, Claude Projects, and Websim is that you immediately get a working program back even if you don't know anything about programming! For example, in Websim you don't even see the code, you just see the generated website.
+The beauty of products like Vercel v0, Claude Artifacts, and Websim is that you immediately get a working program back even if you don't know anything about programming! For example, in Websim you don't even see the code, you just see the generated website.
 
 So far these LLM-generated programs have been limited to the frontend, or copy-pasted into other places. Tools like VSCode Copilot and Cursor let you build larger software with a frontend and a backend, but now you need a place to deploy it, which is a significant barrier to non-programmers, and slows the iteration cycle.
 
@@ -65,7 +71,14 @@ This vision is taking shape with frontend-only apps, but if we're really talking
 
 I spent the last few weeks prototyping codegen ideas in Val Town, with great results. In this blog post I'll show you what I built and what I learned. And since I built it all within Val Town itself, it's all open source, and you can fork it!
 
-We're now full steam ahead on productionizing this within the product, so this blog post will also give you a sneak peak at what you can expect to see soon.
+<figure >
+  <video controls loop autoplay>
+    <source src="/video/hndemo.mp4" />
+  </video>
+  <figcaption>
+    My prototype codegen with an instantly deployed backend and database.
+  </figcaption>
+</figure>
 
 # Generate a full-stack app with backend and database
 
@@ -111,7 +124,7 @@ I called this prototype VALL-E, and you can [fork it yourself](https://www.val.t
 
 ### SQLite
 
-Each val has a [SQLite](https://docs.val.town/std/sqlite/) database using [Turso](https://turso.tech/). We ran into a problem though: the Turso API returns data as arrays, instead of as objects. For example:
+Each Val Town user has a [SQLite](https://docs.val.town/std/sqlite/) database powered by [Turso](https://turso.tech/). We ran into a problem though: the Turso API returns data as arrays, instead of as objects. For example:
 
 ```ts
 console.log(await sqlite.execute(`select a, b, c from my_table`));
@@ -239,6 +252,8 @@ However, this doesn't come natural to LLMs, and they often go off the rails. Esp
 
 There is a lot more I'd like to experiment with, such as different diff syntaxes and semantics, including line numbers (so the model has a better point of reference), or early abort + retry if the model goes wrong.
 
+We have recently had [success with unified diffs](https://x.com/stevekrouse/status/1826336463543566826).
+
 # Other ideas
 
 ### Diffs in UI
@@ -257,7 +272,9 @@ I implemented this using [Codemirror's merge view](https://github.com/codemirror
 
 Vals are a single file of code, and typically include both backend and frontend code. This can be confusing LLMs. It can be confusing to humans too, and some solutions that are good for humans are good for LLMs as well, such as clearly demarkating the frontend vs backend parts of the code, or using better abstractions.
 
-LLMs run into unique issues though. They don't have the benefit of seeing syntax highlighting, and sometimes they like to put HTML in a long string with backticks. They then forget that they're already within a string with backticks, and forget to escape any inner backticks. I've looked into encouraging LLMs to use `(function() {}).toString()` instead, but I haven't fully solved this yet.
+LLMs run into unique issues though. They don't have the benefit of seeing syntax highlighting, and sometimes they like to put HTML in a long string with backticks. They then forget that they're already within a string with backticks, and forget to escape any inner backticks. 
+
+Our current prompt (which we be released shortly) is built around a client-side React template, which clearly demarcates between the frontend and backend parts of the code, so Claude knows it has to communicate between by making `fetch` calls on the frontend that are handled as API calls on the backend.
 
 ### Iterating
 
@@ -292,4 +309,4 @@ Let's look back at the dream of end-user programming:
 > The dream is that the full power of computers be **accessible to all**, that our
 digital worlds will be as **moldable as clay**.
 
-We might get there sooner than I would have thought.
+We might get there sooner than we thought.
