@@ -35,11 +35,12 @@ for dependencies. Additionally, when Deno resolves dependencies with a lockfile
 it knows the full graph ahead of time, and can get things done much more
 quickly.
 
-With this change we have dropped the number of esm.town [module fetches by
-80%](https://x.com/mxmcd/status/1816144931720946080). P50 worker initialization
+With this change we're making less requests for dependencies and have dropped
+the number of esm.town [module fetches by
+80%](https://x.com/mxmcd/status/1816144931720946080). Additionally, P50 worker initialization
 latency also dropped around 50% from 50ms to ~25ms.
 
-![purple line graph showing a sharp drop from ~50ms to ~25ms](./lockfiles/image.png)
+![](./lockfiles/metrics.png)
 
 ## Getting clever with updates
 
