@@ -1,0 +1,78 @@
+
+---
+
+---
+
+<div id="latency-histogram"></div>
+<script>
+// @ts-nocheck
+    const elem = document.querySelector("#latency-histogram");
+
+    // Import Observable Plot
+    const Plot = await import("@observablehq/plot");
+
+    // Example data for two benchmarks
+    const valTownBenchmark = [
+        { percentile: "p50", latency: 50 },
+        { percentile: "p75", latency: 56 },
+        { percentile: "p90", latency: 80 },
+        { percentile: "p95", latency: 91 },
+        { percentile: "p99", latency: 160 },
+        { percentile: "p999", latency: 193 },
+    ];
+    const renderBenchmark = [
+        { percentile: "p50", latency: 90 },
+        { percentile: "p75", latency: 108 },
+        { percentile: "p90", latency: 121 },
+        { percentile: "p95", latency: 142 },
+        { percentile: "p99", latency: 352 },
+        { percentile: "p999", latency: 399 },
+    ];
+
+    const maxLatency = Math.max(
+    ...valTownBenchmark.map(d => d.latency),
+    ...renderBenchmark.map(d => d.latency)
+    );
+
+    const container = document.createElement("div");
+    container.style.display = "flex";
+    container.style["justify-content"] = "center";
+
+    const chart1 = Plot.plot({
+        grid: true,
+        width: 450,
+        height: 300,
+        y: { label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        x: { label: "Val Town + AWS + Tailscale" },
+        marks: [
+        Plot.barY(valTownBenchmark, {
+            x: "percentile",
+            y: "latency",
+            fill: "#58d68d",
+            title: d => `Benchmark 1: ${d.latency} ms`,
+        }),
+        ],
+    });
+    const chart2 = Plot.plot({
+        grid: true,
+        width: 450,
+        height: 300,
+        y: { label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        x: { label: "Render" },
+        marks: [
+        Plot.barY(renderBenchmark, {
+            x: "percentile",
+            y: "latency",
+            fill: "#8e44ad",
+            title: d => `Benchmark 1: ${d.latency} ms`,
+        }),
+        ],
+    });
+
+    container.appendChild(chart2);
+    container.appendChild(chart1);
+    elem.appendChild(container)
+
+</script>
+
+
