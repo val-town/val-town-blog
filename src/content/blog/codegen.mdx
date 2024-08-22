@@ -197,7 +197,7 @@ With an eval in hand, I started trimming the context window. I made [another val
 
 At this point we have iframes nested 3 levels deep (matrix => E-VALL-UATOR => VALL-E => preview), but it all works.
 
-I sorted the example vals such that the most important ones are in the beginning. This way we can easily play with how many examples to include.
+I sorted the example vals in the context window such that the most important ones are in the beginning. This way we can easily play with how many examples to include.
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={MatrixImage} alt="" />
@@ -223,7 +223,7 @@ However, this doesn't come natural to LLMs, and they often go off the rails. Esp
 
 There is a lot more I'd like to experiment with, such as different diff syntaxes and semantics, including line numbers (so the model has a better point of reference), or early abort + retry if the model goes wrong.
 
-We have recently had [seom success with unified diffs](https://x.com/stevekrouse/status/1826336463543566826), but are still experimenting heavily with this. We also have our eye Anthropic's [Fast Edit Mode](https://x.com/zeddotdev/status/1825967818329731104), currently in private beta.
+We have recently had [seom success with unified diffs](https://x.com/stevekrouse/status/1826336463543566826), but are still experimenting heavily with this. We also have our eye on Anthropic's [Fast Edit Mode](https://x.com/zeddotdev/status/1825967818329731104), currently in private beta.
 
 # Other ideas
 
@@ -231,7 +231,7 @@ We have recently had [seom success with unified diffs](https://x.com/stevekrouse
 
 Viewing diffs in the UI before accepting them can be very useful, especially when making incremental changes to large vals. This depends somewhat on the audience: non-programmers wouldn't know what to do with diffs, while for programmers they are essential.
 
-Note that diffs in the UI is completely independent from whether the LLM generates diffs or not. It is possible in either case to immediately apply the changes to the val, or to first show diffs to the user.
+Note that "diffs in the UI" is completely independent from whether the LLM generates diffs or not. It is possible in either case to immediately apply the changes to the val, or to first show diffs to the user.
 
 <figure style={{ maxWidth: "600px", border: '1px solid var(--border)' }}>
   <Image src={UidiffsImage} alt="" />
@@ -259,7 +259,7 @@ When we detect an error, we can feed it back to the LLM. This was actually the f
   </figcaption>
 </figure>
 
-We can do this for all the types of mistakes we mentioned when talking to evals. We can feed syntax/Typescript/runtime errors back to the LLM; we can take screenshots of the website and feed them back; we can even have the LLM generate its own tests.
+We can do this for all the types of mistakes we mentioned earlier (when talking about evals). We can feed syntax/Typescript/runtime errors back to the LLM; we can take screenshots of the website and feed them back; we can even have the LLM generate its own tests.
 
 ### Social coding
 
