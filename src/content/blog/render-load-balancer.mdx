@@ -41,9 +41,9 @@ makes pre-warmed requests from within a datacenter you will not always see the
 50ms slowdown we measured, but that is what we were seeing in more
 representative testing of user code.
 
-Render has mentioned that they're working on improving this, and it certainly
+*Render has mentioned that they're working on improving this, and it certainly
 seems better than when I was first testing, so maybe things will change in the
-future.
+future.*
 
 ## Don't wrap your FaaS in a FaaS
 
@@ -51,7 +51,9 @@ After some investigation it turns out the slowdown is because Render routes
 every incoming request through a Cloudflare Worker. So we're not just seeing the
 geographic cost of hopping over to Cloudflare, but we're also seeing the
 occasional cold start or whatever scheduling congesting might be involved in
-finding available capacity.
+finding available capacity. Maybe Render is even doing stuff in the Worker, who
+knows? What we do know is that the slowdown is consistent and we can't
+introspect it, or improve it ourselves.
 
 We're building a [FaaS](https://en.wikipedia.org/wiki/Function_as_a_service)! We
 can't wrap our FaaS in another FaaS. We have cold starts and scheduling and
@@ -112,7 +114,7 @@ Will it be reliable? What should our load balancer look like in AWS?
 
 ## Putting it all together
 
-Yes, we can use this, it's been woring well. Here's the architecture we ended up with.
+Yes, we can use this, it's been working well. Here's the architecture we ended up with.
 
 ![](./render-load-balancer/arch-diagram.png)
 
