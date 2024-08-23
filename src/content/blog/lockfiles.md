@@ -3,10 +3,11 @@ title: How we lock your dependencies
 description: Adding lockfiles to Val Town for stability, security, and performance.
 pubDate: Aug 23, 2024
 author: Max McDonnell
+image: ./lockfiles/metrics.png
 ---
 
-Over the past few months we rolled out dependency lockfiles in Val
-Town. Now when you save a val, we generate a
+Over the past few months, we rolled out dependency lockfiles in Val
+Town. When you save a val, we generate a
 [deno.lock](https://docs.deno.com/runtime/manual/basics/modules/integrity_checking/)
 file. When your val is run any time in the future, it'll use those exact same versions
 of your dependencies – effectively pinning your unpinned dependencies. When you save a new
@@ -15,10 +16,10 @@ dependencies to whatever their current versions are at that new time.
 
 ## Imports in Val Town
 
-Val Town doesn't have a package manager like npm or yarn or package.json files. Imports
-are listed at the top of the val and are resolved by our runtime, Deno. We support
-`npm:` imports, `jsr:` imports, and `https:` imports. You specify the version (or not)
-in the import statement. For example:
+Val Town doesn't have a package manager like npm, and it doesn't use package.json files to declare dependencies. Imports
+are listed at the top of the val and are resolved by our runtime, Deno. We support imports from the [NPM](https://www.npmjs.com/) and [JSR](https://jsr.io/) registries using `npm:` and `jsr:` protocols, as well as imports
+from any URL using `https://`. You can optionally specify
+a version in the import statement itself. For example:
 
 ```ts
 import lodash from "npm:lodash"; // unpinned, gets the latest
@@ -34,20 +35,21 @@ You'll see improvements on three fronts from lockfiles: stability,
 security and performance.
 
 **Stability**: Libraries would change over time and vals would break. Now, if you
-build something and it is working, it should generally keep working.
+build something and it's working, it should generally keep working.
 
-**Security**: If there is a
-malicious dependency, it is easy for the vulnerability to proliferate rapidly
+**Security**: If there's a
+malicious dependency, it's easy for the vulnerability to proliferate rapidly
 without dependency pinning. Lockfiles will slow things down, and prevent certain
-types of attacks from being very effective. Additionally we do integrity
+types of attacks from being effective. Additionally we do integrity
 checking on the contents of dependencies. If the contents of a module have
 changed unexpectedly, we won't run your code.
 
 **Performance**: Lockfiles cache the whole dependency tree,
-so we make fewer requests, all in parallel. Module fetches to Val Town
+so we make fewer requests, and we can make requests in parallel.
+Module fetches to Val Town
 fell by 80%. Worker initialization latency (P50) dropped 50%.
 
-![](./lockfiles/metrics.png)
+![Charts of requests to esm.town and worker initialization time decreasing](./lockfiles/metrics.png)
 
 ## Getting clever with updates
 
@@ -78,7 +80,7 @@ that teams can fluidly iterate on together.
 ## Going forward
 
 We've seen a variety of situations where an https import has a subtle change
-and val is halted from running because of an integrity error against what should
+and a val is halted from running because of an integrity error against what should
 be the same exact version. If you run into this issue and are confident it's
 not an exploit, you can fix it by re-saving your val, which will regenerate
 the lockfile. We're working on the best way to handle these issues without
