@@ -8,9 +8,15 @@
 <style>
 @media(min-width:640px) {
   :global(.chart-grid) {
+    padding-top: 20px;
     display: flex;
     align-items: center;
   }
+}
+
+:global(.chart-grid g[aria-label="x-axis label"] text) {
+  font-weight: bold;
+  font-size: 16px;
 }
 
 </style>
@@ -51,7 +57,12 @@
     const chart1 = Plot.plot({
         width: 450,
         height: 300,
-        y: { grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        style: {
+          fontSize: '14px',
+          fontFamily: 'inherit',
+        },
+        marginBottom: 55,
+        y: { ticks: 4, grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
         x: { label: "Val Town + AWS + Tailscale" },
         marks: [
         Plot.barY(valTownBenchmark, {
@@ -65,7 +76,12 @@
     const chart2 = Plot.plot({
         width: 450,
         height: 300,
-        y: { grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        style: {
+          fontSize: '14px',
+          fontFamily: 'inherit',
+        },
+        marginBottom: 55,
+        y: { ticks: 4, grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
         x: { label: "Render" },
         marks: [
         Plot.barY(renderBenchmark, {
