@@ -1,7 +1,7 @@
 ---
 title: How we lock your dependencies
 description: Adding lockfiles to Val Town for stability, security, and performance.
-pubDate: Aug 22, 2024
+pubDate: Aug 23, 2024
 author: Max McDonnell
 ---
 
