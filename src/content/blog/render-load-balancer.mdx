@@ -48,22 +48,27 @@ future.*
 
 ## Don't wrap your FaaS in a FaaS
 
-After some investigation it turns out the slowdown is because Render routes
-every incoming request through a Cloudflare Worker. So we're not just seeing the
-geographic cost of hopping over to Cloudflare, but we're also seeing the
-occasional cold start or whatever scheduling congesting might be involved in
-finding available capacity. Maybe Render is even doing stuff in the Worker, who
-knows? What we do know is that the slowdown is consistent and we can't
+We eventually learned that Render routes
+every incoming request through a Cloudflare Worker: that's where the latency
+is coming from.
+
+So we're not just seeing the
+geographic cost of hopping between the user, Cloudflare, and Render's server
+instances in AWS, but we're also seeing the
+occasional cold start or whatever scheduling congestion might be involved in
+finding available capacity. There could also be a slowdown due to the Worker
+code itself, if Render is making some datastore query for each request.
+What we do know is that the slowdown is consistent and we can't
 introspect it, or improve it ourselves.
 
 We're building a [FaaS](https://en.wikipedia.org/wiki/Function_as_a_service)! We
 can't wrap our FaaS in another FaaS. We have cold starts and scheduling and
 worker re-use and resource problems to deal with ourselves. If we're fighting to
-reduce tail latencies and Cloudflare Workers have their own tail latencies we
-have less control over our performance than we'd like.
+reduce tail latencies and Cloudflare Workers have their own tail latencies,
+then we have less control over our performance than we'd like.
 
-We talked to Render. They were nice, and helpful, and read my benchmarks. They
-confirmed the issue, but where unwilling to remove their Cloudflare layer or
+We talked to Render. They were friendly, helpful, and they read my benchmarks. They
+confirmed the issue, but where unable to remove their Cloudflare layer or
 help us find out a way to get around it.
 
 What do we do next?
