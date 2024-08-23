@@ -6,7 +6,7 @@ author: Max McDonnell
 ---
 
 Over the past few months we rolled out dependency lockfiles in Val
-Town. Now when you save a val, we write a
+Town. Now when you save a val, we generate a
 [deno.lock](https://docs.deno.com/runtime/manual/basics/modules/integrity_checking/)
 file. When your val is run any time in the future, it'll use those exact same versions
 of your dependencies – effectively pinning your unpinned dependencies. When you save a new
