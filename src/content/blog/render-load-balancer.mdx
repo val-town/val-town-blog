@@ -9,21 +9,22 @@ author: Max McDonnell
 import LatencyHistogram from './render-load-balancer/LatencyHistogram.astro';
 
 Last year we migrated from [Supabase to
-Render](https://blog.val.town/blog/migrating-from-supabase/). Generally, Render
-has been excellent. We have a handful of services, they are easy to monitor and
-configure, onboarding is easy. Every now and then we think about what moving to
-AWS would be like and we are thankful to not be in the complex sea of orange
-buttons.
+Render](https://blog.val.town/blog/migrating-from-supabase/). Render
+has been excellent: our development velocity has gone up, we have realistic
+full-stack development environments, and the tools for monitoring
+and configuration have been rock-solid. Sometimes we log into the AWS
+console for something unrelated and feel blessed to be insulated from the
+see of orange buttons and indecipherable error states.
 
 However.
 
-During our journey to [improve the speed of HTTP
-Vals](https://github.com/val-town/val-town-product/discussions/113) we noticed
-that there was a surprising amount of latency reaching our Render servers. This
-latency wasn't present on all requests, but we think on average it was adding
+While we were figuring out how to [improve the speed of HTTP
+Vals](https://github.com/val-town/val-town-product/discussions/113), we noticed
+that there was a surprising amount of latency between us and our our Render
+servers. The latency was spiky, but we think on average it was adding
 about 50ms to requests we sent through Render.
 
-You can try it out yourself. I've made two Vals, [one that works using our new
+You can try it out yourself: I've made two Vals, [one that works using our new
 load balancer](https://www.val.town/v/maxm/itsOnValTown) (like all Vals), and
 [another one](https://www.val.town/v/maxm/itsOnRender) that I've set up to send
 through Render's load balancer.
