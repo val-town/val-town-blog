@@ -3,7 +3,17 @@
 
 ---
 
+
 <div id="latency-histogram"></div>
+<style>
+@media(min-width:640px) {
+  :global(.chart-grid) {
+    display: flex;
+    align-items: center;
+  }
+}
+
+</style>
 <script>
 // @ts-nocheck
     const elem = document.querySelector("#latency-histogram");
@@ -35,14 +45,13 @@
     );
 
     const container = document.createElement("div");
-    container.style.display = "flex";
-    container.style["justify-content"] = "center";
+    container.className = 'chart-grid';
+
 
     const chart1 = Plot.plot({
-        grid: true,
         width: 450,
         height: 300,
-        y: { label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        y: { grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
         x: { label: "Val Town + AWS + Tailscale" },
         marks: [
         Plot.barY(valTownBenchmark, {
@@ -54,10 +63,9 @@
         ],
     });
     const chart2 = Plot.plot({
-        grid: true,
         width: 450,
         height: 300,
-        y: { label: "Latency (ms), lower is better", domain: [0, maxLatency] },
+        y: { grid: true, label: "Latency (ms), lower is better", domain: [0, maxLatency] },
         x: { label: "Render" },
         marks: [
         Plot.barY(renderBenchmark, {

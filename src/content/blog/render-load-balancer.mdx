@@ -78,12 +78,13 @@ What do we do next?
 At this point we have a few considerations about Render:
 
 1. We'd prefer not to route our requests through Cloudflare Workers.
-2. Due to some quirks with "double cloudflare" we cannot run our own Cloudflare
+2. Due to some quirks with "double Cloudflare" we cannot run our own Cloudflare
    account in front of Render's Cloudflare.
 3. Render has other limitations, mainly limited Linux capabilities and lack of
    more advanced networking functionality.
 
-How do we address these issues? We considered moving away entirely. We replicated our application stack in AWS
+How do we address these issues? We considered moving away entirely. We replicated
+our application stack in AWS
 and began talking with other providers that would provide us the level of
 control we needed. In the end, it was hard to justify the migration cost and
 difficult to stomach adding any complexity to our deploy and administration
@@ -94,10 +95,11 @@ Cloudflare Tunnel and was able to connect our Render server directly to
 Cloudflare, skipping Render's load balancer. Requests flowed and I was able to
 get a very good sense of the Render slowdown for the first time.
 
-If Cloudflare Tunnel works, what about Tailscale/Wireguard? Thankfully, Render
+If Cloudflare Tunnel works, what about [Tailscale](https://tailscale.com/)
+and [Wireguard](https://www.wireguard.com/)? Thankfully, Render
 has an [example tailscale subnet
 router](https://github.com/render-examples/tailscale). I got that running in
-Render, set up an EC2 instance in AWS, grabbed the local ip address of one of
+Render, set up an EC2 instance in AWS, grabbed the local IP address of one of
 our Render servers, crossed my fingers and ran `tailscale ping 10.207.5.44`.
 
 ```
@@ -125,24 +127,25 @@ Yes, we can use this, it's been working well. Here's the architecture we ended u
 ![](./render-load-balancer/arch-diagram.png)
 
 We have an Application Load Balancer (ALB) doing TLS termination and handling
-incoming traffic. We have HAProxy servers that receive that traffic and route it
+incoming traffic. We have [HAProxy](https://www.haproxy.org/) servers that receive
+that traffic and route it
 to individual hosts through the subnet routers. We have redundant load balancers
 and subnet routers and we're resilient to many types of failures.
 
 A few notes on this setup:
 
-1. HAProxy needs to know where to route traffic. The Render server IPs change
+1. HAProxy needs to know where to route traffic, but the Render server IPs change
    every deploy. Thankfully Render provides a DNS server that reports the server
    addresses. We configure HAProxy to listen for DNS changes and update the
    routing table accordingly.
-2. Tailscale subnet routers can be run redundantly. If one of them goes down
+2. Tailscale subnet routers can be run redundantly. If one of them goes down,
    we'll simply drop those TCP packets and traffic will be seamlessly re-routed
    through the other instance.
-3. If a HAProxy server crashes we will lose any connections that are being
+3. If an HAProxy server crashes, we lose any connections that are being
    served, but we've placed those instances in an Auto Scaling Group so a new
    instance will be created to replace it.
 
-This setup has been working quite well. All inbound HTTP requests are quicker
+This setup has been working well. All inbound HTTP requests are quicker
 and we've seen a reduction in tail latencies. We deploy these instances very
 infrequently so the administrative overhead is relatively low.
 
