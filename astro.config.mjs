@@ -57,7 +57,14 @@ function directiveToHtml() {
 // https://astro.build/config
 export default defineConfig({
   site: "https://blog.val.town",
-  integrations: [astroExpressiveCode(), mdx(), sitemap()],
+  integrations: [astroExpressiveCode({
+    // By default, expressive-code responds to light/dark
+    // mode. This would make sense if our blog was also responsive
+    // to light and dark mode, but since we're only supporting
+    // light mode at the moment, we want to lock code into light
+    // mode.
+    theme: 'github-light'
+  }), mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkDirective, directiveToHtml, mermaid],
   },
