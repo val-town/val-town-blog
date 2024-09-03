@@ -1,0 +1,55 @@
+---
+title: Joining the Open Source Pledge
+description: We donated $9,600 to open-source!
+pubDate: August 30, 2024
+author: Tom MacWright
+image: ./oss/opensourcepledge-logo-horiz-color-opengraph.png
+---
+
+import { Image } from "astro:assets";
+import Pledge from "./oss/opensourcepledge-logo-horiz-mono-dark@2x.svg";
+
+<div class='banner'>
+  <Image class='pledge' src={Pledge} alt="Pledge icon" />
+</div>
+<style>
+{`
+.banner {
+  padding: 30px;
+  background-color: #eee;
+  line-height: 0;
+  border-radius: 20px;
+  display: flex;
+  justify-content: center;
+}
+.pledge {
+  width: auto;
+  max-width: 320px;
+}
+`}
+</style>
+
+Val Town couldn't exist without open source software. Like most startups, we build applications on top of open source frameworks, modules, languages, and more. It's crucial to us that these projects thrive and their maintainers have the time, energy, and justification to keep working on them. We contribute patches upstream and are gradually [releasing open source modules](https://github.com/val-town) of our own, but today we're supporting these projects more directly: with funding.
+
+We're joining the [Open Source Pledge](https://osspledge.com/), and have donated $9,600 so far in 2024. The goal is to donate at least $2,000 per full-time employee per year, which we've already exceeded, but we plan to donate more throughout the year.
+
+So far we've donated to:
+
+| Project | What it does |Amount |
+| ------ | ----- | -----: |
+| [esm.sh](https://esm.sh/) | CDN for ESM modules |$1000 |
+| [Sindre Sorhus](https://github.com/sindresorhus) | Prolific open source maintainer | $1000 |
+| [tsx](https://tsx.is/) | Easy way to run TypeScript directly | $1000 |
+| [Fastify](https://fastify.dev/) | Web framework | $1000 |
+| [Zod](https://zod.dev/) | Data validation library | $1000 |
+| [Unified](https://unifiedjs.com/) | Markdown transformation module ecosystem | $1000 |
+| [Drizzle](https://orm.drizzle.team/) | Database query builder | $800 |
+| [CodeMirror](https://codemirror.net/) | Code editor framework | $800 |
+| [Mock Service Worker](https://mswjs.io/) | Testing helper modules | $500 |
+| [rclone](https://rclone.org/) | Upload and download files to S3 and more | $500 |
+| [Hono](https://hono.dev/) | Web standards-based web framework | $500 |
+| [husky](https://typicode.github.io/husky/) | Nice way to set up git hooks | $500 |
+
+Thanks so much to all the maintainers of these projects! We are so grateful for your work. We hope these donations go a small way towards showing our appreciation and making open-source more sustainable.
+
+Do you rely on open source software? You probably do: ask your company to [join the pledge](https://osspledge.com/join/) too!
