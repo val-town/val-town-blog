@@ -40,6 +40,26 @@ body {
   background: #fff;
 }
 
+/* Style the Markdown heading links. */
+.prose :is(h1, h2, h3, h4, h5, h6) {
+  position: relative;
+}
+.prose :is(h1, h2, h3, h4, h5, h6) > a {
+  color: rgb(var(--black));
+  text-decoration: none;
+  text-decoration-color: #eee;
+
+  &:hover {
+    text-decoration: underline;
+  }
+  &:hover::before {
+    content: '#';
+    position: absolute;
+    left: -1.5rem;
+    opacity: 0.5;
+  }
+}
+
 h1,
 h2,
 h3,

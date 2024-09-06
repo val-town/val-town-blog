@@ -8,6 +8,8 @@ import { visit } from "unist-util-visit";
 
 import sitemap from "@astrojs/sitemap";
 import { visit } from "unist-util-visit";
+import { rehypeHeadingIds } from '@astrojs/markdown-remark'
+import rehypeAutolinkHeadings from "rehype-autolink-headings";
 
 const mermaid = () => (tree) => {
   visit(tree, "code", (node) => {
@@ -67,6 +69,9 @@ export default defineConfig({
   }), mdx(), sitemap()],
   markdown: {
     remarkPlugins: [remarkDirective, directiveToHtml, mermaid],
+    rehypePlugins: [rehypeHeadingIds, [rehypeAutolinkHeadings, {
+      behavior: 'wrap'
+    }]]
   },
   editLink: {
     baseUrl: "https://github.com/val-town/val-town-docs/edit/main/",
