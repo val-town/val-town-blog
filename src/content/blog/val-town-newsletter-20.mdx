@@ -1,25 +1,31 @@
 ---
 title: Val Town Newsletter 20
 description: Townie AI, Faster vals, and Lockfiles
-pubDate: Aug 26, 2024
+pubDate: September 6, 2024
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 
-The newest version of Townie is _incredible_ at writing vals. You can create fully working apps with a frontend, backend, and database – without even knowing how to code – in minutes. Honestly, if you have five minutes, you gotta try it out!
+The newest version of Townie is _incredible_ at writing vals. It creates deployed apps with a backend and database in seconds. Honestly, if you have five minutes, [you gotta try it out](https://val.town/townie)!
 
-We also deployed a new load balancer that make vals run up to 10x faster. We rolled out lockfiles to to your vals for security, stability, and speed. We shipped a dozen other features and bug fixes, too.
+We shipped a number of other improvements, including a huge speedup to vals, lockfiles to secure your code, the ability to receive email attachments, a new version history UI, and opened up support for hundreds more NPM packages.
 
-Quick hiring update – we're still looking for a couple engineers to join our founding team. If you have any brilliant friends in NYC, please send them our way!
+Quick hiring update: we're still looking for a couple more engineers to join our founding team. If you have any brilliant friends in NYC, please send them our way!
 
-TODO - say something about community vals
+There was such an overwhelming amount of amazing vals created this month that I had to [build a custom tool](TODO) to help me write the "community vals" section of this newsletter. You guys rock!
 
 ## 🤖 Townie AI
 
-TODO - video
+This month we released our third wholesale rewrite of Townie, and it's _incredible_. It's now able to generate full-stack applications with a backend and database in seconds. It's like Claude Artifacts, with a backend.
 
-JP just released [an excellent blog post about how he prototyped Townie](TODO). It's an excellent post on the current state of code generation.
+<video controls loop class="image-rounded">
+  <source src="/video/TownieIntro.mp4" />
+</video>
+
+[If](https://x.com/stevekrouse/status/1826728366549975506) [you](https://x.com/stevekrouse/status/1824823444485415000) [want](https://x.com/stevekrouse/status/1823825618246779241) [more](https://x.com/stevekrouse/status/1826336463543566826) [demos](https://x.com/stevekrouse/status/1825978445697819067), [I've](https://x.com/stevekrouse/status/1828864172567712103) [been](https://x.com/stevekrouse/status/1828831012966777263) [tweeting](https://x.com/stevekrouse/status/1827046592806891580) [up](https://x.com/stevekrouse/status/1827036933823848553) [a](https://x.com/stevekrouse/status/182636536262528211) [storm](https://x.com/stevekrouse/status/1826356154525778404) [of](https://x.com/stevekrouse/status/1826317269657395227) [them](https://x.com/stevekrouse/status/1831046366904353066)!
+
+If you want to knwo the backstory behind Townie, JP released [an excellent blog post about how he prototyped Townie](TODO). It's an excellent post on the current state of code generation.
 
 ## ⚡️ Faster Vals
 
@@ -42,7 +48,7 @@ https://x.com/mxmcd/status/1828881056969150616
 - TODO review commits
 
 - [Ability to trigger LLM completions manually](https://x.com/stevekrouse/status/1821229088209862848) (alt-\)
-- Go from a val [to the full-screen editor by pressing .](TODO) (like on GitHub) - thanks https://www.val.town/u/dvdsgl for the suggestion 🙏
+- Go from a val [to the full-screen editor by pressing .](TODO) (like on GitHub) - thanks https://val.town/u/dvdsgl for the suggestion 🙏
 - Val READMEs are now CodeMirror, with LLM completions (triggered manually, alt-\)
 - Val settings tab
 - [Redesigned Profile menu](https://x.com/stevekrouse/status/1819005362877407357) (in the top-right corner)
@@ -65,117 +71,38 @@ Here's some of the top features we're planning to work in the coming months. Ple
 
 https://x.com/simonw/status/1828638149633024460
 https://x.com/gvy_dvpont/status/1814270840545976653
-https://x.com/jxnblk/status/1826252329940832560
-https://x.com/stevekrouse/status/1827667523359174659
-https://val.town/v/curtcox/QRCodeScanner
-https://www.val.town/v/yawnxyz/newsly
-https://www.val.town/v/schpet/linearStandup
-https://www.val.town/v/all/promptGen
-https://all-iconexplorer.web.val.run/
-https://www.val.town/v/thatsmeadarsh/star_a_github_repository_with_natural_language
-https://www.val.town/v/moe/spacex
-https://www.val.town/v/gilesb/emailExpenser
-https://www.val.town/v/calebduren/rollingAmberSilverfish
-https://val.town/v/calebduren/rollingAmberSilverfish -- maybe unlisted
-https://dthyresson-playmeasong.web.val.run/
-https://dthyresson-bedtimeStoryMaker.web.val.run
-https://dthyresson-movieMashup.web.val.run (add these too investor thanks)
-https://val.town/v/jxnblk/indirection
 https://jxnblk.com/
-https://val.town/v/jdan/dialog
-https://val.town/v/moe/spacex
-https://val.town/v/tempdev/rabbitstream
-https://val.town/v/tempdev/flix
-https://www.val.town/v/moe/p5 / https://www.val.town/v/moe/exampleP5sketch / https://www.val.town/v/moe/lostKeys
-https://val.town/v/sharanbabu/legitimateTanTiger
-https://val.town/v/mauriciobc/MiauFood
-https://www.val.town/v/alexdphan/slackScout
-https://www.val.town/v/maxkrass/bondingKatalogGateway
-https://www.val.town/v/jxnblk/test
-https://www.val.town/v/jxnblk/blogOGImage
-https://www.val.town/v/wilg/taxrates
-https://www.val.town/v/csl_/dndoodle
-https://val.town/v/gio/razza
-https://val.town/v/gio/theHereTimes
-https://val.town/v/yawnxyz/diesel
-https://val.town/v/dthyresson/playRandomSong
-https://www.val.town/v/weaverwhale/FindTrendsUsingGPT
-https://val.town/v/todepond/labLogin - find the tweets
-https://val.town/v/cephalization/smsjournalertextrelay
-https://val.town/v/isidentical/fluxImageGenerator
-https://www.val.town/v/movienerd/clicker
-https://www.val.town/v/dthyresson/tracksAPI
-https://www.val.town/v/kaz/reluctantCoffeeGayal
-https://val.town/v/stevekrouse/lucia_middleware
-https://www.val.town/v/sharanbabu/textSummarizationComparisonTool
-https://www.val.town/v/pinjasaur/smallweb
-https://just-be.dev/rc/impossible-day
-https://www.val.town/v/keenanzucker/surfboardDemoSchedule2 / https://www.val.town/v/szymonator/surfboardDemoSchedule2
-https://www.val.town/v/alexpetros/AggregatorAlert
-https://val.town/v/vawogbemi/short
-https://www.val.town/v/csl_/homepage
-https://val.town/v/moe/numbergame
-\https://val.town/v/dthyresson/honoWithUnkeyRateLimiting
-https://www.val.town/v/jxnblk/tunaTestSuite
-https://www.val.town/v/samwho/featureflags
-https://val.town/v/stevekrouse/switchbot
-https://val.town/v/gunnnnii/caniuse_notifierchr
-https://www.val.town/v/dvdsgl/glideImportDemo
-https://www.val.town/v/neverstew/superchargedQueryParams
-https://www.val.town/v/kylem/dependencyLicenses - tweet about this one
-https://val.town/v/mjweaver01/FindFraudTrendsUsingGPT
-https://www.val.town/v/alexdphan/twitterapi
-https://val.town/v/maxm/php
-https://www.val.town/v/kian/webcamEffects
-https://val.town/v/maxm/forwarder
-https://www.val.town/v/gio/clothingWeatherSuggestion
-https://www.val.town/v/yawnxyz/perlinNoiseFabricColor
-https://www.val.town/v/jdan/infoboxCrawler
-https://www.val.town/v/yawnxyz/hnCloneLuciaGithubOauth
-https://www.val.town/v/roramigator/lootGenAPI#loot-generator-api
-https://www.val.town/v/roramigator/hackerNewsDigest
-https://roramigator-religionclickergame.web.val.run/
-https://stevekrouse-typetest.web.val.run/
-https://x.com/stevekrouse/status/1831046366904353066
-val contribution chart https://x.com/mrejfox/status/1830343140168839336
-https://www.val.town/v/stevekrouse/confessionalApp
-https://www.val.town/v/wilg/taxrates - tax.moi
-https://www.val.town/v/stevekrouse/confessionalApp
-https://x.com/stevekrouse/status/1829979963560267965
+https://x.com/jxnblk/status/1826252329940832560
+https://docs.cannoli.website/Blog/Release+Notes+8-11-2024#Val+Town
+https://x.com/stevekrouse//1829979963560267965
 https://x.com/stevekrouse/status/1829144643734548900
+https://x.com/stevekrouse/status/1826328083181211939
+
+https://x.com/67523359174659/stevekrouse/status/18276
+https://x.com/mrejfox/status/1830343140168839336
 https://x.com/samwillis/status/1829142581831450859
 https://x.com/sircromulent/status/1828864863629689167
-https://x.com/stevekrouse/status/1828864172567712103
-https://x.com/stevekrouse/status/1828831012966777263
 https://x.com/isidentical/status/1828614519259832725
 https://x.com/raulgalerad/status/1827049028862828825
-https://x.com/stevekrouse/status/1827046592806891580
-https://x.com/stevekrouse/status/1827036933823848553
 https://x.com/TheMoonMidas/status/1826973638697861283
-https://x.com/stevekrouse/status/1826728366549975506
-https://x.com/stevekrouse/status/1826365362625282118
-https://x.com/stevekrouse/status/1826356154525778404
-https://x.com/stevekrouse/status/1826336463543566826
-https://x.com/stevekrouse/status/1826328083181211939
-https://x.com/stevekrouse/status/1826317269657395227
-https://x.com/stevekrouse/status/1826295659286364646
-https://x.com/stevekrouse/status/1825972820121366961
 https://x.com/Willthereader/status/1825565234263978267
 https://x.com/peterhartree/status/1825254990169927976
-https://x.com/stevekrouse/status/1824823444485415000
-https://x.com/stevekrouse/status/1823825618246779241
 https://x.com/jxnblk/status/1823725027109290039
-https://x.com/stevekrouse/status/1822034681904201939
 https://x.com/nickarner/status/1820130204452626545
 https://x.com/crim_codes/status/1818112710149578764
 https://x.com/dvdsgl/status/1817397810880479315
 https://x.com/samwhoo/status/1816582937707528586
 https://x.com/kyle__malloy/status/1816127781409022008
-https://ankitkr0-clicktrackerwebsite.web.val.run/
 https://x.com/MarcusSandstrom/status/1830544711850823697
 https://x.com/sharanbabu2001/status/1830356028954726621
-https://peterqliu-vt_app_v2.web.val.run/
-https://docs.cannoli.website/Blog/Release+Notes+8-11-2024#Val+Town
-https://x.com/stevekrouse/status/1825978445697819067
+
+https://just-be.dev/rc/impossible-day
 https://netlify-plugin-redirect-with-auth.netlify.app/
+
+https://val.town/v/moe/p5 / https://val.town/v/moe/exampleP5sketch / https://val.town/v/moe/lostKeys
+https://val.town/v/keenanzucker/surfboardDemoSchedule2 / https://val.town/v/szymonator/surfboardDemoSchedule2
+https://val.town/v/wilg/taxrates - tax.moi
+https://x.com/stevekrouse/status/1826295659286364646
+https://x.com/stevekrouse/status/1825972820121366961
+https://x.com/stevekrouse/status/1822034681904201939
 https://x.com/stevekrouse/status/1831076208681111782
