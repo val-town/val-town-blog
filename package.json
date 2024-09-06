@@ -11,6 +11,7 @@
   },
   "dependencies": {
     "@astrojs/check": "^0.9.3",
+    "@astrojs/markdown-remark": "^5.2.0",
     "@astrojs/mdx": "^3.1.5",
     "@astrojs/rss": "^4.0.7",
     "@astrojs/sitemap": "^3.1.6",
@@ -23,6 +24,7 @@
     "astro-expressive-code": "^0.36.1",
     "hastscript": "^9.0.0",
     "mermaid": "^11.1.0",
+    "rehype-autolink-headings": "^7.1.0",
     "remark-directive": "^3.0.0",
     "typescript": "^5.5.4"
   },
