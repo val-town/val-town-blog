@@ -1,0 +1,172 @@
+---
+title: Val Town Newsletter 20
+description: Townie AI, Faster vals, and Lockfiles
+pubDate: September 7, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+
+The newest version of Townie is _incredible_ at writing vals. It creates deployed apps with a backend and database in seconds. Honestly, if you have five minutes, [you gotta try it out](https://val.town/townie)!
+
+We shipped a number of other improvements, including a huge speedup to vals, lockfiles to secure your code, the ability to receive email attachments, a new version history UI, and opened up support for hundreds more NPM packages.
+
+Quick hiring update: we're still looking for a couple more engineers to join our founding team in Brooklyn. If you have any brilliant friends in NYC, please send them our way!
+
+There was such an overwhelming amount of amazing vals created this month that I had to [build a custom tool](https://www.youtube.com/watch?v=-PI5CIkcETc) to help me write the "community vals" section of this newsletter. You guys rock!
+
+## 🤖 Townie AI
+
+This month we released our third wholesale rewrite of Townie, and it's _incredible_. It's now able to generate full-stack applications with a backend and database in seconds. It's like Claude Artifacts, with a backend.
+
+<video controls loop class="image-rounded">
+  <source src="/video/TownieIntro.mp4" />
+</video>
+
+[If](https://x.com/stevekrouse/status/1826728366549975506) [you](https://x.com/stevekrouse/status/1824823444485415000) [want](https://x.com/stevekrouse/status/1823825618246779241) [more](https://x.com/stevekrouse/status/1826336463543566826) [Townie](https://x.com/stevekrouse/status/1828831012966777263) [demos](https://x.com/stevekrouse/status/1825978445697819067), [I'm](https://x.com/stevekrouse/status/1828864172567712103) [tweeting](https://x.com/stevekrouse/status/1827046592806891580) [up](https://x.com/stevekrouse/status/1827036933823848553) [a](https://x.com/stevekrouse/status/182636536262528211) [storm](https://x.com/stevekrouse/status/1826356154525778404) [of](https://x.com/stevekrouse/status/1826317269657395227) [them](https://x.com/stevekrouse/status/1831046366904353066). If you want to know the backstory behind Townie, JP released [an excellent blog post about how we prototyped Townie](/blog/codegen/).
+
+## ⚡️ Faster Vals
+
+Vals now run way faster. You'll see 2-10x speedups, depending on the context. We're finally competitive with premier hosting providers. For example if you hit an HTTP val's endpoint in NYC, you'll often get a response in under 100ms. (Our servers are in Ohio. Multi-region is still a while off. Sorry Japan!)
+
+This is thanks to our new load balancer, which:
+
+1. Routes around a slow part of our stack (more on this later)
+2. Directs traffic to where your val is already running, so you skip cold starts
+
+Expect more improvements and a fuller blog on this shortly!
+
+## 🔒 Lockfiles
+
+We've introduced lockfiles in Val Town to enhance stability, security, and performance. When you save a val, a deno.lock file is generated, ensuring the same versions of dependencies are used in the future. This prevents issues caused by changing libraries and malicious dependencies, and improves performance by caching the dependency tree. Learn more in [our announcement post](/blog/lockfiles).
+
+![Charts of requests to esm.town and worker initialization time decreasing](./lockfiles/metrics.png)
+
+### 💸 We joined the OSS Pledge
+
+We're excited to announce that we've joined the [OSS Pledge](https://osspledge.com/). We commit to donating at least $2k per year per full-time developer at Val Town to open-source. You can learn more in [our announcement post](/blog/oss). We donated have donated $9,600 so far in 2024:
+
+| Project                                          | What it does                             | Amount |
+| ------------------------------------------------ | ---------------------------------------- | -----: |
+| [esm.sh](https://esm.sh/)                        | CDN for ESM modules                      |  $1000 |
+| [Sindre Sorhus](https://github.com/sindresorhus) | Prolific open source maintainer          |  $1000 |
+| [tsx](https://tsx.is/)                           | Easy way to run TypeScript directly      |  $1000 |
+| [Fastify](https://fastify.dev/)                  | Web framework                            |  $1000 |
+| [Zod](https://zod.dev/)                          | Data validation library                  |  $1000 |
+| [Unified](https://unifiedjs.com/)                | Markdown transformation module ecosystem |  $1000 |
+| [Drizzle](https://orm.drizzle.team/)             | Database query builder                   |   $800 |
+| [CodeMirror](https://codemirror.net/)            | Code editor framework                    |   $800 |
+| [Mock Service Worker](https://mswjs.io/)         | Testing helper modules                   |   $500 |
+| [rclone](https://rclone.org/)                    | Upload and download files to S3 and more |   $500 |
+| [Hono](https://hono.dev/)                        | Web standards-based web framework        |   $500 |
+| [husky](https://typicode.github.io/husky/)       | Nice way to set up git hooks             |   $500 |
+
+### 🎉 Other updates
+
+- Email handler vals can now receive attachments – thanks [danielrw7](https://github.com/danielrw7) for the [feature request](https://github.com/val-town/val-town-product/discussions/75) 🙏
+- [New version history UI for vals](https://x.com/stevekrouse/status/1831027036220989664)
+- [Support for hundreds more NPM packages](https://x.com/mxmcd/status/1828881056969150616)
+- [Ability to trigger LLM completions manually](https://x.com/stevekrouse/status/1821229088209862848) (alt-\\)
+- [Go to a val's full-screen editor by pressing .](https://x.com/stevekrouse/status/1822023518793404828) (like on GitHub) - thanks [David Siegel](https://val.town/u/dvdsgl) for the suggestion 🙏
+- [Redesigned Profile menu](https://x.com/stevekrouse/status/1819005362877407357) (in the top-right corner)
+- [Ability to set HTTP headers in `@std/email`](https://github.com/val-town/val-town-product/discussions/142) - thanks [wilhelm](https://github.com/wilhelmklopp) for the suggestion 🙏
+- Val READMEs are now CodeMirror, with LLM completions (triggered manually, alt-\\)
+- A new val settings tab
+- Protections for certain kinds of denial of service attacks
+- "Forked from" information on val cards
+- Updated Deno to 1.46.3
+
+## 🛣️ Roadmap
+
+Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+
+- Continued Townie AI improvements
+- Rolling out `HTTP (Preview)` as the default `HTTP` val type
+- Continued performance improvements
+- [LLM-generated READMEs](https://github.com/val-town/val-town-product/discussions/26)
+
+## 🌟 Community vals
+
+- Guy Dupont made an incredible [digital "bumper sticker" that shows what he's listening to right now](https://x.com/gvy_dvpont/status/1831412749647409286) + [an amazing video explaining it](https://www.youtube.com/watch?v=mWRPRW6pHIY)!
+- Ben Bleikamp wrote a couple of [crons to automate some posts on campsite.co and send posts to Slack](https://x.com/bleikamp/status/1832073946151207029)
+- [Schpet](https://www.val.town/u/schpet) built a val that sends a daily post to Slack listing all the Linear issues assigned to you that changed status, [powered by Val Town](https://www.val.town/v/schpet/linearStandup)
+- Guy Dupont [injected a val into his hand](https://x.com/gvy_dvpont/status/1823342935208755558)!!!
+- [csl\_](https://www.val.town/u/csl_) built a [DNDoodle](https://dndoodle.redfloatplane.lol/), a scheduling app for D&D groups with improved features like setting poll end dates and identifying the DM's availability separately
+- [charmaine](https://x.com/charmaine_klee) made a val to help her at work (Snapchat) [track all mentions of SnapAR or Lens Studio on Twitter](https://x.com/charmaine_klee/status/1831525120294236222)
+- [@isidentical](https://www.val.town/u/isidentical) built a [Flux Image Generator](https://www.val.town/v/isidentical/fluxImageGenerator) that generates images from user prompts using the fal.ai API in [under 1 minute from scratch with Townie](https://x.com/isidentical/status/1828614519259832725)!
+- Larry Hudson made [a netifly plugin that allows you to redirect with authentication](https://netlify-plugin-redirect-with-auth.netlify.app/) so you can submit to private vals
+- [Sam Rose](https://x.com/samwhoo) built a [collaborative 6-word story app](https://x.com/samwhoo/status/1816582937707528586)
+- Simon Willison wrote an excellent [blog post](https://simonwillison.net/2024/Aug/28/system-prompt-for-townie/) on Townie's prompt
+- [David Siegel](https://www.val.town/u/dvdsgl) used Glide's bulk API [to sync all of Glide’s issues and PRs into an app](https://x.com/dvdsgl/status/1817397810880479315)
+- [Moe](https://www.val.town/u/moe) built an awesome [SpaceX Launch tracker](https://moe-spacex.web.val.run/) that displays upcoming and past SpaceX launches with data visualizations
+- [@wilg](https://val.town/u/wilg) made [tax.moi](https://tax.moi/) to explain how graduated federal income tax works
+- [Perbhat Kumar](https://www.val.town/u/PerbhatK) built [an app that weighs his coffee using the mac trackpad](https://x.com/PerbhatK/status/1831860667604934904)
+- [@jxnblk](https://val.town/u/jxnblk) [rebuilt](https://x.com/jxnblk/status/1826252329940832560) [jxnblk.com](https://jxnblk.com/) on val town – it's awesome!
+- [@moe](https://val.town/u/moe) created a [P5.js helper for Val Town](https://val.town/v/moe/p5) and used it to make [two](https://val.town/v/moe/exampleP5sketch) awesome [examples](https://val.town/v/moe/lostKeys)
+- The [Cannoli](https://cannoli.website/) docs [teach their users how to use Val Town](https://docs.cannoli.website/Blog/Release+Notes+8-11-2024#Val+Town)!
+- [David Thyresson](https://www.val.town/u/dthyresson) built a [Bedtime Story Maker](https://dthyresson-bedtimestorymaker.web.val.run/) that generates personalized children's stories with illustrations using OpenAI and Fal AI
+- [Jackson](https://www.val.town/u/jxnblk) built [test](https://www.val.town/v/jxnblk/test), a utility and badge to show test suite status in your val readme.
+- [Justin Bennett](https://www.val.town/u/just_be) is creating [content-addressable JavaScript](https://just-be.dev/rc/impossible-day)
+- [Peter Liu](https://www.val.town/u/peterqliu) revamped their [VT App v2](https://www.val.town/v/peterqliu/vt_app_v2) with JWT authentication, user accounts, and a way to change emails or delete accounts.
+- [Carl Lange](https://www.val.town/u/csl_) made [a site that can measure your tennis speed based on the sound of the ball hitting the racket](https://tennisspeed.redfloatplane.lol/)
+- [yawnxyz](https://www.val.town/u/yawnxyz) built [Newsly](https://www.val.town/v/yawnxyz/newsly), a val that stores emails in a SQLite database, allowing you to access your newsletters
+- [@jdan](https://www.val.town/u/jdan) built an [interactive Wikipedia Family Tree Crawler](https://www.val.town/v/jdan/infoboxCrawler) that visualizes parent-child relationships by crawling Wikipedia infoboxes
+- [@moe](https://www.val.town/u/moe) created an awesome [Number Chain Puzzle game](https://www.val.town/v/moe/numbergame) where players drag between adjacent squares with the same number to score points
+- [@roramigator](https://www.val.town/u/roramigator) built a [Hacker News digest](https://www.val.town/v/roramigator/hackernewsdigest) that emails you the top stories from Hacker News every 3 days
+- [Giles](https://www.val.town/u/gilesb) built an email expenser that processes email content using GPT-4, extracts key information like income and expenses, and logs it to a Google Sheet, [powered by Val Town](https://www.val.town/v/gilesb/emailExpenser).
+- [roramigator](https://www.val.town/u/roramigator) created a [idle clicker game about spreading a religion](https://val.town/v/roramigator/religionClickerGame)
+- [@stevekrouse](https://www.val.town/u/stevekrouse) built a [typing challenge game](https://www.val.town/v/stevekrouse/typetest) where you can test your typing speed and submit your score to a leaderboard
+- [David Thyresson](https://www.val.town/u/dthyresson) [generating movie mashups](https://www.val.town/v/dthyresson/movieMashup) with posters, titles, and treatments.
+- [@ankit](https://www.val.town/u/ankitkr0) built a [website that tracks clicks](https://clicktracker.ankitkr0.web.val.run/) and adds confetti with each click, backed by a SQLite database.
+- [@all](https://www.val.town/u/all) built an [Icon Explorer](https://www.val.town/v/all/iconExplorer) that lets you search, filter, and copy React icon components from popular libraries like Feather, Font Awesome, and Ant Design.
+- [David Thyresson](https://www.val.town/u/dthyresson) built [Play Me A Song](https://www.val.town/v/dthyresson/playMeASong), a web app that lets you search for and open songs in Spotify.
+- [Adam Kazwell](https://www.val.town/u/kaz) built a [site that helps you know understand your personal healthy boundaries](https://x.com/kaz/status/1829022200147706175)
+- [@szymonator](https://val.town/u/szymonator) made a [an API demo to showcase how the Teamsurfboard API can be used](https://val.town/v/szymonator/surfboardDemoSchedule2)
+- [@all](https://www.val.town/u/all) built a [Val Town Prompt Generator](https://promptgen.all.esm.town/) that creates optimized prompts for Val Town
+- [@thatsmeadarsh](https://www.val.town/u/thatsmeadarsh) built a script that allows OpenAI assistants to [star a GitHub repository via natural language commands](https://www.val.town/v/thatsmeadarsh/star_a_github_repository_with_natural_language), powered by Composio
+- [Alex Phan](https://www.val.town/u/alexdphan) and [Sarah Chieng](https://www.val.town/u/sarahxc) built [Slack Scout](https://www.val.town/v/alexdphan/slackScout), which sends Slack notifications whenever your keywords are mentioned on Twitter, Hacker News, or Reddit, powered by Browserbase
+- [Max Krass](https://www.val.town/u/maxkrass) built a gateway to access Microsoft Graph data for event catalogs, powered by [a val](https://www.val.town/v/maxkrass/bondingkataloggateway).
+- [Brent Jackson](https://www.val.town/u/jxnblk) built a [service to generate OG images](https://www.val.town/v/jxnblk/blogOGImage) for his blog, powered by Val Town.
+- [@weaverwhale](https://www.val.town/u/weaverwhale) created [FindTrendsUsingGPT](https://www.val.town/v/weaverwhale/FindTrendsUsingGPT), which analyzes merchant transaction data and generates a markdown report with charts and tables identifying trends, fraud regions, refund rates, and merchant profit/loss analyses.
+- [@movienerd](https://www.val.town/u/movienerd) created a [pixel-art idle clicker game](https://www.val.town/v/movienerd/clicker) where you can earn money and upgrade various factories and workers, all written in React and powered by Val Town.
+- [Dan Thyresson](https://www.val.town/u/dthyresson) built a [GraphQL API to query Spotify tracks](https://www.val.town/v/dthyresson/tracksapi) he has listened to
+- [Jackson](https://x.com/jxnblk) built [a minimal web-based markdown editor with vim keybindings](https://x.com/jxnblk/status/1823725027109290039)
+- [Kaz](https://www.val.town/u/kaz) built a ["Would You Rather" game](https://www.val.town/v/kaz/reluctantcoffeegayal) that ranks answers with an Elo-based system and tracks progress.
+- [Sharan Babu](https://www.val.town/u/sharanbabu) built a [Text Summarization Comparison Tool](https://www.val.town/v/sharanbabu/textSummarizationComparisonTool) that uses the Cerebras LLM API to generate summaries through direct and extractive + cohesive methods
+- [@pinjasaur](https://www.val.town/u/pinjasaur) built a [proxy for Kagi's Smallweb RSS feed](https://pinjasaur-smallweb.web.val.run/) to limit the size and make it more RSS reader-friendly
+- [Curt](https://www.val.town/u/curtcox) built a [QR Code Scanner](https://x.com/curtcox/qrcodescanner) that uses your device's camera to decode QR codes and display their content and additional information
+- [Jackson](https://www.val.town/u/jxnblk) built [Indirection](https://www.val.town/v/jxnblk/indirection), a game of riddles to play with friends by guessing words from clues
+- [jdan](https://www.val.town/u/jdan) created [dialog](https://www.val.town/v/jdan/dialog), a val that renders Windows 98-style dialog boxes as SVGs
+- [EJ Fox](https://www.val.town/u/mrejfox) built a [daily contribution checkerboard](https://x.com/mrejfox/status/1830343140168839336) for Val Town
+- [@tempdev](https://www.val.town/u/tempdev) built a [RabbitStream](https://www.val.town/v/tempdev/rabbitstream) val that provides an easy-to-deploy TypeScript implementation for quickly accessing RabbitStream video sources
+- [Sharan Babu](https://www.val.town/u/sharanbabu) built a [search engine prototype with autocomplete functionality](https://www.val.town/v/sharanbabu/legitimateTanTiger) powered by the Cerebras LLM API and cached in the browser
+- [Mauricio](https://www.val.town/u/mauriciobc) built [a cat feeding app](https://www.val.town/v/mauriciobc/miau-food) that allows you to log when you fed your cats and which cats were fed
+- [@tempdev](https://www.val.town/u/tempdev) created a [Flix](https://www.val.town/v/tempdev/flix), a movie and TV show streaming platform with search, watch, and info pages
+- [@gio](https://www.val.town/u/gio) built [Razza](https://www.val.town/v/gio/razza), a web app that generates QR codes for initiating SMS conversations, categorized by topics like Film, Technology, and Sports
+- [@yawnxyz](https://www.val.town/u/yawnxyz) built [Diesel](https://www.val.town/v/yawnxyz/diesel), a lightweight data manipulation library for querying and transforming JSON, YAML, CSV, and TOML data
+- [@gio](https://www.val.town/u/gio) built [The Here Times](https://www.val.town/v/gio/theheretimes), a map-based news aggregator using the Google Maps API, Geonames, and NewsAPI
+- [@cephalization](https://www.val.town/u/cephalization) built a [SMS Journaler Text Relay](https://cephalization-smsjournalertextrelay.web.val.run) that lets you have conversational SMS exchanges with an AI assistant to organize your daily work activities
+- [@stevekrouse](https://www.val.town/u/stevekrouse) built [lucia_middleware](https://www.val.town/v/stevekrouse/lucia_middleware), a middleware for handling user authentication and sessions, backed by Val Town SQLite
+- [@vawogbemi](https://www.val.town/u/vawogbemi) built a [URL shortener](https://vawogbemi-short.web.val.run/)
+- [David Thyresson](https://www.val.town/u/dthyresson) created [a Hono demo app with Unkey rate-limiting middleware](https://www.val.town/v/dthyresson/honoWithUnkeyRateLimiting) that limits requests to 2 per minute
+- [Matthew Weaver](https://www.val.town/u/mjweaver01) built [FindFraudTrendsUsingGPT](https://val.town/v/mjweaver01/FindFraudTrendsUsingGPT), which generates real-time fraud trend reports using GPT-4o, complete with data tables and Mermaid charts.
+- [Carl Lange](https://www.val.town/u/csl_) created his [redfloatplane.lol](https://redfloatplane.lol/), hosted on Val Town
+- [Alex](https://www.val.town/u/alexpetros) built a [val that monitors Hacker News and Lobsters for posts from certain sites](https://www.val.town/v/alexpetros/aggregatoralert) and sends an email notification with the matched stories
+- [Jackson](https://www.val.town/u/jxnblk) built an [example of using his test val to test his tuna val](https://www.val.town/v/jxnblk/tunaTestSuite), showcasing tuna's CSS-in-JS features.
+- [Sam Rose](https://www.val.town/u/samwho) built a [simple feature flag implementation](https://www.val.town/v/samwho/featureflags) that uses hashing and rollout percentages to determine flag behavior for users.
+- [Matt](https://www.val.town/u/neverstew) created a val that [supercharges query params](https://www.val.town/v/neverstew/superchargedQueryParams) to allow for operators like `>`, `<`, and `!=` in addition to `=`.
+- [Kyle](https://www.val.town/u/kylem) built a [Dependency License Checker](https://www.val.town/v/kylem/dependencyLicenses) that generates a table of licenses for all dependencies in a package.json file
+- [Kian](https://www.val.town/u/kian) built a [webcam-based image processing app](https://www.val.town/v/kian/webcameffects) that applies fun effects like Pink Zone, Goth Girl, and Weed Mode to your webcam feed.
+- [@yawnxyz](https://www.val.town/u/yawnxyz) created a [Perlin Noise Fabric Color Generator](https://www.val.town/v/yawnxyz/perlinNoiseFabricColor) that renders a hypnotic, organic pattern using Processing.js and the Perlin noise function
+- [@roramigator](https://www.val.town/u/roramigator) created a [Loot Generator API](https://www.val.town/v/roramigator/lootGenAPI) that generates random legendary loot items with adjectives, materials, and item types, based on a rarity algorithm.
+- [Steve Krouse](https://www.val.town/u/stevekrouse) built a [Virtual Confessional](https://www.val.town/v/stevekrouse/confessionalApp) where users can confess sins and receive penance in the form of Catholic prayers from ChatGPT
+- [@yawnxyz](https://www.val.town/u/yawnxyz) reorganized [Val Town's SQLite adapter for Lucia](https://www.val.town/v/yawnxyz/luciaValtownSqlite), making it easier to work with SQLite databases for authentication.
+- [Sam Willis](https://www.val.town/u/samwillis) got [WASM Posgres running in Val Town](https://x.com/samwillis/status/1829142581831450859)
+- [Raul Galera](https://www.val.town/u/rgd) made [a surf forecast for his hometown with Townie](https://x.com/raulgalerad/status/1827049028862828825)
+- [Midas](https://x.com/TheMoonMidas) built [a quote image generator in just a couple requests in Townie](https://x.com/TheMoonMidas/status/1826973638697861283)
+- [Will Krouse](https://x.com/Willthereader) made [an infosite for Jumpchain](https://x.com/Willthereader/status/1825565234263978267)
+- [Peter Hartree](https://x.com/peterhartree) made [a 5 min Townie demo video of an app that summarizes blogs](https://x.com/peterhartree/status/1825254990169927976)
+- [Austin Crim](https://x.com/crim_codes) built [a notes app that works with iPhone shortcuts](https://x.com/crim_codes/status/1818112710149578764)
+- [Marcus Sandstrom](https://x.com/MarcusSandstrom) made [mood tracker app](https://x.com/MarcusSandstrom/status/1830544711850823697)
+- [Will Krouse](https://x.com/Willthereader) made [a Safari Extension to stream in ChatGPT to define words inline](https://x.com/Willthereader/status/1825969919147597933)
+- [Steve Krouse](https://x.com/stevekrouse) made [demo that shows Cerebras 8b generating HTML pages in under a second](https://x.com/stevekrouse/status/1831076208681111782)
