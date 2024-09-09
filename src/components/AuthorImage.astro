@@ -1,0 +1,36 @@
+---
+import { Image } from "astro:assets";
+import andre from "../content/authors/andre.jpg";
+import max from "../content/authors/max.jpg";
+import tom from "../content/authors/tom.jpg";
+import steve from "../content/authors/steve.jpg";
+import jp from "../content/authors/jp.jpg";
+interface Props {
+	author: string;
+}
+const { author } = Astro.props;
+---
+<style>
+.avatar {
+    border-radius: 4px;
+    vertical-align: middle;
+    margin-right: 2px;
+    margin-top: -3px;
+}
+</style>
+
+<Image
+    densities={[1, 2, 3]}
+    width="20"
+    height="20"
+    class="avatar"
+    alt={author}
+    title={author}
+    src={{
+        "Tom MacWright": tom,
+        "André Terron": andre,
+        "Steve Krouse": steve,
+        "Max McDonnell": max,
+        "JP Posma": jp,
+    }[author]}
+/>
