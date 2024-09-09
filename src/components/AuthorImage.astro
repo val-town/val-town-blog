@@ -5,10 +5,18 @@ import max from "../content/authors/max.jpg";
 import tom from "../content/authors/tom.jpg";
 import steve from "../content/authors/steve.jpg";
 import jp from "../content/authors/jp.jpg";
+const authors = {
+    "Tom MacWright": tom,
+    "André Terron": andre,
+    "Steve Krouse": steve,
+    "Max McDonnell": max,
+    "JP Posma": jp,
+} as const;
 interface Props {
-	author: string;
+	author: keyof authors;
 }
 const { author } = Astro.props;
+const src = authors[author];
 ---
 <style>
 .avatar {
@@ -26,11 +34,5 @@ const { author } = Astro.props;
     class="avatar"
     alt={author}
     title={author}
-    src={{
-        "Tom MacWright": tom,
-        "André Terron": andre,
-        "Steve Krouse": steve,
-        "Max McDonnell": max,
-        "JP Posma": jp,
-    }[author]}
+    src={src}
 />
