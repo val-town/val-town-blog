@@ -11,9 +11,13 @@ const authors = {
     "Steve Krouse": steve,
     "Max McDonnell": max,
     "JP Posma": jp,
-} as const;
+};
 interface Props {
-	author: keyof authors;
+	author: "Tom MacWright" |
+    "André Terron" |
+    "Steve Krouse" |
+    "Max McDonnell" |
+    "JP Posma"
 }
 const { author } = Astro.props;
 const src = authors[author];
