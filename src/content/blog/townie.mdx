@@ -1,0 +1,152 @@
+---
+title: Introducing Townie AI
+description: Introducing Townie AI
+pubDate: September 25, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+import BlogSummaries from "./introducing-townie/blog-summaries.png";
+import MoodTracker from "./introducing-townie/mood-tracker.png";
+import SlackBot from "./introducing-townie/slack-bots.png";
+
+Last month, we launched a major overhaul of Townie, our AI code assistant that helps you build apps. Val Town is already the best place to turn an idea into a deployed app. Townie gets you there in minutes.
+
+## Townie in Action
+
+{/* TODO: a GIF of a basic Townie interaction a la the one at the beginning of our codegen article */}
+
+In the following video, I use Townie to make an RSVP page. In just a few prompts and a couple minutes, I create a deployed apps with a frontend, backend, and SQLite database. No joke!
+
+<video controls loop class="image-rounded">
+  <source src="/video/TownieIntro.mp4" />
+</video>
+
+But the best way to see what Townie is like is to just go play with it.
+
+<a
+  href="https://val.town/townie"
+  style={{
+    backgroundColor: "#3c82f7",
+    display: "block",
+    textAlign: "center",
+    color: "white",
+    borderRadius: "5px",
+    width: "200px",
+    textDecoration: "none",
+    margin: "0px !important",
+    padding: "1px 0px",
+    fontSize: "1.2em",
+    fontWeight: "bold",
+    margin: "0 auto",
+    lineHeight: "10px",
+  }}
+>
+  Go to Townie
+</a>
+
+## 🔥 Examples from the community
+
+Your creativity never ceases to amaze us. Here are some of the cool things built with Townie so far.
+
+#### Blog summaries
+
+With a hand full of prompts, Peter made a neat tool to get Claude to summarize a blog post just by pasting a link.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/peterhartree/status/1825254990169927976"
+    target="_blank"
+  >
+    <Image
+      src={BlogSummaries}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Mood tracker
+
+Marcus was able to build a mood-tracking app in minutes.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/MarcusSandstrom/status/1830544711850823697"
+    target="_blank"
+  >
+    <Image
+      src={MoodTracker}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Slack Bot
+
+Johnnie built a Slack bot for his team.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/destroytoday/status/1834408549549494302"
+    target="_blank"
+  >
+    <Image
+      src={SlackBot}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+{/* TODO: https://x.com/charmaine_klee/status/1831525120294236222, https://x.com/isidentical/status/1828614519259832725 */}
+{/* TODO: include more ideas of what you can build, https://www.val.town/v/jdan/infoboxCrawler, https://www.val.town/v/moe/numbergame, https://www.val.town/v/roramigator/religionClickerGame, https://www.val.town/v/stevekrouse/typetest, https://www.val.town/v/dthyresson/movieMashup, https://www.val.town/v/all/iconExplorer, https://x.com/kaz/status/1829022200147706175, etc from last newsletter */}
+
+## Resources
+
+We have some helpful [prompting tips in our docs](https://docs.val.town/reference/townie/).
+
+If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5RY), or email me directly (steve@val.town), and include a link to your val. We're here to help!
+
+## Start building today
+
+Have an idea for a website, game, or app for yourself, friends, family, community, or work?
+
+Townie is free and available now in public beta. We can't wait to see what you build.
+
+<a
+  href="https://val.town/townie"
+  style={{
+    backgroundColor: "#3c82f7",
+    display: "block",
+    textAlign: "center",
+    color: "white",
+    borderRadius: "5px",
+    width: "200px",
+    textDecoration: "none",
+    margin: "0px !important",
+    padding: "1px 0px",
+    fontSize: "1.2em",
+    fontWeight: "bold",
+    margin: "0 auto",
+    lineHeight: "10px",
+  }}
+>
+  Go to Townie
+</a>
