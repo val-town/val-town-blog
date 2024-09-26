@@ -1,0 +1,214 @@
+---
+title: Introducing Townie AI
+description: Meet Townie, our AI assistant that helps you ship apps fast
+pubDate: September 26, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+import BlogSummaries from "./townie/blog-summaries.png";
+import MoodTracker from "./townie/mood-tracker.png";
+import SlackBot from "./townie/slack-bots.png";
+import Fal from "./townie/fal.png";
+import Twitter from "./townie/twitter.png";
+
+Last month, we launched a major overhaul of Townie, our AI assistant that helps you build apps. Val Town was already the best website to turn an idea into a deployed app. Townie can help you ship much faster.
+
+<figure>
+  <video controls loop autoplay muted>
+    <source src="/video/TownieChatDemo.mp4" />
+  </video>
+</figure>
+
+In the following video, I use Townie to make an RSVP page – with a backend and database – in just a few prompts and a couple minutes.
+
+<video controls loop class="image-rounded">
+  <source src="/video/TownieIntro.mp4" />
+</video>
+
+But the best way to see what Townie is like is to just go play with it.
+
+<a
+  href="https://val.town/townie"
+  style={{
+    backgroundColor: "#3c82f7",
+    display: "block",
+    textAlign: "center",
+    color: "white",
+    borderRadius: "5px",
+    width: "200px",
+    textDecoration: "none",
+    margin: "0px !important",
+    padding: "1px 0px",
+    fontSize: "1.2em",
+    fontWeight: "bold",
+    margin: "0 auto",
+    lineHeight: "10px",
+    boxShadow: "0 2px 4px 0 rgba(0,0,0,0.2)",
+  }}
+>
+  Start creating with Townie
+</a>
+
+## Community creations
+
+Your creativity never ceases to amaze us. Here are some of the cool things built with Townie so far.
+
+#### Fal Image Generator
+
+In under a minute and a single prompt, Batuhan built a tool to generate images with Fal AI.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/isidentical/status/1828614519259832725"
+    target="_blank"
+  >
+    <Image
+      src={Fal}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Twitter Tracker
+
+Charmaine built a site that tracks mentions of her company's product on Twitter.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/charmaine_klee/status/1831525120294236222"
+    target="_blank"
+  >
+    <Image
+      src={Twitter}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Blog summaries
+
+With a handful of prompts, Peter made a neat tool to get Claude to summarize a blog post just by pasting a link.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/peterhartree/status/1825254990169927976"
+    target="_blank"
+  >
+    <Image
+      src={BlogSummaries}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Mood tracker
+
+Marcus was able to build a mood-tracking app in minutes.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/MarcusSandstrom/status/1830544711850823697"
+    target="_blank"
+  >
+    <Image
+      src={MoodTracker}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### Slack Bot
+
+Johnnie built a Slack bot for his team.
+
+<figure
+  style={{
+    maxWidth: "500px",
+    margin: "0 auto",
+  }}
+>
+  <a
+    href="https://x.com/destroytoday/status/1834408549549494302"
+    target="_blank"
+  >
+    <Image
+      src={SlackBot}
+      alt=""
+      style={{ borderRadius: "5px", border: "1px solid var(--border)" }}
+    />
+  </a>
+</figure>
+
+#### The sky's the limit
+
+Townie can make almost anything you can imagine. Here's more inspiration from the community to get you started:
+
+- [Carl Lange](https://www.val.town/u/csl_) built a [DNDoodle](https://dndoodle.redfloatplane.lol/), a scheduling app for D&D groups with improved features like setting poll end dates and identifying the DM's availability separately
+- [David Thyresson](https://www.val.town/u/dthyresson) built a [Bedtime Story Maker](https://dthyresson-bedtimestorymaker.web.val.run/) that generates personalized children's stories with illustrations using OpenAI and Fal AI
+- [@yawnxyz](https://www.val.town/u/yawnxyz) built [Newsly](https://www.val.town/v/yawnxyz/newsly), a val that stores emails in a SQLite database, allowing you to access your newsletters
+- [@jdan](https://www.val.town/u/jdan) built an [interactive Wikipedia Family Tree Crawler](https://www.val.town/v/jdan/infoboxCrawler) that visualizes parent-child relationships by crawling Wikipedia infoboxes
+- [@moe](https://www.val.town/u/moe) created an awesome [Number Chain Puzzle game](https://www.val.town/v/moe/numbergame) where players drag between adjacent squares with the same number to score points
+- [@roramigator](https://www.val.town/u/roramigator) built a [Hacker News digest](https://www.val.town/v/roramigator/hackernewsdigest) that emails you the top stories from Hacker News every 3 days
+- [Giles](https://www.val.town/u/gilesb) built [an email expenser](https://www.val.town/v/gilesb/emailExpenser) that processes email content using GPT4, extracts key information like income and expenses, and logs it to a Google Sheet
+- [@roramigator](https://www.val.town/u/roramigator) created a [idle clicker game about spreading a religion](https://val.town/v/roramigator/religionClickerGame)
+
+## Resources
+
+We have some helpful [prompting tips in our docs](https://docs.val.town/reference/townie/).
+
+You can also read more about [how we built Townie](./how-we-built-townie) and [Simon Willison's blog post about Townie's prompt](https://simonwillison.net/2024/Aug/28/system-prompt-for-townie/).
+
+If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5RY), or email me directly (steve@val.town), and include a link to your val. We're here to help!
+
+## Start building today
+
+Have an idea for a site, game, or app for yourself, friends, family or work?
+
+Townie is free and available now in public beta. We can't wait to see what you build.
+
+<a
+  href="https://val.town/townie"
+  style={{
+    backgroundColor: "#3c82f7",
+    display: "block",
+    textAlign: "center",
+    color: "white",
+    borderRadius: "5px",
+    width: "200px",
+    textDecoration: "none",
+    margin: "0px !important",
+    padding: "1px 0px",
+    fontSize: "1.2em",
+    fontWeight: "bold",
+    margin: "0 auto",
+    lineHeight: "10px",
+    boxShadow: "0 2px 4px 0 rgba(0,0,0,0.2)",
+  }}
+>
+  Go to Townie
+</a>
