@@ -23,7 +23,7 @@
     "astro": "^4.15.2",
     "astro-expressive-code": "^0.36.1",
     "hastscript": "^9.0.0",
-    "mermaid": "^11.1.0",
+    "mermaid": "^11.2.1",
     "rehype-autolink-headings": "^7.1.0",
     "remark-directive": "^3.0.0",
     "typescript": "^5.5.4"
