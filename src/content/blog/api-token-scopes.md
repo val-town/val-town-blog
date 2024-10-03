@@ -1,5 +1,5 @@
 ---
-title: Leveling Up Our API Tokens: Introducing Scopes
+title: "Leveling Up Our API Tokens: Introducing Scopes"
 description: Improving security and allowing more granular control over permissions.
 pubDate: Oct 3, 2024
 author: Max McDonnell
