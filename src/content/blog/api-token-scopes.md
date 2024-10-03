@@ -15,9 +15,9 @@ resources are accessed today: https://docs.val.town/openapi.
 ## Configuring scopes
 
 There will be two ways to configure token scopes. You can visit the
-[API tokens](https://www.val.town/settings/api) UI and generate a new token with
-specific permissions. This token can be used with our API from outside of the
-platform, or from within a running Val.
+[API tokens](https://www.val.town/settings/api) page and generate a new token
+with specific permissions. This token can be used with our API from outside of
+the platform, or from within a running Val.
 
 Additionally, you'll be able to configure the permissions of each Val in your
 account to ensure that it only has access to the resources that it needs.
@@ -38,8 +38,8 @@ in your account.
 On **November 1st** we'll update the existing API tokens on people's accounts to
 use these safer defaults. Many users use their existing API tokens or Vals to
 create/edit/delete existing Vals in their accounts. We've identified those
-users, and we'll hold off on migrating their tokens over to the new permissions
-and work with them to upgrade.
+users, We'll hold off on migrating their tokens over to the new permissions, and
+work with them to upgrade.
 
 We're always looking for ways to make our platform more secure. If you have
 security-related feedback or new feature suggestions please make yourself heard
