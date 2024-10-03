@@ -8,7 +8,7 @@ author: Max McDonnell
 We're adding more granular permissions to our API tokens and changing some of
 the default behavior of our platform to keep things more secure.
 
-We're introducing read and read/write scopes for five key resources: `vals`,
+We're introducing read and read/write scopes for five key resources: `val`,
 `blob`, `user`, `sqlite`, `email`. You can browse our API docs to see how these
 resources are accessed today: https://docs.val.town/openapi.
 
@@ -25,7 +25,7 @@ account to ensure that it only has access to the resources that it needs.
 ## Safer Defaults
 
 Vals will now use short-lived API tokens when they are running. Additionally,
-the default permissions for a val will only be able to read the `vals` resource,
+the default permissions for a val will only be able to read the `val` resource,
 not edit, create, or update any Val.
 
 These new defaults help limit potential damage from misconfigurations,
