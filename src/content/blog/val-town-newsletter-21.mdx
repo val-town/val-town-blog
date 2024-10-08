@@ -9,6 +9,7 @@ import { Image } from "astro:assets";
 
 ## 🤖 Townie improvements
 
+- Can create & edit any kind of val
 - Support image uploads
 - Add requests and logs to the Townie view
 - New page to view old versions & revert to them
@@ -16,6 +17,10 @@ import { Image } from "astro:assets";
 - Townie can detect and fix client-side errors
 - Fundamentally rearchitected to be less buggy
 - Evals
+- Townie diffs are copyable without the `+` and `-` characters
+- Diffs are off by default, can request them explicitly
+- Townie doesn't overwrite user hand-written code
+- Townie docs page https://docs.val.town/reference/townie/
 
 ## ⚡️ Fast Vals
 
@@ -33,16 +38,16 @@ links work too
 
 ## 🎉 Other updates
 
-- Deprecate the old HTTP runtime
-- Change the order of logs (newest at the bottom)
+- Pagerduty on! 🚨
 - Block most AI bots from HTTP vals
 - Update Deno types
 - Fixed a bug with renaming vals onto previously deleted vals – thanks Robin Sloan for the report 🙏
 - Fixed logs and errors with new HTTP runtime
 - Removed pinned vals UI
+- Change the order of logs (newest at the bottom)
 - Disable password autofill on env variables – thanks Matthew Bunday for the suggestion 🙏
-- Townie diffs are copyable without the `+` and `-` characters
 - Improve our list of adjectives for new val names
+- Make POST v1/vals/id a no-op if nothing changed – thanks Andres Rodriguez for [the feature request](https://github.com/val-town/val-town-product/issues/185) 🙏
 
 ## 🛣️ Roadmap
 
@@ -50,10 +55,59 @@ Here's some of the top features we're planning to work in the coming months. Ple
 
 - Val Projects
 - Continued Townie AI improvements
-- Rolling out `HTTP (Preview)` as the default `HTTP` val type
 - API Token Scopes
-- [LLM-generated READMEs](https://github.com/val-town/val-town-product/discussions/26)
+- Townie writing READMEs
 
 ## 🌟 Community vals
 
-- TODO
+https://www.val.town/v/stevekrouse/renderEmails
+
+- livestream about lucia death: https://x.com/stevekrouse/status/1843592198941729019
+- stringify.org
+- send our deprecation emails from a val: https://x.com/stevekrouse/status/1843310733511324131
+- helper functions for sending images to llms: https://www.val.town/v/stevekrouse/fileToDataURL
+- dog-e-dex livestream: https://x.com/stevekrouse/status/1842611050187022383
+- lastlogin with google auth video: https://x.com/stevekrouse/status/1842328023049117787, https://www.val.town/v/stevekrouse/lastlogin
+- https://x.com/stevekrouse/status/1842308619897069918 https://stevekrouse-smoothbluepanther.web.val.run/ - cerebras sliders
+- https://stevekrouse-growth.web.val.run/
+- twitter alert on social data: https://www.val.town/v/stevekrouse/twitterAlert https://www.val.town/v/stevekrouse/socialDataProxy https://www.val.town/v/stevekrouse/socialDataSearch
+- guy dupont X slams Y https://x.com/gvy_dvpont/status/1841818282719924430
+- yawnxyz prompt tool https://x.com/yawnxyz/status/1841613186531000522
+- guy dupont val https://x.com/stevekrouse/status/1841073846390051325
+- https://efoley-wordpicturematch.web.val.run/ https://x.com/ericdfoley/status/1840478366408798277
+- json visualizer https://x.com/nbbaier/status/1840308862856896721
+- github graph drum machine https://x.com/stevekrouse/status/1839700676760186896 git jiggy https://x.com/stevekrouse/status/1839421869466018061
+- livestream with alex vilinskyy https://x.com/stevekrouse/status/1839681458820293071 original svg generator: https://x.com/stevekrouse/status/1837144507713773984
+- jonnie hallman slack bot https://x.com/stevekrouse/status/1839336401353220099
+- perlin noise by seamus https://x.com/stevekrouse/status/1838666792484638992
+- realtime chess https://x.com/stevekrouse/status/1838654708342481267
+- run in val town chrome extension on gists https://x.com/stevekrouse/status/1838592604734202102
+- seamus drum machine https://x.com/stevekrouse/status/1838590564993765706
+- synth playground https://x.com/stevekrouse/status/1838248962865647838
+- book photo analyzer https://x.com/stevekrouse/status/1836781662161588486
+- townie video: make a crud blog app like rails demo https://x.com/stevekrouse/status/1836457427677458826
+- chore app for daughter https://x.com/stevekrouse/status/1836136881702031425
+- nathan baschez color app for daught https://x.com/stevekrouse/status/1836031718249083128
+- Townie creations by crossmint team: https://x.com/stevekrouse/status/1835778062237008084
+- bookshelf scanner with gemini 1.5 flash https://x.com/stevekrouse/status/1835740596884951317
+- book reccomendation mind map: https://x.com/paraschopra/status/1835311841024614581
+- domain name finder https://x.com/stevekrouse/status/1834709297869070764
+- try campsite: https://x.com/DanPhilibin/status/1833619842303463748
+- browserbase slack notification https://x.com/SarahChieng/status/1833602967410528594
+- sqlite dashboard video https://x.com/stevekrouse/status/1833577807093371325
+- stefan bosen allergy food tracker https://x.com/stefanboesen/status/1833364392232296897
+- dnd character creator https://x.com/stevekrouse/status/1832391129586638943
+- harry zhang langchain ambassador flipping acard https://x.com/zhanghaili0610/status/1840602999443640343
+- flux playground modal labs
+  https://x.com/_amankishore/status/1840522105403961439
+- hex maze visualization https://x.com/0xMoe_/status/1840079699344588805
+- hold the clock button game like mr beast https://x.com/ankitkr0/status/1833410323543404961
+- cerebras personal writing assistant by sharan babu https://x.com/sharanbabu2001/status/1832549769111015900
+- https://www.val.town/v/dctalbot/pirateTalk - slack bot that translates messages to pirate speak
+- https://madprops2024.org/ https://elibcohen-madpropsv2.web.val.run/ https://val.town/v/elibcohen/madpropsv2
+- https://thejeshgn.com/2024/09/11/simple-imd-alerts/
+- https://www.val.town/v/arthrod/Chatprincipal
+- https://val.town/v/konradmoneta/carInventory
+- https://www.val.town/v/ashryanio/getBlobAndRenderAsImage
+- https://www.val.town/v/macro21kgb/imageConverterSite
+- https://www.val.town/v/dthyresson/gameOfLifeSite
