@@ -8,6 +8,10 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import PrettyErrors from "./val-town-newsletter-21/pretty-errors.png";
 
+We've been shipping big improvements to Townie and HTTP val performance. We're also deprecating old APIs, and making lots of other upgrades and fixes.
+
+Hundreds of awesome vals were created last month. I feature my favorite 50 at the end of this newsletter.
+
 ## 🤖 Townie improvements
 
 Townie can blow-your-mind, but it also can make you tear your hair out. We're working hard to make it more of the former and less of the latter. Here's some of the improvements we've made:
@@ -28,7 +32,7 @@ Please continue to reach out when Townie does something amazing or awful. Your f
 
 ## ⚡️ Fast Vals
 
-Vals continue to get faster and more scalable. Now [a 'hello world' val](https://www.val.town/v/stevekrouse/hello_world) responds in under 60ms, which is comparable to other cloud providers. Our servers are in Ohio and we're testing it here in New York, so your mileage may vary if you live further from Ohio.
+Vals continue to get faster and more scalable. Now [a 'hello world' val](https://www.val.town/v/stevekrouse/hello_world) responds in under 60ms, which is comparable to other cloud providers. Our servers are in Ohio and we're testing here in New York, so your mileage may vary if you live further from Ohio.
 
 ## Deprecating old APIs
 
@@ -53,22 +57,25 @@ HTTP vals now have prettier errors. They sometimes have stack traces and link to
 
 ## Videos
 
+Videos are a great way to learn the pro tips & tricks for Val Town.
+
 I did two livestreams with wonderful guests:
 
-- livestream with alex vilinskyy https://x.com/stevekrouse/status/1839681458820293071 original svg generator: https://x.com/stevekrouse/status/1837144507713773984
-- dog-e-dex livestream: https://x.com/stevekrouse/status/1842611050187022383
+- [Creating design tools](https://www.youtube.com/watch?v=OtqmldWYJoo) with [Alexander Vilinskyy](https://x.com/vilinskyy) – remaking his [viral SVG generator](https://x.com/vilinskyy/status/1834982920685269308) with Townie
+- [Creating a Dog-E-Dex](https://www.youtube.com/watch?v=vsvBroU9I68) with [Cynthia](https://x.com/yescynfria), a designer at Notion, who has a dream to meet every breed of dog
 
-I made a couple other videos:
+And a handful of other videos:
 
-- lastlogin with google auth video: https://x.com/stevekrouse/status/1842328023049117787, https://www.val.town/v/stevekrouse/lastlogin
-- townie video: make a crud blog app like rails demo https://x.com/stevekrouse/status/1836457427677458826
-- livestream about lucia death: https://x.com/stevekrouse/status/1843592198941729019
-- sqlite dashboard video https://x.com/stevekrouse/status/1833577807093371325
+- [How to add Google Login to your val in 30 seconds](https://x.com/stevekrouse/status/1842328023049117787)
+- [Watch AI make me a SQLite Dashboard from 7 in minutes](https://youtu.be/pJJfCMsklqg)
+- [Watch me make & deploy a blog in 24 minutes with AI](https://x.com/stevekrouse/status/1836457427677458826)
+- [Lucia Auth is DEAD! Long live implementing sessions by hand?](https://youtube.com/live/lmEgcuVm0jI)
+- [Building a Bookshelf Scanner with AI](https://youtube.com/live/xPvLUHvTgwM)
 
 ## 🎉 Other updates
 
-- PagerDuty – the Val Town team now gets woken up for downtime 🚨
-- Blocked AI bots from HTTP vals
+- The Val Town team now gets woken up for downtime (PagerDuty) 🚨
+- AI bots are blockedfrom HTTP vals
 - Updated Deno types
 - Fixed a bug with renaming vals onto previously deleted vals – thanks Robin Sloan for the report 🙏
 - Fixed logs and errors with new HTTP runtime
@@ -80,12 +87,16 @@ I made a couple other videos:
 
 ## 🛣️ Roadmap
 
-Here's some of the top features we're planning to work in the coming months. Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+The main projects over the next couple months are:
 
-- Val Projects
+- Discontinuing the old HTTP runtime and Eval API
 - Continued Townie AI improvements
 - API Token Scopes
+- Val Projects
 - Townie writing READMEs
+- New val runtime architecture for faster & more scalable vals
+
+Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
 
 ## 🌟 Community vals
 
