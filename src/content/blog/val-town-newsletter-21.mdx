@@ -1,20 +1,20 @@
 ---
 title: Val Town Newsletter 21
-description: Townie is a lot more helpful and HTTP vals are a lot faster
-pubDate: October 9, 2024
+description: Townie improvements & faster HTTP vals
+pubDate: October 10, 2024
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 import PrettyErrors from "./val-town-newsletter-21/pretty-errors.png";
 
-We've been shipping big improvements to Townie and HTTP val performance. We're also deprecating old APIs, and making lots of other upgrades and fixes.
+We've been shipping big improvements to Townie and HTTP val performance. We're deprecating some old APIs, and making lots of other upgrades and fixes.
 
 Hundreds of awesome vals were created last month. I feature my favorite 50 at the end of this newsletter.
 
 ## 🤖 Townie improvements
 
-Townie can blow-your-mind, but it also can make you tear your hair out. We're working hard to make it more of the former and less of the latter. Here's some of the improvements we've made:
+Townie can blow-your-mind and it can make you tear your hair out. We're working hard to make it more of the former and less of the latter. Here's some of the improvements we've made:
 
 - Townie can create & edit any kind of val (not just HTTP vals)
 - You can upload images to Townie to help it understand your request
@@ -66,7 +66,7 @@ I did two livestreams with wonderful guests:
 
 And a handful of other videos:
 
-- [How to add Google Login to your val in 30 seconds](https://x.com/stevekrouse/status/1842328023049117787)
+- How to add Google Login to your val in 30 seconds - [quick demo](https://x.com/stevekrouse/status/1844426213353455701), [longer explanation](https://x.com/stevekrouse/status/1842328023049117787)
 - [Watch AI make me a SQLite Dashboard from 7 in minutes](https://youtu.be/pJJfCMsklqg)
 - [Watch me make & deploy a blog in 24 minutes with AI](https://x.com/stevekrouse/status/1836457427677458826)
 - [Lucia Auth is DEAD! Long live implementing sessions by hand?](https://youtube.com/live/lmEgcuVm0jI)
@@ -91,8 +91,8 @@ The main projects over the next couple months are:
 
 - Discontinuing the old HTTP runtime and Eval API
 - Continued Townie AI improvements
-- API Token Scopes
-- Val Projects
+- Fine-grained API Token Scopes
+- Val Projects (organize your vals into projects)
 - Townie writing READMEs
 - New val runtime architecture for faster & more scalable vals
 
@@ -100,14 +100,29 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 
 ## 🌟 Community vals
 
-- try campsite: https://x.com/DanPhilibin/status/1833619842303463748
-- browserbase slack notification https://x.com/SarahChieng/status/1833602967410528594
-- jonnie hallman slack bot https://x.com/stevekrouse/status/1839336401353220099
-- guy dupont X slams Y https://x.com/gvy_dvpont/status/1841818282719924430
-- guy dupont val https://x.com/stevekrouse/status/1841073846390051325
-- Townie creations by crossmint team: https://x.com/stevekrouse/status/1835778062237008084
-- chore app for daughter https://x.com/stevekrouse/status/1836136881702031425
-- nathan baschez color app for daught https://x.com/stevekrouse/status/1836031718249083128
+- Dan Philbin made [a bunch of vals to work with the campsite API](https://www.val.town/u/campsite) and [tweeted a video](https://x.com/DanPhilibin/status/1833619842303463748) about it
+- Sarah Chieng made a [Slack notifier](https://x.com/SarahChieng/status/1833602967410528594) whenever you, your company, or topics of interest are mentioned on Twitter, Hacker News, and Reddit, powered by Browserbase
+- Jonnie Hallman made a [Slack bot](https://x.com/destroytoday/status/1834408549549494302) that reminds designtown.nyc folks ofthe keypad code
+- Guy Dupont [generates X slams Y memes](https://x.com/gvy_dvpont/status/1841818282719924430), autotweeted to Mastadon
+- Steve upgraded his [twitter alert](https://www.val.town/v/stevekrouse/twitterAlert) that sends a notification when certain keywords are tweeted to use SocialData's API, which any Val Town Pro user can fork and get some free usage of
+- Guy Dupont built a site to convert [Landscape Video -> Blurred Portrait](https://x.com/gvy_dvpont/status/1840894297698128246)
+- The Crossmint team made a [bunch of awesome vals](https://x.com/stevekrouse/status/1835778062237008084)
+- Steve launched [stringify.org](https://stringify.org) a mini-site that converts any text into a valid string you can paste into a JS file
+
+- Sharan made a [personal writing assistant](https://x.com/sharanbabu2001/status/1832549769111015900) with Cerebras
+- Steve [converts error emails from Render](https://www.val.town/v/stevekrouse/renderEmails) into alerts on Discord and Github Issues, assigned to the right person, in the current milestone
+- Max sent some Val Town users [personalized deprecation emails](https://x.com/stevekrouse/status/1843310733511324131)
+- Steve created [helper functions](https://www.val.town/v/stevekrouse/fileToDataURL) for base64 encoding images for sending to ChatGPT, Anthropic, and Gemini
+- Steve made a demo showing how [Cerebras is an LLM fast enough for sliders](https://x.com/stevekrouse/status/1842308619897069918)
+- Steve made a mini-site for calculating [idealized weekly growth](https://stevekrouse-growth.web.val.run/)
+- Steve made a [domain name finder](https://x.com/stevekrouse/status/1834709297869070764)
+- Steve made a [bookshelf scanner](https://x.com/stevekrouse/status/1835740596884951317) with Gemini 1.5 flash
+- Steve made a [realtime chess game](https://x.com/stevekrouse/status/1838654708342481267) where you play as the king and move with the arrow keys
+- Steve made a [synth playground](https://x.com/stevekrouse/status/1838248962865647838) where you can create melodies with a sequencer and play them
+
+- Ash Ryan made a [chore app](https://x.com/stevekrouse/status/1836136881702031425) for his daughter
+- Nathan Baschez made a [color app](https://x.com/stevekrouse/status/1836031718249083128) for his daughter
+
 - flux playground modal labs
   https://x.com/_amankishore/status/1840522105403961439
 - perlin noise by seamus https://x.com/stevekrouse/status/1838666792484638992
@@ -124,7 +139,6 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - stefan bosen allergy food tracker https://x.com/stefanboesen/status/1833364392232296897
 - hex maze visualization https://x.com/0xMoe_/status/1840079699344588805
 - hold the clock button game like mr beast https://x.com/ankitkr0/status/1833410323543404961
-- cerebras personal writing assistant by sharan babu https://x.com/sharanbabu2001/status/1832549769111015900
 - https://www.val.town/v/dctalbot/pirateTalk - slack bot that translates messages to pirate speak
 - https://madprops2024.org/ https://elibcohen-madpropsv2.web.val.run/ https://val.town/v/elibcohen/madpropsv2
 - https://thejeshgn.com/2024/09/11/simple-imd-alerts/
@@ -133,15 +147,3 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - https://www.val.town/v/ashryanio/getBlobAndRenderAsImage
 - https://www.val.town/v/macro21kgb/imageConverterSite
 - https://www.val.town/v/dthyresson/gameOfLifeSite
-
-- Steve [converts error emails from Render](https://www.val.town/v/stevekrouse/renderEmails) into alerts on Discord and Github Issues, assigned to the right person, in the current milestone
-- Steve launched [stringify.org](https://stringify.org) a mini-site that converts any text into a valid string you can paste into a JS file
-- Max sent some Val Town users [personalized deprecation emails](https://x.com/stevekrouse/status/1843310733511324131)
-- Steve created [helper functions](https://www.val.town/v/stevekrouse/fileToDataURL) for base64 encoding images for sending to ChatGPT, Anthropic, and Gemini
-- Steve made a demo showing how [Cerebras is an LLM fast enough for sliders](https://x.com/stevekrouse/status/1842308619897069918)
-- Steve made a mini-site for calculating [idealized weekly growth](https://stevekrouse-growth.web.val.run/)
-- domain name finder https://x.com/stevekrouse/status/1834709297869070764
-- bookshelf scanner with gemini 1.5 flash https://x.com/stevekrouse/status/1835740596884951317
-- twitter alert on social data: https://www.val.town/v/stevekrouse/twitterAlert https://www.val.town/v/stevekrouse/socialDataProxy https://www.val.town/v/stevekrouse/socialDataSearch
-- realtime chess https://x.com/stevekrouse/status/1838654708342481267
-- synth playground https://x.com/stevekrouse/status/1838248962865647838
