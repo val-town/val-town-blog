@@ -1,6 +1,6 @@
 ---
 title: Val Town Newsletter 21
-description: Townie improvements & faster HTTP vals
+description: Townie upgrades & faster HTTP vals
 pubDate: October 10, 2024
 author: Steve Krouse
 ---
@@ -8,11 +8,11 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import PrettyErrors from "./val-town-newsletter-21/pretty-errors.png";
 
-We've been shipping big improvements to Townie and HTTP val performance. We're deprecating some old APIs, and making lots of other upgrades and fixes.
+[Townie](https://val.town/townie), our AI code assistant, got huge upgrades this month. We fixed a dozen bugs and shipped many of your feature requests. We also made big strides in HTTP val performance, are deprecating some old APIs, and made a number of other upgrades and fixes, detailed below.
 
-Hundreds of awesome vals were created last month. I feature my favorite 50 at the end of this newsletter.
+You all created hundreds of awesome vals last month! Our favorite 50 are featured at the bottom of this newsletter.
 
-## 🤖 Townie improvements
+## 🤖 Townie upgrades
 
 Townie can blow-your-mind and it can make you tear your hair out. We're working hard to make it more of the former and less of the latter. Here's some of the improvements we've made:
 
@@ -32,7 +32,7 @@ Please continue to reach out when Townie does something amazing or awful. Your f
 
 ## ⚡️ Fast Vals
 
-Vals continue to get faster and more scalable. Now [a 'hello world' val](https://www.val.town/v/stevekrouse/hello_world) responds in under 60ms, which is comparable to other cloud providers. Our servers are in Ohio and we're testing here in New York, so your mileage may vary if you live further from Ohio.
+Vals continue to get faster and more scalable. Now [a 'hello world' val](https://www.val.town/v/stevekrouse/hello_world) responds in about 50ms, which is comparable to other cloud providers. Our servers are in Ohio and we're testing here in New York, so your mileage may vary if you live further from Ohio.
 
 ## Deprecating old APIs
 
@@ -44,7 +44,7 @@ We are deprecating a number of old APIs that are no longer in use:
 
 These changes effect less than 1% of our users. If you're effected, you will receive an email with more information on how to upgrade.
 
-The exciting part about deprecations is that it means we'll be able to ship faster because we won't have to worry about maintaining old code that almost nobody is using. Max is working on rebuilding our code-running infrastructure from the ground up (yet again) to even faster and more scalable, and not having to support these old APIs will make his job a lot easier.
+The exciting part about deprecations is that it means we'll be able to ship faster because we won't be maintaining old code that almost nobody is using. Max rebuilding our code-running infrastructure to even faster and more scalable, and not having to support these old APIs will make his job a lot easier.
 
 ## Prettier errors
 
@@ -61,29 +61,29 @@ Videos are a great way to learn the pro tips & tricks for Val Town.
 
 I did two livestreams with wonderful guests:
 
-- [Creating design tools](https://www.youtube.com/watch?v=OtqmldWYJoo) with [Alexander Vilinskyy](https://x.com/vilinskyy) – remaking his [viral SVG generator](https://x.com/vilinskyy/status/1834982920685269308) with Townie
-- [Creating a Dog-E-Dex](https://www.youtube.com/watch?v=vsvBroU9I68) with [Cynthia](https://x.com/yescynfria), a designer at Notion, who has a dream to meet every breed of dog
+- [**Creating design tools**](https://www.youtube.com/watch?v=OtqmldWYJoo) with [Alexander Vilinskyy](https://x.com/vilinskyy) – remaking his [viral SVG generator](https://x.com/vilinskyy/status/1834982920685269308) with Townie
+- [**Creating a Dog-E-Dex**](https://www.youtube.com/watch?v=vsvBroU9I68) with [Cynthia](https://x.com/yescynfria), a designer at Notion, who has a dream to meet every breed of dog
 
 And a handful of other videos:
 
-- How to add Google Login to your val in 30 seconds - [quick demo](https://x.com/stevekrouse/status/1844426213353455701), [longer explanation](https://x.com/stevekrouse/status/1842328023049117787)
-- [Watch AI make me a SQLite Dashboard from 7 in minutes](https://youtu.be/pJJfCMsklqg)
-- [Watch me make & deploy a blog in 24 minutes with AI](https://x.com/stevekrouse/status/1836457427677458826)
-- [Lucia Auth is DEAD! Long live implementing sessions by hand?](https://youtube.com/live/lmEgcuVm0jI)
-- [Building a Bookshelf Scanner with AI](https://youtube.com/live/xPvLUHvTgwM)
+- **How to add Google Login to your val in 30 seconds** - [quick demo](https://x.com/stevekrouse/status/1844426213353455701), [longer explanation](https://x.com/stevekrouse/status/1842328023049117787)
+- [**Watch AI make me a SQLite Dashboard from 7 in minutes**](https://youtu.be/pJJfCMsklqg)
+- [**Watch me make & deploy a blog in 24 minutes with AI**](https://x.com/stevekrouse/status/1836457427677458826)
+- [**Lucia Auth is DEAD! Long live implementing sessions by hand?**](https://youtube.com/live/lmEgcuVm0jI)
+- [**Building a Bookshelf Scanner with AI**](https://youtube.com/live/xPvLUHvTgwM)
 
 ## 🎉 Other updates
 
 - The Val Town team now gets woken up for downtime (PagerDuty) 🚨
-- AI bots are blockedfrom HTTP vals
+- AI bots are blocked from HTTP vals
 - Updated Deno types
-- Fixed a bug with renaming vals onto previously deleted vals – thanks Robin Sloan for the report 🙏
+- Fixed a renaming bug – thanks Robin Sloan for the report 🙏
 - Fixed logs and errors with new HTTP runtime
 - Removed pinned vals UI cruft
-- Change the order of logs (newest at the bottom)
-- Disable password autofill on env variables – thanks Matthew Bunday for the suggestion 🙏
-- Improve our list of adjectives for new val names
-- Make POST v1/vals/id a no-op if nothing changed – thanks Andres Rodriguez for [the feature request](https://github.com/val-town/val-town-product/issues/185) 🙏
+- Changed the order of logs (newest at the bottom)
+- Disabled autofill on env variables – thanks Matthew Bunday for the suggestion 🙏
+- Improved our list of adjectives for new val names
+- Made POST v1/vals/id a no-op if no changed – thanks Andres Rodriguez for [the request](https://github.com/val-town/val-town-product/issues/185) 🙏
 
 ## 🛣️ Roadmap
 
@@ -92,7 +92,7 @@ The main projects over the next couple months are:
 - Discontinuing the old HTTP runtime and Eval API
 - Continued Townie AI improvements
 - Fine-grained API Token Scopes
-- Val Projects (organize your vals into projects)
+- Val Projects (to manage complex multi-val collections)
 - Townie writing READMEs
 - New val runtime architecture for faster & more scalable vals
 
@@ -102,47 +102,43 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 
 - Dan made [a bunch of vals to work with the Campsite API](https://www.val.town/u/campsite) and [a demo video](https://x.com/DanPhilibin/status/1833619842303463748)
 - Sarah made a [Slack notifier](https://x.com/SarahChieng/status/1833602967410528594) whenever topics of interest are mentioned on Twitter, Hacker News, and Reddit, powered by Browserbase
-- Jonnie made a [Slack bot](https://x.com/destroytoday/status/1834408549549494302) that reminds designtown.nyc folks ofthe keypad code
+- Jonnie made a [Slack bot](https://x.com/destroytoday/status/1834408549549494302) that reminds [designtown.nyc](https://designtown.nyc) folks of the keypad code
 - Guy [generates X slams Y memes](https://x.com/gvy_dvpont/status/1841818282719924430), autotweeted to Mastadon
+- Thej wrote [an excellent blog on AQI alerts in India](https://thejeshgn.com/2024/09/11/simple-imd-alerts/)
 - Steve upgraded his [twitter alert](https://www.val.town/v/stevekrouse/twitterAlert) to use SocialData's API, so any Val Town Pro user can seamlessly fork it
 - Guy built a site to convert [Landscape Video -> Blurred Portrait](https://x.com/gvy_dvpont/status/1840894297698128246)
+- Steve [converts error emails from Render](https://www.val.town/v/stevekrouse/renderEmails) into alerts on Discord and Github Issues, assigned to the right person, in the current milestone
 - The Crossmint team made a [bunch of awesome vals](https://x.com/stevekrouse/status/1835778062237008084)
 - Nathan made a [color app](https://x.com/stevekrouse/status/1836031718249083128) for his daughter
 - Steve launched [stringify.org](https://stringify.org) a mini-site that converts any text into a valid string you can paste into a JS file
 - Ash made a [chore app](https://x.com/stevekrouse/status/1836136881702031425) for his daughter
-- Steve made a [bookshelf scanner](https://x.com/stevekrouse/status/1835740596884951317) with Gemini 1.5 flash
+- Eric's eight-year-old made a [word picture match game](https://efoley-wordpicturematch.web.val.run/) [for his two-year-old using Townie](https://x.com/ericdfoley/status/1840478366408798277)
 - Aman built a [flux playground](https://x.com/_amankishore/status/1840522105403961439) with Modal
+- Eli made [an info site for California's 2024 ballot propositions](https://madprops2024.org/)
 - Seamus made a [perlin noise animation generator](https://x.com/stevekrouse/status/1838666792484638992)
 - Wolf made a [chrome extension](https://x.com/stevekrouse/status/1838592604734202102) to run github gists in Val Town
 - Steve made a [domain name finder](https://x.com/stevekrouse/status/1834709297869070764)
 - Seamus made a [drum machine](https://x.com/stevekrouse/status/1838590564993765706)
-- Steve made a [github graph drum machine](https://x.com/stevekrouse/status/1839421869466018061) and [tom made it sound nicer](https://x.com/stevekrouse/status/1839700676760186896)
+- Steve made a [github graph drum machine](https://x.com/stevekrouse/status/1839421869466018061) and Tom made it [sound nicer](https://x.com/stevekrouse/status/1839700676760186896)
 - Harry made a snazzy [LangChain Ambassador card](https://x.com/zhanghaili0610/status/1840602999443640343)
 - Steve made a [synth playground](https://x.com/stevekrouse/status/1838248962865647838) where you can create melodies with a sequencer and play them
 - Carl built a [DnD character creator](https://x.com/stevekrouse/status/1832391129586638943)
 - Jan made a very good prompt for [news & research with Groq](https://x.com/yawnxyz/status/1841613186531000522)
 - Sharan made a [personal writing assistant](https://x.com/sharanbabu2001/status/1832549769111015900) with Cerebras
-- Steve [converts error emails from Render](https://www.val.town/v/stevekrouse/renderEmails) into alerts on Discord and Github Issues, assigned to the right person, in the current milestone
 - Max sent some Val Town users [personalized deprecation emails](https://x.com/stevekrouse/status/1843310733511324131)
 - Steve created [helper functions](https://www.val.town/v/stevekrouse/fileToDataURL) for base64 encoding images for sending to ChatGPT, Anthropic, and Gemini
-- Steve made a demo showing how [Cerebras is an LLM fast enough for sliders](https://x.com/stevekrouse/status/1842308619897069918)
-- Steve made a mini-site for calculating [idealized weekly growth](https://stevekrouse-growth.web.val.run/)
+- Stefan made an [allergy food tracker](https://x.com/stefanboesen/status/1833364392232296897)
+- Moe made a [hex maze visualization](https://x.com/0xMoe_/status/1840079699344588805)
+- Ankit made a [hold the clock button game](https://x.com/ankitkr0/status/1833410323543404961)
+- Dustin made a [slack bot](https://x.com/dctalbot/status/1840478366408798277) that translates messages to pirate speak
 - Steve made a [realtime chess game](https://x.com/stevekrouse/status/1838654708342481267) where you play as the king and move with the arrow keys
-
----
-
-- https://efoley-wordpicturematch.web.val.run/ https://x.com/ericdfoley/status/1840478366408798277
-- json visualizer https://x.com/nbbaier/status/1840308862856896721
-- book photo analyzer https://x.com/stevekrouse/status/1836781662161588486
-- book reccomendation mind map: https://x.com/paraschopra/status/1835311841024614581
-- stefan bosen allergy food tracker https://x.com/stefanboesen/status/1833364392232296897
-- hex maze visualization https://x.com/0xMoe_/status/1840079699344588805
-- hold the clock button game like mr beast https://x.com/ankitkr0/status/1833410323543404961
-- https://www.val.town/v/dctalbot/pirateTalk - slack bot that translates messages to pirate speak
-- https://madprops2024.org/ https://elibcohen-madpropsv2.web.val.run/ https://val.town/v/elibcohen/madpropsv2
-- https://thejeshgn.com/2024/09/11/simple-imd-alerts/
-- https://www.val.town/v/arthrod/Chatprincipal
-- https://val.town/v/konradmoneta/carInventory
-- https://www.val.town/v/ashryanio/getBlobAndRenderAsImage
-- https://www.val.town/v/macro21kgb/imageConverterSite
-- https://www.val.town/v/dthyresson/gameOfLifeSite
+- Paras made a [book recommendation mind map](https://x.com/paraschopra/status/1835311841024614581)
+- Steve made a [bookshelf scanner](https://x.com/stevekrouse/status/1835740596884951317) with Gemini 1.5 flash
+- Ash made a [val to show how to get and render images from Val Town Blob Storage](https://www.val.town/v/ashryanio/getBlobAndRenderAsImage)
+- Steve made a demo showing how [Cerebras is an LLM fast enough for sliders](https://x.com/stevekrouse/status/1842308619897069918)
+- Konrad made a [retro car inventory app](https://val.town/v/konradmoneta/carInventory)
+- @macro21kgb made a [site to convert WebP images to PNG](https://www.val.town/v/macro21kgb/imageConverterSite)
+- DT made [a twist on the classic Game of Life](https://www.val.town/v/dthyresson/gameOfLifeSite)
+- Steve made a mini-site for calculating [idealized weekly growth](https://stevekrouse-growth.web.val.run/)
+- Nico made a [JSON visualizer](https://x.com/nbbaier/status/1840308862856896721)
+- Steve cloned Dan Shipper's [book photo analyzer](https://x.com/stevekrouse/status/1836781662161588486)
