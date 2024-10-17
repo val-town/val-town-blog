@@ -9,35 +9,89 @@ import { Image } from "astro:assets";
 
 {/* https://supabase.com/blog/supabase-vercel-partnership */}
 
-[Fal](https://fal.ai/) has an API for generating AI images incredibly quickly, ie under 120ms. Specializing in diffusion models, Fal has no cold starts and a pay-for-what-you-use pricing model.
+[Fal](https://fal.ai/) is an API for generating AI images lightning fast.
 
-Today we're announcing a partnership with Fal to bring their API to Val Town users. You can use Fal in your vals right away, even without an API key!
+Today we're announcing a partnership with Fal to bring their API to Val Town users. You can now use Fal in your vals right away – no Fal API key necessary.
 
-## Use-cases
+## Quickstart vals
 
-TODO - rewrite this section
+The quickest way to get started is to fork one of these starter apps:
 
-- Text-to-image applications: Use Fal to integrate real-time text-to-image generation in applications, enabling users to create complex visual content from textual descriptions instantly
-- Real-time image processing: Use Fal for applications requiring instantaneous image analysis and modification, such as real-time filters, enhancements, or object recognition in streaming video
+Side-by-side Videos or GIFs with the links underneath?
 
-## Getting started
+1. [falDemoApp](https://www.val.town/v/stevekrouse/falDemoApp) - simplest possible fal app
+2. [Faltown](https://www.val.town/v/drochetti/faltown) - simplified version of Midjourney, with typesafe API client and blob storage
 
-Val Town users can now use the Fal API right away - no API key necessary. The quickest way to get started is to fork [faltown](https://www.val.town/v/drochetti/faltown), an example text-to-image app powered by the new Fal integration.
+You just need to click fork to get a clone of this app. It'll be deployed on your account with no further setup necessary. You can then ask Townie to customize it to your needs. Want a DnD character generator? No problem! Want a meme generator? Easy! Want a tool to help you design your next tattoo? Done! (TODO - linkify those)
 
-Or you could copy and paste this text into Townie:
+## Instructions for Townie
 
-```markdown
-How to use the Fal API: TODO
+Another quick way to get started is to copy & paste the following instructions into Townie:
+
+````markdown
+Import the necessary modules:
+
+```ts
+import { falProxyRequest } from "https://esm.town/v/stevekrouse/falProxyRequest";
+import { createFalClient } from "https://esm.sh/@fal-ai/client";
 ```
 
-- fal is an API to make AI images super fast
-- val town users can now use the fal api right away - no api key necessary
-- for example you could make...
-- you can fork any val that uses fal and it will work right away
-  - like this example one
-- or you could paste these instructions to townie
-- eventually you'll need your own fal api key once you want to scale
-- how this works under the hood
-- if you're an api provider, contact steve@val.town to launch a partnership to bring your api to val town users
-- todo: add this to our docs under a new section maybe?
-  - https://vercel.com/docs/integrations/ai/fal
+Set up the Fal client on the client side:
+
+```ts
+const FAL_ENDPOINT = "fal-ai/flux/schnell";
+const fal = createFalClient({
+  proxyUrl: "/api/fal/proxy",
+});
+```
+
+Use the Fal client to handle image generation requests on the client:
+
+```ts
+const result = await fal.run("fal-ai/flux/schnell", {
+  input: {
+    prompt,
+    image_size: "landscape_4_3",
+    num_inference_steps: 4, // must be 12 or less
+    num_images: 1,
+    enable_safety_checker: true,
+    sync_mode: true,
+  },
+});
+const image_url = result.data.images[0].url;
+```
+
+Set up the Fal proxy request on the server side:
+
+```ts
+export default async function server(req: Request): Promise<Response> {
+  const url = new URL(req.url);
+  if (url.pathname === "/") {
+    /* Return HTML */
+  }
+
+  if (url.pathname === "/api/fal/proxy") {
+    return falProxyRequest(req);
+  }
+}
+```
+````
+
+## Limitations
+
+This partnership is intended for prototyping and small-scale projects. If you're building something that needs to scale, you'll need to sign up for a Fal API key and use that instead.
+
+- Val Town Free Users - X requests per Y
+- Val Town Pro Users - Z requests per W
+
+## How it works
+
+Normally to use the Fal API, you'd need to sign up for an API key on their website. But with this partnership, you can use Fal in your vals right away without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](TODO), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
+
+This is how our OpenAI integration works as well. TODO: [OpenAI](https://docs.val.town/std/openai/) is powered by [proxy](TODO)
+
+I recently built a similar integration with SocialData, a Twitter data API provider, which Val Town Pro users can access.
+
+We think of these 'userspace proxies' as the beginnings of the 'Val Town Marketplace'. If you want to bring a rate-limited version of your API, email me at steve@val.town.
+
+{/* todo: add this to our docs under a new section maybe? https://vercel.com/docs/integrations/ai/fal */}
