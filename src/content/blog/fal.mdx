@@ -17,12 +17,12 @@ Today we're announcing a partnership with Fal to bring their API to Val Town use
 
 The quickest way to get started is to fork one of these starter apps:
 
-Side-by-side Videos or GIFs with the links underneath?
+{/* TODO: Side-by-side Videos or GIFs with the links underneath? */}
 
 1. [falDemoApp](https://www.val.town/v/stevekrouse/falDemoApp) - simplest possible fal app
 2. [Faltown](https://www.val.town/v/drochetti/faltown) - simplified version of Midjourney, with typesafe API client and blob storage
 
-You just need to click fork to get a clone of this app. It'll be deployed on your account with no further setup necessary. You can then ask Townie to customize it to your needs. Want a DnD character generator? No problem! Want a meme generator? Easy! Want a tool to help you design your next tattoo? Done! (TODO - linkify those)
+Click fork to get a clone of this app. It'll immediately be deployed on your account with no further setup necessary. You can then ask Townie to customize it to your needs. Want a DnD character generator? [No problem!](https://stevekrouse-genuinevioletswordtail.web.val.run/) Want a tool to help you design your next tattoo? [Done!](https://stevekrouse-tattoodesignapp.web.val.run/)
 
 ## Instructions for Townie
 
@@ -79,19 +79,21 @@ export default async function server(req: Request): Promise<Response> {
 
 ## Limitations
 
-This partnership is intended for prototyping and small-scale projects. If you're building something that needs to scale, you'll need to sign up for a Fal API key and use that instead.
+This partnership is intended for prototyping and small-scale projects, and is rate-limited as follows:
 
-- Val Town Free Users - X requests per Y
-- Val Town Pro Users - Z requests per W
+- Val Town Free Users - 10 requests per hour
+- Val Town Pro Users - 50 requests per hour
+
+If you're building something that needs to scale, you'll need to sign up for a [Fal API key here](https://fal.ai/).
 
 ## How it works
 
-Normally to use the Fal API, you'd need to sign up for an API key on their website. But with this partnership, you can use Fal in your vals right away without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](TODO), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
+Normally to use the Fal API, you'd need to sign up for an API key on their website, but with this partnership, you can use Fal in your vals right away without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](https://www.val.town/v/drochetti/faltownproxy), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
 
-This is how our OpenAI integration works as well. TODO: [OpenAI](https://docs.val.town/std/openai/) is powered by [proxy](TODO)
+This is how our [OpenAI](https://docs.val.town/std/openai/) integration works as well, through [this proxy](https://www.val.town/v/std/openaiproxy).
 
-I recently built a similar integration with SocialData, a Twitter data API provider, which Val Town Pro users can access.
+I recently built [a similar proxy](https://www.val.town/v/stevekrouse/socialDataProxy) for [SocialData](https://socialdata.tools/), a Twitter data API provider, which Val Town Pro users can make 100 requests per day to to power vals like this [twitterAlert](https://www.val.town/v/stevekrouse/twitterAlert).
 
-We think of these 'userspace proxies' as the beginnings of the 'Val Town Marketplace'. If you want to bring a rate-limited version of your API, email me at steve@val.town.
+We think of these 'userspace proxies' as the beginnings of what we hope will become 'Val Town Marketplace'. If you want to bring your API to Val Town users, email me at steve@val.town.
 
 {/* todo: add this to our docs under a new section maybe? https://vercel.com/docs/integrations/ai/fal */}
