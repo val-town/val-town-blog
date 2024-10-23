@@ -1,0 +1,43 @@
+---
+title: "Why Val Town is not using Effect"
+description: The very cool functional programming library that could improve our codebase but is too much for our onboarding
+pubDate: October 23, 2024
+author: Tom MacWright
+---
+
+Val Town's backend is a pretty complex application. We're running user code, proxying blob storage and other services, storing observability data, running intervals, and a lot more.
+
+One of the things that makes it complicated is the wide variety of error states. There are simple errors, like when a client supplies us with an invalid input, but there are a lot of more sophisticated errors, like when a Val has invalid dependencies or syntax, and then when Vals fail with errors when operating as HTTP endpoints or cron triggers. Distinguishing between internal and external, recoverable and non-recoverable errors, is pretty crucial.
+
+We also have some pretty sophisticated asynchronous code. Vals should run as fast as possible, which means that we parallelize some operations and defer others. There are some pretty tricky functions that string it all together.
+
+I recently evaluated [Effect](https://effect.website/) as a better framework for solving these problems. It makes up for some of TypeScript's main deficiencies in error handling and concurrency: in TypeScript, thrown errors and rejected promises do not have error types. And concurrency is, by default, unbounded. Effect provides many fundamental tools for dealing with complex operations, and I've been taken in by the rave reviews it has gotten from [Dillon](https://x.com/dillon_mulroy) amongst other fans.
+
+I'm no stranger to the functional programming world: I used [Rambda](https://ramdajs.com/) in a large-scale project in the past, and [Purify](https://github.com/gigobyte/purify) more recently. I'm completely sold on the value of typed errors, and I think that `Either`, `Option`, and `Maybe` types are generally good ideas.
+
+So I dove into Effect for a few days, and we decided as a team not to use it. Here's why.
+
+## Documentation
+
+The biggest concern right at the top: documentation, the lack thereof. Effect has [narrative documentation](https://effect.website/docs/quickstart), as well as [API documentation](https://effect-ts.github.io/effect/docs/effect), but both are incredibly incomplete.
+
+I think in large part this is because the API surface – the number of functions and variables exported by Effect – is enormous. But regardless, there are just so many core APIs that are undocumented. Like take `Effect.gen`, the function that lets you run a series of effects using a generator and get the result at the end: [it has no JSDoc documentation at all](https://effect-ts.github.io/effect/effect/Either.ts.html#gen). The same for nearly all of the functional shorthand methods like [ap, product, and productMany](https://effect-ts.github.io/effect/effect/Option.ts.html#ap) on the Option and Effect types. In my effort to add Effect, I ran into undocumented APIs constantly.
+
+The narrative documentation leaves a lot to be desired: in the extremely brief documentation about running effects, it recommends you use [Effect.runFork](https://effect.website/docs/guides/essentials/running-effects#runfork), but only provides a contrived example that doesn't show you how to do something like get the result of the computation, or an error, or really use the `runFork` method in practice.
+
+The level of documentation is the first reason why we aren't adopting Effect: I'm not onboarding new team members onto something with so little quality documentation available. And I'm afraid that the documentation won't get better, for two reasons: first, that Effect inherits a lot from the [fp-ts project](https://gcanti.github.io/fp-ts/modules/Either.ts.html), which has been around since 2017 but has a similarly low level of documentation. And second, the surface area of Effect seems to be only growing - there are [six ecosystem modules as well as Effect](https://effect.website/docs/other/api-reference) that are listed in the documentation, and then a lot of other unstable modules that are still in development, like `@effect/sql-drizzle`. We use [Drizzle](https://orm.drizzle.team/) as our ORM and probably would use `@effect/sql-drizzle`, but it's unstable and undocumented. And I fear that, if there's some incremental improvement to add documentation, it'll never catch up with also-increasing surface area to document.
+
+## Interoperability
+
+Something I liked about Purify was that it was a relatively small abstraction. It just supported a few functional programming-flavored data types, and worked well with existing code.
+
+Effect's style, on the other hand, tends to take over the codebase: you want to combine Effects and only actually _run_ them once. But this meant that more and more of the codebase started to have to adopt Effect - we would have to use it in the tests, for which there's [`@effect/vitest`](https://effect-ts.github.io/effect/vitest/index.ts.html), which lacks any JSDoc documentation, but at least [has a readme](https://www.npmjs.com/package/@effect/vitest).
+
+Interoperating with the existing parts of our stack would, as far as I can tell, have us using those ecosystem parts, like `@effect/sql-drizzle`. But there isn't even [a README](https://www.npmjs.com/package/@effect/sql-drizzle/v/0.16.6) for that module: we can't make that part of our onboarding.
+
+## What we're doing instead
+
+For now, we're going to just use TypeScript error handling, but I plan to try out [neverthrow](https://github.com/supermacro/neverthrow), which is a lighter-weight abstraction and just gives an `Either`-like abstraction for capturing the types of errors.
+
+Honestly, I like a lot of things about Effect: I think that TypeScript really does need better abstractions, and Effect is providing them. And it's exciting that the project seems to have a full-time team and [startup company](https://effectful.co/) behind it. Hopefully they fix the ratio of API surface to documentation surface, and it'll become something that I'd be comfortable including in a production application. I think it's always going to be a little intimidating because functional programming concepts
+are not very mainstream, but there's a lot that this team could do to promote them.
