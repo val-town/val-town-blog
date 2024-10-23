@@ -5,7 +5,7 @@ pubDate: October 23, 2024
 author: Tom MacWright
 ---
 
-Val Town's backend is a pretty complex application. We're running user code, proxying blob storage and other services, storing observability data, running intervals, and a lot more.
+Val Town's backend is a pretty complex application. We're running user code, proxying [blob storage](https://docs.val.town/std/blob/) and other services, storing observability data, running [intervals](https://docs.val.town/types/cron/), and a lot more.
 
 One of the things that makes it complicated is the wide variety of error states. There are simple errors, like when a client supplies us with an invalid input, but there are a lot of more sophisticated errors, like when a Val has invalid dependencies or syntax, and then when Vals fail with errors when operating as HTTP endpoints or cron triggers. Distinguishing between internal and external, recoverable and non-recoverable errors, is pretty crucial.
 
