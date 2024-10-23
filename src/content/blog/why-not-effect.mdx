@@ -39,6 +39,8 @@ Effect's style, on the other hand, tends to take over the codebase: you want to 
 
 Interoperating with the existing parts of our stack would, as far as I can tell, have us using those ecosystem parts, like `@effect/sql-drizzle`. But there isn't even [a README](https://www.npmjs.com/package/@effect/sql-drizzle/v/0.16.6) for that module: we can't make that part of our onboarding.
 
+Val Town is not a greenfield project at this point. We have a lot of functionality that we want to keep supporting, and we studiously avoid [the big rewrite](https://www.joelonsoftware.com/2000/04/06/things-you-should-never-do-part-i/). Adopting Effect would mean _incrementally_ adopting it in our mixed-paradigm, mostly-imperative codebase.
+
 ## What we're doing instead
 
 For now, we're going to just use TypeScript error handling, but I plan to try out [neverthrow](https://github.com/supermacro/neverthrow), which is a lighter-weight abstraction and just gives an `Either`-like abstraction for capturing the types of errors.
