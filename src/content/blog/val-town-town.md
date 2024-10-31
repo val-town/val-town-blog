@@ -233,7 +233,7 @@ should be very cautious editing and running this code on your own account.
 There are many more features that would be possible to implement:
 
 1. We currently spawn one Worker per request, would it be possible to share a
-   worker?
+   Worker across many requests?
 2. How could you capture request logs and request metadata for users to view?
 3. Could you provide user accounts? Environment variables? Database access?
 
