@@ -1,7 +1,7 @@
 ---
-title: Generate images for free with fal.ai
+title: Val Town + Fal Partnership
 description: Bringing lightning fast AI image generation to Val Town
-pubDate: Oct 30, 2024
+pubDate: Oct 31, 2024
 author: Steve Krouse
 ---
 
@@ -66,13 +66,11 @@ The quickest way to get started is to fork one of these starter apps:
   </div>
 </div>
 
-Click "Fork" on either of these apps, and in that one click you'll instantly get that app deployed in your Val Town account. No further setup necessary. You can then ask [Townie](https://val.town/townie) to customize it to your needs. Want a DnD character generator? [No problem!](https://stevekrouse-genuinevioletswordtail.web.val.run/) Want a tool to help you design your next tattoo? [Done!](https://stevekrouse-tattoodesignapp.web.val.run/)
+Click "Fork" on either of these apps, and you'll instantly get that app deployed in your Val Town account. No further setup necessary. You can then ask [Townie](https://val.town/townie) to customize it to your needs. Want a DnD character generator? [No problem!](https://stevekrouse-genuinevioletswordtail.web.val.run/) Want a tool to help you design your next tattoo? [Done!](https://stevekrouse-tattoodesignapp.web.val.run/)
 
 ## Instructions for Townie
 
-Another quick way to get started is to copy & paste the following instructions into Townie.
-
-This will give Townie everything it needs to use [Flux Schnell](https://fal.ai/models/fal-ai/flux/schnell),
+Another quick way to get started is to copy & paste instructions into Townie. The following instructions will give Townie everything it needs to use [Flux Schnell](https://fal.ai/models/fal-ai/flux/schnell),
 a state-of-the-art 12b parameter image model by [Black Forest Labs](https://blackforestlabs.ai/#get-flux).
 Fal supports [the whole Flux suite](https://fal.ai/flux), and you can use any of them by changing the `FAL_ENDPOINT` variable.
 
@@ -139,8 +137,8 @@ When your project needs scale, you can sign up for a [Fal API key here](https://
 
 ## How it works
 
-Normally to use the Fal API, you'd need to sign up for an API key on their website, but with this partnership, you can use Fal in your vals right away without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](https://www.val.town/v/drochetti/faltownproxy), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
+Normally to use the Fal API, you'd need to sign up for an API key on their website, but with this partnership, you can start prototyping with Fal in your vals without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](https://www.val.town/v/fal/faltownproxy), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
 
-This is how our [OpenAI](https://docs.val.town/std/openai/) integration works as well, through [this proxy](https://www.val.town/v/std/openaiproxy). I recently built [a similar proxy](https://www.val.town/v/stevekrouse/socialDataProxy) for [SocialData](https://socialdata.tools/), a Twitter data API provider, which Val Town Pro users can make 100 requests per day to to power vals like this [twitterAlert](https://www.val.town/v/stevekrouse/twitterAlert).
+This is how our [OpenAI](https://docs.val.town/std/openai/) integration works as well, through [this proxy](https://www.val.town/v/std/openaiproxy). I recently built [a similar proxy](https://www.val.town/v/stevekrouse/socialDataProxy) for [SocialData](https://socialdata.tools/), a Twitter data API provider, which Val Town Pro users can use to run this [twitterAlert](https://www.val.town/v/stevekrouse/twitterAlert) notifying.
 
 We think of these 'userspace proxies' as the beginnings of what we hope will become 'Val Town Marketplace'. If you want to bring your API to Val Town users, email me at steve@val.town.
