@@ -223,7 +223,9 @@ of things. You can
 [a React Playground](https://maxm-valtowntown.web.val.run/handler/31), and even
 [stream Server Sent Events](https://maxm-valtowntown.web.val.run/handler/30).
 
----
+<br />
+<hr />
+<br />
 
 And there you have it. It is indeed possible to implement a basic subset of Val
 Town's functionality on Val Town itself. As always, make sure to be very careful
@@ -234,7 +236,12 @@ There are many more features that would be possible to implement:
 
 1. We currently spawn one Worker per request, would it be possible to share a
    Worker across many requests?
-2. How could you capture request logs and request metadata for users to view?
-3. Could you provide user accounts? Environment variables? Database access?
+2. We use `data:text/tsx` for import urls, could you implement your own module
+   host so that you can use https imports?
+3. How could you capture request logs and request metadata for users to view?
+4. Could you provide user accounts? Environment variables? Database access?
+5. Val Town Town
+   [cannot run itself](https://maxm-valtowntown.web.val.run/handler/37), can you
+   fix that?
 
 Fork the code and see what you can make!
