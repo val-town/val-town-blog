@@ -1,14 +1,14 @@
 ---
 title: Val Town Town
 generated: 1701894028953
-description: Can we implement Val Town in Val Town?
+description: Can we implement Val Town on Val Town?
 pubDate: Oct 30, 2024
 author: Max McDonnell
 ---
 
 [![](./val-town-town/screenshot.png)](https://maxm-valtowntown.web.val.run)
 
-_Val Town Town is Val Town implemented in Val Town. Check it out
+_Val Town Town is Val Town implemented on Val Town. Check it out
 [here](https://www.val.town/v/maxm/valtowntown) or
 [here](https://maxm-valtowntown.web.val.run/). Fork it, extend it, build stuff
 on it, or read on if you'd like to learn more._
