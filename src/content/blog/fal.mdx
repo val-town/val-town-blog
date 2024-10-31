@@ -1,0 +1,144 @@
+---
+title: Val Town + Fal Partnership
+description: Bringing lightning fast AI image generation to Val Town
+pubDate: Oct 31, 2024
+author: Steve Krouse
+---
+
+<style>
+  {`
+    .lineup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+    }
+    figcaption {
+      margin-top: -20px;
+    }
+    .border {
+      border: 2px solid #eaeaea;
+      padding: 5px;
+    }
+    #subscribe {
+      font-size: 20px; 
+      border: 2px solid #143f9d; 
+      text-align:center; 
+      border-radius: 5px; 
+      text-decoration: none; 
+      display: block;
+    }
+    #subscribe:hover {
+      background-color: #143f9d;
+      color: white;
+    }
+`}
+</style>
+
+import { Image } from "astro:assets";
+import Demo from "./fal/demo.png";
+import Faltown from "./fal/faltown.png";
+
+[Fal](https://fal.ai/) is an API for generating AI images lightning fast.
+
+Today we're announcing a partnership with Fal to bring their API to Val Town users. You can now use Fal in your vals right away – no Fal API key necessary.
+
+## Quickstart vals
+
+The quickest way to get started is to fork one of these starter apps:
+
+<div class='lineup'>
+  <div align="center">
+    <a href="https://www.val.town/v/stevekrouse/falDemoApp"> 
+      <Image src={Demo} alt="Simplest possible Fal app" class="border" />
+      <figcaption>
+        Simplest possible Fal app
+      </figcaption>
+    </a>
+  </div>
+
+  <div align="center">
+    <a href="https://www.val.town/v/drochetti/faltown">
+      <Image src=  {Faltown} alt="Simplified Midjourney, with type-safe API client, blob storage" class="border" />
+      <figcaption>
+      "Faltown" – variants, API client, blob storage
+      </figcaption>
+    </a>
+  </div>
+</div>
+
+Click "Fork" on either of these apps, and you'll instantly get that app deployed in your Val Town account. No further setup necessary. You can then ask [Townie](https://val.town/townie) to customize it to your needs. Want a DnD character generator? [No problem!](https://stevekrouse-genuinevioletswordtail.web.val.run/) Want a tool to help you design your next tattoo? [Done!](https://stevekrouse-tattoodesignapp.web.val.run/)
+
+## Instructions for Townie
+
+Another quick way to get started is to copy & paste instructions into Townie. The following instructions will give Townie everything it needs to use [Flux Schnell](https://fal.ai/models/fal-ai/flux/schnell),
+a state-of-the-art 12b parameter image model by [Black Forest Labs](https://blackforestlabs.ai/#get-flux).
+Fal supports [the whole Flux suite](https://fal.ai/flux), and you can use any of them by changing the `FAL_ENDPOINT` variable.
+
+````markdown
+The following are instructions on how to use Fal,
+an image generation API, in your Val Town app.
+
+Import the necessary modules:
+
+```ts
+import { falProxyRequest } from "https://esm.town/v/stevekrouse/falProxyRequest";
+import { createFalClient } from "https://esm.sh/@fal-ai/client";
+```
+
+Set up the Fal client on the client side:
+
+```ts
+const FAL_ENDPOINT = "fal-ai/flux/schnell";
+const fal = createFalClient({
+  proxyUrl: "/api/fal/proxy",
+});
+```
+
+Use the Fal client to handle image generation requests on the client:
+
+```ts
+const result = await fal.run("fal-ai/flux/schnell", {
+  input: {
+    prompt,
+    image_size: "landscape_4_3",
+    num_inference_steps: 4, // must be 12 or less
+    num_images: 1,
+    enable_safety_checker: true,
+    sync_mode: true,
+  },
+});
+const image_url = result.data.images[0].url;
+```
+
+Set up the Fal proxy request on the server side:
+
+```ts
+export default async function server(req: Request): Promise<Response> {
+  const url = new URL(req.url);
+  if (url.pathname === "/") {
+    /* Return HTML */
+  }
+
+  if (url.pathname === "/api/fal/proxy") {
+    return falProxyRequest(req);
+  }
+}
+```
+````
+
+## Limitations
+
+This partnership is intended for prototyping and small-scale projects, and is rate-limited as follows:
+
+- Val Town Free Users: 10 requests per hour
+- Val Town Pro Users: 50 requests per hour
+
+When your project needs scale, you can sign up for a [Fal API key here](https://fal.ai/).
+
+## How it works
+
+Normally to use the Fal API, you'd need to sign up for an API key on their website, but with this partnership, you can start prototyping with Fal in your vals without any setup. This is possible because we're proxying requests to the Fal API through [this HTTP val](https://www.val.town/v/fal/faltownproxy), which uses your Val Town API token to authenticate and rate-limit you. In this way you're using your Val Town API key in place of a Fal API key.
+
+This is how our [OpenAI](https://docs.val.town/std/openai/) integration works as well, through [this proxy](https://www.val.town/v/std/openaiproxy). I recently built [a similar proxy](https://www.val.town/v/stevekrouse/socialDataProxy) for [SocialData](https://socialdata.tools/), a Twitter data API provider, which Val Town Pro users can use to run this [twitterAlert](https://www.val.town/v/stevekrouse/twitterAlert) notifying.
+
+We think of these 'userspace proxies' as the beginnings of what we hope will become 'Val Town Marketplace'. If you want to bring your API to Val Town users, email me at steve@val.town.
