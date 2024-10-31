@@ -97,7 +97,7 @@ const fal = createFalClient({
 Use the Fal client to handle image generation requests on the client:
 
 ```ts
-const result = await fal.run("fal-ai/flux/schnell", {
+const result = await fal.subscribe("fal-ai/flux/schnell", {
   input: {
     prompt,
     image_size: "landscape_4_3",
