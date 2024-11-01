@@ -7,7 +7,8 @@ author: Max McDonnell
 
 [![](./val-town-town/screenshot.png)](https://maxm-valtowntown.web.val.run)
 
-_[Val Town Town](https://www.val.town/v/maxm/valtowntown) is Val Town implemented on Val Town._
+_[Val Town Town](https://www.val.town/v/maxm/valtowntown) is Val Town implemented on Val Town. Fork it, extend it, build stuff
+on it, or read on if you'd like to learn more.__
 
 Val Town lets you build all sorts of tools with vals: HTTP handlers, crons,
 email endpoints, frontend applications, the list goes on. But
@@ -20,7 +21,7 @@ So we want to accept user code, parse and execute it, and use it to handle a web
 request.
 
 The most naïve and solution is to use JavaScript's [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
-functionality to load their code.
+functionality to load their code. 
 
 Supposing the user-provided HTTP handler looks like this:
 
@@ -29,7 +30,7 @@ export default (req: Request) => Response.json("I work!");
 ```
 
 We wrap it in our runtime by creating a [data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/data)
-including the code, calling import, and running the default export:
+including the code, calling import, and running the default export ([source](https://www.val.town/v/maxm/VTTnosecurity#L1)):
 
 ```tsx val
 export default async function (req: Request): Promise<Response> {
@@ -42,13 +43,14 @@ export default async function (req: Request): Promise<Response> {
 }
 ```
 
-[View this code running on Val Town.
-
 This [works](https://www.val.town/v/maxm/VTTnosecurity), but is very dangerous:
-there's almost no separation between the
-system code and the user code. The user code has access to the same memory and
-permissions that we do. It could read our secrets in `Deno.env` or mess with objects on
-`globalThis`. This is barely better than the much-feared [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) method. _(Fun side note: Val Town was originally called "Eval Town" but was shortened when we started calling the blocks of code "vals".)_
+there's almost no separation between the system code and the user code. The user
+code has access to the same memory and permissions that we do. It could read our
+secrets in `Deno.env` or mess with objects on `globalThis`. This is barely
+better than the much-feared
+[eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval)
+method. _(Fun side note: Val Town was originally called "Eval Town" but was
+shortened when we started calling the blocks of code "vals".)_
 
 How can we lock things down?
 
