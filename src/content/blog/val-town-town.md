@@ -256,7 +256,7 @@ Town's functionality on Val Town itself!
 Workers provide a viable security sandbox, but it's important to note that
 it is not as isolated or safe
 as [the runtime strategy that we use today](https://blog.val.town/blog/first-four-val-town-runtimes/),
-which uses process isolation as well. Bare careful when implementing this
+which uses process isolation as well. Be careful when implementing this
 and any other security-sensitive code on Val Town in your accounts!
 
 There are many more features that would be possible to implement:
