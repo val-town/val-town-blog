@@ -1,46 +1,62 @@
 ---
-title: "Leveling Up Our API Tokens: Introducing Scopes"
-description: Improving security and allowing more granular control over permissions.
+title: "API Tokens Scopes"
+description: Improving security with granular control over permissions
 pubDate: Oct 3, 2024
 author: Max McDonnell
 ---
 
-We've added more granular permissions to our API tokens and changed some of the
-default behavior of our platform to keep things more secure.
+We've added scopes to Val Town API tokens. This will give you more granular
+control over what your API tokens can do.
 
-We've added read and read/write scopes for five key resources: `val`, `blob`,
-`user`, `sqlite`, `email`. You can browse our API docs to see how these
-resources are accessed today: https://docs.val.town/openapi.
+We'll also be introducing scopes to vals, so you can control which resources
+your vals can access.
 
-## Configuring scopes
+We're introducing read/write scopes for five resources:
 
-There are two ways to configure token scopes. You can visit the
-[API tokens](https://www.val.town/settings/api) page and generate a new token
-with specific permissions. This token can be used with our API from outside of
-the platform, or from within a running Val.
+- `val` – [vals](https://docs.val.town/openapi#tag/vals)
+- `user` – [user account details](https://docs.val.town/openapi#tag/me)
+- `blob` – [blob storage](https://docs.val.town/openapi#tag/blobs)
+- `sqlite` – [sqlite database](https://docs.val.town/openapi#tag/sqlite)
+- `email` – [ability to send emails](https://docs.val.town/openapi#tag/emails)
+
+You will be able to configure the scopes of your API tokens from the
+[API tokens](https://www.val.town/settings/api) page.
+
+## Scoping vals
+
+Vals run with a `valtown` environment variable. You can now configure the scopes
+that each of your vals has access to, ensuring that it only has access to the
+resources that it needs.
 
 ![](./api-token-scopes/val-names-permissions.png)
 
-Additionally, can configure the permissions of each Val in your account to
-ensure that it only has access to the resources that it needs.
+Vals also use short-lived API tokens when they are running, limiting the
+potential damage from a compromised val.
 
 ## Safer Defaults
 
-Vals will now use short-lived API tokens when they are running. Additionally,
-the default permissions for a val will only be able to read the `val` resource,
-not edit, create, or update any Val.
+The new default scopes for a val will include everything except `val:write` and
+`user:write` to limit potential damage from misconfigurations, vulnerable
+libraries, or account compromises.
 
-These new defaults help limit potential damage from misconfigurations,
-vulnerable libraries, or account compromises. Without the ability to mutate Val
-resources, unauthorized actors cannot execute new code or modify existing code
-in your account.
+Without the ability to mutate Val resources, unauthorized actors cannot execute
+new code or modify existing code in your account.
+
+We're also considering even fewer default scopes in the future, and having a
+slick UI to let you opt-into extra scopes at runtime when you code accesses
+them.
+
+## Github Secret Scanning
+
+We're joining the Github Secret Scanning program, so if your API token is leaked
+in a public Github repository, we'll be notified and can revoke the token.
 
 ## Migrating current users
 
-Many users use their existing API tokens or Vals to create/edit/delete existing
-Vals in their accounts. We've identified those users, We'll hold off on
-migrating their tokens over to the new permissions, and work with them to
-upgrade.
+We've updated the existing API tokens on people's accounts to use these safer
+defaults. Many users use their existing API tokens or Vals to create/edit/delete
+existing Vals in their accounts. We've identified those users, and will hold off
+on migrating their tokens, and work with them to upgrade.
 
 We're always looking for ways to make our platform more secure. If you have
 security-related feedback or new feature suggestions please make yourself heard
