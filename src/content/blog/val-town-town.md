@@ -7,21 +7,22 @@ author: Max McDonnell
 
 [![](./val-town-town/screenshot.png)](https://maxm-valtowntown.web.val.run)
 
-_[Val Town Town](https://www.val.town/v/maxm/valtowntown) is Val Town implemented on Val Town. Fork it, extend it, build stuff
-on it, or read on if you'd like to learn more.__
+_[Val Town Town](https://www.val.town/v/maxm/valtowntown) is Val Town
+implemented on Val Town. Fork it, extend it, build stuff on it, or read on if
+you'd like to learn more._
 
 Val Town lets you build all sorts of tools with vals: HTTP handlers, crons,
-email endpoints, frontend applications, the list goes on. But
-_can you build Val Town with Val Town_? With a few caveats, the answer
-is yes: let's dive in.
+email endpoints, frontend applications, the list goes on. But _can you build Val
+Town with Val Town_? With a few caveats, the answer is yes: let's dive in.
 
 ### Handling a Request with import
 
 So we want to accept user code, parse and execute it, and use it to handle a web
 request.
 
-The most naïve and solution is to use JavaScript's [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
-functionality to load their code. 
+The most naïve and solution is to use JavaScript's
+[dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+functionality to load their code.
 
 Supposing the user-provided HTTP handler looks like this:
 
@@ -29,17 +30,21 @@ Supposing the user-provided HTTP handler looks like this:
 export default (req: Request) => Response.json("I work!");
 ```
 
-We wrap it in our runtime by creating a [data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/data)
-including the code, calling import, and running the default export ([source](https://www.val.town/v/maxm/VTTnosecurity#L1)):
+We wrap it in our runtime by creating a
+[data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/data)
+including the code, calling import, and running the default export
+([source](https://www.val.town/v/maxm/VTTnosecurity#L1)):
 
 ```tsx val
 export default async function (req: Request): Promise<Response> {
-  const mod = await import(
-    `data:text/tsx,${encodeURIComponent(
-      `export default (req: Request) => Response.json("I work!")`
-    )}`
-  );
-  return mod.default(req);
+    const mod = await import(
+        `data:text/tsx,${
+            encodeURIComponent(
+                `export default (req: Request) => Response.json("I work!")`,
+            )
+        }`
+    );
+    return mod.default(req);
 }
 ```
 
@@ -61,15 +66,15 @@ how to execute untrusted code safely, using Deno's
 [Web Worker](https://docs.deno.com/runtime/reference/web_platform_apis/#web-workers)
 and
 [granular permissions](https://docs.deno.com/runtime/reference/web_platform_apis/#specifying-worker-permissions).
-We can build all sorts of things with this, like secure playgrounds for writing code,
-or scripting interfaces for existing applications.
+We can build all sorts of things with this, like secure playgrounds for writing
+code, or scripting interfaces for existing applications.
 
-With a little cleverness, we can use Web Workers as a sandbox for
-user-defined HTTP handlers!
+With a little cleverness, we can use Web Workers as a sandbox for user-defined
+HTTP handlers!
 
 By wrapping things in a Deno Web Worker, we can isolate user code from the
-parent process. This'll give us much better security guarantees than the `import()`
-method did.
+parent process. This'll give us much better security guarantees than the
+`import()` method did.
 
 Here's a very minimal example:
 
@@ -99,11 +104,13 @@ Notice that we've added the permission `{net: false}` to lock things down even
 further. Now the running code also doesn't get to make HTTP requests.
 
 Web Workers make us _work_ a little harder to call that user-provided function:
-we're passing messages here instead of calling functions directly. That's the cost
-of better security.
+we're passing messages here instead of calling functions directly. That's the
+cost of better security.
 
-We're passing messages back and forth using [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage), which has some limitations on the kinds of objects it can transmit –
-passing numbers back and forth like this is fine:
+We're passing messages back and forth using
+[postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage),
+which has some limitations on the kinds of objects it can transmit – passing
+numbers back and forth like this is fine:
 
 ```ts
 await workerEval(`export default (a, b) => a+b`, [1, 2]);
@@ -114,69 +121,71 @@ But we can't just pass a complex object like a `Request`.
 
 ```ts
 await workerEval(`export default (req) => req`, [
-  new Request("https:/val.town"),
+    new Request("https:/val.town"),
 ]); // => {}
 ```
 
-Only [structured-cloneable](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#supported_types) types
-are supported.
+Only
+[structured-cloneable](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#supported_types)
+types are supported.
 
-That's a bummer - how are we going to implement an HTTP handler if we can't
-send requests and responses between the user code and the system?
+That's a bummer - how are we going to implement an HTTP handler if we can't send
+requests and responses between the user code and the system?
 
 ### Put a Server in the Worker
 
 If we can't send `Request` and `Response` using `postMessage`, then let's set up
-a web server in the Worker and communicate directly
-with that, instead of using `postMessage`. Here's how it works with
+a web server in the Worker and communicate directly with that, instead of using
+`postMessage`. Here's how it works with
 [reqEvaltown](https://www.val.town/v/maxm/reqEvaltown) the library I've created
 to handle HTTP requests within a Worker.
 
 ```ts
 export async function serveRequest(
-  req: Request,
-  importUrl: string
+    req: Request,
+    importUrl: string,
 ): Promise<Response> {
-  let port = await getFreePort();
-  const worker = new Worker(
-    `https://esm.town/v/maxm/evaltownWorker?cachebust=${crypto.randomUUID()}`,
-    {
-      type: "module",
-      deno: {
-        permissions: {
-          net: [`0.0.0.0:${port}`, `esm.sh:443`, `esm.town:443`],
-          read: false,
-          write: false,
+    let port = await getFreePort();
+    const worker = new Worker(
+        `https://esm.town/v/maxm/evaltownWorker?cachebust=${crypto.randomUUID()}`,
+        {
+            type: "module",
+            deno: {
+                permissions: {
+                    net: [`0.0.0.0:${port}`, `esm.sh:443`, `esm.town:443`],
+                    read: false,
+                    write: false,
+                },
+            },
         },
-      },
-    }
-  );
-  worker.postMessage({
-    port,
-    importUrl,
-  });
-  worker.onmessage = (event) => console.log(event.data);
-  setTimeout(worker.terminate, 10_000); // request timeout
-  await isPortListening(port);
-  const { pathname, search } = new URL(req.url);
-  const url = new URL("." + pathname, "http://localhost:" + port);
-  url.search = search;
-  const resp = await fetch(url, {
-    method: req.method,
-    headers: req.headers,
-    body: req.body,
-    redirect: "manual",
-  });
-  return resp;
+    );
+    worker.postMessage({
+        port,
+        importUrl,
+    });
+    worker.onmessage = (event) => console.log(event.data);
+    setTimeout(worker.terminate, 10_000); // request timeout
+    await isPortListening(port);
+    const { pathname, search } = new URL(req.url);
+    const url = new URL("." + pathname, "http://localhost:" + port);
+    url.search = search;
+    const resp = await fetch(url, {
+        method: req.method,
+        headers: req.headers,
+        body: req.body,
+        redirect: "manual",
+    });
+    return resp;
 }
 ```
 
 Within this function, we:
 
 1. Find an available port.
-2. Spawn a Worker using our [script](https://www.val.town/v/maxm/evaltownWorker).
-   We're running the Worker with limited permissions to allow the server to run
-   and allow some https imports to work, but otherwise block network activity.
+2. Spawn a Worker using our
+   [script](https://www.val.town/v/maxm/evaltownWorker). We're running the
+   Worker with limited permissions to allow the server to run and allow some
+   https imports to work, but otherwise block network activity.
 3. Send a message to the Worker with the port and importUrl.
 4. Wait for the post to be available.
 5. Proxy our request to the Worker and return the response.
@@ -187,38 +196,38 @@ the exchange.
 
 ```ts
 const start = (port: number, importUrl: string) => {
-  import(importUrl)
-    .then((m) => {
-      mod = m;
-    })
-    .catch((err) => {
-      modError = err;
-      console.error(err);
-    })
-    .finally(() => {
-      doneLoading = true;
-      for (const { req, resolve } of pendingRequests) {
-        handleRequest(req).then(resolve);
-      }
-    });
-  Deno.serve(
-    {
-      port,
-      onListen: () => {},
-      onError: (err) => {
-        console.error(err);
-        return errorResponse(err);
-      },
-    },
-    (req) => {
-      if (!doneLoading) {
-        return new Promise<Response>((resolve) => {
-          pendingRequests.push({ req, resolve });
+    import(importUrl)
+        .then((m) => {
+            mod = m;
+        })
+        .catch((err) => {
+            modError = err;
+            console.error(err);
+        })
+        .finally(() => {
+            doneLoading = true;
+            for (const { req, resolve } of pendingRequests) {
+                handleRequest(req).then(resolve);
+            }
         });
-      }
-      return handleRequest(req);
-    }
-  );
+    Deno.serve(
+        {
+            port,
+            onListen: () => {},
+            onError: (err) => {
+                console.error(err);
+                return errorResponse(err);
+            },
+        },
+        (req) => {
+            if (!doneLoading) {
+                return new Promise<Response>((resolve) => {
+                    pendingRequests.push({ req, resolve });
+                });
+            }
+            return handleRequest(req);
+        },
+    );
 };
 ```
 
@@ -230,17 +239,17 @@ handler.
 
 ### UI
 
-Now for the fun part: we head over to [Townie](https://www.val.town/townie)
-to create the UI. I
-asked for a simple site with minimal styling that accepted user code in a text
-box and stored it in a SQLite database. From there I made a few manual tweaks,
-hooked up the code in the database to the request handler endpoint, added some
-stylistic touches, and tweaked a few things with Townie's help.
+Now for the fun part: we head over to [Townie](https://www.val.town/townie) to
+create the UI. I asked for a simple site with minimal styling that accepted user
+code in a text box and stored it in a SQLite database. From there I made a few
+manual tweaks, hooked up the code in the database to the request handler
+endpoint, added some stylistic touches, and tweaked a few things with Townie's
+help.
 
 Try it out 👉 https://maxm-valtowntown.web.val.run
 
-The functionality is quite limited compared to Val Town, but you can still do lots
-of things. You can
+The functionality is quite limited compared to Val Town, but you can still do
+lots of things. You can
 [host TLDraw](https://maxm-valtowntown.web.val.run/handler/29), build
 [a React Playground](https://maxm-valtowntown.web.val.run/handler/31), and even
 [stream Server Sent Events](https://maxm-valtowntown.web.val.run/handler/30).
@@ -249,14 +258,14 @@ of things. You can
 <hr />
 <br />
 
-And there you have it: you can implement a subset of Val
-Town's functionality on Val Town itself!
+And there you have it: you can implement a subset of Val Town's functionality on
+Val Town itself!
 
-Workers provide a viable security sandbox, but it's important to note that
-it is not as isolated or safe
-as [the runtime strategy that we use today](https://blog.val.town/blog/first-four-val-town-runtimes/),
-which uses process isolation as well. Be careful when implementing this
-and any other security-sensitive code on Val Town in your accounts!
+Workers provide a viable security sandbox, but it's important to note that it is
+not as isolated or safe as
+[the runtime strategy that we use today](https://blog.val.town/blog/first-four-val-town-runtimes/),
+which uses process isolation as well. Be careful when implementing this and any
+other security-sensitive code on Val Town in your accounts!
 
 There are many more features that would be possible to implement:
 
