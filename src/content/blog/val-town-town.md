@@ -13,28 +13,29 @@ _Val Town Town is Val Town implemented on Val Town. Check it out
 [here](https://maxm-valtowntown.web.val.run/). Fork it, extend it, build stuff
 on it, or read on if you'd like to learn more._
 
-I recently [published a Val](https://www.val.town/v/maxm/eval) that demonstrates
-how to execute untrusted code safely. Under the hood it uses Deno's
-[`Web Worker`](https://docs.deno.com/runtime/reference/web_platform_apis/#web-workers)
-and the more granular
-[`Worker` permissions](https://docs.deno.com/runtime/reference/web_platform_apis/#specifying-worker-permissions).
+Val Town lets you build all sorts of tools with vals: HTTP handlers, crons,
+email endpoints, frontend applications, the list goes on. But
+_can you build Val Town with Val Town_? With a few caveats, the answer
+is yes: let's dive in.
 
-We can build all sorts of things with this building block. Secure playgrounds,
-or a platform that allows users to extend functionality with custom code. Well
-what about implementing something like Val Town? On Val Town you can run crons,
-or scripts, or HTTP handlers, but at the core it's just storing some data and
-running isolated Typescript. Could we implement Val Town on itself?
+### Handling a Request with import
 
-Let's try building a version of val town that just handles writing an HTTP
-handler. You'll get to write code that handles a web request and returns a
-response, and the platform we're building will deploy that code and make it
-available on the internet!
+So we want to accept user code, parse and execute it, and use it to handle a web
+request.
 
-### Handling a Request
-
-We want to accept user code, parse and execute it, and use it to handle a web
-request. We effectively want to do this
+The most naïve and solution is to use JavaScript's [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
+functionality to load their code.
+We effectively want to do this
 ([source](https://www.val.town/v/maxm/VTTnosecurity)):
+
+Supposing the user-provided HTTP handler looks like this:
+
+```ts
+export default (req: Request) => Response.json("I work!")
+```
+
+We wrap it in our runtime by creating a [data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/data)
+including the code, calling import, and running the default export:
 
 ```tsx val
 export default async function (req: Request): Promise<Response> {
@@ -49,22 +50,30 @@ export default async function (req: Request): Promise<Response> {
 }
 ```
 
-Our user wants to exclaim `I work!` and hands us a request handler that provides
-that response. We turn that code into an importable module url, import it with a
-dynamic import, and then process our request by calling the default export
-directly. We've done it, yay!
+This works, but is very dangerous: there's almost no separation between the
+system code and the user code. The user code has access to the same memory and
+permissions that we do. It could read our secrets in `Deno.env` or mess with objects on
+`globalThis`. This is barely better than the much-feared [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) method.
 
-The only issue is that in this current stat this is terribly insecure. When we
-call `import(` the user code has access to the same memory and permissions that
-we do. It could read our secrets in `Deno.env` or mess with objects on
-`globalThis`. How can we lock things down?
+How can we lock things down?
 
-### Web Workers
+### Using Web Workers
 
-By wrapping things in a Deno
-[`Web Worker`](https://docs.deno.com/runtime/reference/web_platform_apis/#web-workers)
-we can isolate user code from the parent process. Just like the eval example we
-can create a Worker, send it our user code, and then send back the response.
+I recently [published a Val](https://www.val.town/v/maxm/eval) that demonstrates
+how to execute untrusted code safely, using Deno's
+[Web Worker](https://docs.deno.com/runtime/reference/web_platform_apis/#web-workers)
+and
+[granular permissions](https://docs.deno.com/runtime/reference/web_platform_apis/#specifying-worker-permissions).
+We can build all sorts of things with this, like secure playgrounds for writing code,
+or scripting interfaces for existing applications.
+
+With a little cleverness, we can use Web Workers as a sandbox for
+user-defined HTTP handlers!
+
+By wrapping things in a Deno Web Worker, we can isolate user code from the
+parent process. This'll give us much better security guarantees than the `import()`
+method did.
+
 Here's a very minimal example:
 
 ```ts
@@ -90,17 +99,21 @@ self.onmessage = async (e) => {
 ```
 
 Notice that we've added the permission `{net: false}` to lock things down even
-further. Now the running code also doesn't get to use the network.
+further. Now the running code also doesn't get to make HTTP requests.
 
-We could call this function like so, and it will return the result we expect?
+Web Workers make us _work_ a little harder to call that user-provided function:
+we're passing messages here instead of calling functions directly. That's the cost
+of better security.
+
+We're passing messages back and forth using [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage), which has some limitations on the kinds of objects it can transmit –
+passing numbers back and forth like this is fine:
 
 ```ts
 await workerEval(`export default (a, b) => a+b`, [1, 2]);
 // => 3
 ```
 
-Things get a little more complicated if we want to try and send a request across
-the boundary though.
+But we can't just pass a complex object like a `Request`.
 
 ```ts
 await workerEval(`export default (req) => req`, [
@@ -108,15 +121,19 @@ await workerEval(`export default (req) => req`, [
 ]); // => {}
 ```
 
-Sadly the request cannot be sent between the parent process and the Worker. Hmm,
-how are we going to implement an HTTP handler then?
+Only [structured-cloneable](https://developer.mozilla.org/en-US/docs/Web/API/Web_Workers_API/Structured_clone_algorithm#supported_types) types
+are supported.
+
+That's a bummer - how are we going to implement an HTTP handler if we can't
+send requests and responses between the user code and the system?
 
 ### Put a Server in the Worker
 
-If we can't send `Request` and `Response` using `postMessage` then let's set up
-a web server in the Worker to communicate with. Here's how it works with
+If we can't send `Request` and `Response` using `postMessage`, then let's set up
+a web server in the Worker and communicate directly
+with that, instead of using `postMessage`. Here's how it works with
 [reqEvaltown](https://www.val.town/v/maxm/reqEvaltown) the library I've created
-to handle http requests within a Worker.
+to handle HTTP requests within a Worker.
 
 ```ts
 export async function serveRequest(
@@ -160,7 +177,7 @@ export async function serveRequest(
 Within this function, we:
 
 1. Find an available port.
-2. Span a Worker using our [script](https://www.val.town/v/maxm/evaltownWorker).
+2. Spawn a Worker using our [script](https://www.val.town/v/maxm/evaltownWorker).
    We're running the Worker with limited permissions to allow the server to run
    and allow some https imports to work, but otherwise block network activity.
 3. Send a message to the Worker with the port and importUrl.
@@ -210,14 +227,20 @@ handler.
 
 ### UI
 
-Now we head over to [Townie](https://www.val.town/townie) to create the UI. I
+Now for the fun part: we head over to [Townie](https://www.val.town/townie)
+to create the UI. I
 asked for a simple site with minimal styling that accepted user code in a text
 box and stored it in a SQLite database. From there I made a few manual tweaks,
 hooked up the code in the database to the request handler endpoint, added some
 stylistic touches, and tweaked a few things with Townie's help.
 
-All that is ready and working here: https://maxm-valtowntown.web.val.run. The
-functionality is quite limited compared to Val Town, but you can still do lots
+Try it out:
+
+<div>
+<a style="font-size:20px;display:block;padding:10px;border-radius:5px;background:#eee;" href="https://maxm-valtowntown.web.val.run">👉 https://maxm-valtowntown.web.val.run</a>
+</div>
+
+The functionality is quite limited compared to Val Town, but you can still do lots
 of things. You can
 [host TLDraw](https://maxm-valtowntown.web.val.run/handler/29), build
 [a React Playground](https://maxm-valtowntown.web.val.run/handler/31), and even
@@ -227,10 +250,14 @@ of things. You can
 <hr />
 <br />
 
-And there you have it. It is indeed possible to implement a basic subset of Val
-Town's functionality on Val Town itself. As always, make sure to be very careful
-running untrusted code. While Worker's provide us a nice security boundary you
-should be very cautious editing and running this code on your own account.
+And there you have it: you can implement a subset of Val
+Town's functionality on Val Town itself!
+
+Workers provide a viable security sandbox, but it's important to note that
+it is not as isolated or safe
+as [the runtime strategy that we use today](https://blog.val.town/blog/first-four-val-town-runtimes/),
+which uses process isolation as well. Bare careful when implementing this
+and any other security-sensitive code on Val Town in your accounts!
 
 There are many more features that would be possible to implement:
 
