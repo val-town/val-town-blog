@@ -36,7 +36,7 @@ potential damage from a compromised val.
 ## Safer Defaults
 
 The new default scopes for a val will include everything except `val:write` and
-`user:write` to limit potential damage from misconfigurations, vulnerable
+`user:write` to limit potential damage from misconfiguration, vulnerable
 libraries, or account compromises.
 
 Without the ability to mutate Val resources, unauthorized actors cannot execute
