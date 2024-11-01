@@ -5,8 +5,8 @@ pubDate: Oct 3, 2024
 author: Max McDonnell
 ---
 
-We've added scopes to Val Town API tokens. This will give you more granular
-control over what your API tokens can do.
+We've added scopes to Val Town API tokens to give you more granular control over
+what vals can do and more security for your custom uses of the Val Town [REST API](https://docs.val.town/openapi).
 
 We'll also be introducing scopes to vals, so you can control which resources
 your vals can access.
