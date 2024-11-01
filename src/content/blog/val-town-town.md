@@ -1,17 +1,13 @@
 ---
 title: Val Town Town
-generated: 1701894028953
 description: Can we implement Val Town on Val Town?
-pubDate: Oct 30, 2024
+pubDate: Nov 1, 2024
 author: Max McDonnell
 ---
 
 [![](./val-town-town/screenshot.png)](https://maxm-valtowntown.web.val.run)
 
-_Val Town Town is Val Town implemented on Val Town. Check it out
-[here](https://www.val.town/v/maxm/valtowntown) or
-[here](https://maxm-valtowntown.web.val.run/). Fork it, extend it, build stuff
-on it, or read on if you'd like to learn more._
+_[Val Town Town](https://www.val.town/v/maxm/valtowntown) is Val Town implemented on Val Town._
 
 Val Town lets you build all sorts of tools with vals: HTTP handlers, crons,
 email endpoints, frontend applications, the list goes on. But
@@ -25,13 +21,11 @@ request.
 
 The most naïve and solution is to use JavaScript's [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
 functionality to load their code.
-We effectively want to do this
-([source](https://www.val.town/v/maxm/VTTnosecurity#L1)):
 
 Supposing the user-provided HTTP handler looks like this:
 
 ```ts
-export default (req: Request) => Response.json("I work!")
+export default (req: Request) => Response.json("I work!");
 ```
 
 We wrap it in our runtime by creating a [data URL](https://developer.mozilla.org/en-US/docs/Web/URI/Schemes/data)
@@ -39,21 +33,22 @@ including the code, calling import, and running the default export:
 
 ```tsx val
 export default async function (req: Request): Promise<Response> {
-    const mod = await import(
-        `data:text/tsx,${
-            encodeURIComponent(
-                `export default (req: Request) => Response.json("I work!")`,
-            )
-        }`
-    );
-    return mod.default(req);
+  const mod = await import(
+    `data:text/tsx,${encodeURIComponent(
+      `export default (req: Request) => Response.json("I work!")`
+    )}`
+  );
+  return mod.default(req);
 }
 ```
 
-This works, but is very dangerous: there's almost no separation between the
+[View this code running on Val Town.
+
+This [works](https://www.val.town/v/maxm/VTTnosecurity), but is very dangerous:
+there's almost no separation between the
 system code and the user code. The user code has access to the same memory and
 permissions that we do. It could read our secrets in `Deno.env` or mess with objects on
-`globalThis`. This is barely better than the much-feared [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) method.
+`globalThis`. This is barely better than the much-feared [eval()](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) method. _(Fun side note: Val Town was originally called "Eval Town" but was shortened when we started calling the blocks of code "vals".)_
 
 How can we lock things down?
 
@@ -117,7 +112,7 @@ But we can't just pass a complex object like a `Request`.
 
 ```ts
 await workerEval(`export default (req) => req`, [
-    new Request("https:/val.town"),
+  new Request("https:/val.town"),
 ]); // => {}
 ```
 
@@ -137,40 +132,40 @@ to handle HTTP requests within a Worker.
 
 ```ts
 export async function serveRequest(
-    req: Request,
-    importUrl: string,
+  req: Request,
+  importUrl: string
 ): Promise<Response> {
-    let port = await getFreePort();
-    const worker = new Worker(
-        `https://esm.town/v/maxm/evaltownWorker?cachebust=${crypto.randomUUID()}`,
-        {
-            type: "module",
-            deno: {
-                permissions: {
-                    net: [`0.0.0.0:${port}`, `esm.sh:443`, `esm.town:443`],
-                    read: false,
-                    write: false,
-                },
-            },
+  let port = await getFreePort();
+  const worker = new Worker(
+    `https://esm.town/v/maxm/evaltownWorker?cachebust=${crypto.randomUUID()}`,
+    {
+      type: "module",
+      deno: {
+        permissions: {
+          net: [`0.0.0.0:${port}`, `esm.sh:443`, `esm.town:443`],
+          read: false,
+          write: false,
         },
-    );
-    worker.postMessage({
-        port,
-        importUrl,
-    });
-    worker.onmessage = (event) => console.log(event.data);
-    setTimeout(worker.terminate, 10_000); // request timeout
-    await isPortListening(port);
-    const { pathname, search } = new URL(req.url);
-    const url = new URL("." + pathname, "http://localhost:" + port);
-    url.search = search;
-    const resp = await fetch(url, {
-        method: req.method,
-        headers: req.headers,
-        body: req.body,
-        redirect: "manual",
-    });
-    return resp;
+      },
+    }
+  );
+  worker.postMessage({
+    port,
+    importUrl,
+  });
+  worker.onmessage = (event) => console.log(event.data);
+  setTimeout(worker.terminate, 10_000); // request timeout
+  await isPortListening(port);
+  const { pathname, search } = new URL(req.url);
+  const url = new URL("." + pathname, "http://localhost:" + port);
+  url.search = search;
+  const resp = await fetch(url, {
+    method: req.method,
+    headers: req.headers,
+    body: req.body,
+    redirect: "manual",
+  });
+  return resp;
 }
 ```
 
@@ -190,32 +185,38 @@ the exchange.
 
 ```ts
 const start = (port: number, importUrl: string) => {
-    import(importUrl).then((m) => {
-        mod = m;
-    }).catch((err) => {
-        modError = err;
+  import(importUrl)
+    .then((m) => {
+      mod = m;
+    })
+    .catch((err) => {
+      modError = err;
+      console.error(err);
+    })
+    .finally(() => {
+      doneLoading = true;
+      for (const { req, resolve } of pendingRequests) {
+        handleRequest(req).then(resolve);
+      }
+    });
+  Deno.serve(
+    {
+      port,
+      onListen: () => {},
+      onError: (err) => {
         console.error(err);
-    }).finally(() => {
-        doneLoading = true;
-        for (const { req, resolve } of pendingRequests) {
-            handleRequest(req).then(resolve);
-        }
-    });
-    Deno.serve({
-        port,
-        onListen: () => {},
-        onError: (err) => {
-            console.error(err);
-            return errorResponse(err);
-        },
-    }, (req) => {
-        if (!doneLoading) {
-            return new Promise<Response>((resolve) => {
-                pendingRequests.push({ req, resolve });
-            });
-        }
-        return handleRequest(req);
-    });
+        return errorResponse(err);
+      },
+    },
+    (req) => {
+      if (!doneLoading) {
+        return new Promise<Response>((resolve) => {
+          pendingRequests.push({ req, resolve });
+        });
+      }
+      return handleRequest(req);
+    }
+  );
 };
 ```
 
@@ -234,11 +235,7 @@ box and stored it in a SQLite database. From there I made a few manual tweaks,
 hooked up the code in the database to the request handler endpoint, added some
 stylistic touches, and tweaked a few things with Townie's help.
 
-Try it out:
-
-<div>
-<a style="font-size:20px;display:block;padding:10px;border-radius:5px;background:#eee;" href="https://maxm-valtowntown.web.val.run">👉 https://maxm-valtowntown.web.val.run</a>
-</div>
+Try it out 👉 https://maxm-valtowntown.web.val.run
 
 The functionality is quite limited compared to Val Town, but you can still do lots
 of things. You can
@@ -269,6 +266,6 @@ There are many more features that would be possible to implement:
 4. Could you provide user accounts? Environment variables? Database access?
 5. Val Town Town
    [cannot run itself](https://maxm-valtowntown.web.val.run/handler/37), can you
-   fix that?
+   fix that so we can make Val Town Town Town?!
 
 Fork the code and see what you can make!
