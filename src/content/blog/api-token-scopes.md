@@ -48,7 +48,7 @@ them.
 
 ## Github Secret Scanning
 
-We're joining the Github Secret Scanning program, so if your API token is leaked
+We're joining the Github [Secret Scanning program](https://docs.github.com/en/code-security/secret-scanning/introduction/about-secret-scanning), so if your API token is leaked
 in a public Github repository, we'll be notified and can revoke the token.
 
 ## Migrating current users
