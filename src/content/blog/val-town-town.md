@@ -26,7 +26,7 @@ request.
 The most naïve and solution is to use JavaScript's [dynamic import](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/import)
 functionality to load their code.
 We effectively want to do this
-([source](https://www.val.town/v/maxm/VTTnosecurity)):
+([source](https://www.val.town/v/maxm/VTTnosecurity#L1)):
 
 Supposing the user-provided HTTP handler looks like this:
 
