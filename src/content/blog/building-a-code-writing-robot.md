@@ -129,7 +129,7 @@ Another potential solution that we've struggled to implement successfully is _di
 ![Anthropic uptime](./code-writing-robot/slide-20.png)
 ![OpenAI uptime](./code-writing-robot/slide-21.png)
 
-Unfortunately, we've also hit reliability issues with both Anthropic and OpenAI – both center around two nines of uptime recently. There's not too much we can do about this without hosting the models ourselves, so we have just decided to really double down on implementing good error handling in our application and have recently adopted [neverthrow](https://github.com/supermacro/neverthrow) to improve how we use errors in TypeScript.
+Unfortunately, we've also hit reliability issues with both Anthropic and OpenAI – both center around two nines of uptime recently. They're doing magical things, it's understandable that there are some speed bumps along the way! But there's not too much we can do about this without hosting the models ourselves, so we have just decided to really double down on implementing good error handling in our application and have recently adopted [neverthrow](https://github.com/supermacro/neverthrow) to improve how we use errors in TypeScript.
 
 <br />
 
