@@ -3,7 +3,7 @@ title: Building a code-writing robot and keeping it happy
 description: Our experiences running LLMs in production
 pubDate: November 8, 2024
 author: Tom MacWright
-heroImage: ./code-writing-robot/slide-1.png
+image: ./code-writing-robot/slide-1.png
 ---
 
 I recently gave this talk at a lovely event put on by our friends at
