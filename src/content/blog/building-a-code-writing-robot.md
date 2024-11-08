@@ -67,7 +67,7 @@ The good models are expensive. LLMs eat money. We're practicing financial discip
 
 The easiest cost and performance alpha is just using different providers for different tasks. For example, when someone creates a val, we want to generate the TypeScript code for that val, which is pretty nitpicky work: it needs to work with [Deno](https://deno.com/)'s TypeScript environment and it should reliably know whether it's running on the frontend or the backend, and so on. For that we use Sonnet, which is pretty expensive.
 
-But then once we have the generate code, we want to generate a name for it, given both the prompt and response to that prompt: for that we use [OpenAI GPT-4o](https://openai.com/index/hello-gpt-4o/), which is cheap, fast, and good enough.
+But then once we have the generated code, we want to generate a name for it, given both the prompt and response to that prompt: for that we use [OpenAI GPT-4o](https://openai.com/index/hello-gpt-4o/), which is cheap, fast, and good enough.
 
 
 <br />
