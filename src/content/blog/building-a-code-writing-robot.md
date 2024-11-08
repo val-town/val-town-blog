@@ -27,16 +27,14 @@ Val Town is mostly a platform for running little bits of JavaScript that we call
 
 <video controls><source src="/video/townie-presentation.mp4" /></video>
 
-Here's the feature I'm talking about today - Townie. It's the Val Town bot. If you want to be old-fashioned, you can write the code yourself with your hands and fingers, but Townie will let you write it indirectly with English. It's similar in broad strokes to Anthropic Artifacts or Vercel v0, but one of the biggest differences is that the artifacts have full-stack backends, can be shared and forked, and so on.
+Here's the feature I'm talking about today - Townie. It's the Val Town bot. If you want to be old-fashioned, you can write the code yourself with your hands and fingers, but Townie will let you write it indirectly with English. It's similar in broad strokes to [Anthropic Artifacts](https://www.anthropic.com/news/artifacts) or [Vercel v0](https://v0.dev/), but one of the biggest differences is that the artifacts have full-stack backends, can be shared and forked, and so on.
 
 <br />
 
 
 ![Flowchart of Townie's LLM usage, including using Sonnet and OpenAI](./code-writing-robot/slide-4.png)
 
-In contrast to the pretty cutting-edge stuff that everyone else has been talking about, we're probably running more of a plain-vanilla setup.
-
-The meat and potatoes of Val Town are the challenges of running a lot of user code, at scale, with good security guarantees, and building community and collaboration tools.
+We're running a pretty plain-vanilla LLM setup! The meat and potatoes of Val Town are the challenges of running a lot of user code, at scale, with good security guarantees, and building community and collaboration tools. We aren't training our own models or running our own GPU clusters.
 
 So for LLMs, we're riding on the coattails of [Anthropic](https://www.anthropic.com/) and OpenAI and running none of our own LLM infrastructure.
 
@@ -75,7 +73,7 @@ But then once we have the generate code, we want to generate a name for it, give
 
 ![Use am abstraction library because you will switch models](./code-writing-robot/slide-9.png)
 
-And to use different models, it's really nice to use an abstraction library like @vercel/ai, which is what we've been using. I know that there are several hundred options, so that isn't a fully-researched approved recommendation, but it's worked fine for us.
+And to use different models, it's really nice to use an abstraction library like [@vercel/ai](https://sdk.vercel.ai/docs/introduction), which is what we've been using. I know that there are several hundred options, so that isn't a fully-researched approved recommendation, but it's worked fine for us.
 
 <br />
 
@@ -96,7 +94,7 @@ Our first line of defense against this is just reminding users that Townie gets 
 
 ![caching old messages saves us a lot of money](./code-writing-robot/slide-14.png)
 
-Caching old messages supposedly lets Anthropic amortize the cost of parsing messages and turning them into embeddings or whatever kind of fancy internal representation they have. It costs more money to create the cached stuff initially, but less to use it later.
+Caching old messages somehow lets Anthropic amortize the cost of parsing messages and turning them into embeddings or whatever kind of fancy internal representation they have. It costs more money to create the cached stuff initially, but less to use it later.
 
 <br />
 
