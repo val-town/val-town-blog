@@ -1,0 +1,93 @@
+---
+title: Val Town Newsletter 22
+description: TODO
+pubDate: November 20, 2024
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+import PrettyErrors from "./val-town-newsletter-21/pretty-errors.png";
+
+TODO
+
+## 🤖 Townie upgrades
+
+- Restore past versions - probably a video for this one! (like the one on twitter and discord)
+- Anthropic Prompt Caching, saving 40% and perf improvement
+- Upgraded to Sonnet 3.5 New (maybe worse?)
+- Haiku - need to figure out what we're doing here
+  - if we add it, track the model in the db
+- Detects more server-side errors automatically
+- Lets you view errors before sending them back to Townie
+- Have it include the deployed URL in its response
+- Get it to not reply with "// code remains unchanged"
+- https://blog.val.town/blog/building-a-code-writing-robot/
+- Limits & credits are coming as fast as we can
+  - Free users will get to try Townie, using Haiku, but not very much
+  - Pro users will get higher limits
+  - If you hit the daily limits, please email steve@val.town if you'd like to inquire about purchasing a higher plan. We'd love your input on how much you'd like to pay to use Townie more!
+
+## Scoped Permissions
+
+https://blog.val.town/blog/api-token-scopes/
+
+## Fal Partnership
+
+https://blog.val.town/blog/fal/
+
+## Videos
+
+Videos are a great way to learn the pro tips & tricks for Val Town.
+
+TODO - link to the videos
+
+## 🎉 Other updates
+
+- Privacy filter on profile pages, so you can view all your vals on your own profile page – thanks TODO for the feature request!
+- Fixed bugs related to 'Discard Changes' and stale editor state in Townie
+- Simplified our pricing page and expanded the Pro tier to 500 HTTP requests per minute for HTTP vals
+- Other users' vals are focusable and searchable
+- Finally no more confirm modals, we have a proper modal
+- HTTP errors always have stacktraces, which link directly to val source lines
+- Improve val generated names and validation
+- Fix our CORS headers – thanks TODO
+- Improve our Custom Domains UI and docs
+- Ability to delete a val's version on the val's /versions page
+- Fix the logs showing old runs that never finished at the top
+- Fix simple cron UI bug
+- Discontinued Eval API
+- [Fixed beta & structured outputs for std/openai](https://www.val.town/v/stevekrouse/openai_structured_output_demo) 🙏 alfonso for the bug report
+- Link to edit profile photo on the profile settings page – thanks Ivan Reese for the question that pushed us to do it 🙏
+
+## 🛣️ Roadmap
+
+TODO - linkify to https://github.com/val-town/val-town-product/discussions?discussions_q=is%3Aopen+sort%3Atop
+
+- Multi-file Projects
+  - allow huge real projects, relative imports, three-way merges - launch in Dec
+  - maybe screenshot
+- /dogfooding - a page that shows all the vals we use internally
+- /explore - a new page to find interesting vals
+- Val- & project- scoped environment variables
+- LLM Switcher for Townie
+- Experimenting with diffs, fast-edit, tool-use for Townie speed
+- Team accounts
+- Websocket vals
+- Searchable & filterable logs and traces
+- Scale plan – scale to infinity & usage-based pricing, with custom alerts & caps
+- SOC2
+- Townie integrated into the full-screen editor
+- Improved code search
+- Hyphens in val names
+- Comments on pull requests
+
+Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
+
+## 🌟 Community vals
+
+- Community vals
+- llamapalooza vals
+- robin sloan space video val (could link to a tweet)
+- TODO review #showcase and twitter and postgres query
+- Robin Sloan val video
+- https://x.com/deepfates/status/1846998463759913158]
