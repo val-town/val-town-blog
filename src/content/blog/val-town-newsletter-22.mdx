@@ -1,63 +1,135 @@
 ---
 title: Val Town Newsletter 22
-description: TODO
+description: Townie upgrades, Scoped API permissions, Fal partnership
 pubDate: November 20, 2024
 author: Steve Krouse
 ---
 
-import { Image } from "astro:assets";
-import PrettyErrors from "./val-town-newsletter-21/pretty-errors.png";
+<style>
+  {`
+    .lineup {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 20px;
+    }
+    figcaption {
+      margin-top: -20px;
+    }
+    .border {
+      border: 2px solid #eaeaea;
+      padding: 5px;
+    }
+    #subscribe {
+      font-size: 20px; 
+      border: 2px solid #143f9d; 
+      text-align:center; 
+      border-radius: 5px; 
+      text-decoration: none; 
+      display: block;
+    }
+    #subscribe:hover {
+      background-color: #143f9d;
+      color: white;
+    }
+`}
+</style>
 
-TODO
+import { Image } from "astro:assets";
+import Demo from "./fal/demo.png";
+import Faltown from "./fal/faltown.png";
+
+Our team's main focus this month has been multi-file projects. Projects will enable you to create infinitely complex real-world apps in Val Town – instead of being limited to a single long val. This will also improve the ability for LLM agents like Townie to help write your vals. We're hoping to have something to share before the year's out.
+
+In the meantime, we've shipped many other features and improvements, including a dozen Townie upgrades, scoped API permissions, a partnership with Fal, and dozens more.
 
 ## 🤖 Townie upgrades
 
-- Restore past versions - probably a video for this one! (like the one on twitter and discord)
-- Anthropic Prompt Caching, saving 40% and perf improvement
-- Upgraded to Sonnet 3.5 New (maybe worse?)
-- Haiku - need to figure out what we're doing here
-  - if we add it, track the model in the db
-- Detects more server-side errors automatically
-- Lets you view errors before sending them back to Townie
-- Have it include the deployed URL in its response
-- Get it to not reply with "// code remains unchanged"
-- https://blog.val.town/blog/building-a-code-writing-robot/
-- Limits & credits are coming as fast as we can
-  - Free users will get to try Townie, using Haiku, but not very much
-  - Pro users will get higher limits
-  - If you hit the daily limits, please email steve@val.town if you'd like to inquire about purchasing a higher plan. We'd love your input on how much you'd like to pay to use Townie more!
+The Townie experience has been massively upgraded this month, with a handful of the most important feature requests, and worst bugs fixed.
 
-## Scoped Permissions
+TODO video of restoring an old version, and possibly townie detecting and fixing an error
 
-https://blog.val.town/blog/api-token-scopes/
+By far the most common feature request for Townie has been the ability to preview the older versions of HTTP vals. This is now live! There's a dropdown in the bottom of the Preview tab in Townie to select an older version to preview, with the ability to restore that version. Thanks [Charlie](https://www.val.town/u/dcm31) for the tip to add the Restore button, and [Matt](https://www.val.town/u/neverstew) for the feedback on the wording of the button 🙏
 
-## Fal Partnership
+In order to make Townie sustainable, we rolled out usage limits. Inference is expensive, so we can only afford to let Free users try out Townie for about a dozen messages on a Haiku, a cheaper (albeit still fantastic) model. We hope this will help you get a sense of what Townie can do, and encourage you to upgrade to Pro if you want to use it regularly. Pro users will have much higher Townie limits. If you find that you're hitting your limits as a Pro user quite often, please reach out to me at steve@val.town with more context on your use case. We're eagerly looking for feedback on a higher-level Pro tier.
 
-https://blog.val.town/blog/fal/
+At long-last we fixed bugs with the Townie code editor getting out of sync or showing "unsaved changes" when there weren't any.
 
-## Videos
+We rolled out prompt caching ([try it on Val Town](https://www.val.town/v/stevekrouse/anthropicCaching)), which saves 40% on cost, and improves latency by up to 85% for long prompts.
 
-Videos are a great way to learn the pro tips & tricks for Val Town.
+We rolled out Sonnet 3.5 New, which is supposed to be even better at coding, but unfortunately had to rollback to Sonnet 3.5 Old, because the New version was resistant to writing very large blocks of code in their entirety. It added a lot of `// code remains unchanged here`. We fixed that issue with Anthropic's help, and are working through a couple other system prompt issues with Sonnet 3.5 New, but hope to get it rolled out in the coming weeks, likely with a toggle to switch between the two versions, and the new Haiku model, which is almost as good as Sonnet 3.5 Old, but much faster and cheaper.
 
-TODO - link to the videos
+Townie now detects more client-side and sever-side errors automatically, and has a clean UI to view the errors to help you decide if you want to debug them manually, dismiss them, or ask Townie to solve them for you.
+
+If you'd like to read more about behind-the-scenes of Townie, Tom gave a talk, which he turned into a blog post about it: [Building a Code Writing Robot](https://blog.val.town/blog/building-a-code-writing-robot/).
+
+## 🔐 Scoped Permissions
+
+We added API scopes to Val Town API tokens to give you more granular control over our REST API.
+
+We have read/write scopes for:
+
+- `val` – [vals](https://docs.val.town/openapi#tag/vals)
+- `user` – [user account details](https://docs.val.town/openapi#tag/me)
+- `blob` – [blob storage](https://docs.val.town/openapi#tag/blobs)
+- `sqlite` – [sqlite database](https://docs.val.town/openapi#tag/sqlite)
+- `email` – [ability to send emails](https://docs.val.town/openapi#tag/emails)
+
+The [API tokens page](https://www.val.town/settings/api)
+now lets you view and configure the scope of each token.
+You can also configure the scope of for each individual val
+on its settings page.
+[Learn more ➡](/blog/api-token-scopes/)
+
+## 🌄 Fal Partnership
+
+We announced a partnership with [Fal](https://fal.ai/), to bring their
+lightning-fast image generation API to Val Town users.
+[Learn more ➡](/blog/fal/)
+
+<div class='lineup'>
+  <div align="center">
+    <a href="https://www.val.town/v/stevekrouse/falDemoApp"> 
+      <Image src={Demo} alt="Simplest possible Fal app" class="border" />
+      <figcaption>
+        Simplest possible Fal app
+      </figcaption>
+    </a>
+  </div>
+
+  <div align="center">
+    <a href="https://www.val.town/v/fal/faltown">
+      <Image src=  {Faltown} alt="Simplified Midjourney, with type-safe API client, blob storage" class="border" />
+      <figcaption>
+      "Faltown" – variants, API client, blob storage
+      </figcaption>
+    </a>
+  </div>
+</div>
+
+## 📺 Videos
+
+Videos are a great way to learn the pro tips & tricks for Val Town. This month I live coded twith two wonderful guests:
+
+- **[Creating customer-enrichment workflows](https://www.youtube.com/live/wOyfS9-Q01I) with [Justin Duke](https://jmduke.com/)**, founder of [Buttondown](https://buttondown.email/)
+- **[Prototyping Markdown Extensions](https://www.youtube.com/live/oBuJoVV_yWc) with [Boris Berenberg](https://www.nothingeasyaboutthis.com/)**
 
 ## 🎉 Other updates
 
-- Privacy filter on profile pages, so you can view all your vals on your own profile page – thanks TODO for the feature request!
-- Fixed bugs related to 'Discard Changes' and stale editor state in Townie
-- Simplified our pricing page and expanded the Pro tier to 500 HTTP requests per minute for HTTP vals
-- Other users' vals are focusable and searchable
-- Finally no more confirm modals, we have a proper modal
+- You can now view all your vals on your own profile page – even private ones – with a privacy filter – thanks [Fabian](https://fabian.ai/) for the request 🙏
+- Simplified pricing page. Expanded the Pro tier from 100 to 500 HTTP val req / min – thanks [Izu](https://www.val.town/u/izuchukwu) for the feedback 🙏
+- Simplified and unified buttons to edit a val's name, type, etc – thanks [Fabian](https://fabian.ai/) for the request 🙏
+- [Others' vals are focusable and searchable](https://x.com/stevekrouse/status/1851670974019559621)
 - HTTP errors always have stacktraces, which link directly to val source lines
-- Improve val generated names and validation
-- Fix our CORS headers – thanks TODO
+- We improve val generated names and validation
+- Fix our CORS headers – thanks [Andreas](https://www.val.town/u/rozek) 🙏
 - Improve our Custom Domains UI and docs
-- Ability to delete a val's version on the val's /versions page
-- Fix the logs showing old runs that never finished at the top
-- Fix simple cron UI bug
-- Discontinued Eval API
-- [Fixed beta & structured outputs for std/openai](https://www.val.town/v/stevekrouse/openai_structured_output_demo) 🙏 alfonso for the bug report
-- Link to edit profile photo on the profile settings page – thanks Ivan Reese for the question that pushed us to do it 🙏
+- Added buttons to the val versions page to preview old versions, view their code, and delete them
+- Fixed the logs showing old traces that stalled
+- Fixed cron UI bug
+- Discontinued Eval API and upgraded all HTTP vals to the new concurrent runtime
+- [Fixed beta & structured outputs for std/openai](https://www.val.town/v/stevekrouse/openai_structured_output_demo) – thanks [Alfonso](https://www.val.town/u/alfongj) for the bug report 🙏
+- Added a link to edit your profile photo on the profile settings page – thanks [Ivan](https://www.val.town/u/spiralganglion) for the bug report 🙏
+- Removed all browser `alert` and `confirm` in favor of proper modals
 
 ## 🛣️ Roadmap
 
@@ -85,9 +157,31 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 
 ## 🌟 Community vals
 
-- Community vals
-- llamapalooza vals
+- https://x.com/DanPhilibin/status/1852052119521542552
+- https://x.com/stevekrouse/status/1852024470958989517
+- https://docs.val.town/integrations/stripe/
+- https://blog.val.town/blog/val-town-town/
+- https://x.com/stevekrouse/status/1851994923957985567
+
+- https://www.val.town/v/vprtwn/svaltown
+- https://x.com/deepfates/status/1846998463759913158]
+- https://www.val.town/v/loading/xp
+- https://www.val.town/v/JamesAndrew/ai8000
+- https://www.val.town/v/trollishka/giftsuggestionapp
+- https://www.val.town/v/willthereader/SafeReminder
+- prompt token counter https://prashamtrivedi-tokencounter.web.val.run/
+- milei twitter like bots https://x.com/stevekrouse/status/1854255504681210055
+- https://www.val.town/v/g/countGithubLOCUI
+- https://www.val.town/v/trob/multilingualchatroom
+- https://val.town/v/vawogbemi/characterguesser
+- https://www.val.town/v/stevekrouse/claude_speed_test
+- https://www.val.town/v/stevekrouse/openai_structured_output_demo
+- https://x.com/DanPhilibin/status/1849823537034305704
+- https://www.val.town/v/vprtwn/svaltown
+- https://x.com/destroytoday/status/1856709997737984089
+- https://x.com/MO_warsi786/status/1856995667790397885
+- https://x.com/jesi_rgb/status/1856654868611530782
+- https://x.com/0xperp/status/1853891992780251416
+- https://x.com/simplescraper/status/1851964365613994373
 - robin sloan space video val (could link to a tweet)
 - TODO review #showcase and twitter and postgres query
-- Robin Sloan val video
-- https://x.com/deepfates/status/1846998463759913158]
