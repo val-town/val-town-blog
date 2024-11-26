@@ -37,6 +37,7 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import Demo from "./fal/demo.png";
 import Faltown from "./fal/faltown.png";
+import Pricing from "./val-town-newsletter-22/Pricing.png";
 
 Val Town is growing up! We're working on new features and infra that will fundamentally unlock the scope and scale of what you can build in Val Town. We have two major efforts running in parallel: projects and scale.
 
@@ -108,9 +109,9 @@ lightning-fast image generation API to Val Town users.
 
 ## Updated Pricing Page
 
-We've made some long-overdue updates to our pricing page.
+We've made some long-overdue updates to our [pricing page](https://www.val.town/pricing).
 
-TODO photo
+<Image src={Pricing} alt="Val Town Pricing Page at val.town/pricing" />
 
 Here's what changed:
 
@@ -119,7 +120,7 @@ Here's what changed:
 - Lowered the number of private or unlisted vals on the Free tier from 100 to 10. (We have yet to enforce this. When we enforce it, we will grandfather in any vals created before.)
 - Removed some stale limitations we never enforced
 
-Note - we don't enforce all of these limits today. For example, Free tier users can make over 10 runs per minute. We're figuring out the right balance between signaling what we can support at scale, without adding unnecessary friction for users. This will all shift around (for the better) when we roll out our scale plan early next year.
+We don't enforce some of these limits today. For example, Free tier users can make over 10 runs per minute. We're figuring out the right balance between signaling what we can support at scale, without adding unnecessary friction for users.
 
 ## Blob storage admin
 
@@ -182,10 +183,11 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 
 ## 🌟 Community vals
 
-- [Dan](TODO), an engineer at [Campsite](https://campsite.com), wrote [How we prototype API integrations with Val Town](https://www.campsite.com/blog/how-we-prototype-integrations-with-val-town) – it's an excellent read about how they "speedrun prototypes of bots, features, and 3rd party integrations" ([tweet](https://x.com/DanPhilibin/status/1852052119521542552))
-- [Max](TODO) built [Val Town Town](https://blog.val.town/blog/val-town-town/) – a clone of Val Town, built in Val Town! If you want to run your users' or AI-generated server-side JavaScript, now you can do that in Val Town by forking and customizing Val Town Town
+- [Dan](https://www.val.town/u/danphilibin), an engineer at [Campsite](https://campsite.com), wrote [How we prototype API integrations with Val Town](https://www.campsite.com/blog/how-we-prototype-integrations-with-val-town) – it's an excellent read about how they "speedrun prototypes of bots, features, and 3rd party integrations" ([tweet](https://x.com/DanPhilibin/status/1852052119521542552))
+- [Max](https://val.town/u/maxm) built [Val Town Town](https://blog.val.town/blog/val-town-town/) – a clone of Val Town, built in Val Town! If you want to run your users' or AI-generated server-side JavaScript, now you can do that in Val Town by forking and customizing Val Town Town
 - [Victor](https://www.val.town/u/vawogbemi) added [Stripe to our docs](https://docs.val.town/integrations/stripe/) showing how you can accept payments in Val Town in minutes
 - Daniel created [an app that helps industrial robot programmers visualize their program call graph](https://bsky.app/profile/stevekrouse.com/post/3lbu7qbq6mc2b)
+- TODO: https://vawogbemi-notuber.web.val.run/, https://vawogbemi-notuberfolder.web.val.run/
 - [osspledge.com](https://osspledge.com/)'s redirect to [opensourcepledge.com](https://opensourcepledge.com/) is [hosted on Val Town](https://www.val.town/v/vladh/opensourcepledgeRedirect?v=5). (_If your company hasn't joined the pledge yet, you should!_)
 - [Arti](https://www.val.town/u/artivilla) built a [Farcaster Keyword Alerter](https://www.val.town/v/artivilla/farcasterKeyHook), which sends Slack notifications when a keyword is mentioned on Farcaster, powered by [Neynar](https://neynar.com/) ([original post](https://warpcast.com/artivilla.eth/0x1bc32ac7))
 - In honor of Bluesky, here are all the awesome Bluesky vals:
@@ -194,17 +196,21 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
   - [@karkowg](https://www.val.town/u/karkowg) built a beautiful [Matrix-style Bluesky firehose visualization](https://www.val.town/v/karkowg/theOneSky)
   - [Steve](https://www.val.town/u/stevekrouse) created a [Bluesky Firehose](https://val.town/v/stevekrouse/firehose) visualizer that displays real-time updates from the Bluesky network, with word cloud
 - [@trob](https://www.val.town/u/trob) built an [interactive prompt-to-code app](https://www.val.town/v/trob/prompt_to_code_auto_refresh_codebed) that generates JavaScript code from prompts and allows previewing the output with user input. [James](https://www.val.town/u/JamesAndrew) forked it, and made a [Three.js Scene Generator](https://www.val.town/v/JamesAndrew/tenaciousPlumWoodpecker) to create 3D scenes by via natural language prompts. We love when people build on each other's work!
+- [Robin Sloan is tracking solar storms with a cron val!](https://bsky.app/profile/stevekrouse.com/post/3lbuwlperjc2b)
+- [Dean](https://www.val.town/u/loading) built a [peer-to-peer file transfer app](https://www.val.town/v/loading/file) using WebRTC
+- [Wolf](https://www.val.town/u/wolf) built [a magic importer](https://www.val.town/v/wolf/UseDynamic) that lets you dynamically generate functions at runtime in the import URL, powered by an HTTP val! ([Discord discussion](https://discord.com/channels/1020432421243592714/1279542466357366804/1295911703040622662))
 - "Who needs blockchain when you have Val Town SQLite?" – [Jamie](https://www.val.town/u/jamiedubs) built [Glifbux](https://www.val.town/v/jamiedubs/glifbux), virtual money on Val Town
-- Jonnie Hallman [built a tool with Townie to extract the dominant colors from an image](https://x.com/destroytoday/status/1856709997737984089)
+- [Steve](https://www.val.town/u/stevekrouse) built a website showcasing [how Val Town uses Val Town to build Val Town](https://www.val.town/v/stevekrouse/dogfooding)å
 - Steve built [three vals to demo the insanely-fast Cerebras inference](https://x.com/stevekrouse/status/1851994923957985567) – [Cerebras Searcher](https://www.val.town/v/stevekrouse/cerebras_searcher) to search and summarize the web, [Cerebras Coder](https://www.val.town/v/stevekrouse/cerebras_coder) to generate full websites in miliseconds, and [Cerebras Debater](https://www.val.town/v/stevekrouse/cerebras_debater) to get to the bottom of age old questions
-- https://x.com/stevekrouse/status/1851994923957985567
-- https://x.com/Andre_Terron/status/1859477394819887608
+- [Juan](https://www.val.town/u/juansebsol) built a [EchoSearch](https://juansebsol-echosearch.web.val.run/), a site that lets you search across Reddit, HN, Github Discussions, StackOverflow all at the same time
 - [Dan](https://www.val.town/u/danphilibin) built a [What did I work on today?](https://www.val.town/v/danphilibin/what_did_i_work_on_today) in 6 prompts with Townie, which pulls from Github and Linear to generate a daily summary of what you worked on ([tweet](https://x.com/DanPhilibin/status/1849823537034305704))
 - [Juan](https://www.val.town/u/juansebsol) built a [D3.JS Defi pool explorer](https://juansebsol-blockchainecosystembubblemap.web.val.run/) to visualize Blockchain Pool APYs
 - [Cam](https://www.val.town/u/cameronpak) made a [Tool Drawer](https://www.val.town/v/cameronpak/tooldrawer) to showcase the apps on the [Techless Wisephone II](https://www.wisephone.com/)
+- Jonnie Hallman [built a tool with Townie to extract the dominant colors from an image](https://x.com/destroytoday/status/1856709997737984089)
 - [Peter](https://www.val.town/u/peterqliu) built a [mayor_setup](https://www.val.town/v/peterqliu/mayor_setup), a val that gives you a bird's eye view across all your vals, lets you organize vals into composable collections, batch actions on multiple vals, and uninstall itself with no trace left behind
+- @deepfates built [deeperfates.com](https://deeperfates.com/), their AI clone
 - [@bladesquad](https://www.val.town/u/bladesquad) built a [React app for reporting stray cats and finding nearby emergency vet contacts in Algeria](https://www.val.town/v/bladesquad/thrillingAmaranthKiwi)
-- [Steve](https://www.val.town/u/stevekrouse) built a website showcasing [how Val Town uses Val Town to build Val Town](https://www.val.town/v/stevekrouse/dogfooding)
+- [@yawnxyz](https://www.val.town/u/yawnxyz) built a [Open Graph Image Generator](https://www.val.town/v/yawnxyz/og) using satori and a Deno-friendly SVG WASM, cached with Val Town Blob Storage
 - [Steve](https://www.val.town/u/stevekrouse) showed [how to use OpenAI Structured Output with zod](https://www.val.town/v/stevekrouse/openai_structured_output_demo) to ensure responses are in the right JSON format
 - [vprtwn](https://www.val.town/u/vprtwn) created a [typing practice app with word generation and stat tracking](https://vprtwn-svaltown.web.val.run/) for the [Svalboard](https://svalboard.com/)
 - [willthereader](https://www.val.town/u/willthereader) built a [reminder app](https://val.town/v/willthereader/SafeReminder) that lets you quickly set alarms and timers, and sends web notifications
@@ -224,10 +230,11 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [Mike](https://www.val.town/u/mikehiggins) created [a 90s-style text analyzer](https://www.val.town/v/mikehiggins/sanguinecyanmastodon) that calculates word frequencies, TF-IDF scores, sentiment analysis, and generates fun facts
 - [@janu](https://www.val.town/u/janu) built a [passworded Bitcoin price dashboard](https://www.val.town/v/janu/dataDash) that displays the current price, 24-hour change, and a chart of the last 30 days.
 - [Prasham ](https://www.val.town/u/prashamtrivedi) built [summarizeHn](https://www.val.town/v/prashamtrivedi/summarizehn) which summarizes Hacker News discussions using Gemini Models
-- [Prasham](https://www.val.town/u/prashamtrivedi) built a [Prompt Token Counter](https://www.val.town/v/prashamtrivedi/tokencounter) for Anthropic and Google Gemini models
 - [Daniel](https://www.val.town/u/danieladmsf) created a [Seller Dashboard](https://www.val.town/v/danieladmsf/gregariousIvoryOstrich) that displays real-time updates of quotes, savings, and a list of sellers with filtering and action buttons.
+- [Muhammad](https://www.val.town/u/muhammad_owais_warsi) built a [realtime image generator](https://www.val.town/v/muhammad_owais_warsi/imageGen) ([tweet](https://x.com/MO_warsi786/status/1856995667790397885))
 - [@vip](https://www.val.town/u/vip) built [RSS Feed AI Analysis](https://www.val.town/v/vip/rss_feed_ai_analysis)
 - [Jared](https://www.val.town/u/jaredsilver) created [Startup Clicker Game](https://www.val.town/v/jaredsilver/startup_clicker) which simulates running a tech startup
+- [Prasham](https://www.val.town/u/prashamtrivedi) built a [Prompt Token Counter](https://www.val.town/v/prashamtrivedi/tokencounter) for Anthropic and Google Gemini models
 - [Steve](https://www.val.town/u/stevekrouse) built [The Password Game](https://www.val.town/v/stevekrouse/passwordgame), a web app that generates increasingly silly password requirements using AI with Cerebras
 - [@all](https://www.val.town/u/all) built [jamz](https://www.val.town/v/all/jamz), a music player app that lets you add songs, edit their details, and sort them by date or title
 - [@janu](https://www.val.town/u/janu) built [airSource](https://www.val.town/v/janu/airsource), which generates an SVG displaying real-time air quality data for major Australian cities
@@ -248,34 +255,23 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [@tk120404](https://www.val.town/u/tk120404) built a [3D visualization of our solar system](https://tk120404-solarsystem.web.val.run/), complete with rotating planets, moons, meteor trails, and a starry background
 - [Steve](https://www.val.town/u/stevekrouse) built a middleware [usageAlert](https://www.val.town/v/stevekrouse/usageAlert) that sends an email alert if your HTTP val exceeds 1k requests per minute
 - [@mashimi](https://www.val.town/u/Mashimi) built an [Insect Identifier](https://www.val.town/v/Mashimi/insectIdentifier) that recognizes insects from uploaded images using the Grok.AI API
+- [Will](https://www.val.town/u/willthereader) made an [AI-powered Safari extension](https://x.com/Willthereader/status/1859023415421845824), powered by a val for the backend
 - [Natalie](https://www.val.town/u/natsa) built a [todo list app for learning Node.js](https://www.val.town/v/natsa/genuinebrownermine) with expandable sub-topics and progress tracking
 - [@minhee](https://www.val.town/u/minhee) built a [single file implementation of ActivityPub using Fedify](https://www.val.town/v/minhee/FedifyOnValTown), allowing your fediverse account to follow and be followed back by a demo account
 - [@meta](https://www.val.town/u/metart43) built [a page displaying color schemes used by major news media outlets for US election map visualizations](https://www.val.town/v/metart43/us_election_color_scheme)
 - [@yawnxyz](https://www.val.town/u/yawnxyz) built a [Counter](https://val.town/v/yawnxyz/counter) - an all-in-one word, byte, and token counter that saves results to browser history
 - [Victor](https://www.val.town/u/vawogbemi) built a [Solana Pay QR Code Generator](https://www.val.town/v/vawogbemi/solanaPayDemo) that allows merchants to generate QR codes for accepting Solana payments
-- [Jesi](https://www.val.town/u/jesi_rgb) built a [Secret Santa group creator app](https://www.val.town/v/jesi_rgb/secretsanta) that allows participants to join and be randomly matched while excluding certain pairings
+- [Jesi](https://www.val.town/u/jesi_rgb) built a [Secret Santa group creator app](https://www.val.town/v/jesi_rgb/secretsanta) that allows participants to join and be randomly matched while excluding certain pairings ([tweet])(https://x.com/jesi_rgb/status/1856654868611530782))
+- [Prasham](https://www.val.town/u/prashamtrivedi) built a [Markdown to Rich Text Converter](https://prashamtrivedi-mdtort.web.val.run/) to paste reports from AI into Confluence or other systems which use rich text
+- [Ash](https://www.val.town/u/ashryanio) built put his [record collection online](https://ashryanio-randodisc.web.val.run/)
+- [Will](https://www.val.town/u/willthereader) built a [Thank You Note Generator](https://val.town/v/willthereader/ThankYouNoteGenerator) that generates personalized thank you notes for any occasion
+- [Max](https://www.val.town/u/maxm) built a beautiful [Draggable Emoji Garden](https://maxm-draggableemojigarden.web.val.run/) that lets you drag and drop emojis to create a garden
+- [Gueejla](https://www.val.town/u/gueejla) built a [Square Root Calculator](https://gueejla-squareroot.web.val.run/?inputNum=16) that visualizes the square root of a number
 
 ---
 
 - TODO
-- https://www.val.town/v/muhammad_owais_warsi/imageGen
-- https://x.com/stevekrouse/status/185896999632577778
-- https://x.com/deepfates/status/1846998463759913158]
-- https://x.com/MO_warsi786/status/1856995667790397885
-- https://x.com/jesi_rgb/status/1856654868611530782
-- https://x.com/0xperp/status/1853891992780251416
 - https://x.com/simplescraper/status/1851964365613994373
-- https://ashryanio-randodisc.web.val.run/
-- https://all-passwordgen.web.val.run/
-- https://yawnxyz-og.web.val.run/
-- https://juansebsol-rudeai.web.val.run/
-- https://maxm-draggableemojigarden.web.val.run/
-- https://gueejla-squareroot.web.val.run/?inputNum=16
-- https://discord.com/channels/1020432421243592714/1279542466357366804/1294444150510456893 (could link to a tweet/bluesky post)
-- wolf magic imports: https://discord.com/channels/1020432421243592714/1279542466357366804/1295911703040622662
-- https://x.com/Willthereader/status/1859023415421845824
-- https://www.val.town/v/loading/file
-- https://val.town/v/willthereader/ThankYouNoteGenerator
-  https://www.val.town/v/jonbo/cabinAdjacentTweets - might be an issue with exposed discord urls!
+- https://x.com/Andre_Terron/status/1859477394819887608
 
 ---
