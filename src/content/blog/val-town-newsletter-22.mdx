@@ -41,15 +41,15 @@ import Pricing from "./val-town-newsletter-22/Pricing.png";
 import SettingsBlob from "./val-town-newsletter-22/SettingsBlob.png";
 import BlobAdmin from "./val-town-newsletter-22/BlobAdmin.png";
 
-Val Town is growing up! We're working on new features and infra that will fundamentally unlock the scope of what you can build in Val Town. We have two major efforts running in parallel: projects and scale.
+Val Town is growing up! We're working on new features and infra that will fundamentally unlock the scope of what you can build in Val Town. We have two major efforts running in parallel: projects and scalability.
 
-_Projects_ are containers for multiple vals, folders, and files – enabling you to create infinitely complex real-world apps – instead of being limited to a single long val. Internal to a project, vals will use relative imports (ie `./foo/bar`), so they can be forked as a unit, and merged back in as a unit. Projects will also improve Townie's ability to help write your vals in more modular files – so it doesn't have to generate and re-generate all the code on every change.
+_Projects_ are containers for multiple vals, folders, and files. The enable you to create infinitely complex real-world apps, instead of being limited to a single long val. Internal to a project, vals will use relative imports (ie `./foo/bar`), so they can be forked as a unit, and merged back in as a unit. Projects will also improve Townie's ability to help write your vals in more modular files, so that it doesn't have to regenerate all the code on every change.
 
 _Scale_ will enable you to run production workloads in Val Town, with usage-based pricing, custom alerts, and caps.
 
 We hope to have both of these efforts live in the coming months. In the meantime, we've shipped many other features and improvements, including a dozen Townie upgrades, scoped API permissions, a partnership with Fal, and more.
 
-[Justin Bennett](https://just-be.dev) has joined our team! He is well known for the [DevtoolsFM podcast](https://www.devtools.fm/), and was most recently at [The Recurse Center](https://www.recurse.com/), [Membrane](https://www.membrane.io/), and [Oxide](https://oxide.computer/) before that. I've known Justin for years, and I'm thrilled to have him on the team.
+[Justin Bennett](https://just-be.dev) has joined our team! He is well-known for the [DevtoolsFM podcast](https://www.devtools.fm/), and was most recently at [The Recurse Center](https://www.recurse.com/), [Membrane](https://www.membrane.io/), and [Oxide](https://oxide.computer/). I've known Justin for years, and I'm thrilled to have him here.
 
 As per usual, the highlight of our newsletter is at the bottom: a list of the most interesting community vals we've seen this month, including a Val Town clone built on Val Town, Stripe examples, Bluesky vals, virtual money, Cerebras demos, and almost a hundred more!
 
@@ -60,10 +60,10 @@ Townie has been massively upgraded this month. We shipped some of the most commo
 TODO video of restoring an old version, and possibly townie detecting and fixing an error
 
 - By far the most common feature request for Townie has been the ability to preview the older versions of HTTP vals. This is now live! There's a dropdown in the bottom of the Preview tab in Townie to select an older version to preview, with the ability to restore that version. Thanks [Charlie](https://www.val.town/u/dcm31) for the tip to add the Restore button, and [Matt](https://www.val.town/u/neverstew) for the feedback on the wording of the button 🙏
-- In order to make Townie sustainable, we rolled out usage limits. Now free-tier users can try out Townie for about a dozen messages on a Haiku, a cheaper (albeit still fantastic) model. We hope this will help you get a sense of what Townie can do, and encourage you to upgrade to Pro if you want to use it regularly. If you find that you're hitting your limits as a Pro user quite often, please reach out to me at steve@val.town with more context on your use case. We're eagerly looking for feedback on a higher-level Pro tier or usage-based pricing.
+- In order to make Townie sustainable, we rolled out usage limits. Now free-tier users can try out Townie for about a dozen messages on a Haiku, a cheaper (albeit still fantastic) model. We hope this will help you get a sense of what Townie can do, and encourage you to upgrade to Pro if you want to use it regularly. If you find that you're hitting your limits as a Pro user, please reach out to me at steve@val.town with more context on your use case. We're eagerly looking for feedback on a higher-level Pro tier or usage-based pricing.
 - We deployed Anthropic prompt caching ([try it on Val Town](https://www.val.town/v/stevekrouse/anthropicCaching)), which saves 40% on cost, and improves latency by up to 85% for long prompts.
 - We rolled out Sonnet 3.5 New, which is supposed to be even better at coding, but unfortunately had to rollback to Sonnet 3.5 Old, because the New version was resistant to writing very large blocks of code in their entirety. It added a lot of `// code remains unchanged here`. We fixed that issue with Anthropic's help, and are working through a couple other system prompt issues with Sonnet 3.5 New, and hope to get it rolled out in the coming weeks.
-- Townie now detects more client-side and sever-side errors automatically, and has a clean UI to view the errors to help you decide if you want to debug them manually, dismiss them, or ask Townie to solve them for you.
+- Townie now detects many client-side and server-side errors automatically, and has a clean UI to view the errors to help you decide if you want to debug them manually, dismiss them, or ask Townie to solve them for you.
 - At long-last we fixed bugs with the Townie code editor getting out of sync or showing "unsaved changes" when there weren't any.
 
 If you'd like to read more about behind-the-scenes of Townie, Tom gave a talk, which he turned into a blog post: [Building a Code Writing Robot](https://blog.val.town/blog/building-a-code-writing-robot/).
@@ -119,12 +119,12 @@ We've made some long-overdue updates to our [pricing page](https://www.val.town/
 
 Here's what changed:
 
-- Expanded the Pro tier from 100 to 500 HTTP val req / min – thanks [Izu](https://www.val.town/u/izuchukwu) for the request 🙏
+- Expanded the Pro tier from 100 to 500 HTTP val req/min – thanks [Izu](https://www.val.town/u/izuchukwu) for the request 🙏
 - Listed custom domains on the Pro tier
 - Lowered the number of private or unlisted vals on the Free tier from 100 to 10. (We have yet to enforce this. When we enforce it, we will grandfather in any vals created before.)
 - Removed some stale limitations we never enforced
 
-We don't enforce some of these limits today. For example, Free tier users can make over 10 runs per minute. We're figuring out the right balance between signaling what we can support at scale, without adding unnecessary friction for users.
+We don't enforce all of these limits today. For example, Free tier users can make over 10 runs per minute. We're figuring out the right balance between signalling what we can support at scale, without adding unnecessary friction for users.
 
 ## Blob Storage admin
 
@@ -155,7 +155,7 @@ Want to view and edit the blobs stored in your [Val Town Blob Storage](https://d
 Videos are a great way to learn the pro tips & tricks for Val Town. This month I live coded with three wonderful guests:
 
 - **[Creating customer-enrichment workflows](https://www.youtube.com/live/wOyfS9-Q01I) with [Justin Duke](https://jmduke.com/)**, founder of [Buttondown](https://buttondown.email/)
-- **[Live coding viral AI apps with](https://www.youtube.com/live/plubVSqiQAw)** with [Hassan](https://x.com/nutlope), of [TogetherAI](https://www.together.ai/)
+- **[Live coding viral AI apps with](https://www.youtube.com/live/plubVSqiQAw) with [Hassan](https://x.com/nutlope)**, of [TogetherAI](https://www.together.ai/)
 - **[Prototyping Markdown Extensions](https://www.youtube.com/live/oBuJoVV_yWc) with [Boris Berenberg](https://www.nothingeasyaboutthis.com/)**
 
 We were also featured in [three](https://www.youtube.com/watch?v=j5SfOA7gGfw) [YouTube](https://www.youtube.com/watch?v=l9NyuajxjrI) [videos](https://www.youtube.com/watch?v=yMHDBQp5hbE), which led to thousands of new subscribers. If that includes you – welcome! Thanks AICodeKing, Julian Goldie, and Emre Kabli for the videos 🙏
