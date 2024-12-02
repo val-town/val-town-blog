@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 22
 description: Townie upgrades, Scoped API permissions, Fal partnership
-pubDate: November 27, 2024
+pubDate: Dec 2, 2024
 author: Steve Krouse
 ---
 
@@ -40,18 +40,19 @@ import Faltown from "./fal/faltown.png";
 import Pricing from "./val-town-newsletter-22/Pricing.png";
 import SettingsBlob from "./val-town-newsletter-22/SettingsBlob.png";
 import BlobAdmin from "./val-town-newsletter-22/BlobAdmin.png";
+import Projects from "./val-town-newsletter-22/Projects.png";
 
-Val Town is growing up! We're working on new features and infra that will fundamentally unlock the scope of what you can build in Val Town. We have two major efforts running in parallel: projects and scalability.
+Val Town is growing up! We're working on features and infra that will fundamentally unlock the scope and scale of what you can build in Val Town. We have two major efforts running in parallel: projects and scalability.
 
 _Projects_ are containers for multiple vals, folders, and files. The enable you to create infinitely complex real-world apps, instead of being limited to a single long val. Internal to a project, vals will use relative imports (ie `./foo/bar`), so they can be forked as a unit, and merged back in as a unit. Projects will also improve Townie's ability to help write your vals in more modular files, so that it doesn't have to regenerate all the code on every change.
 
-_Scale_ will enable you to run production workloads in Val Town, with usage-based pricing, custom alerts, and caps.
+_Scalability_ will enable you to run production workloads in Val Town, with usage-based pricing, custom alerts, and caps.
 
 We hope to have both of these efforts live in the coming months. In the meantime, we've shipped many other features and improvements, including a dozen Townie upgrades, scoped API permissions, a partnership with Fal, and more.
 
-[Justin Bennett](https://just-be.dev) has joined our team! He is well-known for the [DevtoolsFM podcast](https://www.devtools.fm/), and was most recently at [The Recurse Center](https://www.recurse.com/), [Membrane](https://www.membrane.io/), and [Oxide](https://oxide.computer/). I've known Justin for years, and I'm thrilled to have him here.
+[Justin Bennett](https://just-be.dev) has joined our team! He is well-known for the [DevtoolsFM podcast](https://www.devtools.fm/), and was most recently at [The Recurse Center](https://www.recurse.com/), [Membrane](https://www.membrane.io/), and [Oxide](https://oxide.computer/). We've known Justin for years, and are thrilled he's on the team.
 
-As per usual, the highlight of our newsletter is at the bottom: a list of the most interesting community vals we've seen this month, including a Val Town clone built on Val Town, Stripe examples, Bluesky vals, virtual money, Cerebras demos, and almost a hundred more!
+As per usual, the [highlight of our newsletter is at the bottom: a list of the most interesting community vals we've seen this month](), including a bunch working with the Bluesky API, a Val Town clone built on Val Town, Stripe examples, virtual money, data journalism, lightning-fast Cerebras 2k-tokens-per-second demos, and dozens more!
 
 ## 🤖 Townie upgrades
 
@@ -190,14 +191,15 @@ We were also featured in [three](https://www.youtube.com/watch?v=j5SfOA7gGfw) [Y
 
 ### Projects
 
-Our biggest effort coming up is _Projects_ - groups of vals, files, folders, forkable as a unit, mergeable as a unit, three-way-merges, relative imports
+Our biggest effort coming up is _Projects_ - groups of vals, files, folders that will be forkable as a unit and mergeable as a unit, supporting relative imports, and more. Where a val is like a Github gist, a Project is like a Github repo. Projects will enable you to build infinitely complex real-world apps in Val Town. We're excited to share something hopefully in Dec 2024, and if not in Jan 2025.
 
-- TODO photo that got Victor inspired
-- TODO https://vawogbemi-notuber.web.val.run/, https://vawogbemi-notuberfolder.web.val.run/
+<Image src={Projects} alt="Screenshot of an example Val Town Project" />
+
+We shared the above screenshot of an example Projects a couple weeks back in our Discord. One of our users, [Victor], was so inspired that he's started building larger projects in Val Town already in advance of Projects, living in the future by pretending that they already exist. His most recent large val project was [NotUber](https://vawogbemi-notuber.web.val.run/), a surprisingly full-featured Uber/Lyft clone. The best part is that he built [another val that acts as the 'project view' for the 8 vals that NotUber depends on](https://vawogbemi-notuberfolder.web.val.run/). We love Victor's vision, and we can't wait to see what everyone else builds once Projects ship for real!
 
 ### Scale
 
-We're also working on _Scale_ – a new infra architecture that will enable you to run vals in production, with scale to infinity, usage-based pricing, with usage alerts, and caps. Websocket-type vals will also launch with this effort.
+We're also working on _Scale_ – a new infra architecture that will enable you to run production workloads in Val Town, with scale to infinity, usage-based pricing, with usage alerts, and caps. Websocket-type vals will also launch with this effort.
 
 ### Other features coming soon
 
@@ -224,8 +226,9 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
   - [Stef](https://www.val.town/u/stef) built a [Bluesky feed generator](https://www.val.town/v/stef/feeds) that subscribes to a feed of posts without the letter 'E'
   - [TanatsDeanwa](https://www.val.town/u/loading) built [WinSky](https://loading-xp.web.val.run/), a Windows XP-styled BlueSky client that you can OAuth into with your Bluesky account, make posts, etc!
   - [@karkowg](https://www.val.town/u/karkowg) built a beautiful [Matrix-style Bluesky firehose visualization](https://www.val.town/v/karkowg/theOneSky)
-  - [Steve](https://www.val.town/u/stevekrouse) created a [Bluesky Firehose](https://val.town/v/stevekrouse/firehose) visualizer that displays real-time updates from the Bluesky network, with word cloud
   - [Wilhelm](https://www.val.town/u/wilhelm) is [mirroring his Bluesky posts](https://www.val.town/v/wilhelm/bsky). It's easy to fork it and mirror your own posts! I did [here](https://www.val.town/v/stevekrouse/bsky).
+  - [Steve](https://www.val.town/u/stevekrouse) created a [Bluesky Firehose](https://val.town/v/stevekrouse/firehose) visualizer that displays real-time updates from the Bluesky network, with word cloud
+  - [Wilhelm](https://www.val.town/u/wilhelm) figured out how to [make a val http endpoint your Bluesky handle](https://www.val.town/v/wilhelm/did)!
 - [Robin Sloan is tracking solar storms with a cron val!](https://bsky.app/profile/stevekrouse.com/post/3lbuwlperjc2b)
 - [Jan](https://www.val.town/u/yawnxyz) built [Scribe](https://yawnxyz-scribe.web.val.run/), a SuperWhisper / Granola alternative that transcribes your voice in realtime, powered by Huggingface, VAD, and Groq
 - [Arti](https://www.val.town/u/artivilla) built a [Farcaster Keyword Alerter](https://www.val.town/v/artivilla/farcasterKeyHook), which sends Slack notifications when a keyword is mentioned on Farcaster, powered by [Neynar](https://neynar.com/) ([original post](https://warpcast.com/artivilla.eth/0x1bc32ac7))
@@ -233,6 +236,8 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [Nulo](https://www.val.town/u/nulo) is [tracking and graphing tweets and likes for President Milei of Argentina to expose bots and archive deleted tweets](https://x.com/stevekrouse/status/1854255504681210055)
 - [Charlie](https://www.val.town/u/dcm31) made [a hilarious short-video about a tour-guide app with various intelligence levels](https://www.tiktok.com/@charliemocomedy/video/7441621954571832619). The app in the video was made with Townie!
 - [Peter](https://www.val.town/u/peterqliu) built a [mayor_setup](https://www.val.town/v/peterqliu/mayor_setup), a val that gives you a bird's eye view across all your vals, lets you organize vals into composable collections, batch actions on multiple vals, and uninstall itself with no trace left behind
+- [Jon](https://www.val.town/u/jonbo) built [a custom Twitter Alert bot that detects when specific accounts tweet relevant phrases, and uses an LLM to decide which Discord channel to send the alert to](https://www.val.town/v/jonbo/cabinAdjacentTweets)
+- [Max](https://www.val.town/u/maxm) built [WIDE](https://maxm-wide.web.val.run/), a service to write and query unstructured data, powered by Clickhouse, powered by his new [ValSession](https://www.val.town/v/maxm/valSession) authentication method
 - [@trob](https://www.val.town/u/trob) built an [interactive prompt-to-code app](https://www.val.town/v/trob/prompt_to_code_auto_refresh_codebed) that generates JavaScript code from prompts and allows previewing the output with user input. [James](https://www.val.town/u/JamesAndrew) forked it, and made a [Three.js Scene Generator](https://www.val.town/v/JamesAndrew/tenaciousPlumWoodpecker) to create 3D scenes by via natural language prompts. We love when people build on each other's work!
 - [Dean](https://www.val.town/u/loading) built a [peer-to-peer file transfer app](https://www.val.town/v/loading/file) using WebRTC
 - [Wolf](https://www.val.town/u/wolf) built [a magic importer](https://www.val.town/v/wolf/UseDynamic) that lets you dynamically generate functions at runtime in the import URL, powered by an HTTP val! ([Discord discussion](https://discord.com/channels/1020432421243592714/1279542466357366804/1295911703040622662))
