@@ -58,7 +58,11 @@ As per usual, the [highlight of our newsletter is at the bottom: a list of the m
 
 Townie has been massively upgraded this month. We shipped some of the most common feature request and fixed the worst bugs.
 
-TODO video of restoring an old version, and possibly townie detecting and fixing an error
+<video controls loop class="image-rounded">
+  <source src="/video/CerebrasCoderAnalyticsTownie.mp4" />
+</video>
+
+_This video shows me adding analytics to [Cerebras Coder](https://www.val.town/v/stevekrouse/cerebras_coder), a minimal Townie clone, powered by [Cerebras](https://cerebras.ai/)'s lightning-fast inference. The video shows switching from Haiku to Sonnet; Townie detecting a server-side error; fixing it upon request; fixing another bug; viewing older versions of the val; and a notice to start a new chat because longer chats make Townie dumber._
 
 - By far the most common feature request for Townie has been the ability to preview the older versions of HTTP vals. This is now live! There's a dropdown in the bottom of the Preview tab in Townie to select an older version to preview, with the ability to restore that version. Thanks [Charlie](https://www.val.town/u/dcm31) for the tip to add the Restore button, and [Matt](https://www.val.town/u/neverstew) for the feedback on the wording of the button 🙏
 - In order to make Townie sustainable, we rolled out usage limits. Now free-tier users can try out Townie for about a dozen messages on a Haiku, a cheaper (albeit still fantastic) model. We hope this will help you get a sense of what Townie can do, and encourage you to upgrade to Pro if you want to use it regularly. If you find that you're hitting your limits as a Pro user, please reach out to me at steve@val.town with more context on your use case. We're eagerly looking for feedback on a higher-level Pro tier or usage-based pricing.
@@ -203,14 +207,15 @@ We're also working on _Scale_ – a new infra architecture that will enable you 
 
 ### Other features coming soon
 
-- Val- & project- scoped environment variables
+- Val- & Project- scoped environment variables
 - Searchable & filterable logs and traces
+- /explore - a new page to find interesting vals
+- Allow hyphens in val names
+- Improved code search
+- Comments on pull requests
+- Ability to follow a user on Val Town
 - Team accounts
 - SOC2 compliance (I told you we're growing up!)
-- /explore - a new page to find interesting vals
-- Improved code search
-- Allow hyphens in val names
-- Comments on pull requests
 - ...and much more!
 
 Please [make feature requests and vote](https://github.com/val-town/val-town-product/discussions?discussions) on what you'd like to see next.
@@ -221,14 +226,15 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [Max](https://val.town/u/maxm) built [Val Town Town](https://blog.val.town/blog/val-town-town/) – a clone of Val Town, built in Val Town! If you want to run your users' or AI-generated server-side JavaScript, now you can do that in Val Town by forking and customizing Val Town Town
 - [Victor](https://www.val.town/u/vawogbemi) added [Stripe to our docs](https://docs.val.town/integrations/stripe/) showing how you can accept payments in Val Town in minutes
 - Daniel created [an app that helps industrial robot programmers visualize their program call graph](https://bsky.app/profile/stevekrouse.com/post/3lbu7qbq6mc2b)
-- [osspledge.com](https://osspledge.com/)'s redirect to [opensourcepledge.com](https://opensourcepledge.com/) is [hosted on Val Town](https://www.val.town/v/vladh/opensourcepledgeRedirect?v=5). (_If your company hasn't joined the pledge yet, you should!_)
+- [osspledge.com](https://osspledge.com/)'s redirect to [opensourcepledge.com](https://opensourcepledge.com/) is [hosted on Val Town](https://www.val.town/v/vladh/opensourcepledgeRedirect?v=5) (_[Join the pledge here](https://opensourcepledge.com/join/)!_)
 - In honor of Bluesky, here are all the awesome Bluesky vals:
-  - [Stef](https://www.val.town/u/stef) built a [Bluesky feed generator](https://www.val.town/v/stef/feeds) that subscribes to a feed of posts without the letter 'E'
   - [TanatsDeanwa](https://www.val.town/u/loading) built [WinSky](https://loading-xp.web.val.run/), a Windows XP-styled BlueSky client that you can OAuth into with your Bluesky account, make posts, etc!
-  - [@karkowg](https://www.val.town/u/karkowg) built a beautiful [Matrix-style Bluesky firehose visualization](https://www.val.town/v/karkowg/theOneSky)
+  - [Stef](https://www.val.town/u/stef) built a [Bluesky feed generator](https://www.val.town/v/stef/feeds) that subscribes to a feed of posts without the letter 'E', forked from [@nws/feeds](https://www.val.town/v/nws/feeds), forked from [@jordan/feeds](https://www.val.town/v/jordan/feeds)
+  - [Jonas](https://www.val.town/u/jonasmerlin) made a [Bluesky bot template](https://www.val.town/v/jonasmerlin/bluesky_bot_template) ([original post](https://bsky.app/profile/jonasmerlin.bsky.social/post/3lcdnfizwrs2a))
   - [Wilhelm](https://www.val.town/u/wilhelm) is [mirroring his Bluesky posts](https://www.val.town/v/wilhelm/bsky). It's easy to fork it and mirror your own posts! I did [here](https://www.val.town/v/stevekrouse/bsky).
-  - [Steve](https://www.val.town/u/stevekrouse) created a [Bluesky Firehose](https://val.town/v/stevekrouse/firehose) visualizer that displays real-time updates from the Bluesky network, with word cloud
+  - [@karkowg](https://www.val.town/u/karkowg) built a beautiful [Matrix-style Bluesky firehose visualization](https://www.val.town/v/karkowg/theOneSky)
   - [Wilhelm](https://www.val.town/u/wilhelm) figured out how to [make a val http endpoint your Bluesky handle](https://www.val.town/v/wilhelm/did)!
+  - [Steve](https://www.val.town/u/stevekrouse) created a [Bluesky Firehose](https://val.town/v/stevekrouse/firehose) visualizer that displays real-time updates from the Bluesky network, with word cloud
 - [Robin Sloan is tracking solar storms with a cron val!](https://bsky.app/profile/stevekrouse.com/post/3lbuwlperjc2b)
 - [Jan](https://www.val.town/u/yawnxyz) built [Scribe](https://yawnxyz-scribe.web.val.run/), a SuperWhisper / Granola alternative that transcribes your voice in realtime, powered by Huggingface, VAD, and Groq
 - [Arti](https://www.val.town/u/artivilla) built a [Farcaster Keyword Alerter](https://www.val.town/v/artivilla/farcasterKeyHook), which sends Slack notifications when a keyword is mentioned on Farcaster, powered by [Neynar](https://neynar.com/) ([original post](https://warpcast.com/artivilla.eth/0x1bc32ac7))
