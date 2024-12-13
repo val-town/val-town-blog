@@ -112,6 +112,8 @@ Another big issue we have – that probably many other projects have as well –
 
 Sentry includes a binary distribution of their [CLI, a native Rust tool](https://github.com/getsentry/sentry-cli), which weighs 16MB. [Biome](https://biomejs.dev/), which we use to lint and format our code, is another 23MB.
 
+### Lots of copies of esbuild
+
 The biggest challenge that isn't on this list is [esbuild](https://esbuild.github.io/), which is used internally by lots of modules that we depend on. All in all, we spend about 94MB of space storing 10 versions of esbuild, a fact that I figured out
 using this epic (for me) chain of Linux commands:
 
