@@ -115,7 +115,13 @@ Sentry includes a binary distribution of their [CLI, a native Rust tool](https:/
 
 ### Lots of copies of esbuild
 
-The biggest challenge that isn't on this list is [esbuild](https://esbuild.github.io/), which is used internally by lots of modules that we depend on. All in all, we spend about 94MB of space storing 10 versions of esbuild, a fact that I figured out
+The biggest challenge that isn't on this list is [esbuild](https://esbuild.github.io/), which is used internally by lots of modules that we depend on.
+
+![Grand Perspective](./devstats/grandperspective.png)
+
+That's [Grand Perspective](https://en.wikipedia.org/wiki/GrandPerspective) showing all of the files in `node_modules` as a treemap, with the seven copies of `esbuild` glowing.
+
+All in all, we spend about 94MB of space storing 7 versions of esbuild, a fact that I figured out
 using this epic (for me) chain of Linux commands:
 
 ```
