@@ -1,5 +1,5 @@
 ---
-title: Devstats
+title: Using Val Town to chart dependency bloat
 description: Building a simple aggregate view of our codebase
 pubDate: Dec 13, 2024
 author: Tom MacWright
