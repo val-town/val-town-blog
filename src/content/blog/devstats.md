@@ -121,7 +121,7 @@ The biggest challenge that isn't on this list is [esbuild](https://esbuild.githu
 
 That's [Grand Perspective](https://en.wikipedia.org/wiki/GrandPerspective) showing all of the files in `node_modules` as a treemap, with the seven copies of `esbuild` glowing.
 
-All in all, we spend about 94MB of space storing 7 versions of esbuild, a fact that I figured out
+All in all, we spend about 94MB of space storing 7 versions of esbuild and another 3 versions in sub-packages, a fact that I figured out
 using this epic (for me) chain of Linux commands:
 
 ```
