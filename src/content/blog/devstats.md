@@ -3,6 +3,7 @@ title: Devstats
 description: Building a simple aggregate view of our codebase
 pubDate: Dec 13, 2024
 author: Tom MacWright
+image: ./devstats/screenshot.png
 ---
 
 [Devstats](https://www.val.town/v/tmcw/devstats) is a Val that you can use to easily track send point-in-time statistics from your GitHub Actions (or other CI) runs and turn them into pretty charts. Here's ours!
