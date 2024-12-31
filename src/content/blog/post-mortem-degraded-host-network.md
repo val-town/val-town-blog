@@ -7,11 +7,12 @@ author: Max McDonnell
 ---
 
 At 12:15am ET one of our servers started to experience long timeouts on both
-inbound and outbound connections. Existing connections continued to serve
-requests and some inbound and outbound requests were successful, but most
-requests would stall indefinitely in a pending state, timing out without
-establishing a connection. This persisted until 7:04am ET when we manually
-terminated the server after a user report.
+inbound and outbound connections. This degraded the network for many of our Vals
+and they started to experience network timeout errors and other issues. Existing
+connections continued to serve requests and some inbound and outbound requests
+were successful, but most requests would stall indefinitely in a pending state,
+timing out without establishing a connection. This persisted until 7:04am ET
+when we manually terminated the server after a user report.
 
 We make our best effort to route Val requests to the same hosts so that they can
 be picked up by a warm worker. As a result, certain vals were repeatedly routed
