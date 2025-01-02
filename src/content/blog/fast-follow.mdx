@@ -89,11 +89,11 @@ We've gotten scared off of investing more time in diffs right now, but I expect 
   <source src="/video/cerebras-coder.mp4" />
 </video>
 
-DeepSeek [recently open-sourced an almost-Sonnet-3.5-level model that's twice as fast and trained for only $6m](https://x.com/deepseek_ai/status/1872242657348710721). Just today, [a company announced a that they fine-tuned Llama 3.3 70b to get more accurate results than Claude 3.5 Sonnet](https://finecodex.com/). A boy can dream of a world where Sonnet-3.5-level codegen (or even smarter!) is available on a chip like Cerebras at a fraction of Anthropic's cost. I think that would unleash a whole new class of innovation here.
+DeepSeek [recently open-sourced an almost-Sonnet-3.5-level model that's twice as fast and trained for only $6m](https://x.com/deepseek_ai/status/1872242657348710721). A boy can dream of a world where Sonnet-3.5-level codegen (or even smarter!) is available on a chip like Cerebras at a fraction of Anthropic's cost. I think that would unleash a whole new class of innovation here.
 
 #### Autodetecting errors
 
-We did contribute one possibly-novel UI interaction, where the LLM automatically detect errors and ask you if you'd like it to try to solve them. We detect server-side errors by polling our backend for 500 errors in your logs. We detect client-side errors in the iframe by prompting Townie to import [this client-side library](https://www.val.town/v/std/catch), which in turns pushing errors up to the parent window.
+We did contribute one possibly-novel UI interaction, where the LLM automatically detects errors and asks you if you'd like it to try to solve them. We detect server-side errors by polling our backend for 500 errors in your logs. We detect client-side errors in the iframe by prompting Townie to import [this client-side library](https://www.val.town/v/std/catch), which pushes errors up to the parent window.
 
 <video controls>
   <source src="/video/TownieErrorDetection.mp4" />
@@ -114,7 +114,7 @@ honor likely goes to Vercel's [v0](https://v0.dev/).
 
 ### Cursor
 
-The next big thing was [Cursor](https://www.cursor.com/). I must admit that I never personally fell in love with it, but given how many people I respect love it, I think that's a me-problem. I think Cursor best for development in larger codebases, but recently my work recently has been on making vals in Val Town, which up until now have been smaller, single-file projects, of 1000 lines or less. (Our upcoming launch of multi-file Projects, now in private beta, will change this.) However Cursor is a real pioneer in the space, and has some UI interactions there that we have an eye to copy.
+The next big thing was [Cursor](https://www.cursor.com/). I must admit that I never personally fell in love with it, but given how many people I respect love it, I think that's a me-problem. I think Cursor is best for development in larger codebases, but recently my work has been on making vals in Val Town which are usually under 1,000 lines of code. (Our upcoming launch of multi-file Projects, now in private beta, will change this.) However Cursor is a real pioneer in the space, and has some UI interactions there that we have an eye to copy.
 
 ### Windsurf
 
@@ -124,9 +124,9 @@ I am salivating at the idea of giving Townie some of these capabilities. Imagine
 
 ### Devin
 
-Watching Windsurf take multiple actions on my behalf without my input is very inspirational. I'm dreaming of a world where Townie not only detects errors, but also automatically tries to fix them, possibly multiple times, possibly in parallel in multiple branches, without any human interaction. Here, of course, we'd be getting into territory mostly explored by the folks at [Devin](https://devin.ai/).
+Watching Windsurf take multiple actions on my behalf without my input is very inspirational. I'm dreaming of a world where Townie not only detects errors, but also automatically tries to fix them, possibly multiple times, in parallel in multiple branches, without any human interaction. Here, of course, we'd be getting into territory mostly explored by the folks at [Devin](https://devin.ai/).
 
-For starters, we could feed back screenshots of the outputted website back to the LLM, but eventually you could imagine giving it a full web browser so it can itself poke around the app, like a human would, to see what features work and which ones don't. And then write itself some tests, also like a human would, to make sure things don't break as it continues to iterate.
+For starters, we could feed back screenshots of the generated website back to the LLM, but eventually you could imagine giving it a full web browser so it can itself poke around the app, like a human would, to see what features work and which ones don't. And then write some tests, also like a human would, to make sure things don't break as it continues to iterate.
 
 I have a vague sense by the end of this year that you'll be able to tell Townie to "make a fully realistic Hacker News Clone, with user accounts, nested comments, upvotes, downvotes" and it could iterate for hours on your behalf. You could even go to bed and wake up with it done.
 
@@ -136,9 +136,9 @@ Is this fast-following competitive or is it collaborative? So far it's been feel
 
 ### Should we bow out?
 
-All this copying and how fast everything is moving begs the question: Should we get out of this race entirely and just do a better job integrating with the editors like VSCode, Cursor, Windsurf, and even Bolt? Maybe! We're planning to dip our toes into integrating: we're planing more local development support, and possibly even a FUSE virtual filesystem that could make it easy to use any editors with Val Town.
+All this copying and how fast everything is moving begs the question: Should we get out of this race entirely and just do a better job integrating with the editors like VSCode, Cursor, Windsurf, and even Bolt? Maybe! We're planning to dip our toes into integrating: we're planning more local development support, and possibly even a [FUSE](https://en.wikipedia.org/wiki/Filesystem_in_Userspace) virtual filesystem that could make it easy to use any editors with Val Town.
 
-However, it still feels like there's a lot to be gained with a fully integrated web AI code editor experience in Val Town – even if we can only get 80% of the features that the big dogs have, and a couple months later. We have had a lot of success fast-following so far, and think it's worth continuing to do so.
+However, it still feels like there's a lot to be gained with a fully-integrated web AI code editor experience in Val Town – even if we can only get 80% of the features that the big dogs have, and a couple months later. We have had a lot of success fast-following so far, and think it's worth continuing to do so.
 
 ### Townie
 
