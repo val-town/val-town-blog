@@ -6,10 +6,10 @@ pubDate: Dec 31, 2024
 author: Max McDonnell
 ---
 
-_After investigating we learned more about what happened and updated the content
-of this post. You can view the
-[original version here](https://github.com/val-town/val-town-blog/commit/1059e2aff2973aa841b06c46c1ce6c3e680d2d45)._
-
+_An
+[earlier version of this post](https://github.com/val-town/val-town-blog/commit/1059e2aff2973aa841b06c46c1ce6c3e680d2d45)
+posited that the cause of this downtime was a degraded host network.
+We now think that initial hypothesis was incorrect, so we have updated this post with our current understanding of the cause.
 ### Timeline
 
 At 12:15am ET, one of our servers exhausted its database connection pool and
