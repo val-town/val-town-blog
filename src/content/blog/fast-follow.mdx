@@ -8,15 +8,15 @@ author: Steve Krouse
 import Townie from "./val-town-newsletter-18/townie.png";
 import Codeium from "./val-town-newsletter-16/codeium.png";
 
-Since the beginning of Val Town, our users have been clamouring for the state-of-the-art LLM code generation experience. When we launched in 2022, it was GitHub Copilot. But soon it was ChatGPT, then Claude Artifacts, and now Bolt, Cursor, and Windsurf. We've been trying our best to keep up. Looking back over 2024, our efforts have really been a series of _fast-follows_, copying the innovation of others. Some have been successful, and others false-starts. This article is a historical account of our efforts, giving credit where it is due.
+Since the beginning of Val Town, our users have been clamouring for the state-of-the-art <abbr title="Large Language Model">LLM</abbr> code generation experience. When we launched in 2022, it was GitHub Copilot. But soon it was ChatGPT, then Claude Artifacts, and now [Bolt](https://bolt.new/), [Cursor](https://www.cursor.com/), and [Windsurf](https://codeium.com/windsurf). We've been trying our best to keep up. Looking back over 2024, our efforts have really been a series of _fast-follows_, copying the innovation of others. Some have been successful, and others false-starts. This article is a historical account of our efforts, giving credit where it is due.
 
 ### GitHub Copilot Completions
 
-The story starts, of course, with GitHub Copilot. From Day 1, Val Town users begged for a GitHub-Copilot-like completions experience.
+The story starts, of course, with GitHub Copilot. From day 1, Val Town users begged for a GitHub-Copilot-like completions experience.
 
-We were wary of building this ourselves, but one day we stumbled upon [codemirror-copilot](https://github.com/asadm/codemirror-copilot), and hooked it up. It was just ok. The completions ChatGPT provided were not great, and the latency was bad.
+We were wary of building this ourselves, but one day we stumbled upon Asad Memon’s [codemirror-copilot](https://github.com/asadm/codemirror-copilot), and hooked it up. That gave us our first taste of LLM-driven autocomplete, but behind the scenes, it was using ChatGPT. The prompt essentially asked ChatGPT to cosplay as an autocomplete service and fill in the text at the user’s cursor. So it was fairly slow, occasionally the model would forget its role and do something unexpected, and it didn't have the accuracy of a purpose-built autocomplete model.
 
-We researched the space and found [Codeium](https://codeium.com/) as the best provider, with good completions and great latency. We [launched Codeium completions](https://blog.val.town/blog/val-town-newsletter-16/#-codeium-completions) in April 2024 and open-sourced our [codemirror-codeium](https://github.com/val-town/codemirror-codeium) component. It's been pretty great. It's enabled by default for new users.
+We wanted a faster, more accurate autocomplete sytem, one that used a model trained for the task - which is technically called ['Fill in the Middle'](https://arxiv.org/abs/2207.14255). Finding an option that we could use within a product like Val Town was tricky – Copilot and most of its competitors lack documented or open APIs. But [Codeium](https://codeium.com/) did, and they also had very good accuracy and performance. We [launched Codeium completions](https://blog.val.town/blog/val-town-newsletter-16/#-codeium-completions) in April 2024 and open-sourced our [codemirror-codeium](https://github.com/val-town/codemirror-codeium) component. It's been pretty great. It's enabled by default for new users.
 
 ![Codeium](./val-town-newsletter-16/codeium.png)
 
