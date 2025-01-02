@@ -25,13 +25,11 @@ Val Town is mostly a platform for running little bits of JavaScript that we call
 
 <br />
 
-
 <video controls><source src="/video/townie-presentation.mp4" /></video>
 
 Here's the feature I'm talking about today - Townie. It's the Val Town bot. If you want to be old-fashioned, you can write the code yourself with your hands and fingers, but Townie will let you write it indirectly with English. It's similar in broad strokes to [Anthropic Artifacts](https://www.anthropic.com/news/artifacts) or [Vercel v0](https://v0.dev/), but one of the biggest differences is that the artifacts have full-stack backends, can be shared and forked, and so on.
 
 <br />
-
 
 ![Flowchart of Townie's LLM usage, including using Sonnet and OpenAI](./code-writing-robot/slide-4.png)
 
@@ -41,13 +39,11 @@ So for LLMs, we're riding on the coattails of [Anthropic](https://www.anthropic.
 
 <br />
 
-
 ![LLMs are chaotic](./code-writing-robot/slide-5.png)
 
 But despite the simplicity, LLMs are pretty chaotic, and this has taken longer to build than we expected.
 
 <br />
-
 
 ![LLMs are great but have drawbacks like being expensive, unreliable, unpredictable, and slow](./code-writing-robot/slide-6.png)
 
@@ -55,20 +51,17 @@ LLMs are unlike everything else on the backend: they can easily blow up your ser
 
 <br />
 
-
 ![Good LLM models are expensive and eat money](./code-writing-robot/slide-7.png)
 
 The good models are expensive. LLMs eat money. We're practicing financial discipline in a non-zero interest-rate world. How do we do it?
 
 <br />
 
-
 ![We fix this by using different LLMs](./code-writing-robot/slide-8.png)
 
 The easiest cost and performance alpha is just using different providers for different tasks. For example, when someone creates a val, we want to generate the TypeScript code for that val, which is pretty nitpicky work: it needs to work with [Deno](https://deno.com/)'s TypeScript environment and it should reliably know whether it's running on the frontend or the backend, and so on. For that we use Sonnet, which is pretty expensive.
 
 But then once we have the generated code, we want to generate a name for it, given both the prompt and response to that prompt: for that we use [OpenAI GPT-4o](https://openai.com/index/hello-gpt-4o/), which is cheap, fast, and good enough.
-
 
 <br />
 
@@ -78,13 +71,11 @@ And to use different models, it's really nice to use an abstraction library like
 
 <br />
 
-
 ![Large context windows get expensive and chat interfaces lead to them](./code-writing-robot/slide-11.png)
 
 So the other problem is that this is a chat interface, and none of the LLM providers provide persistence: you have to put the whole chat history into context for every single new message. And the responses that we get from Claude can be pretty long - these are complete programs that we're getting back, lots of tokens. So we've basically dispatched three different approaches to this problem.
 
 <br />
-
 
 ![We remind users on a regular basis that long conversations are worse and more expensive](./code-writing-robot/slide-12.png)
 
@@ -92,13 +83,11 @@ Our first line of defense against this is just reminding users that Townie gets 
 
 <br />
 
-
 ![caching old messages saves us a lot of money](./code-writing-robot/slide-14.png)
 
 Caching old messages somehow lets Anthropic amortize the cost of parsing messages and turning them into embeddings or whatever kind of fancy internal representation they have. It costs more money to create the cached stuff initially, but less to use it later.
 
 <br />
-
 
 ![We can visualize our cache usage with Observable](./code-writing-robot/slide-15.png)
 
@@ -144,7 +133,6 @@ We've also spent a lot of time tuning our custom prompt, which felt like shootin
 Here's our progress with Braintrust over time. We highlight different bad behaviors that we want to forbid from our outputs: things like using `require()` instead of `import`, using the `alert()` method, or omitting code from results. Some evals rely on simple string matching, while others use a secondary LLM to judge results from the "smart" LLM.
 
 <br />
-
 
 ![Notifications on pull requests](./code-writing-robot/slide-28.png)
 
