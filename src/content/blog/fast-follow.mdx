@@ -60,7 +60,7 @@ While we were out in front, we invested a lot of resources in trying to stay the
 
 The biggest problem with all current codegen systems is the speed of generation. It takes minutes to generate just a couple hundred lines of code. If you regenerate the whole file every time – which is how most systems work – that means minutes between every feedback loop. (Not to mention the cost of regenerating the whole file every time, even when you are making a small change.)
 
-We worked hard to get the LLM producing diffs, based on [work we say in Aider](https://aider.chat/docs/unified-diffs.html). We were able to get it to work most of the time, but not reliably enough to be on by default. It's now off by default, but you can ask Townie to "reply in diff" if you'd like to try your luck with it.
+We worked hard to get the LLM producing diffs, based on [work we saw in Aider](https://aider.chat/docs/unified-diffs.html). We were able to get it to work most of the time, but not reliably enough to be on by default. It's now off by default, but you can ask Townie to "reply in diff" if you'd like to try your luck with it.
 
 Our system prompt has always been open (you can view it in your Townie settings), so you can see how we're doing that. Here's the relevant section:
 
