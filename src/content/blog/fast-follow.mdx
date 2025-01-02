@@ -26,7 +26,7 @@ Then came ChatGPT. We found our users asking it to write Val Town code, and copy
 
 ![Townie](./val-town-newsletter-18/townie.png)
 
-The [first version of Townie](https://blog.val.town/blog/val-town-newsletter-18/#-townie) was born, a simple chat interface, very much inspired by ChatGPT, powered by GPT-3.5. It was just ok. It didn't get much use.
+The [first version of Townie](https://blog.val.town/blog/val-town-newsletter-18/#-townie) was born: a simple chat interface, very much inspired by ChatGPT, powered by GPT-3.5. It was just ok. It didn't get much use, mostly because it was hard to iterate on its results. Getting good results from an LLM usually requires a conversation because programming-via-English is pretty imprecise, and you need follow-up requests to clarify your needs.
 
 ### ChatGPT Tool Use
 
@@ -43,7 +43,9 @@ Earlier this year, ChatGPT Function Calling, now called 'tool-use', was seen as 
   allowfullscreen
 ></iframe>
 
-It was fine. The issue was that the interface was too generic. In theory, it was capable of doing anything (editing your blobs or sqlite data), but it wasn't very useful at any specific thing. Most notably, it wasn't a good interface for writing code. It could write the code, but it wasn't optimized to let you run that code, see the output, debug it, ask the AI for more help, etc. In other words, the feedback loop was bad.
+It was, ahem, fine. Function calling was a disappointment. You do all the work to provide the LLM with a strict definition of what functions it can call and with which arguments. But even all of that, the LLM would hallucinate things that didn't exist. Function calling has improved since, with the introduction of [Structured Outputs](https://platform.openai.com/docs/guides/function-calling#structured-outputs).
+
+But for us, the issue was that the interface was too generic. In theory, it was capable of doing anything (editing your blobs or sqlite data), but it wasn't very useful at any specific thing. Most notably, it wasn't a good interface for writing code. It could write the code, but it wasn't optimized to let you run that code, see the output, debug it, ask the AI for more help, etc. In other words, the feedback loop was bad.
 
 ### Claude Artifacts
 
