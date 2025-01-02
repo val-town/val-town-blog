@@ -1,6 +1,6 @@
 ---
 title: Fast following in the age of LLM code generation
-description: From Github Copilot to ChatGPT to Claude Artifacts, how Val Town's borrowed the best of all the code generation tools
+description: From GitHub Copilot to ChatGPT to Claude Artifacts, how Val Town's borrowed the best of all the code generation tools
 pubDate: Jan 2, 2025
 author: Steve Krouse
 ---
@@ -8,11 +8,11 @@ author: Steve Krouse
 import Townie from "./val-town-newsletter-18/townie.png";
 import Codeium from "./val-town-newsletter-16/codeium.png";
 
-Since the beginning of Val Town, our users have been clamouring for the state-of-the-art LLM code generation experience. When we launched in 2022, it was Github Copilot. But soon it was ChatGPT, then Claude Artifacts, and now Bolt, Cursor, and Windsurf. We've been trying our best to keep up. Looking back over 2024, our efforts have really been a series of _fast-follows_, copying the innovation of others. Some have been successful, and others false-starts. This article is a historical account of our efforts, giving credit where it is due.
+Since the beginning of Val Town, our users have been clamouring for the state-of-the-art LLM code generation experience. When we launched in 2022, it was GitHub Copilot. But soon it was ChatGPT, then Claude Artifacts, and now Bolt, Cursor, and Windsurf. We've been trying our best to keep up. Looking back over 2024, our efforts have really been a series of _fast-follows_, copying the innovation of others. Some have been successful, and others false-starts. This article is a historical account of our efforts, giving credit where it is due.
 
-### Github Copilot Completions
+### GitHub Copilot Completions
 
-The story starts, of course, with Github Copilot. From Day 1, Val Town users begged for a Github-Copilot-like completions experience.
+The story starts, of course, with GitHub Copilot. From Day 1, Val Town users begged for a GitHub-Copilot-like completions experience.
 
 We were wary of building this ourselves, but one day we stumbled upon [codemirror-copilot](https://github.com/asadm/codemirror-copilot), and hooked it up. It was just ok. The completions ChatGPT provided were not great, and the latency was bad.
 
@@ -101,7 +101,7 @@ It's not particularly novel in that others would have thought of this if we didn
 
 ### Hosted runtime and included APIs
 
-Maybe some of our UI ideas made it into Github Spark too, including deployment-free hosting, and persistent data storage, and the ability to use LLMs in your apps without a your own API key – their versions of [@std/sqlite](https://docs.val.town/std/sqlite/) and [@std/openai](https://docs.val.town/std/openai/), respectively. In other words, you can say, "make me a ChatGPT clone with persistent thread history", and in about 30 seconds, you'll have a deployed app that does exactly that.
+Maybe some of our UI ideas made it into GitHub Spark too, including deployment-free hosting, and persistent data storage, and the ability to use LLMs in your apps without a your own API key – their versions of [@std/sqlite](https://docs.val.town/std/sqlite/) and [@std/openai](https://docs.val.town/std/openai/), respectively. In other words, you can say, "make me a ChatGPT clone with persistent thread history", and in about 30 seconds, you'll have a deployed app that does exactly that.
 
 <video controls>
   <source src="/video/TownieChatGPTClone.mp4" />
@@ -140,4 +140,4 @@ However, it still feels like there's a lot to be gained with a fully integrated 
 
 ### Townie
 
-If you've made it this far in the article, you should really [try out Townie](https://www.val.town/townie). It's still is one of the best tools to create fullstack web apps. Make yourself a ['what did I work on today' app that pulls from Linear and Github](https://www.val.town/v/danphilibin/what_did_i_work_on_today), [a tool to extract dominant colors from an image](https://x.com/destroytoday/status/1856709997737984089), or [an AI clone for your personality](https://deeperfates.com/). And if you do, please let me know (steve@val.town) what features from other tools you'd like to see in Townie. We're eager to learn from you.
+If you've made it this far in the article, you should really [try out Townie](https://www.val.town/townie). It's still is one of the best tools to create fullstack web apps. Make yourself a ['what did I work on today' app that pulls from Linear and GitHub](https://www.val.town/v/danphilibin/what_did_i_work_on_today), [a tool to extract dominant colors from an image](https://x.com/destroytoday/status/1856709997737984089), or [an AI clone for your personality](https://deeperfates.com/). And if you do, please let me know (steve@val.town) what features from other tools you'd like to see in Townie. We're eager to learn from you.
