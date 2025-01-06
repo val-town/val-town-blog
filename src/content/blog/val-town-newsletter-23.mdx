@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 23
 description: TODO
-pubDate: Jan 10, 2024
+pubDate: Jan 10, 2025
 author: Steve Krouse
 ---
 
@@ -9,19 +9,42 @@ import { Image } from "astro:assets";
 
 TODO
 
-## Projects in Beta
+## Val Projects Beta
 
-TODO
+Vals are great for small projects, but what if you want to build something bigger? Introducing Val Projects, a new way to organize multiple vals, files, and folders into a single place. Where a val is like a GitHub gist, a val project is like a GitHub repository.
 
-## Use cases
+TODO screenshot
 
-TODO
+Projects will support:
+
+- Static assets, like images, videos, css, html, etc
+- Multiple files and folders
+- Environment variables scoped to the project (that code outside the project _can't_ access)
+- Forking, pull requests, and three-way merges
+- Townie, with the ability to understand and edit multiple files
+
+Projects currently support about half of these features, but because it's such a big effort, we've released it to about a dozen users in a private beta. If you're a Pro users who can't wait to try it out and give us feedback, please reach out to steve@val.town, and I'll add you to the beta.
+
+## Use Cases
+
+What can I do with Val Town? We get this question a lot, so we made a page to help answer it.
+
+TODO screenshot
+
+Check it out and see if it sparks any ideas for you! Maybe you'll find a val that's perfect for your needs and you can fork it and make it your own. We'd really appreciate feedback on this page. If you don't find what you're looking for, let us know. If you want to submit a val to be included, we'd love that too! If you try to fork someone else's val and fail, hit us up and we'll help you get it working.
 
 ## Upgraded to Deno 2
 
-- Upgraded Deno to 2.1.4 (ps - you can always [check our Deno version here](https://www.val.town/v/std/deno_version))- TODO confirm this
+[Deno 2](https://deno.com/blog/v2.0) is out, and Val Town is now running it. We're currently on 2.1.2, but you can always check which version we're running [here](https://www.val.town/v/std/deno_version).
 
-process and Buffer globally available
+This upgrade should be mostly transparent to you, but it comes with a couple nice features:
+
+- `process` and `Buffer` are now globally available, so means you don't have to import them anymore, which increases compatibility with Node.js code ([example](https://www.val.town/v/stevekrouse/processBufferDeno2Example))
+- WebAssembly imports ([example](https://www.val.town/v/just_be/deno2wasmExample))
+
+## Yearly pricing
+
+TODO
 
 ## Helping users deal with React 19
 
@@ -31,16 +54,20 @@ ie pinning to 18.2.0
 
 ## 🛣️ Roadmap
 
+- Val Projects
 - Val- & Project- scoped environment variables
-- Better support (redirects) for renamed vals
-- New val runtime architecture for faster & more scalable vals
-- Searchable & filterable logs and traces
-- /explore - a new page to find interesting vals
+- Ability to change your username
+- Automatically redirect renamed vals
+- Dashboard to track your usage and limits
+- Faster & scalable runtime
+- Observability upgrades: searchable & filterable logs and traces
+- New Homepage dashboard
+- New /explore page for discovering vals
 - Allow hyphens in val names (in place of underscores)
-- Improved val & code search
+- Improved code search
 - Comments on pull requests
-- Ability to follow a user on Val Town
 - Team accounts
+- Ability to follow a Val Town user
 - SOC2 compliance
 - ...and much more!
 
