@@ -46,7 +46,7 @@ in the future.
   connection pool, and we've added timeouts to pool queries.
 - We've identified the cause of the deadlock, added tests, and changed the logic
   to be sure it can't deadlock again.
-- We got unlucky with this one. Our external val execution health checks were
+- Our external val execution health checks were
   being routed to other hosts. We've updated these checks to make sure that
   every host is hit with each health check request.
 
