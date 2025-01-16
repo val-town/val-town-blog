@@ -1,0 +1,50 @@
+---
+title: "Post-mortem: esm.sh Breaking Changes"
+description: Some vals experienced lockfile and React errors due to breaking changes in esm.sh
+pubDate: Jan 16, 2025
+author: Steve Krouse
+---
+
+import { Image } from "astro:assets";
+import Chart from "./post-mortem-esm-sh/chart.svg";
+
+Yesterday [esm.sh](https://esm.sh) deployed breaking changes that caused two kinds of errors for our users: lockfile errors and client-side React errors. The first error was resolved by esm.sh rolling back the change related to React version pinning. The second error was resolved by us manually regenerating all effected lockfiles. We are working to upgrade our systems and with the esm.sh maintainer to ensure this doesn't happen again.
+
+### Timeline
+
+<div style={{ display: "flex", justifyContent: "center" }}>
+  <Image src={Chart} alt="Chart of lockfile errors" width="500px" />
+</div>
+
+- **12:00am ET** - Vals started experiencing lockfile errors. Some vals using client-side React stopped working.
+- **4:09am ET** - esm.sh maintainer [announced the changes in the Val Town Discord](https://discord.com/channels/1020432421243592714/1020432421243592717/1329014642223218741)
+- **9:36am ET** - esm.sh begins [rolling back the change related to React version pinning](https://github.com/esm-dev/esm.sh/pull/1032)
+- **10:34am ET** - All client-side React vals resume working
+- **10:39am ET** - We stopped sending unnecessary lockfile error emails to users (because the lockfiles would automatically regenerate)
+- **4:00pm ET** - We manually regenerated the lock files for all remaining affected vals. Most lockfile errors were resolved.
+
+### Impact
+
+These breaking changes impacted approximately 2% of Val Town users.
+
+#### Lockfile errors
+
+The lockfile errors happened the first time a val using esm.sh was run yesterday, because [esm.sh changed the URL structure of their imports](https://github.com/esm-dev/esm.sh/releases/tag/v136), which results in a lockfile integrity error.
+
+So on first run, the val would to throw an error. Then we'd send an error email to the user. Some users received many such error emails. The lockfiles would automatically regenerate, so the error emails were unnecessary. At 10:39am we decided to silence lockfile error emails.
+
+This lockfile error would only happen the first time a val was run after the esm.sh change. However, we still wanted to prevent this error, so we manually regenerated the lockfiles for all remaining affected vals. After 5pm ET, almost all lockfile errors were resolved. We are still tracking some remaining few errors per hour that are still happening.
+
+#### Client-side React errors
+
+The client-side React errors were unrelated to the lockfile errors, but were also bundled into the v136 esm.sh release. In v136, esm.sh stopped pinning `react-dom` to use the same version of `react` automatically, which is behavior that many vals were unintentionally relying on. This issue was more easily resolved, when by simply having [esm.sh roll back that change](https://github.com/esm-dev/esm.sh/pull/1032).
+
+### Next Steps
+
+We take stability extremely seriously and we're sorry for the downtime this caused. We're taking steps to ensure this doesn't happen again:
+
+1. We're working with esh.sh’s creator to ensure this doesn't happen again.
+2. Longer term, we're planning to replicate all your backend dependencies on our infrastructure, so we can control any infrastructure updates that may affect val reliability. We're also exploring patterns to make frontend dependencies more reliable.
+3. Shorter term, we're going to rewrite lockfile errors to be less confusing, so that if val has integrity errors, it'll be much clearer what happened and what action you need to take, if anything.
+
+If you have any questions or concerns, please reach out to me directly at steve@val.town.
