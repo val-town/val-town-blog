@@ -8,7 +8,7 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import Chart from "./post-mortem-esm-sh/chart.svg";
 
-Yesterday [esm.sh](https://esm.sh) deployed breaking changes that caused lockfile errors and client-side React errors for 2% of Val Town users. The issue was resolved by esm.sh rolling back the change related to React version pinning and us manually regenerating our users' affected lockfiles. We are working to upgrade our systems, and with the esm.sh maintainer to ensure this doesn't happen again.
+Yesterday [esm.sh](https://esm.sh) deployed breaking changes that caused two kinds of errors for our users: lockfile errors and client-side React errors. The first error was resolved by esm.sh rolling back the change related to React version pinning. The second error was resolved by us manually regenerating all effected lockfiles. We are working to upgrade our systems and with the esm.sh maintainer to ensure this doesn't happen again.
 
 ### Timeline
 
