@@ -8,7 +8,7 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import Chart from "./post-mortem-esm-sh/chart.svg";
 
-Yesterday [esm.sh](https://esm.sh) deployed breaking changes that caused two kinds of errors for our users: lockfile errors and client-side React errors. The first error was resolved by esm.sh rolling back the change related to React version pinning. The second error was resolved by us manually regenerating all effected lockfiles. We are working to upgrade our systems and with the esm.sh maintainer to ensure this doesn't happen again.
+Yesterday [esm.sh](https://esm.sh) deployed breaking changes that caused two kinds of errors for our users: lockfile errors and client-side React errors. The first error was resolved by esm.sh rolling back the change related to React version pinning. The second error was resolved by us manually regenerating all affected lockfiles. We are working to upgrade our systems with the esm.sh maintainer to ensure this doesn't happen again.
 
 ### Timeline
 
@@ -31,7 +31,7 @@ These breaking changes impacted approximately 2% of Val Town users.
 
 The lockfile errors happened the first time a val using esm.sh was run yesterday, because [esm.sh changed the URL structure of their imports](https://github.com/esm-dev/esm.sh/releases/tag/v136), which results in a lockfile integrity error.
 
-So on first run, the val would to throw an error. Then we'd send an error email to the user. Some users received many such error emails. The lockfiles would automatically regenerate, so the error emails were unnecessary. At 10:39am we decided to silence lockfile error emails.
+So on first run, the val would throw an error. Then we'd send an error email to the user. Some users received many such error emails. The lockfiles would automatically regenerate, so the error emails were unnecessary. At 10:39am we decided to silence lockfile error emails.
 
 This lockfile error would only happen the first time a val was run after the esm.sh change. However, we still wanted to prevent this error, so we manually regenerated the lockfiles for all remaining affected vals. After 5pm ET, almost all lockfile errors were resolved. We are still tracking some remaining few errors per hour that are still happening.
 
