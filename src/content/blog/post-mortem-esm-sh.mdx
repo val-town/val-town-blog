@@ -43,8 +43,8 @@ The client-side React errors were unrelated to the lockfile errors, but were als
 
 We take stability extremely seriously and we're sorry for the downtime this caused. We're taking steps to ensure this doesn't happen again:
 
-1. We're working with esh.sh creator to ensure this doesn't happen again.
-2. Longer term, we're planning to replicate all your backend dependencies on our infrastructure, so your vals will be effectively frozen, and much more stable. We're also exploring patterns that will allow you to get more stable frontend dependencies too.
-3. Shorter term, we're going to rewrite lockfile errors to be less confusing, so that the next time your val has integrity errors, it'll be much clearer what happened and what action you need to take, if anything.
+1. We're working with esh.sh’s creator to ensure this doesn't happen again.
+2. Longer term, we're planning to replicate all your backend dependencies on our infrastructure, so we can control any infrastructure updates that may affect val reliability. We're also exploring patterns to make frontend dependencies more reliable.
+3. Shorter term, we're going to rewrite lockfile errors to be less confusing, so that if val has integrity errors, it'll be much clearer what happened and what action you need to take, if anything.
 
 If you have any questions or concerns, please reach out to me directly at steve@val.town.
