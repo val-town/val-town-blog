@@ -1,7 +1,7 @@
 ---
 title: Val Town Newsletter 23
 description: TODO
-pubDate: Jan 10, 2025
+pubDate: Jan 21, 2025
 author: Steve Krouse
 ---
 
@@ -15,55 +15,52 @@ Vals are great for small projects, but what if you want to build something bigge
 
 TODO screenshot
 
-Projects will support:
+Projects support:
 
 - Static assets, like images, videos, css, html, etc
 - Multiple files and folders
 - Environment variables scoped to the project (that code outside the project _can't_ access)
-- Forking, pull requests, and three-way merges
+
+Projects will soon support:
+
+- Branches, forking, pull requests, and three-way merges
 - Townie, with the ability to understand and edit multiple files
 
-Projects currently support about half of these features, but because it's such a big effort, we've released it to about a dozen users in a private beta. If you're a Pro users who can't wait to try it out and give us feedback, please reach out to steve@val.town, and I'll add you to the beta.
+Projects are currently in private beta. We're looking for more passionate Val Town users to try it out and give feedback. If you're a Pro user, please reach out to steve@val.town, and we'll add you to the beta.
 
 ## Use Cases
 
-What can I do with Val Town? We get this question a lot, so we made a page to help answer it.
+"What can I do with Val Town?" We get this question a lot, so we made a page to help answer it.
 
 TODO screenshot
 
-Check it out and see if it sparks any ideas for you! Maybe you'll find a val that's perfect for your needs and you can fork it and make it your own. We'd really appreciate feedback on this page. If you don't find what you're looking for, let us know. If you want to submit a val to be included, we'd love that too! If you try to fork someone else's val and fail, hit us up and we'll help you get it working.
+Check it out and see if it sparks any ideas for you! Maybe you'll find a val that's perfect for your needs and you can fork it and make it your own. If you don't find what you're looking for, let us know. If you want to submit a val to be included, we'd love that too!
 
 ## Upgraded to Deno 2
 
-[Deno 2](https://deno.com/blog/v2.0) is out, and Val Town is now running it. We're currently on 2.1.2, but you can always check which version we're running [here](https://www.val.town/v/std/deno_version).
+[Deno 2](https://deno.com/blog/v2.0) is out, and Val Town is now running it. We're currently on Deno v2.1.2, but you can always check which version we're running [here](https://www.val.town/v/std/deno_version).
 
-This upgrade should be mostly transparent to you, but it comes with a couple nice features:
+In addition to some performance and security upgrades, Deno 2 also includes a couple exciting features:
 
-- `process` and `Buffer` are now globally available, so means you don't have to import them anymore, which increases compatibility with Node.js code ([example](https://www.val.town/v/stevekrouse/processBufferDeno2Example))
-- WebAssembly imports ([example](https://www.val.town/v/just_be/deno2wasmExample))
+- `process` and `Buffer` are now globally available, which means you don't have to import them anymore, which increases compatibility with Node.js code ([example](https://www.val.town/v/stevekrouse/processBufferDeno2Example))
+- WebAssembly imports are supported out-of-the-box ([example](https://www.val.town/v/just_be/deno2wasmExample))
 
-## Yearly pricing
+## Updated pricing
 
 TODO
 
-## Helping users deal with React 19
+## Other updates
 
-TODO - not sure if this needs a section here...
-
-ie pinning to 18.2.0
+- The logged-in Val Town homepage is now the dashboard, which shows your recent vals and projects. You can find the old homepage at [val.town/home](https://www.val.town/home).
+- Updated val Run & Save buttons to be easier to find, and provide more immediate feedback
 
 ## 🛣️ Roadmap
 
 - Val Projects
-- Val- & Project- scoped environment variables
-- Ability to change your username
-- Automatically redirect renamed vals
 - Dashboard to track your usage and limits
 - Faster & scalable runtime
 - Observability upgrades: searchable & filterable logs and traces
-- New Homepage dashboard
 - New /explore page for discovering vals
-- Allow hyphens in val names (in place of underscores)
 - Improved code search
 - Comments on pull requests
 - Team accounts
@@ -80,4 +77,4 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - https://www.val.town/v/hameed/calmRoseCaterpillar
 - https://bsky.app/profile/baolei.org/post/3leqdekcylk2g
 - https://mattrossman.com/2025/01/06/turning-data-into-calendar-feeds
-https://x.com/esoesnulo/status/1876980910928658681
+  https://x.com/esoesnulo/status/1876980910928658681
