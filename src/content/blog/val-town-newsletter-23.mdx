@@ -1,6 +1,6 @@
 ---
 title: Val Town Newsletter 23
-description: TODO
+description: Projects beta, Deno 2, Use cases, and more
 pubDate: Jan 21, 2025
 author: Steve Krouse
 ---
@@ -9,7 +9,7 @@ import { Image } from "astro:assets";
 
 🥳 Happy new year! Some 2024 highlights:
 
-- Raised a seed round of funding
+- Raised [our seed round](/blog/seed)
 - Max, Jackson, Justin, Sophie & Charmaine joined our team
 - Made our infra fast and stable
 - Launched Townie, a shockingly useful code assistant
@@ -21,14 +21,10 @@ Looking forward to 2025:
 - Scalable infra & usage-based billing
 - Team accounts for companies to collaborate
 - Improvements to Discovery, Search, Townie, Observability
-- Continuing to [fast-follow](/fast-follow/) with LLMs
-- SOC 2
+- Continuing to [fast-follow with LLMs](/blog/fast-follow/)
+- SOC 2 (👋 our enterprise friends)
 
-Sophie and Charmaine have joined the Val Town team 🥳. [Sophie](https://sophiehouser.com/)
-is a designer, programmer, and artist, who just moved from Berlin to join us. She's
-best-known for [a viral app she made as a teenager](https://sophiehouser.com/tampon-run-), but most recently worked with Nike and Delivery Hero. [Charmaine](https://www.charmaineklee.com/)
-is a technical product manager, with a deep background in developer tools. She's worked at
-Snapchat, Unity Labs, and Microsoft. We're thrilled to have them both on board!
+We have two new additions to the Val Town team! [Sophie](https://sophiehouser.com/) is a designer, programmer, and artist, who just moved from Berlin to join us here in Brookyn. She's best-known for [a viral app she made as a teenager](https://sophiehouser.com/tampon-run-), but most recently worked with Nike and Delivery Hero. [Charmaine](https://www.charmaineklee.com/) is a technical product manager, with a deep background in developer tools. She's worked at Snapchat, Unity Labs, and Microsoft. We're thrilled to have them both on board.
 
 ## Val Projects Beta
 
@@ -72,15 +68,17 @@ TODO
 
 ## Blogs, podcasts, and livestreams
 
+There's been a lot of great content about Val Town recently, a podcast, a livestream, 5 blogs, and (unfortunately) 2 post-mortems:
+
+- 📺 [Every Podcast: Do a 60-Minute Coding Task in 60-seconds](https://x.com/danshipper/status/1864324178901651828) with Steve Krouse
+- 📺 [Finsweet livestream: Exploring Val Town to supercharge your Webflow projects ](https://www.youtube.com/watch?v=Cm-yqc8Hve8) ft. Steve Krouse
+- 📝 [Turning data into calendar feeds](https://mattrossman.com/2025/01/06/turning-data-into-calendar-feeds) by Matt Rossman about how to get any data onto any calendar app supports iCal (which is all of them) super quickly
+- 📝 [Reimplementing Unsplash Source](https://paul.af/reimplementing-unsplash-source) by Paul Esch-Laurent about reimplementing the now discontinued Unsplash Source API
+- 📝 [Using Val Town to chart dependency bloat](https://blog.val.town/blog/devstats/) by Tom MacWright about [Devstats](https://www.val.town/v/tmcw/devstats), a val lets you post statistics from your GitHub Actions runs to build charts of change over time
+- 📝 [Bandcamp wrapped](https://macwright.com/2024/12/06/bandcamp-wrapped) by Tom MacWright about a val that generates a Spotify Wrapped-style report for your Bandcamp purchases
 - 📝 [What we learned copying all the best code assistants](https://blog.val.town/blog/fast-follow/) by Steve Krouse
-- 📺 [Every Podcast: Do a 60-Minute Coding Task in 60-seconds with Steve Krouse](https://x.com/danshipper/status/1864324178901651828)
-- 📝 [Using Val Town to chart dependency bloat](https://blog.val.town/blog/devstats/) by Tom MacWright
-- 📝 [Turning data into calendar feeds](https://mattrossman.com/2025/01/06/turning-data-into-calendar-feeds) by [Matt Rossman](https://www.val.town/u/mattrossman) - an excellent blog & [val](https://www.val.town/v/mattrossman/turningDataIntoCalendarFeeds) about how to get any data onto any calendar app supports iCal (which is all of them) super quickly
-- 📝 [Reimplementing Unsplash Source](https://paul.af/reimplementing-unsplash-source) - a blog about reimplementing the now discontinued Unsplash Source API
-- 📝 [Bandcamp wrapped](https://macwright.com/2024/12/06/bandcamp-wrapped) by Tom MacWright - blog about a val that generates a Spotify Wrapped-style report for your Bandcamp purchases
-- 📺 [Finsweet livestream: Exploring Val Town to supercharge your Webflow projects ft. Steve Krouse](https://www.youtube.com/watch?v=Cm-yqc8Hve8)
-- 📝 [Post-mortem: esm.sh breaking changes](https://blog.val.town/blog/post-mortem-esm-sh/) - esm.sh unexpectedly released breaking changes that impacted 2% of users for some time
-- 📝 [Post-mortem: Exhausted Host Connection Pool](https://blog.val.town/blog/post-mortem-exhausted-host-connection-pool/) - one of our servers had degraded performance due to a deadlock
+- 📝 [Post-mortem: esm.sh breaking changes](https://blog.val.town/blog/post-mortem-esm-sh/) – esm.sh unexpectedly released breaking changes that impacted 2% of Val Town users
+- 📝 [Post-mortem: Exhausted Host Connection Pool](https://blog.val.town/blog/post-mortem-exhausted-host-connection-pool/) – one of our servers had degraded performance due to a deadlock
 
 ## Other updates
 
@@ -90,10 +88,10 @@ TODO
 ## 🛣️ Roadmap
 
 - Val Projects
-- Dashboard to track your usage and limits
 - Faster & scalable runtime
 - Observability upgrades: searchable & filterable logs and traces
-- New /explore page for discovering vals
+- Metrics to track your usage and limits
+- New Explore page for discovering vals
 - Improved code search
 - Comments on pull requests
 - Team accounts
@@ -106,30 +104,30 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 ## 🌟 Community vals
 
 - Steve relaunched [Cerebras Coder](https://www.val.town/v/stevekrouse/cerebras_coder), an app that generates websites in under a second. Over 100k projects have been created with it!
-- [Bao](https://www.val.town/u/bao) (an iOS engineer at Notion) created the [Cipher Challenge](https://www.val.town/v/bao/cipher), a game to decode a letter substitution cipher as quick as you can. It's even multiplayer! ([post on bluesky](https://bsky.app/profile/baolei.org/post/3leqdekcylk2g))
-- [Paul](https://www.val.town/u/paulkinlan), who leads Chrome’s Developer Relations team, made an [Email Summary Service for newsletters] (https://paul.kinlan.me/projects/email-summary-service/)
-- [Morry](https://wttdotm.com/) made a website where people can [take pictures of his cats in his window and submit them via QR Code + email] (https://x.com/WTTDOTM/status/186654745801826339)
-- [Prasham](https://www.val.town/u/prashamtrivedi) made a [Val Town README Generator](https://www.val.town/v/prashamtrivedi/valreadmegenerator) - type in your username and val’s name and it’ll generate a readme with AI you can copy and paste
+- [Paul](https://www.val.town/u/paulkinlan), who leads Chrome’s Developer Relations team, made an [Email Summary Service for newsletters](https://paul.kinlan.me/projects/email-summary-service/)
+- [Morry](https://wttdotm.com/) made a website where people can [take pictures of his cats in his window and submit them via QR Code + email](https://x.com/WTTDOTM/status/186654745801826339)
+- [Bao](https://www.val.town/u/bao), an iOS engineer at Notion, created the [Cipher Challenge](https://www.val.town/v/bao/cipher), a game to decode a letter substitution cipher as quick as you can. It's even multiplayer! ([post on bluesky](https://bsky.app/profile/baolei.org/post/3leqdekcylk2g))
 - [Michael](https://www.val.town/u/michaelfromyeg) from Notion made a [Notion web clipper](https://x.com/michaelfromyeg/status/1873087505224089742) to save Notion content to Wallabag
-- [Steve](https://www.val.town/u/stevekrouse) made a val that shows [the top 100 Val Town users by number of public vals](https://www.val.town/v/stevekrouse/prolific) - did you make the cut? ([tweet](https://x.com/stevekrouse/status/1879282475823952138))
+- [Prasham](https://www.val.town/u/prashamtrivedi) made a [Val Town README Generator](https://www.val.town/v/prashamtrivedi/valreadmegenerator) - type in your username and val’s name and it’ll generate a readme with AI you can copy and paste
 - [Bryce](https://www.val.town/u/amoeba) made [a daily email digest of a github repo’s activity](https://www.val.town/v/amoeba/githubRepoDailyEmailDigest) ([post on bluesky](https://bsky.app/profile/stevekrouse.com/post/3ldsxj5xgrk2l))
 - [Ellie Huxtable](https://www.val.town/u/ellie/forks) added a [“recent listening” widget](https://x.com/ellie_huxtable/status/1866590562620420550) to their website
-- [Sam](https://www.val.town/u/samkingco) powers the “Latest YouTube video” part of his site with data from a val (post on bluesky) -[Max McDonnell](https://www.val.town/u/maxm) used vector embeddings to get ["vibes" search on emojis] (https://www.val.town/v/maxm/emojiInstantSearch)
+- [Sam](https://www.val.town/u/samkingco) powers the “Latest YouTube video” part of his site with data from a val (post on bluesky) -[Max McDonnell](https://www.val.town/u/maxm) used vector embeddings to get ["vibes" search on emojis](https://www.val.town/v/maxm/emojiInstantSearch)
+- [Steve](https://www.val.town/u/stevekrouse) made a val that shows [the top 100 Val Town users by number of public vals](https://www.val.town/v/stevekrouse/prolific) - did you make the cut? ([tweet](https://x.com/stevekrouse/status/1879282475823952138))
 - [John](https://www.val.town/u/johnphamous) made cron vals to [snipe hard to get nintendo museum tickets](https://x.com/JohnPhamous/status/1877781209750913223)
 - [Jan](https://www.val.town/u/yawnxyz) made a [fresh - an invoice generator](https://www.val.town/v/yawnxyz/fresh)
-- [Steve](https://www.val.town/u/stevekrouse) made an Anonymous doc publishing tool [https://x.com/stevekrouse/status/1874921337300623825]
 - [Prasham](https://www.val.town/u/prashamtrivedi) made a calendar app for viewing ICS files
+- [Steve from tldraw](https://www.val.town/u/steveruizok) made an [example custom endpoint for tldraw computer’s data component](TODO). Jordan agrees that [tldraw and Val Town are besties](https://bsky.app/profile/jdan.me/post/3lefgekm73s2u)
 - [Victor](https://www.val.town/u/vawogbemi/) made Let Him Cook, which lets you [query database with natural language](https://www.val.town/v/vawogbemi/lhc) via email
-- [Mixer](https://www.val.town/u/mixer) made a val to show their [Spotify Listening History] (https://mixer-listening.web.val.run/)
+- [Mixer](https://www.val.town/u/mixer) made a val to show their [Spotify Listening History](https://mixer-listening.web.val.run/)
 - [Trent](https://www.val.town/u/tr3ntg) built [a val that calls him via Twilio whenever it receives a webhook](https://www.val.town/v/tr3ntg/makeCallOnEmail)
 - [Charmaine](https://www.val.town/u/charmaine) [made Townie her personal illustrator](https://x.com/charmaine_klee/status/1880307658013466712)
-- [Steve from tldraw](https://www.val.town/u/steveruizok) made an [example custom endpoint for tldraw computer’s data component]. Jordan agrees that [tldraw and Val Town are besties] (https://bsky.app/profile/jdan.me/post/3lefgekm73s2u)
-- [Colin](https://www.val.town/u/colin) from Zod built Josh Goldberg [a mood diary] (https://x.com/stevekrouse/status/1865049638429946311)
-- [David](https://www.val.town/u/dthyresson) made [AI Rapped 2024] (https://dthyresson-ai_rapped_2024.web.val.run/)
-- [Danny](https://www.val.town/u/postpostscript) made Interruptible Chain, a simple interface for [pausing and resuming execution chains] (https://www.val.town/v/postpostscript/interruptibleChain)
+- [Steve](https://www.val.town/u/stevekrouse) made[an Anonymous doc publishing tool](https://x.com/stevekrouse/status/1874921337300623825)
+- [Colin](https://www.val.town/u/colin) from Zod built Josh Goldberg [a mood diary](https://x.com/stevekrouse/status/1865049638429946311)
+- [David](https://www.val.town/u/dthyresson) made [AI Rapped 2024](https://dthyresson-ai_rapped_2024.web.val.run/)
+- [Danny](https://www.val.town/u/postpostscript) made Interruptible Chain, a simple interface for [pausing and resuming execution chains](https://www.val.town/v/postpostscript/interruptibleChain)
 - [Vlad](https://www.val.town/u/vlad) made a val that converts [Bluesky Threads to RSS](https://vlad-blueskythreadtorss.web.val.run/)
-- https://x.com/itseieio/status/1866167891550179352
-- [Charmaine](https://www.val.town/u/charmaine) added a new [Reddit Keyword Alerts template] (https://www.val.town/v/valdottown/templateRedditAlert) with an [SMS version](https://www.val.town/v/charmaine/redditKeywordSMS)
+- TODO https://x.com/itseieio/status/1866167891550179352
+- [Charmaine](https://www.val.town/u/charmaine) added a new [Reddit Keyword Alerts template](https://www.val.town/v/valdottown/templateRedditAlert) with an [SMS version](https://www.val.town/v/charmaine/redditKeywordSMS)
 - [Victor](https://www.val.town/u/vawogbemi/) made [BYOB, Build Your Own Bot](https://www.val.town/v/vawogbemi/BYOB)
 - [Boris](https://www.val.town/u/boristane/) made a [cyberpunk weather display](<(https://x.com/boristane/status/1868010048225776000)>) with Townie
 - [Jackson](https://www.val.town/u/jxnblk) made GitHub Sync to [sync vals from Val Town to GitHub and back](https://www.val.town/v/jxnblk/gitHubSync)
@@ -138,7 +136,7 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [Danny](https://www.val.town/u/postpostscript) made expiringBlob, [create-and-forget blobs using UUIDv7](https://www.val.town/v/postpostscript/expiringBlob)
 - [Adtiya](https://www.val.town/u/adiadd) from AWS made a site that [gives you ideas from arXiv papers](https://x.com/adiaddxyz/status/1871302483022426476)
 - [Peter](https://www.val.town/u/peterqliu) made a dashboard that shows [the most popular wikipedia articles in a given time range](https://peterqliu-ww_top1k_dashboard.web.val.run/)
-- [Inferable](https://www.val.town/u/inferable) made an [integration with Val Town to create AI agents] (https://x.com/inferablehq/status/1879876394001555893)
+- [Inferable](https://www.val.town/u/inferable) made an [integration with Val Town to create AI agents](https://x.com/inferablehq/status/1879876394001555893)
 - [John](https://x.com/John__Wetzel) embraced Scott Belsky’s DIY software and made a [1000 hours outside challenge tracker](https://x.com/John__Wetzel/status/1876000610413396075)
 - [Jamie](https://www.val.town/u/jamiedubs) from [Glif](https://glif.app/) made [a val that fetches details about media files](https://www.val.town/v/jamiedubs/mediainfo) (images, video, audio, etc) using Mediainfo.js. e.g. codecs used, duration, file sizes, ID3 tags, etc.
 - [mint](https://www.val.town/u/mintexists) made a [Annas Archive/Libgen+ OPDS library catalog](https://www.val.town/v/mintexists/libgenopds) ([tweet](https://x.com/eva_exists/status/1876104402605617277))
