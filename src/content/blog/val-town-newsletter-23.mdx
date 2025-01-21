@@ -6,37 +6,40 @@ author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
+import Pricing from "./val-town-newsletter-23/Pricing.png";
+import ProjectsExample from "./val-town-newsletter-23/ProjectsExample.png";
+import Templates from "./val-town-newsletter-23/Templates.png";
 
-🥳 Happy new year! Some 2024 highlights:
+🥳 Happy 2025! Last year, our product grew from a JavaScript playground to a stable FaaS (Functions as a Service) platform that thousands of engineers use in personal and professional contexts. Some highlights from 2024:
 
 - Raised [our seed round](/blog/seed)
-- Max, Jackson, Justin, Sophie & Charmaine joined our team
-- Made our infra fast and stable
-- Launched Townie, a shockingly useful code assistant
-- Tens of thousands of you made hundreds of thousands of vals run hundreds of millions of times
+- [Max](https://maxmcd.com/), [Jackson](https://jxnblk.com/), [Justin](https://just-be.dev/), [Sophie](https://sophiehouser.com/) and [Charmaine](https://www.charmaineklee.com/) joined our team
+- Our infra became [fast](https://github.com/val-town/val-town-product/discussions/113#discussioncomment-10813787) and stable
+- Launched [Townie](/blog/townie), a shockingly useful code assistant
+- 10k+ of you made 100k+ vals that've run 100m+ times
 
-Looking forward to 2025:
+We have big plans for 2025. By the end of this year, we aim to be a mature cloud platform that serious engineering organizations use for core infrastructure. Here's some of the highlights:
 
 - Projects – groups of vals, files folders – with forks & 3-ways merges (currently in private beta)
 - Scalable infra & usage-based billing
 - Team accounts for companies to collaborate
 - Improvements to Discovery, Search, Townie, Observability
 - Continuing to [fast-follow with LLMs](/blog/fast-follow/)
-- SOC 2 (👋 our enterprise friends)
+- SOC 2
 
-We have two new additions to the Val Town team! [Sophie](https://sophiehouser.com/) is a designer, programmer, and artist, who just moved from Berlin to join us here in Brookyn. She's best-known for [a viral app she made as a teenager](https://sophiehouser.com/tampon-run-), but most recently worked with Nike and Delivery Hero. [Charmaine](https://www.charmaineklee.com/) is a technical product manager, with a deep background in developer tools. She's worked at Snapchat, Unity Labs, and Microsoft. We're thrilled to have them both on board.
+We have two new additions to the Val Town team! [Sophie](https://sophiehouser.com/) is a designer, programmer, and artist, who just moved from Berlin to join us here in Brooklyn. She's best-known for [a viral app she made as a teenager](https://sophiehouser.com/tampon-run-), but most recently worked with Nike and Delivery Hero. [Charmaine](https://www.charmaineklee.com/) is a technical product manager, with a deep background in developer tools. She's worked at Snapchat, Unity Labs, and Microsoft. We're thrilled to have them both on board.
 
 ## Val Projects Beta
 
-Vals are great for small projects, but what if you want to build something bigger? Introducing Val Projects, a new way to organize multiple vals, files, and folders into a single place. Where a val is like a GitHub gist, a val project is like a GitHub repository.
+Vals are great for small projects, but what if you want to build something bigger? Introducing Val Projects, a new way to organize multiple vals, files, and folders into a single place. Where a val is like a GitHub gist, a Val Project is like a GitHub repository.
 
-TODO screenshot
+<Image src={ProjectsExample} alt="Val Projects Example" />
 
 Projects support:
 
 - Static assets, like images, videos, css, html, etc
 - Multiple files and folders
-- Environment variables scoped to the project (that code outside the project _can't_ access)
+- Scoped environment variables (that code outside the project _can't_ access)
 
 Projects will soon support:
 
@@ -45,13 +48,13 @@ Projects will soon support:
 
 Projects are currently in private beta. We're looking for more passionate Val Town users to try it out and give feedback. If you're a Pro user, please reach out to steve@val.town, and we'll add you to the beta.
 
-## Use Cases
+## Templates
 
-"What can I do with Val Town?" We get this question a lot, so we made a page to help answer it.
+"What can I do with Val Town?" We get this question a lot, so we made [a page to help answer it](https://www.val.town/examples/use-cases).
 
-TODO screenshot
+<Image src={Templates} alt="Val Town Templates" />
 
-Check it out and see if it sparks any ideas for you! Maybe you'll find a val that's perfect for your needs and you can fork it and make it your own. If you don't find what you're looking for, let us know. If you want to submit a val to be included, we'd love that too!
+[Check it out](https://www.val.town/examples/use-cases) and see if it sparks any ideas for you! Maybe you'll find a val that's perfect for your needs and you can fork it and make it your own. If you don't find what you're looking for, let us know. If you want to submit a val to be included, we'd love that too!
 
 ## Upgraded to Deno 2
 
@@ -64,7 +67,17 @@ In addition to some performance and security upgrades, Deno 2 also includes a co
 
 ## Updated pricing
 
-TODO
+We made three changes to our pricing:
+
+1. We now have a yearly plan for $100! This is a 20% discount on our monthly plan 🥳
+2. We've explicitly listed custom domains on the Pro plan, with a limit of 10
+3. We've changed the val runs limits from per minute to per day. Now you get:
+   - Free: 100k runs / day
+   - Pro: 1m runs / day
+
+<Image src={Pricing} alt="Val Town Pricing" />
+
+One final word to the wise: we plan to increase our pricing soon, but will grandfather in all existing customers at the current price.
 
 ## Blogs, podcasts, and livestreams
 
@@ -116,7 +129,7 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [John](https://www.val.town/u/johnphamous) made cron vals to [snipe hard to get nintendo museum tickets](https://x.com/JohnPhamous/status/1877781209750913223)
 - [Jan](https://www.val.town/u/yawnxyz) made a [fresh - an invoice generator](https://www.val.town/v/yawnxyz/fresh)
 - [Prasham](https://www.val.town/u/prashamtrivedi) made a calendar app for viewing ICS files
-- [Steve from tldraw](https://www.val.town/u/steveruizok) made an [example custom endpoint for tldraw computer’s data component](TODO). Jordan agrees that [tldraw and Val Town are besties](https://bsky.app/profile/jdan.me/post/3lefgekm73s2u)
+- [Steve from tldraw](https://www.val.town/u/steveruizok) made an [example custom endpoint for tldraw computer’s data component](TOODOO). Jordan agrees that [tldraw and Val Town are besties](https://bsky.app/profile/jdan.me/post/3lefgekm73s2u)
 - [Victor](https://www.val.town/u/vawogbemi/) made Let Him Cook, which lets you [query database with natural language](https://www.val.town/v/vawogbemi/lhc) via email
 - [Mixer](https://www.val.town/u/mixer) made a val to show their [Spotify Listening History](https://mixer-listening.web.val.run/)
 - [Trent](https://www.val.town/u/tr3ntg) built [a val that calls him via Twilio whenever it receives a webhook](https://www.val.town/v/tr3ntg/makeCallOnEmail)
@@ -126,7 +139,7 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 - [David](https://www.val.town/u/dthyresson) made [AI Rapped 2024](https://dthyresson-ai_rapped_2024.web.val.run/)
 - [Danny](https://www.val.town/u/postpostscript) made Interruptible Chain, a simple interface for [pausing and resuming execution chains](https://www.val.town/v/postpostscript/interruptibleChain)
 - [Vlad](https://www.val.town/u/vlad) made a val that converts [Bluesky Threads to RSS](https://vlad-blueskythreadtorss.web.val.run/)
-- TODO https://x.com/itseieio/status/1866167891550179352
+- TOODOO https://x.com/itseieio/status/1866167891550179352
 - [Charmaine](https://www.val.town/u/charmaine) added a new [Reddit Keyword Alerts template](https://www.val.town/v/valdottown/templateRedditAlert) with an [SMS version](https://www.val.town/v/charmaine/redditKeywordSMS)
 - [Victor](https://www.val.town/u/vawogbemi/) made [BYOB, Build Your Own Bot](https://www.val.town/v/vawogbemi/BYOB)
 - [Boris](https://www.val.town/u/boristane/) made a [cyberpunk weather display](<(https://x.com/boristane/status/1868010048225776000)>) with Townie
