@@ -7,9 +7,16 @@ author: Steve Krouse
 
 import { Image } from "astro:assets";
 import ProjectsExample from "./Projects/Project.png";
+import ValExample from "./Projects/Val.png";
+import DateMe from "./Projects/DateMe.png";
+import Create from "./Projects/Create.png";
 
 <figure>
-  <Image src={ProjectsExample} alt="Val Projects Example" />
+  <Image
+    src={ProjectsExample}
+    alt="Young Street Toronto, ,
+    a blog & newsletter project"
+  />
   <figcaption>
     [Young Street Toronto](https://www.val.town/x/vawogbemi/yongeStreetToronto),
     a blog & newsletter project by [Victor](https://www.val.town/u/vawogbemi)
@@ -22,9 +29,34 @@ Today we're releasing **Val Town Projects** in public beta. Projects are contain
 
 Projects solve the biggest problem with Val Town: vals are too small. A vals is just a single file. It's incredible what you all have been able to do with them, but they become unwieldy after a thousand lines or so. This pain is especially acute when you're using an LLM that is trying to edit or rewrite hundreds or thousands of lines in a single file.
 
-{/* TODO Photo */}
+<figure>
+  <Image src={ValExample} alt="Val Example" />
+  <figcaption>
+    [A Personal CRM](https://www.val.town/v/juecd/CRM) by [Catherine
+    Jue](https://www.val.town/u/juecd) - built mostly by Townie AI, but became
+    unwieldy after a thousand lines
+  </figcaption>
+</figure>
 
-You can break up a single val into multiple vals that import each other, but that becomes untenable quickly. For example, say you have a couple of vals running in production that you want to make a medium-sized change to. If you don't want to affect production while you work, you'd have to fork each of those vals manually. Then you'd have to manually update all the imports in each of those vals to point to the forked versions. Then when you're ready to merge back to main, you'd have to manually update all the imports again. This is no fun. Instead most users either stuffed all their code into a single super long val, just made all their changes directly to their main production vals (somtimes breaking it briefly), or moved off Val Town entirely.
+You can break up a single val into multiple vals that import each other, but
+that becomes untenable quickly. For example, say you have a couple of vals
+running in production that you want to make a medium-sized change to. If you
+don't want to affect production while you work, you'd have to fork each of those
+vals manually. Then you'd have to manually update all the imports in each of
+those vals to point to the forked versions. Then when you're ready to merge back
+to main, you'd have to manually update all the imports again. This is no fun.
+Instead most users either stuffed all their code into a single super long val,
+just made all their changes directly to their main production vals (somtimes
+breaking it briefly), or moved off Val Town entirely.
+
+<figure>
+  <Image src={DateMe} alt="Val Example" />
+  <figcaption>
+    [Date Me Directory](https://val.town/v/stevekrouse/dateme) - an alternative
+    dating website that became an unwieldy collection of vals with many
+    disorganized forks
+  </figcaption>
+</figure>
 
 Clearly we needed a solution to dramatically increase the scope of what you can build on Val Town.
 
@@ -74,8 +106,8 @@ If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5R
 
 ## Start building today
 
-TODO explain how projects are launched on public beta today
+You can start building with Projects today by creating a new Project via the blue `New` button in the top right in your [Val Town account](https://val.town/).
 
-That you can create new projects via the blue new button in the top right of the screen
+We can't wait to see what you build!
 
-TODO Link to val town
+If you're new to Val Town, you can [sign up free with Github here](https://val.town/).
