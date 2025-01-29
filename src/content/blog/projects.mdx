@@ -1,6 +1,6 @@
 ---
-title: Introducing Projects
-description: Projects are containers for vals, files, and folders to increase the scope of what you can build in Val Town
+title: Introducing Val Town Projects
+description: Dramatically increasing the scope of what you can build in Val Town, Projects are groups of vals, files, and folders, versioned collectively
 pubDate: January 29, 2025
 author: Steve Krouse
 ---
@@ -22,11 +22,13 @@ import DateMe from "./projects/DateMe.png";
   </figcaption>
 </figure>
 
-Today we're releasing **Val Town Projects** in public beta. Projects are containers for vals, files, and folders that are versioned collectively, and deployed on Val Town. Where a Val Town Val is like a GitHub Gist, a Val Town Project is like a GitHub Repo. {/* Dan Levine doesn't like this analogy; maybe remove it? */} Projects dramatically increase the scope of what you can build in Val Town.
+Today, we're releasing Val Town Projects in public beta. Projects unlock a whole new level of complexity for what you can build in Val Town. Projects are containers for vals, files, and folders that are versioned collectively, and deployed on our serverless platform. They support powerful workflows, such as feature branches, that make it easy to build and deploy complex applications.
 
 ## Vals are too small
 
-Projects solve the biggest problem with Val Town: vals are too small. A vals is just a single file. It's incredible what you all have been able to do with them, but they become unwieldy after a thousand lines or so. This pain is especially acute when you're using an LLM that is trying to edit or rewrite hundreds or thousands of lines in a single file.
+Projects solve the biggest problem with Val Town: vals are too small. A val is just a single file. Despite that, you all have built some incredible things with vals, like A, B, C, D, E. TODO: add some examples here from past newsletters.
+
+But vals simply become unwieldy after about thousand lines or so. This pain is especially acute when you're using an LLM that is trying to edit or rewrite hundreds or thousands of lines in a single file.
 
 <figure>
   <Image src={ValExample} alt="Val Example" />
@@ -37,16 +39,8 @@ Projects solve the biggest problem with Val Town: vals are too small. A vals is 
   </figcaption>
 </figure>
 
-You can break up a single val into multiple vals that import each other, but
-that becomes untenable quickly. For example, say you have a couple of vals
-running in production that you want to make a medium-sized change to. If you
-don't want to affect production while you work, you'd have to fork each of those
-vals manually. Then you'd have to manually update all the imports in each of
-those vals to point to the forked versions. Then when you're ready to merge back
-to main, you'd have to manually update all the imports again. This is no fun.
-Instead most users either stuffed all their code into a single super long val,
-just made all their changes directly to their main production vals (somtimes
-breaking it briefly), or moved off Val Town entirely.
+Unfortunately, things get _worse_ if you tried breaking up a single val into multiple vals that import each other. For example, I broke up the [Date Me Directory](https://val.town/stevekrouse/dateme), an alternative dating website I manage, into a handful of vals, one for each page in the site. But this means that
+whenever I want to make a medium-sized change to the size without affecting the deployed app, I need to manually fork each of those vals one-by-one, and then manually update all the imports in each of them to point to the forked versions. This was miserable.
 
 <figure>
   <Image src={DateMe} alt="Val Example" />
@@ -57,17 +51,17 @@ breaking it briefly), or moved off Val Town entirely.
   </figcaption>
 </figure>
 
-Clearly we needed a solution to dramatically increase the scope of what you can build on Val Town.
+Instead most users either stuffed all their code into a single super long val, just made all their changes directly to their main production vals (sometimes breaking it briefly), or moved off Val Town entirely. Clearly we need a solution to dramatically increase the scope of what you can build on Val Town.
 
 ## Enter Projects
 
-Projects are containers for multiple vals, files, and folders that are versioned, branched, forked, and merged back collectively. Projects support incredibly powerful workflows, such as the desired feature branch workflow described above.
+Projects are containers for multiple vals, files, and folders that are versioned, branched, forked, and merged back collectively. With Projects, you can create feature branches and test changes without affecting production.
 
 As you may know, Val Town deploys your code in 100ms. This is a magical way to code _directly in the cloud_ – [instead of on localhost and deploying to the cloud later](https://dx.tips/the-end-of-localhost). This kind of live feedback loop is incredibly fun. It also means that you are building in the exact same environment that you'll deploy to, cutting out all the complexity of managing multiple environments.
 
 However, as described above, just because you're deploying to the cloud on every save doesn't mean you want to deploy to _production_ on every save. Feature branches in projects give you the best of both worlds: you can rapidly prototype in the exact same environment that you'll deploy to, but without affecting production. It's like localhost and PR previews had a baby: super fast iteration cycles, paired with hosted URLs you can immediately share.
 
-And the final kicker is scale. Our vision is that once your app is running on Val Town, you don't have to worry about provisioning more or less compute. Our serverless platform will automatically scale your app to handle any number of users. Our Scale Plan is slated to launch in Q2 2025.
+And the final kicker is scale. Our vision is that once your app is running on Val Town, it's deployed. You don't have to worry about provisioning more or less compute. Our serverless platform will automatically scale your app to handle any number of users. (Our Scale Plan is slated to launch in Q2 2025. For now, Val Town scales to 100k and 1m runs per day on [the Free and Pro plans](https://www.val.town/pricing), respectively.)
 
 ## Project Features
 
@@ -106,6 +100,8 @@ If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5R
 ## Start building today
 
 You can start building with Projects today by creating a new Project via the blue `New` button in the top right in your [Val Town account](https://val.town/).
+
+TODO: talk about the sorts of things we're excited for people to make. Give more concrete examples, like a personal CRM, or a blog, or an alternative dating website, or a backend for you startup prototype, or a starter template for your API that users can fork and have immediately running in production
 
 We can't wait to see what you build!
 
