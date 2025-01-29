@@ -63,6 +63,34 @@ However, as described above, just because you're deploying to the cloud on every
 
 And the final kicker is scale. Our vision is that once your app is running on Val Town, it's deployed. You don't have to worry about provisioning more or less compute. Our serverless platform will automatically scale your app to handle any number of users. (Our Scale Plan is slated to launch in Q2 2025. For now, Val Town scales to 100k and 1m runs per day on [the Free and Pro plans](https://www.val.town/pricing), respectively.)
 
+## Projects are not git repos
+
+We considered building Projects as git repos. We decided that becoming a git host at scale was too much complexity for the small subset of git's features that we wanted (diffs, branches, merges). We realized that it'd be much simpler to build our own version control system.
+
+This sounds like sacrilege – even to us. Everyone at Val Town is aa happy git and GitHub user. Yet if you think about it, many any of the web's pro tools had to build their own version control, including Google Docs, Figma, and Notion. We feel very heartened to read about how speculative and uncertain this decision felt at Figma to build their own multiplayer system instead of using OTs (operational transforms), which was the standard at the time given its success in Google Docs.
+
+<style>
+  {`
+    blockquote  {
+      font-size: inherit;
+    }
+  `}
+</style>
+
+> As a startup we value the ability to ship features quickly, and OTs were unnecessarily complex for our problem space. So we built a custom multiplayer system that's simpler and easier to implement.
+>
+> At the time, we weren’t sure building this feature was the right product decision. No one was clamoring for a multiplayer design tool—if anything, people hated the idea.
+>
+> ...Our bet paid off, and these days it’s obvious that multiplayer is the way all productivity tools on the web should work, not just design.
+>
+> – Evan Wallace, Co-founder, Figma, [_How Figma’s multiplayer technology works_](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/)
+
+We too think we built something that nobody was clamoring for, but that we hope will be obvious in the future. Experience programmers used to git & GitHub will feel right at home in Val Town Projects – branching, forking, merging, and pull requesting – but all from the same platform you're coding and deploying on.
+
+New programmers might never need to learn git at all. I can still remember the frustration of learning git for the first time, and I'm excited to think that we might be able to save some people from that pain. Particularly in this new age of LLM programming, we think there's an opportunity to build a new kind of version control system that's simpler than git.
+
+And if you really need git, Projects are git-friendly, and can easily be synced to and from a git repo. We're racing to release a beta API for Projects, which will allow you to fully own your data, sync to and from a git repo, and whatever else you want.
+
 ## Project Features
 
 Projects support the following features:
@@ -101,7 +129,7 @@ If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5R
 
 You can start building with Projects today by creating a new Project via the blue `New` button in the top right in your [Val Town account](https://val.town/).
 
-TODO: talk about the sorts of things we're excited for people to make. Give more concrete examples, like a personal CRM, or a blog, or an alternative dating website, or a backend for you startup prototype, or a starter template for your API that users can fork and have immediately running in production
+TODO: talk about the sorts of things we're excited for people to make. Give more concrete examples, like a personal CRM, or a blog, or an alternative dating website, or a backend for you startup prototype, or a starter template for your API that users can fork and have immediately running in production, this is where Nate goes
 
 We can't wait to see what you build!
 
