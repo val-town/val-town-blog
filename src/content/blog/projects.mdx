@@ -1,7 +1,7 @@
 ---
-title: Introducing Val Town Projects
+title: Introducing Val Town Projects Beta
 description: Dramatically increasing the scope of what you can build in Val Town, Projects are groups of vals, files, and folders, versioned collectively
-pubDate: January 29, 2025
+pubDate: January 31, 2025
 author: Steve Krouse
 ---
 
@@ -22,52 +22,51 @@ import DateMe from "./projects/DateMe.png";
   </figcaption>
 </figure>
 
-Today, we're releasing Val Town Projects in public beta. Projects unlock a whole new level of complexity for what you can build in Val Town. Projects are containers for vals, files, and folders that are versioned collectively, and deployed on our serverless platform. They support powerful workflows, such as feature branches, that make it easy to build and deploy complex applications.
+Today we're releasing Val Town Projects in public beta to unlock a whole new level of complexity for what you can build in Val Town. Projects are groups of vals, files, and folders that are versioned collectively, and deployed on our serverless platform. They support powerful workflows, such as feature branches, that make it easy to build and deploy complex applications.
 
 ## Vals are too small
 
-Projects solve the biggest problem with Val Town: vals are too small. A val is just a single file. Despite that, you all have built some incredible things with vals, like A, B, C, D, E. TODO: add some examples here from past newsletters.
+Projects solve the biggest problem with Val Town: vals are too small. A val is just a single file. Despite that, you all have built incredible things with vals. Recently we've seen [a transcription app](https://www.val.town/v/yawnxyz/scribe), [a p2p file transfer service](https://www.val.town/v/loading/file), [a Linear & Github daily LLM summarizer](https://www.val.town/v/danphilibin/what_did_i_work_on_today), [citizen data journalism](https://x.com/stevekrouse/status/1854255504681210055), and [many](https://blog.val.town/blog/val-town-newsletter-23/#-community-vals) [more](https://blog.val.town/blog/val-town-newsletter-22/#-community-vals).
 
-But vals simply become unwieldy after about thousand lines or so. This pain is especially acute when you're using an LLM that is trying to edit or rewrite hundreds or thousands of lines in a single file.
+But vals simply become unwieldy after about thousand lines or so. The pain is especially acute when using an LLM to edit or rewrite hundreds of lines in a single val file.
 
 <figure>
   <Image src={ValExample} alt="Val Example" />
   <figcaption>
     [A Personal CRM](https://www.val.town/v/juecd/CRM) by [Catherine
-    Jue](https://www.val.town/u/juecd) - built mostly by Townie AI, but became
-    unwieldy after a thousand lines
+    Jue](https://www.val.town/u/juecd) - built mostly by Townie AI, and became
+    unwieldy after a thousand lines.
   </figcaption>
 </figure>
 
-Unfortunately, things get _worse_ if you tried breaking up a single val into multiple vals that import each other. For example, I broke up the [Date Me Directory](https://val.town/stevekrouse/dateme), an alternative dating website I manage, into a handful of vals, one for each page in the site. But this means that
-whenever I want to make a medium-sized change to the size without affecting the deployed app, I need to manually fork each of those vals one-by-one, and then manually update all the imports in each of them to point to the forked versions. This was miserable.
+Unfortunately, things get _worse_ if you break up a single val into multiple vals that import each other. For example, I broke up the [Date Me Directory](https://val.town/stevekrouse/dateme), an alternative dating website I manage, into a handful of vals, one for each page in the site. Whenever I want to make a change without affecting production, I need to manually fork each of those vals one-by-one, and then manually update all the imports in each of them to point to the forked versions. This was miserable.
 
 <figure>
   <Image src={DateMe} alt="Val Example" />
   <figcaption>
     [Date Me Directory](https://val.town/v/stevekrouse/dateme) - an alternative
-    dating website that became an unwieldy collection of vals with many
-    disorganized forks
+    dating website. It became an unwieldy collection of vals with many
+    disorganized forks.
   </figcaption>
 </figure>
 
-Instead most users either stuffed all their code into a single super long val, just made all their changes directly to their main production vals (sometimes breaking it briefly), or moved off Val Town entirely. Clearly we need a solution to dramatically increase the scope of what you can build on Val Town.
+Instead most users either stuff all their code into a single super long val or just made all their changes directly to their main production vals (sometimes breaking it briefly). Or they moved off Val Town entirely. We needed a solution to dramatically increase the scope of what you can build on Val Town.
 
-## Enter Projects
+## Enter Val Town Projects
 
-Projects are containers for multiple vals, files, and folders that are versioned, branched, forked, and merged back collectively. With Projects, you can create feature branches and test changes without affecting production.
+Val Town Projects are groups of vals, files, and folders that are versioned, branched, forked, and merged collectively. With Projects, you can create feature branches and test changes without affecting production.
 
-As you may know, Val Town deploys your code in 100ms. This is a magical way to code _directly in the cloud_ – [instead of on localhost and deploying to the cloud later](https://dx.tips/the-end-of-localhost). This kind of live feedback loop is incredibly fun. It also means that you are building in the exact same environment that you'll deploy to, cutting out all the complexity of managing multiple environments.
+As you may know, Val Town deploys your code in 100ms. This is a magical way to code _directly in the cloud_ – [instead of on localhost and deploying to the cloud later](https://dx.tips/the-end-of-localhost). This kind of live feedback loop is incredibly fun. It's almost addicting. It also means that you are building in the exact same environment that you deploy in, cutting out all the complexity of managing multiple environments.
 
-However, as described above, just because you're deploying to the cloud on every save doesn't mean you want to deploy to _production_ on every save. Feature branches in projects give you the best of both worlds: you can rapidly prototype in the exact same environment that you'll deploy to, but without affecting production. It's like localhost and PR previews had a baby: super fast iteration cycles, paired with hosted URLs you can immediately share.
+But just because you're deploying to the _cloud_ on every save doesn't mean you want to deploy to _production_ on every save. Val Town Project branches give you the best of both worlds: you can rapidly prototype in the exact same environment that you'll deploy to, but without affecting production. It's like localhost and PR previews had a baby: super fast iteration cycles, paired with immediately hosted URLs you can share.
 
-And the final kicker is scale. Our vision is that once your app is running on Val Town, it's deployed. You don't have to worry about provisioning more or less compute. Our serverless platform will automatically scale your app to handle any number of users. (Our Scale Plan is slated to launch in Q2 2025. For now, Val Town scales to 100k and 1m runs per day on [the Free and Pro plans](https://www.val.town/pricing), respectively.)
+And the final kicker is scale. Our vision is that once your app is running on Val Town, it's fully deployed and you can rest easy. You don't have to worry about provisioning more or less compute. Our serverless platform will automatically scale your app to handle any number of users. (Our Scale Plan is slated to launch in Q2 2025. For now, Val Town scales to 100k and 1m runs per day on [the Free and Pro plans](https://www.val.town/pricing), respectively.)
 
 ## Projects are not git repos
 
-We considered building Projects as git repos. We decided that becoming a git host at scale was too much complexity for the small subset of git's features that we wanted (diffs, branches, merges). We realized that it'd be much simpler to build our own version control system.
+We considered building Projects as git repos, but decided that becoming a git host at scale was too much complexity for the small subset of git's features that we wanted (diffs, branches, merges). We realized that it'd be much simpler to build our own version control system.
 
-This sounds like sacrilege – even to us. Everyone at Val Town is aa happy git and GitHub user. Yet if you think about it, many any of the web's pro tools had to build their own version control, including Google Docs, Figma, and Notion. We feel very heartened to read about how speculative and uncertain this decision felt at Figma to build their own multiplayer system instead of using OTs (operational transforms), which was the standard at the time given its success in Google Docs.
+This sounds like sacrilege – even to us. Everyone at Val Town is a happy git user. Yet if you think about it, many any of the web's pro tools had to build their own version control, including Google Docs, Figma, and Notion. We feel very heartened to read about how speculative and uncertain this decision felt at Figma – to build their own multiplayer system instead of using OTs (operational transforms), which was the standard at the time given its success in Google Docs.
 
 <style>
   {`
@@ -85,52 +84,60 @@ This sounds like sacrilege – even to us. Everyone at Val Town is aa happy git 
 >
 > – Evan Wallace, Co-founder, Figma, [_How Figma’s multiplayer technology works_](https://www.figma.com/blog/how-figmas-multiplayer-technology-works/)
 
-We too think we built something that nobody was clamoring for, but that we hope will be obvious in the future. Experience programmers used to git & GitHub will feel right at home in Val Town Projects – branching, forking, merging, and pull requesting – but all from the same platform you're coding and deploying on.
+We too built something that nobody was clamoring for, but that we hope will seem obvious in the retrospect. Experienced programmers will feel right at home in Val Town Projects – branching, forking, merging, and pull requesting – collaborating directly within the same platform that you're iterating and deploying on.
 
-New programmers might never need to learn git at all. I can still remember the frustration of learning git for the first time, and I'm excited to think that we might be able to save some people from that pain. Particularly in this new age of LLM programming, we think there's an opportunity to build a new kind of version control system that's simpler than git.
+New programmers might never need to learn git at all. I can still remember the frustration of learning git for the first time, and I'm excited to think that we might be able to save some people from that pain. Particularly in this new age of LLM programming, we think there's an opportunity to build something simpler.
 
-And if you really need git, Projects are git-friendly, and can easily be synced to and from a git repo. We're racing to release a beta API for Projects, which will allow you to fully own your data, sync to and from a git repo, and whatever else you want.
+And if you really need git, Projects are git-friendly, and can easily be synced to and from a git repo. We're racing to release a Beta API for Projects, which will allow you to have full control over your source code, sync to and from a git repo, and wherever else you want.
 
 ## Project Features
 
 Projects support the following features:
 
-- **Multiple vals, files, and folders, versioned collectively** – the version number of a Project increases every time you make a change to any of the vals, files, or folders in the Project
-- **Multiple entrypoints** – you can have multiple HTTP, Cron, and Email vals that all have their own URLs, schedules, and email addresses, respectively
-- **Branches** - you can branch off main, and branch off branches. You can pull from upstream, and merge back upstream
-- **Forks** - other users can fork your Project, and you can fork other user's Projects
-- **Relative imports** – you can import files and folders relative to the project root, which means you don't have to update your imports when you branch or fork a project
-- **Static text files** – projects can contain non-val static text files, such as CSS, HTML, and text files
-- **Scoped environment variables** – Projects have their own environment variables, which code outside the Project in your Val Town account can't access
-- **Readmes are version controlled** – unlike in vals, readmes in Projects are just files, and version controlled collectively with the rest of the Project
-- **Inline AI code completion** – powered by [Codeium](https://codeium.com)
-- **Full-screen Editor** - with a file-tree, logs, and browser preview
+- **Multiple vals, files, and folders, versioned collectively** – The version number of a Project increases every time you make a change to any of the vals, files, or folders in the Project.
+- **Multiple entrypoints** – You can have multiple HTTP, Cron, and Email vals that all have their own URLs, schedules, and email addresses, respectively.
+- **Branches** - Branch off main, and branch off branches. You can pull from upstream, and merge back upstream.
+- **Forks** - Other users can fork your Project, and you can fork other user's Projects.
+- **Relative imports** – You can import files and folders relative to the project root (ie `./foo`), which means you don't have to update your imports when you branch, fork, or rename a project.
+- **Static text files** – Projects can contain static text files, such as CSS, HTML, and Markdown.
+- **Scoped environment variables** – Projects have their own environment variables, which code outside the Project can't access.
+- **Readmes are version controlled** – Unlike in vals, Readmes in Projects are just Markdown files, and version controlled with the rest of the Project.
+- **Inline AI code completion** – Like in vals, our browser-based text editor has completions powered by [Codeium](https://codeium.com).
+- **Full-screen Editor** - You can edit your vals in a dedicated full-screen view, with a file-tree sidebar, logs, and browser preview.
 
 ## Coming soon
 
 Projects will soon support:
 
-- Resolving merge conflicts
+- Pull requests from other users
 - Beta API for Projects
-- Townie, or [some other sort of AI assistance](./fast-follow/)
 - Reverting to a previous version
+- A dedicated view for resolving merge conflicts
 - Previewing past versions
-- Protecting (locking) the main branch (so you can only edit it via branches)
-- Images and videos, and other binary static files
-- Pull requests from other user's to your Project
+- Townie, or [some other sort of AI assistance](./fast-follow/)
+- Protecting (locking) the main branch, so you can only edit it via branches
+- Images, videos, and other binary static files
 - Collaborators & Team Accounts
-- ...and much, much more! Let us know what you want to see next!
 
-## Resources
+## What you can build
 
-If you get stuck, please reach out in [our Discord](https://discord.gg/dHv45uN5RY), or email us directly (help@val.town), and include a link to your project. We're here to help!
+Up till now, Val Town has excelled at small pieces of code, such as little integrations and automations, such as [social media monitoring, data sync, and single-page sites](https://www.val.town/examples/use-cases). Val Town is still super useful for those sorts of things! But with Projects, we're excited to see what you can build with a much larger scope, such as:
 
-## Start building today
+- internal tools
+- durable workflows
+- a backend for your app
+- API prototypes – [like Campsite](https://www.campsite.com/blog/how-we-prototype-integrations-with-val-town), [Glif](https://www.val.town/u/jamiedubs)
+- a starter template for your API – like [PostHog](https://posthog.com/tutorials/rss-item-capture), [Framer](https://www.framer.com/developers/fetch/examples), [tldraw](https://x.com/tldraw/status/1869770077828272134), [Browserbase](https://www.val.town/u/browserbase)
+- multi-page full-stack apps
 
-You can start building with Projects today by creating a new Project via the blue `New` button in the top right in your [Val Town account](https://val.town/).
+We want to highlight one of the biggest Projects so far. Nate is building {/* [X](TODO), */} an app to help people get more insight from their journaling practice. The frontend of the app is simply Notion, and the backend is hosted on Val Town. Nate has a series of Cron vals that run throughout the day to pull your latest journal entries, get analysis from AI, and send the insights back into Notion and personalize reports.
 
-TODO: talk about the sorts of things we're excited for people to make. Give more concrete examples, like a personal CRM, or a blog, or an alternative dating website, or a backend for you startup prototype, or a starter template for your API that users can fork and have immediately running in production, this is where Nate goes
+{/* Todo: Screenshot of Nate's Project here */}
 
-We can't wait to see what you build!
+Before Projects, Nate had dozens of vals scattered across folders, and versioned separately. He was able to migrate them all into a single Val Town Project in about 30 minutes. {/* TODO: Quote from Nate here */}
 
-If you're new to Val Town, you can [sign up free with Github here](https://val.town/).
+## Start building
+
+You can start building with Projects right now. Create a project by clicking the blue `New` button in the top-right corner of the screen, after you're logged in at [val.town](https://val.town/). {/* You can learn more about Val Town Projects [here in our docs](https://docs.val.town/TODO). */}
+
+We can't wait to see what you build! If you're new to Val Town, you can [sign up free here](https://www.val.town/auth/signup).
