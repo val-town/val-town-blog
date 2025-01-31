@@ -1,5 +1,5 @@
 ---
-title: Introducing Val Town Projects Beta
+title: Introducing Val Town Projects
 description: Dramatically increasing the scope of what you can build in Val Town, Projects are groups of vals, files, and folders, versioned collectively
 pubDate: January 31, 2025
 author: Steve Krouse
@@ -9,6 +9,7 @@ import { Image } from "astro:assets";
 import ProjectsExample from "./projects/Project.png";
 import ValExample from "./projects/Val.png";
 import DateMe from "./projects/DateMe.png";
+import JournalGroove from "./projects/JournalGroove.png";
 
 <figure>
   <Image
@@ -130,11 +131,18 @@ Up till now, Val Town has excelled at small pieces of code, such as little integ
 - a starter template for your API – like [PostHog](https://posthog.com/tutorials/rss-item-capture), [Framer](https://www.framer.com/developers/fetch/examples), [tldraw](https://x.com/tldraw/status/1869770077828272134), [Browserbase](https://www.val.town/u/browserbase)
 - multi-page full-stack apps
 
-We want to highlight one of the biggest Projects so far. [Nathanael](https://nates.foo/about) is building {/* [X](TODO), */} an app to help people get more insight from their journaling practice. The frontend of the app is simply Notion, and the backend is hosted on Val Town. Nathanael has a series of Cron vals that run throughout the day to process your latest journal entries and deliver personalized, AI-generated reports back into your private Notion space.
-
-{/* Todo: Screenshot of Nathanael's Project here */}
+We want to highlight one of the biggest Projects so far. [Nathanael](https://nates.foo/about) is building [JournalGroove](https://www.journalgroove.org/) an app to help people get more insight from their journaling practice. The frontend of the app is simply Notion, and the backend is hosted on Val Town. Nathanael has a series of Cron vals that run throughout the day to process your latest journal entries and deliver personalized, AI-generated reports back into your private Notion space.
 
 Before Projects, Nathanael had dozens of vals scattered across folders, and versioned separately. He was able to migrate them all into a single Val Town Project in about 30 minutes.
+
+<figure>
+  <Image src={JournalGroove} alt="" />
+  <figcaption>
+    [JournalGroove](https://www.journalgroove.org/) - an project to help people
+    get more insight from their journaling practice by [Nathanael
+    Silverman](https://nates.foo/about)
+  </figcaption>
+</figure>
 
 > "Val Town enabled me to grow this from an idea into a fully-fledged project much faster than I would have expected. I like that Projects are separate from my other random vals. And I look forward to using branches, eventually collaborating with other people."
 >
@@ -142,8 +150,12 @@ Before Projects, Nathanael had dozens of vals scattered across folders, and vers
 
 ## Start building
 
-You can start building with Projects right now. Create a project by clicking the blue `New` button in the top-right corner of the screen, after you're logged in at [val.town](https://val.town/). {/* You can learn more about Val Town Projects [here in our docs](https://docs.val.town/TODO). */}
+You can start building with Projects right now.
 
-{/* TODO - include photo/GIF for how to create a project - maybe Charmaine can help with this */}
+<video controls autoplay loop style="border-radius: 8px">
+  <source src="/video/CreateProjectDemo.mp4" />
+</video>
+
+You can learn more about Val Town Projects [here in our docs](https://docs.val.town/projects).
 
 We can't wait to see what you build! If you're new to Val Town, you can [sign up free here](https://www.val.town/auth/signup).
