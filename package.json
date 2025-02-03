@@ -11,21 +11,21 @@
 	},
 	"dependencies": {
 		"@astrojs/check": "^0.9.4",
-		"@astrojs/markdown-remark": "^6.0.1",
-		"@astrojs/mdx": "^4.0.3",
-		"@astrojs/rss": "^4.0.10",
+		"@astrojs/markdown-remark": "^6.1.0",
+		"@astrojs/mdx": "^4.0.8",
+		"@astrojs/rss": "^4.0.11",
 		"@astrojs/sitemap": "^3.2.1",
-		"@fontsource/ibm-plex-mono": "^5.1.0",
+		"@fontsource/ibm-plex-mono": "^5.1.1",
 		"@fontsource/ibm-plex-sans": "^5.1.1",
 		"@fontsource/ibm-plex-sans-condensed": "^5.1.1",
 		"@fontsource/ibm-plex-serif": "^5.1.1",
 		"@observablehq/plot": "^0.6.16",
-		"astro": "^5.1.1",
-		"astro-expressive-code": "^0.38.3",
+		"astro": "^5.2.3",
+		"astro-expressive-code": "^0.40.1",
 		"hastscript": "^9.0.0",
 		"mermaid": "^11.4.1",
 		"rehype-autolink-headings": "^7.1.0",
-		"remark-directive": "^3.0.0",
-		"typescript": "^5.7.2"
+		"remark-directive": "^3.0.1",
+		"typescript": "^5.7.3"
 	}
 }
