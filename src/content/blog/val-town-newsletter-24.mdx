@@ -1,17 +1,22 @@
 ---
 title: Val Town Newsletter 24
-description: Projects,  Highlight to AI, Logs Redesign, Public endpoints with private code, and much more!
+description: Projects,  Highlight to edit, Logs Redesign, Public endpoints with private code, and much more!
 pubDate: Feb 28, 2025
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
+import Privacy from "./val-town-newsletter-24/Privacy.png";
 
 TODO summary
 
 ## Val Town Projects
 
-TODO
+Val Town Projects have landed.
+
+TODO photo / video
+
+If you liked vals, you are going to _love_ Projects. Val Town Projects are extremely powerful and flexible technology, yet with the classic Val Town simplicity and speed.
 
 Forks are crazy fast, ie compared to github, I have a video of this
 
@@ -19,31 +24,55 @@ Forks are crazy fast, ie compared to github, I have a video of this
 
 I should probably link to all the best projects to copy and some of my livestreams talking about them, and a link to sign up to chat with me and charmaine to get personally onboarded.
 
-## Highlight to AI
+## Highlight to edit
 
-TODO
+Introducing Highlight to edit, a new way to code with AI in Val Town.
 
-Huge shoutout to Marimo
+TODO video
+
+You can now select text in any val and then click Edit or Cmd+L to ask AI to rewrite that section of code.
+This solves the problem with Townie rewriting too much or our completions not rewriting enough. Now you can highlight exactly what you want edited.
+
+Huge shoutout to the folks at [Marimo](https://marimo.io/) for [building this codemirror plugin and open-sourcing it](https://marimo-team.github.io/codemirror-ai/)!
 
 ## Logs Redesign
 
-TODO
+We've redesigned our logs to be easier to read and navigate – with powerful filters and sorts to help you find what you're looking for fast.
+
+The new logs pair beautifully with Val Town Projects, letting you view all the logs from all vals inside a project in the same view.
 
 ## Public endpoints with private code
 
-TODO, thanks Robin Sloan and others for requesting this 🙏
+We updated val privacy permissions to made it easy for you to create public HTTP endpoints, while keeping your code private.
 
-- public is oss
-- unlisted is now for semi-collab
-- private is closed-source with no collaborators, team accounts will solve that soon!
+<figure align="center">
+  <Image
+    style={{
+      maxWidth: "600px",
+      borderRadius: "8px",
+      border: "1px solid var(--border)",
+      overflow: "hidden",
+    }}
+    src={Privacy}
+    alt="Val Privacy Menu"
+  />
+</figure>
+
+Now `Private` keeps your code private, but your HTTP endpoint open. We've grandfathered old `Private` HTTP endpoints into a `Legacy Private` state, which keeps their HTTP endpoints closed to preserve the previous behavior. You can [learn more about val privacy states here](https://docs.val.town/reference/permissions/).
+
+Thanks Robin Sloan and TODO for requesting this 🙏
 
 ## Client-side errors in the HTTP preview
 
-TODO, legacy private, link to docs maybe, and projects are already on the new semantics, which are explained inline now
+If your Val Town code throws an error while running on the server, you will see that in our (newly redesigned) logs. But if your code throws an error on the client side, that used to be something you'd have to seek in the browser console.
+
+TODO photo
+
+Now, we surface those client-side errors right in every HTTP preview, so you can see them right where you're working. The catch is that this requires you to import [this 20-line script](https://www.val.town/v/std/catch) into your frontend. Townie has been doing this automatically for you for months, but if you're not using Townie, you can add it to your HTML like so: `<script src="https://esm.town/v/std/catch"></script>`.
 
 ## Markdown editor supports line-wrapping
 
-TODO
+TODO photo or video, Tom already has one
 
 ## Other updates
 
