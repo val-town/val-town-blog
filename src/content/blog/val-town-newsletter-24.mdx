@@ -1,6 +1,6 @@
 ---
 title: Val Town Newsletter 24
-description: Val Town Projects, Highlight to edit, Logs redesign, Public endpoints with private code, and much more
+description: Val Town Projects, Highlight to edit, Logs redesign, Public endpoints with private code, and more
 pubDate: Feb 28, 2025
 author: Steve Krouse
 ---
@@ -8,13 +8,15 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import Privacy from "./val-town-newsletter-24/Privacy.png";
 
+TODO summary
+
 ## Val Town Projects
 
 Val Town Projects have landed.
 
 TODO photo / video
 
-If you liked vals, you are going to _love_ Projects. Val Town Projects are extremely powerful tech, but with the classic Val Town simplicity and lightness.
+If you liked vals, you are going to _love_ Projects. Val Town Projects are extremely powerful and flexible technology, yet with the classic Val Town simplicity and speed.
 
 Forks are crazy fast, ie compared to github, I have a video of this
 
@@ -24,23 +26,24 @@ I should probably link to all the best projects to copy and some of my livestrea
 
 ## Highlight to edit
 
-Introducing Highlight to edit. We've yet again brought one of your favorite ways to code with AI into Val Town.
+Introducing Highlight to edit, a new way to code with AI in Val Town.
 
 TODO video
 
-You can now select text in any val and then click Edit or Cmd+L to ask AI to rewrite that section of code. This solves the problem with Townie rewriting too much or our completions not rewriting enough. Now you can highlight exactly what you want edited.
+You can now select text in any val and then click Edit or Cmd+L to ask AI to rewrite that section of code.
+This solves the problem with Townie rewriting too much or our completions not rewriting enough. Now you can highlight exactly what you want edited.
 
-Huge shout-out to the folks at [Marimo](https://marimo.io/) for [this open-source CodeMirror plugin](https://marimo-team.github.io/codemirror-ai/)!
+Huge shoutout to the folks at [Marimo](https://marimo.io/) for [building this codemirror plugin and open-sourcing it](https://marimo-team.github.io/codemirror-ai/)!
 
 ## Logs Redesign
 
 We've redesigned our logs to be easier to read and navigate – with powerful filters and sorts to help you find what you're looking for fast.
 
-The new logs pair beautifully with Val Town Projects, letting you view all the logs across a project at once.
+The new logs pair beautifully with Val Town Projects, letting you view all the logs from all vals inside a project in the same view.
 
 ## Public endpoints with private code
 
-At long last, we've updated val privacy permissions to made it easy for you to create public HTTP endpoints, while keeping your code private.
+We updated val privacy permissions to made it easy for you to create public HTTP endpoints, while keeping your code private.
 
 <figure align="center">
   <Image
@@ -61,38 +64,15 @@ Thanks Robin Sloan and TODO for requesting this 🙏
 
 ## Client-side errors in the HTTP preview
 
-If your Val Town code throws an error while running on the server, you will see that in our beautifully redesigned logs. But if your code throws an error on the client side, that used to be something you'd have to seek in the browser console.
+If your Val Town code throws an error while running on the server, you will see that in our (newly redesigned) logs. But if your code throws an error on the client side, that used to be something you'd have to seek in the browser console.
 
 TODO photo
 
-Now, we surface those client-side errors right in every HTTP preview, so you can see them right where you're working. To enable this, add this to your HTML:
-
-```html
-<script src="https://esm.town/v/std/catch"></script>
-```
-
-We've instructed Townie to do this for you automatically, so some of your vals may already have it installed.
+Now, we surface those client-side errors right in every HTTP preview, so you can see them right where you're working. The catch is that this requires you to import [this 20-line script](https://www.val.town/v/std/catch) into your frontend. Townie has been doing this automatically for you for months, but if you're not using Townie, you can add it to your HTML like so: `<script src="https://esm.town/v/std/catch"></script>`.
 
 ## Markdown editor supports line-wrapping
 
 TODO photo or video, Tom already has one
-
-## Projects API
-
-The Projects API is halfway done! You can now list and retrieve public or your own projects and their branches and files. Here are the routes we currently support:
-
-```http
-GET /v1/projects/{project_id}
-GET /v1/projects
-GET /v1/projects/{project_id}/branches/{branch_id}
-GET /v1/projects/{project_id}/branches
-GET /v1/projects/{project_id}/files
-GET /v1/projects/{project_id}/files/{path}
-GET /v1/projects/{project_id}/files/{path}/content
-GET /v1/alias/projects/{username}/{project_name}
-```
-
-You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK docs](https://github.com/val-town/sdk/blob/6f80c8470f055aa30c5c3cc34fcf715c81df1937/api.md#projects-1) to get started.
 
 ## Other updates
 
@@ -101,8 +81,6 @@ You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK doc
 - Added a beautiful heart animation when you like a val
 - Fixed a bug that would very rarely run crons twice, thanks Nathaneal and TODO for reporting this 🙏
 - townie.new?prompt= and val.town/townie?prompt= let you link someone to a new Townie chat with the input box pre-filled, thanks to our friends at Braintrust for requesting this 🙏
-- Ask you to name vals, files, and folders before creating them with random names
-- Silence one particularly annoying JSX error in the TypeScript editor
 - Moved the val editor button from the top nav to inside your profile menu. You can also get to it from any val via link or Cmd+K menu
 - Improved the error message when a val hits the timeout limit
 - Improved the error message when you try to schedule a val more frequently than every 15 min on the Free plan
@@ -111,16 +89,15 @@ You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK doc
 - Fixed a bug in our rate-limiter
 - Fixed bug that prevented you from deleting comments on your vals
 - Improved the subject line of notification emails
-- Updated our onboarding survey to better personalize your experience
 
 ## 🛣️ Roadmap
 
 How to build devtools... https://www.youtube.com/watch?v=lFBfliNf9C4
 
 - Projects API
-- Local dev: edit vals from your local editor (Cursor, Windsurf, VSCode, vim, etc)
-- New account-wide logs view
-- Customizable `val.run` domains for Project HTTP vals
+- Edit vals from your local editor (Cursor, Windsurf, VSCode, vim, etc) via FUSE
+- Customizable `val.run` domains for project HTTP vals
+- Townie that can edit Projects
 - Faster & scalable runtime
 - Bug fixes to our in-browser TypeScript editor
 - Improved code search
@@ -134,43 +111,29 @@ Please [make feature requests and vote](https://github.com/val-town/val-town-pro
 
 ## 🌟 Community vals and projects
 
-- new showcase section of our website: https://www.val.town/explore/community-showcase
-- https://www.val.town/v/jamiedubs/linkifyDiscordBot
-- https://www.val.town/v/alexwein/loopyletters, https://www.val.town/v/alexwein/judgeWordsDash
-- https://val.town/v/stainless_em/regexToBrainrot
-- https://www.val.town/v/pinjasaur/unsplashSourceReimplementation and https://paul.af/reimplementing-unsplash-source
-- stevekrouse.com/proposal
-- https://www.jordankatzen.com/posts/notes/goodreads-rss/
-- https://www.val.town/x/maxm/status_status
-- https://www.val.town/v/joseforonda/boliviaDigest https://www.val.town/v/joseforonda/digest https://www.val.town/v/joseforonda/newsletter
+- We have a new [Comumunity Showcase](https://www.val.town/explore/community-showcase) page to highlight some community vals and projects we feel inspired by. Go give these vals a like and a fork!
+- [Jamie](https://www.val.town/u/jamiedubs) made a [Discord bot](https://www.val.town/v/jamiedubs/linkifyDiscordBot) to linkify messages in Discord
+- Em from Stainless made [Regex to Brainrot](https://www.val.town/v/stainless_em/regexToBrainrot), it gives you enertaining explanations for regex patterns
+- Paul reimplemented [source.unsplash.com with Val Town](https://paul.af/reimplementing-unsplash-source)
+- Steve, the mayor of Val Town, wrote about how he [proposed with a modified version of Quordle he built on Val Town](https://stevekrouse.com/proposal). Of course he did. 😊
+- Jordan made a val to parse [Goodreads' RSS feed](https://www.jordankatzen.com/posts/notes/goodreads-rss/) to power his [/reading](https://www.jordankatzen.com/reading/) page
+- Max on our team made a status page to check the [statuses of all of Val Town's downstream providers](https://www.val.town/x/maxm/status_status). It helps Max when PagerDuty wakes him up at 3am
+- [Jose Foronda](https://www.val.town/u/joseforonda) made a [Bolivian news digest for social researchers](https://www.val.town/v/joseforonda/newsletter) with Google Gemini
 - https://www.val.town/v/flymaster/BugTracker
-- https://spag.cc/
-- https://www.val.town/v/stevekrouse/badge
-- https://www.val.town/v/seflless/parseAmazonOrderEmail
-- https://www.val.town/v/genco/q
-- https://www.val.town/v/juleeyet/LanguageTranslator
-- https://www.val.town/v/varun1352/AlwaysHere
-- https://www.val.town/v/mbo/neocities_hit_counter
+- [spag](https://spag.cc/) is an awesome tool for uploading and sharing files, made by [Pasta Gang](https://www.pastagang.cc/). You can see all their server code hosted on [spag](https://www.val.town/v/todepond/spag), [spagUpload](https://www.val.town/v/todepond/spagUpload), [spagDelete](https://www.val.town/v/todepond/spagDelete), and [spagList](https://www.val.town/v/todepond/spagList)
+- [Steve](https://www.val.town/u/stevekrouse) made a ["Run on Val Town"](https://www.val.town/v/stevekrouse/badge) badge
+- [Seflless](https://www.val.town/u/seflless) made a val to [parse Amazon order emails](https://www.val.town/v/seflless/parseAmazonOrderEmail)
+- [Alex](https://www.val.town/u/genco) from OneSignal made [Q](https://www.val.town/v/genco/q) and [Uniq](https://www.val.town/v/genco/uniq)
+- [Juleeyet](https://www.val.town/u/juleeyet) made a [Language Translator ](ttps://www.val.town/v/juleeyet/LanguageTranslator)
+- [Varun](https://www.val.town/u/varun1352), a grad student at NYU, made a [conversational AI app]((https://www.val.town/v/varun1352/AlwaysHere)) built with Cerebras
+- [Max](https://www.val.town/u/mbo) from Canva made a [Neocities hit counter](https://www.val.town/v/mbo/neocities_hit_counter)
 
----
 
-- https://www.val.town/v/iLegacyy/valentine
-- https://www.val.town/v/saeed0x53/valentine
-- https://val.town/v/arshs13/valentine
-- https://www.val.town/v/dtang18/willumarrymeoratleastbemyvalentine
-- https://val.town/v/risha_narayanan/valentine
-- https://www.val.town/v/DannieP/BeMyValentines
-- https://www.val.town/v/wabidu/valentine
+- There were so many adorable forks of [mewtru's](https://www.val.town/v/mewtru/valentine) [Valentine's card val](https://www.val.town/v/mewtru/valentine) including these from [iLegacyy](https://www.val.town/v/iLegacyy/valentine), [saeed0x53](https://www.val.town/v/saeed0x53/valentine), [arshs13](https://www.val.town/v/arshs13/valentine), [dtang18](https://www.val.town/v/dtang18/willumarrymeoratleastbemyvalentine), [risha_narayanan](https://www.val.town/v/risha_narayanan/valentine), [DannieP](https://www.val.town/v/DannieP/BeMyValentines), and [wabidu](https://www.val.town/v/wabidu/valentine)
 
 ---
 
 Projects
-
-- "Executive briefing" emails: https://www.val.town/x/geoffreylitt/stevens
-- Assistant to fill out the PHS 398 Research Plan Form: https://www.val.town/x/peterqliu/grantomatic
-- Helper functions for building with Twilio: https://www.val.town/x/vawogbemi/TwilioHelperFunctions
-- Linus' research agent, lightweight wrapper around Perplexity's Sonar API: https://www.val.town/x/thesephist/researchAgent
-- HN Notifier as a Project, but might be broken right now: https://www.val.town/x/nbbaier/hn_notifier/code/backend/index.ts
-- David Thyresson's portfolio directory: https://www.val.town/x/dthyresson/portfolioDirectory/code/server.tsx
-- overwatchTextureViewerWorkshopExtension
-- https://www.val.town/x/std/utils/code
+- [Victor](https://www.val.town/u/vawogbemi) made [helper functions for building with Twilio](https://www.val.town/x/vawogbemi/TwilioHelperFunctions)
+- We made a new set of [utils to help you build Projects more quickly](https://www.val.town/x/std/utils/)
+- [Linus](https://www.val.town/u/thesephist) made an [Email Research Agent](https://www.val.town/x/thesephist/researchAgent), a lightweight wrapper around Perplexity's Sonar API
