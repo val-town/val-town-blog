@@ -8,21 +8,27 @@ author: Steve Krouse
 import { Image } from "astro:assets";
 import Privacy from "./val-town-newsletter-24/Privacy.png";
 
-## Val Town Projects
+Val Town Projects have landed. If you like vals, you are going to _love_ Projects.
 
-Val Town Projects have landed.
+The team was cooking this month. We've shipped over a hundred features and upgrades, including Highlight to Edit with AI,
+Logs totally redesigned, and public endpoints with private code.
+
+Next month, you can look forward to editing your Val Town Projects from Cursor, Windsurf, any other VSCode fork, or local editor. Sublime Text anyone?
+
+## Val Town Projects
 
 TODO photo / video
 
-If you liked vals, you are going to _love_ Projects. Val Town Projects are extremely powerful tech, but with the classic Val Town simplicity and lightness.
+- Find a cool project
+- Fork it, show it running in my account, view the logs
+- Make some changes
+- Open a PR back to the original author
 
-Forks are crazy fast, ie compared to github, I have a video of this
+Projects are groups of vals, files, and folders that are versioned collectively, and deployed on our serverless platform. They support powerful workflows, such as feature branches and pull requests, that make it easy to build and deploy large applications with the classic Val Town simplicity and lightness.
 
-- env variables with descriptions and forked to new projects
+Projects are a great way to build with friends, and to share your work with the world. Learn more about Val Town Projects in our [announcement post](./projects) and [docs](https://docs.val.town/projects/).
 
-I should probably link to all the best projects to copy and some of my livestreams talking about them, and a link to sign up to chat with me and charmaine to get personally onboarded.
-
-## Highlight to edit
+## Highlight to Edit with AI
 
 Introducing Highlight to edit. We've yet again brought one of your favorite ways to code with AI into Val Town.
 
@@ -35,6 +41,8 @@ Huge shout-out to the folks at [Marimo](https://marimo.io/) for [this open-sourc
 ## Logs Redesign
 
 We've redesigned our logs to be easier to read and navigate – with powerful filters and sorts to help you find what you're looking for fast.
+
+TODO VIDEO
 
 The new logs pair beautifully with Val Town Projects, letting you view all the logs across a project at once.
 
@@ -79,7 +87,7 @@ TODO photo or video, Tom already has one
 
 ## Projects API
 
-The Projects API is halfway done. You can now list and retrieve public or your own projects and their branches and files. Here are the routes we currently support:
+The Projects Read API is out in beta. You can now list and retrieve public or your own projects and their branches and files. Here are the routes we currently support:
 
 ```http
 GET /v1/projects/{project_id}
@@ -92,7 +100,7 @@ GET /v1/projects/{project_id}/files/{path}/content
 GET /v1/alias/projects/{username}/{project_name}
 ```
 
-It's already been useful. For example, [here's a Val Town Project that let's you download Val Town Projects as zip files](https://www.val.town/x/shouser/getProjectsAsZips).
+It's already been useful. For example, [here's a Val Town Project that let's you download Projects as zips](https://www.val.town/x/shouser/getProjectsAsZips).
 
 You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK docs](https://github.com/val-town/sdk/blob/6f80c8470f055aa30c5c3cc34fcf715c81df1937/api.md#projects-1) to get started.
 
@@ -117,11 +125,11 @@ You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK doc
 
 ## 🛣️ Roadmap
 
-How to build devtools... https://www.youtube.com/watch?v=lFBfliNf9C4
+We have [a new perspective building for AI coding at Val Town](https://www.youtube.com/watch?v=lFBfliNf9C4). We have paused all Townie development in favor of building out the Projects API to enable local dev workflows. In other words, we are you what you've been asking for: edit your vals from Cursor – or wherever else.
 
-- Projects API
+- Projects Write API
 - Local dev: edit vals from your local editor (Cursor, Windsurf, VSCode, vim, etc)
-- New account-wide logs view
+- New account-wide logs
 - Customizable `val.run` domains for Project HTTP vals
 - Faster & scalable runtime
 - Bug fixes to our in-browser TypeScript editor
