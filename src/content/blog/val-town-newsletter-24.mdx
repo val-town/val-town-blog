@@ -1,42 +1,44 @@
 ---
 title: Val Town Newsletter 24
 description: Val Town Projects, Highlight to edit, Logs redesign, Public endpoints with private code, and much more
-pubDate: Feb 28, 2025
+pubDate: March 3, 2025
 author: Steve Krouse
 ---
 
 import { Image } from "astro:assets";
 import Privacy from "./val-town-newsletter-24/Privacy.png";
 
-Val Town Projects have landed. If you like vals, you are going to _love_ Projects.
+Val Town Projects have landed. If you like vals, you are going to _love_ Projects. We also shipped Highlight to Edit with AI, redesigned Logs, enabled public HTTP endpoints with private code, and much more.
 
-The team was cooking this month. We've shipped over a hundred features and upgrades, including Highlight to Edit with AI,
-Logs totally redesigned, and public endpoints with private code.
+This month, we're fixing many of the frictions y'all are reporting with Projects. Most excitingly, we're building a CLI to let you edit your Val Town Projects locally, so you can use your favorite text editor and AI tools, like Cursor and Windsurf.
 
-Next month, you can look forward to editing your Val Town Projects from Cursor, Windsurf, any other VSCode fork, or local editor. Sublime Text anyone?
+As always, the highlight of this newsletter is the community vals at the bottom. We're so inspired by the creativity of the things you're building. Keep it up!
 
 ## Val Town Projects
 
-TODO photo / video
+Val Town Projects unlock a whole new level of complexity for what you can build in Val Town.
 
-- Find a cool project
-- Fork it, show it running in my account, view the logs
-- Make some changes
-- Open a PR back to the original author
+In this video, I demo a Val Town Project that lets you download the source of any Val Town Project as a zip file. I fork the project, run it on my account, edit it to list a smaller number of projects, and send a pull request – all in 60 seconds.
 
-Projects are groups of vals, files, and folders that are versioned collectively, and deployed on our serverless platform. They support powerful workflows, such as feature branches and pull requests, that make it easy to build and deploy large applications with the classic Val Town simplicity and lightness.
+<video controls loop muted autoPlay class="image-rounded">
+  <source src="/video/ProjectsDemo.mp4" />
+</video>
 
-Projects are a great way to build with friends, and to share your work with the world. Learn more about Val Town Projects in our [announcement post](./projects) and [docs](https://docs.val.town/projects/).
+Val Town Projects are groups of vals versioned collectively and deployed on our serverless platform. They support powerful workflows, such as feature branches and pull requests, that make it easy to build and deploy production applications with the classic Val Town simplicity and lightness.
+
+Learn more about Val Town Projects in our [announcement post](./projects) and [docs](https://docs.val.town/projects/).
 
 ## Highlight to Edit with AI
 
-Introducing Highlight to edit. We've yet again brought one of your favorite ways to code with AI into Val Town.
+Introducing Highlight to edit. We've [yet again](./fast-follow) brought one of your favorite ways to code with AI into Val Town. We actually used it in the video above. Here's the relevant snippet:
 
-TODO video
+<video controls loop muted autoPlay class="image-rounded">
+  <source src="/video/Highlight To Edit.mp4" />
+</video>{" "}
 
 You can now select text in any val and then click Edit or Cmd+L to ask AI to rewrite that section of code. This solves the problem with Townie rewriting too much or our completions not rewriting enough. Now you can highlight exactly what you want edited.
 
-Huge shout-out to the folks at [Marimo](https://marimo.io/) for [this open-source CodeMirror plugin](https://marimo-team.github.io/codemirror-ai/)!
+Huge shout-out to the folks at [Marimo](https://marimo.io/) for open-sourcing [this CodeMirror plugin](https://marimo-team.github.io/codemirror-ai/)!
 
 ## Logs Redesign
 
