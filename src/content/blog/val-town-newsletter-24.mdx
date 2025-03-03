@@ -7,6 +7,7 @@ author: Steve Krouse
 
 import { Image } from "astro:assets";
 import Privacy from "./val-town-newsletter-24/Privacy.png";
+import ClientError from "./val-town-newsletter-24/ClientError.png";
 
 Val Town Projects have landed. If you like vals, you are going to _love_ Projects. We also shipped Highlight to Edit with AI, redesigned Logs, enabled public HTTP endpoints with private code, and much more.
 
@@ -34,7 +35,7 @@ Introducing Highlight to edit. We've [yet again](./fast-follow) brought one of y
 
 <video controls loop muted autoPlay class="image-rounded">
   <source src="/video/Highlight To Edit.mp4" />
-</video>{" "}
+</video>
 
 You can now select text in any val and then click Edit or Cmd+L to ask AI to rewrite that section of code. This solves the problem with Townie rewriting too much or our completions not rewriting enough. Now you can highlight exactly what you want edited.
 
@@ -44,7 +45,9 @@ Huge shout-out to the folks at [Marimo](https://marimo.io/) for open-sourcing [t
 
 We've redesigned our logs to be easier to read and navigate – with powerful filters and sorts to help you find what you're looking for fast.
 
-TODO VIDEO
+<video controls loop muted autoPlay class="image-rounded">
+  <source src="/video/ProjectLogsRedesign.mp4" />
+</video>
 
 The new logs pair beautifully with Val Town Projects, letting you view all the logs across a project at once.
 
@@ -67,15 +70,26 @@ At long last, we've updated val privacy permissions to made it easy for you to c
 
 Now `Private` keeps your code private, but your HTTP endpoint open. We've grandfathered old `Private` HTTP endpoints into a `Legacy Private` state, which keeps their HTTP endpoints closed to preserve the previous behavior. You can [learn more about val privacy states here](https://docs.val.town/reference/permissions/).
 
-Thanks Robin Sloan and TODO for requesting this 🙏
+Thanks Robin Sloan, Matt Marcus, and Achille Lacoin for requesting this 🙏
 
 ## Client-side errors in the HTTP preview
 
 If your Val Town code throws an error while running on the server, you will see that in our beautifully redesigned logs. But if your code throws an error on the client side, that used to be something you'd have to seek in the browser console.
 
-TODO photo
+<figure align="center">
+  <Image
+    style={{
+      borderRadius: "4px",
+      border: "1px solid var(--border)",
+      overflow: "hidden",
+    }}
+    src={ClientError}
+    alt="Client-side error displayed in the HTTP preview"
+  />
+</figure>
 
-Now, we surface those client-side errors right in every HTTP preview, so you can see them right where you're working. To enable this, add this to your HTML:
+Now, we surface those client-side errors right in every HTTP preview, so you can
+see them right where you're working. To enable this, add this to your HTML:
 
 ```html
 <script src="https://esm.town/v/std/catch"></script>
@@ -83,9 +97,13 @@ Now, we surface those client-side errors right in every HTTP preview, so you can
 
 We've instructed Townie to do this for you automatically, so some of your vals may already have it installed.
 
-## Markdown editor supports line-wrapping
+## Markdown editor line-wrapping
 
-TODO photo or video, Tom already has one
+You can now choose to wrap lines in our Markdown editor.
+
+<video controls loop muted autoPlay class="image-rounded">
+  <source src="/video/WrapLines.mp4" />
+</video>
 
 ## Projects API
 
@@ -108,10 +126,10 @@ You can view the [API docs](https://docs.val.town/openapi#tag/beta) and [SDK doc
 
 ## Other updates
 
-- Increased the timeout of script, cron, and email vals on Pro from 5 to 10 min, thanks Nathaneal for requesting this 🙏
+- Increased the timeout of script, cron, and email vals on Pro from 5 to 10 min, thanks Nathaneal Silverman for requesting this 🙏
 - Surface logs extremely quickly after a val starts running
 - Added a beautiful heart animation when you like a val
-- Fixed a bug that would very rarely run crons twice, thanks Nathaneal and TODO for reporting this 🙏
+- Fixed a bug that would very rarely run crons twice, thanks Nathaneal Silverman and Sean Piefayth for reporting this 🙏
 - townie.new?prompt= and val.town/townie?prompt= let you link someone to a new Townie chat with the input box pre-filled, thanks to our friends at Braintrust for requesting this and Nico for making [a Raycast extension for it](https://discord.com/channels/1020432421243592714/1279542466357366804/1345077705854550046) 🙏
 - Ask you to name vals, files, and folders before creating them with random names
 - Silence one particularly annoying JSX error in the TypeScript editor
