@@ -216,7 +216,7 @@ The subprocess's code is tiny: it uses [node-deno-vm](https://github.com/casual-
 a terrific module from [Kallyn Gowdy](https://github.com/KallynGowdy), which works by exposing a WebSocket
 connection between Deno and Node.js and wrapping it in
 a [postMessage](https://developer.mozilla.org/en-US/docs/Web/API/Window/postMessage)-style API.
-The "guest" code that wraps vals is also now [public](https://esm.town/guest.ts),
+The "guest" code that wraps vals is also now [public](https://gist.github.com/tmcw/c099aef89d1f0b0ea00137a45e2a2ea1),
 though it's still an implementation detail and could change at any time.
 
 While this gives far better isolation between user code and system code
