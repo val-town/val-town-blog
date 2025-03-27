@@ -1,11 +1,11 @@
 ---
-title: The internal / external API conundrum
+title: Solving the internal / external API riddle
 description: Figuring out how to provide an API that's usable by everyone and fast for us to iterate on
 pubDate: March 27, 2025
 author: Tom MacWright
 ---
 
-I've been thinking about that [APIs and applications](https://macwright.com/2024/06/21/apis-and-applications) question again for [Val Town](https://www.val.town/). We're trying to solve for two different problems:
+I've been thinking about that [APIs and applications](https://macwright.com/2024/06/21/apis-and-applications) question again for [Val Town](https://www.val.town/). We're trying to resolve two priorities: rapidly developing features, and providing an API for our users. As it turns out, some of our tools are well-suited for rapid development, and others shine when creating externally-consumable REST APIs, but we haven't found a way to do both yet.
 
 ## Rapid application development
 
@@ -23,7 +23,7 @@ Could we both iterate quickly on the application layer _and_ provide a lot of fu
 
 - **Remix loaders** are definitely not a public API. Since the introduction of [Single Fetch](https://remix.run/docs/en/main/guides/single-fetch), loaders don't even output JSON, but they use [turbo-stream](https://github.com/jacob-ebey/turbo-stream). Remix loaders definitely aren’t the REST model.
 - **tRPC is probably a bad way to implement OpenAPI.** tRPC _does technically kinda support OpenAPI_ [via trpc-to-openapi](https://www.npmjs.com/package/trpc-to-openapi), but the first-party [support is archived](https://github.com/trpc/trpc-openapi) and the fork doesn't have much uptake, so this is really a fringe ability that I wouldn't count on. We've experimented with allowing people to make programmatic requests against our tRPC routes, but this always ended up in disappointment. The actual requests and formats that tRPC uses for communication are an implementation detail. tRPC is not a REST provider.
-- **Building Fastify routes and generating SDKs for every feature, before we can even start on frontend development** would introduce a tremendous amount of friction into our development process and create a waterflow between API design and frontend implementation.
+- **Building Fastify routes and generating SDKs for every feature, before we can even start on frontend development** would introduce a tremendous amount of friction into our development process and create a waterflow between API design and frontend implementation. Imagine having to write a REST API method, merge and deploy it, generate a new SDK and release it as an NPM module, just to install that new SDK version into the application and start building a frontend feature.
 - **The OpenAPI specification [does not support Server-Sent Events](https://github.com/OAI/OpenAPI-Specification/discussions/4171)**. Thankfully, Stainless, which helps us produce our SDKs, [has its own support](https://app.stainless.com/docs/guides/configure#sse-streaming), but it's disappointing that such a central specification for designing APIs won't actually be able to describe our current API surface in full.
 - **Batching is good and we'll lose it.** [tRPC supports batching requests](https://trpc.io/docs/v9/links), and [Remix’s Single Fetch batches requests for nested loaders](https://remix.run/docs/en/main/guides/single-fetch). This is a real benefit for frontend applications like Val Town: we tend to make a lot of HTTP requests, and request overhead is a real problem. Generic request batching is not something you can do with OpenAPI or any of these generated clients.
 
