@@ -1,0 +1,51 @@
+---
+title: The internal / external API conundrum
+description: Figuring out how to provide an API that's usable by everyone and fast for us to iterate on
+pubDate: March 27, 2025
+author: Tom MacWright
+---
+
+I've been thinking about that [APIs and applications](https://macwright.com/2024/06/21/apis-and-applications) question again for [Val Town](https://www.val.town/). We're trying to solve for two different problems:
+
+## Rapid application development
+
+For application development, we want to move as fast as possible. A lot of pull requests include both a feature in our [Remix](https://remix.run/)-based frontend and some backend functionality, either in Remix loaders, a [tRPC](https://trpc.io/) route, or, less often, a new route in the [Fastify](https://fastify.dev/) server that powers our [public API](https://docs.val.town/openapi).
+
+Specifically, the workflow of using tRPC and Remix is pretty spectacular: their homepage example tells most of the story. You write a method on the backend and the frontend tRPC client is immediately able to call it with the correct TypeScript types for both inputs & outputs. It all works without code generation, and minimal boilerplate. The developer experience is extraordinary.
+
+## A public API
+
+On the other hand, we're also trying to give our users the ability to build on the Val Town platform in all kinds of new ways. When we introduce something like [Projects](https://blog.val.town/blog/projects/), we want users to be able to programmatically create projects and files within them. Our [SDK](https://github.com/val-town/sdk) should let them do that on day one. But right now, it doesn't: we built the application interface for projects using tRPC and Remix, and then implemented the same with Fastify so that we have an [OpenAPI spec](https://www.openapis.org/) that includes it, and then we can generate our SDK with that OpenAPI spec.
+
+## Trying to do both
+
+Could we both iterate quickly on the application layer _and_ provide a lot of functionality programmatically to users? Possibly! But there are a lot of dragons here.
+
+- **Remix loaders** are definitely not a public API. Since the introduction of [Single Fetch](https://remix.run/docs/en/main/guides/single-fetch), loaders don't even output JSON, but they use [turbo-stream](https://github.com/jacob-ebey/turbo-stream). Remix loaders definitely aren’t the REST model.
+- **tRPC is probably a bad way to implement OpenAPI.** tRPC _does technically kinda support OpenAPI_ [via trpc-to-openapi](https://www.npmjs.com/package/trpc-to-openapi), but the first-party [support is archived](https://github.com/trpc/trpc-openapi) and the fork doesn't have much uptake, so this is really a fringe ability that I wouldn't count on. We've experimented with allowing people to make programmatic requests against our tRPC routes, but this always ended up in disappointment. The actual requests and formats that tRPC uses for communication are an implementation detail. tRPC is not a REST provider.
+- **Building Fastify routes and generating SDKs for every feature, before we can even start on frontend development** would introduce a tremendous amount of friction into our development process and create a waterflow between API design and frontend implementation.
+- **The OpenAPI specification [does not support Server-Sent Events](https://github.com/OAI/OpenAPI-Specification/discussions/4171)**. Thankfully, Stainless, which helps us produce our SDKs, [has its own support](https://app.stainless.com/docs/guides/configure#sse-streaming), but it's disappointing that such a central specification for designing APIs won't actually be able to describe our current API surface in full.
+- **Batching is good and we'll lose it.** [tRPC supports batching requests](https://trpc.io/docs/v9/links), and [Remix’s Single Fetch batches requests for nested loaders](https://remix.run/docs/en/main/guides/single-fetch). This is a real benefit for frontend applications like Val Town: we tend to make a lot of HTTP requests, and request overhead is a real problem. Generic request batching is not something you can do with OpenAPI or any of these generated clients.
+
+## Survey of the solution space
+
+Here's a quick table survey of the solution space that I'm aware of:
+
+| Library                                             | OpenAPI | RPC | Maturity |
+| --------------------------------------------------- | ------- | --- | -------- |
+| [tRPC](https://trpc.io/)                            | ⛔️      | ✅   | A        |
+| [Remix](https://remix.run/)                         | ⛔️      | ✅   | A        |
+| [Fastify](https://fastify.dev/)                     | ✅       | ⛔️  | A        |
+| [oRPC](https://orpc.unnoq.com/)                     | ✅       | ✅   | C        |
+| [stl-api](https://github.com/stainless-api/stl-api) | ✅       | ✅   | F        |
+| [Hono](https://hono.dev/)                           | ✅       | ✅   | A        |
+
+As you can see, there are a few systems that try to provide first-class support for _both_ REST-based APIs that we can generate an SDK around, and RPC-like clients with which we can iterate quickly. Unfortunately, Hono, the most established option and one I'm pretty optimistic about - which supports both [OpenAPI](https://hono.dev/examples/zod-openapi) and [RPC](https://hono.dev/docs/guides/rpc#rpc) - has a [fairly severe bug for using the two together](https://github.com/honojs/hono/issues/2525). [oRPC](https://orpc.unnoq.com/) is extremely promising, but a [new and fairly single-handed effort](https://github.com/unnoq/orpc/graphs/contributors). [stl-api](https://github.com/stainless-api/stl-api) is interesting, but in an alpha stage of development with no releases yet and very little development happening.
+
+## Outlook
+
+We're going to experiment with a strategy to build our SDKs quickly and locally so that we can develop frontend features against the Fastify server. In parallel, I'll probably kick the tires on oRPC and Hono as alternative approaches to this problem.
+
+Decisions like this can cause a lot of churn, which hurts development momentum and makes it harder for everyone to understand the codebase, so it's a decision we're making pretty methodically and incrementally.
+
+Have you seen good solutions to this problem? Let us know!
