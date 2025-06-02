@@ -14,7 +14,7 @@
 		"@astrojs/markdown-remark": "^6.1.0",
 		"@astrojs/mdx": "^4.2.6",
 		"@astrojs/rss": "^4.0.11",
-		"@astrojs/sitemap": "^3.2.1",
+		"@astrojs/sitemap": "^3.4.0",
 		"@fontsource/ibm-plex-mono": "^5.1.1",
 		"@fontsource/ibm-plex-sans": "^5.1.1",
 		"@fontsource/ibm-plex-sans-condensed": "^5.2.5",
