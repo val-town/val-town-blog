@@ -16,7 +16,7 @@
 		"@astrojs/rss": "^4.0.11",
 		"@astrojs/sitemap": "^3.4.0",
 		"@fontsource/ibm-plex-mono": "^5.1.1",
-		"@fontsource/ibm-plex-sans": "^5.1.1",
+		"@fontsource/ibm-plex-sans": "^5.2.6",
 		"@fontsource/ibm-plex-sans-condensed": "^5.2.5",
 		"@fontsource/ibm-plex-serif": "^5.1.1",
 		"@observablehq/plot": "^0.6.17",
