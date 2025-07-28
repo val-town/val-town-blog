@@ -150,7 +150,7 @@ collaborative cloud scripting environment) and install the scripts there.
 [Val Town](https://val.town) is a place to write and run code online. You can
 think of it as a “runnable Github Gists” or a “user-friendly AWS Lambda”. It
 makes it incredibly easy to email yourself, persist small pieces of data, expose
-functions and API endpoints, and create a recurring jobs.
+functions and API endpoints, and create recurring jobs.
 
 [https://www.loom.com/share/878294970d8e48919c819f35d0cd0da4](https://www.loom.com/share/878294970d8e48919c819f35d0cd0da4)
 
@@ -165,7 +165,7 @@ But the dream of Val Town is nothing short of end-user programming, with a
 little detour through end-programmer programming. Come join as we inch along
 towards the dream!
 
-🙏 *Thanks Karik Agaram, Sam Arbesman, Geoffrey Litt, Dan Levine, Rodrigo Tello,
+🙏 *Thanks Kartik Agaram, Sam Arbesman, Geoffrey Litt, Dan Levine, Rodrigo Tello,
 and André Terron for your contributions to this piece, HN Follow, and Val Town!*
 
 ### Subscribe
