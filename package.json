@@ -26,6 +26,6 @@
 		"mermaid": "^11.4.1",
 		"rehype-autolink-headings": "^7.1.0",
 		"remark-directive": "^4.0.0",
-		"typescript": "^5.8.3"
+		"typescript": "^5.9.2"
 	}
 }
