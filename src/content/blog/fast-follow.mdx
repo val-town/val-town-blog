@@ -83,7 +83,7 @@ Include the val type as metadata on the code fence, e.g.: `val type=script
   Use the ```diff language code fence.
 ````
 
-We've gotten scared off of investing more time in diffs right now, but I expect it may have been solved by others in the space already, or will be shortly. Anthropic's long-rumored "fast-edit mode" solve this problem in one fell swoop. OpenAI launched their own [Predicted Outputs](https://platform.openai.com/docs/guides/predicted-outputs), which is also compelling, but then we'd have to switch to OpenAI. Or maybe the solution is simply faster models, smaller, mini-models, or faster chips, like Groq or Cerebras. A couple weeks ago I built [Cerebras Coder](https://cerebrascoder.com) to demonstrate how powerful an instant feedback loop is for code generation. [Try it out yourself](https://cerebrascoder.com) or [fork it here](https://www.val.town/v/stevekrouse/cerebras_coder).
+We've gotten scared off of investing more time in diffs right now, but I expect it may have been solved by others in the space already, or will be shortly. Anthropic's long-rumored "fast-edit mode" solves this problem in one fell swoop. OpenAI launched their own [Predicted Outputs](https://platform.openai.com/docs/guides/predicted-outputs), which is also compelling, but then we'd have to switch to OpenAI. Or maybe the solution is simply faster models, smaller, mini-models, or faster chips, like Groq or Cerebras. A couple weeks ago I built [Cerebras Coder](https://cerebrascoder.com) to demonstrate how powerful an instant feedback loop is for code generation. [Try it out yourself](https://cerebrascoder.com) or [fork it here](https://www.val.town/v/stevekrouse/cerebras_coder).
 
 <video controls>
   <source src="/video/cerebras-coder.mp4" />
@@ -103,7 +103,7 @@ It's not _particularly_ novel (in that others would have thought of this if we d
 
 ### Hosted runtime and included APIs
 
-Maybe some of our UI ideas made it into GitHub Spark too, including deployment-free hosting, persistent data storage, and the ability to use LLMs in your apps without a your own API key – their versions of [@std/sqlite](https://docs.val.town/std/sqlite/) and [@std/openai](https://docs.val.town/std/openai/), respectively. In other words, you can say, "make me a ChatGPT clone with persistent thread history", and in about 30 seconds, you'll have a deployed app that does exactly that.
+Maybe some of our UI ideas made it into GitHub Spark too, including deployment-free hosting, persistent data storage, and the ability to use LLMs in your apps without your own API key – their versions of [@std/sqlite](https://docs.val.town/std/sqlite/) and [@std/openai](https://docs.val.town/std/openai/), respectively. In other words, you can say, "make me a ChatGPT clone with persistent thread history", and in about 30 seconds, you'll have a deployed app that does exactly that.
 
 <video controls>
   <source src="/video/TownieChatGPTClone.mp4" />
